@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import * as faceapi from 'face-api.js';
 
 export default function useFaceRecognition(videoRef: any) {
-    const [output, setOutput] = useState('?');
+    const [player1, setPlayer1] = useState('?');
+    const [player2, setPlayer2] = useState('?');
 
     useEffect(() => {
         Promise.all([
@@ -22,26 +23,45 @@ export default function useFaceRecognition(videoRef: any) {
             )
         });
 
+        function getHighestExpressionValue(val: faceapi.FaceExpressions) {
+            const sortedKeys = Object.keys(val).sort((a, b) => {
+                const valueA = val[a];
+                const valueB = val[b];
+
+                return valueB - valueA;
+            });
+
+            return sortedKeys[0];
+        }
+
         function onPlay() {
             setInterval(async () => {
                 const detections = await faceapi.detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions()).withFaceExpressions()
 
-                if (detections && detections[0]) {
-                    let val = detections[0].expressions
+                if (detections && detections.length > 0) {
+                    let player1 = 0;
+                    let player2 = 1;
 
-                    if (val) {
-                        const sortedKeys = Object.keys(val).sort((a, b) => {
-                            const valueA = val[a];
-                            const valueB = val[b];
-
-                            return valueB - valueA;
-                        });
-
-
-                        setOutput(sortedKeys[0] + ": " + val[sortedKeys[0]]);
-                    } else {
-                        setOutput('?');
+                    if (detections.length === 2) {
+                        if (detections[0].detection.box.x > detections[1].detection.box.x) {
+                            player1 = 1;
+                            player2 = 0;
+                        }
                     }
+
+
+                    const expressions = detections.map(detection => getHighestExpressionValue(detection.expressions));
+
+                    setPlayer1(expressions[player1]);
+
+                    if (detections.length === 2) {
+                        setPlayer2(expressions[player2]);
+                    } else {
+                        setPlayer2('?');
+                    }
+                } else {
+                    setPlayer1('?');
+                    setPlayer2('?');
                 }
             }, 100)
         }
@@ -53,8 +73,5 @@ export default function useFaceRecognition(videoRef: any) {
         };
     }, [videoRef]);
 
-    // run all weird code and finally do setOutput(...)
-
-
-    return output;
+    return { player1, player2 };
 }
