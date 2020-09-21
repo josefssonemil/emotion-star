@@ -4,6 +4,7 @@ import * as faceapi from 'face-api.js';
 export default function useFaceRecognition(videoRef: any) {
     const [player1, setPlayer1] = useState('?');
     const [player2, setPlayer2] = useState('?');
+    //const [emoji, setEmoji] = useState('😐');
 
     useEffect(() => {
         Promise.all([
@@ -34,10 +35,33 @@ export default function useFaceRecognition(videoRef: any) {
             return sortedKeys[0];
         }
 
+        function returnEmoji(expression: any){
+            if (expression === "happy"){
+                return '😁';
+            } 
+            else if (expression === 'angry'){
+                return '😡';
+            }
+            else if (expression === 'surprised'){
+                return '😯';
+            }
+            else if (expression === 'sad'){
+                return '😢';
+            }
+            else if (expression === 'disgusted'){
+                return '🤢';
+            }
+            else if (expression === 'fearful'){
+                return '😰';
+            }
+            else{
+                return '😐';
+            }
+        }
+
         function onPlay() {
             setInterval(async () => {
                 const detections = await faceapi.detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions()).withFaceExpressions()
-
                 if (detections && detections.length > 0) {
                     let player1 = 0;
                     let player2 = 1;
@@ -51,17 +75,16 @@ export default function useFaceRecognition(videoRef: any) {
 
 
                     const expressions = detections.map(detection => getHighestExpressionValue(detection.expressions));
-
-                    setPlayer1(expressions[player1]);
+                    setPlayer1(returnEmoji(expressions[player1]));
 
                     if (detections.length === 2) {
-                        setPlayer2(expressions[player2]);
+                        setPlayer2(returnEmoji(expressions[player2]));
                     } else {
-                        setPlayer2('?');
+                        setPlayer2('😶');
                     }
                 } else {
-                    setPlayer1('?');
-                    setPlayer2('?');
+                    setPlayer1('😶');
+                    setPlayer2('😶');
                 }
             }, 100)
         }

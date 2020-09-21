@@ -5,11 +5,30 @@ export default function Home() {
   const videoRef = useRef();
   const { player1, player2 } = useFaceRecognition(videoRef);
 
-  return (
-    <div>
+  if (player2 === '😶')
+  return(
+    <div id="camera">
       <video ref={videoRef} width="720" height="560" autoPlay muted></video>
-      <h1>Player 1 (left): {player1}</h1>
-      <h1>Player 2 (right): {player2}</h1>
+      <div id="player1">
+        <div className="emoji">{player1}</div>
+        <h2>Player 1</h2>
+      </div>
+      <div id="player2">
+      </div>
+    </div>
+  )
+
+  else return (
+    <div id="camera">
+      <video ref={videoRef} width="720" height="560" autoPlay muted></video>
+      <div id="player1">
+        <div className="emoji">{player1}</div>
+        <h2>Player 1</h2>
+      </div>
+      <div id="player2">
+        <div className="emoji">{player2}</div>
+        <h2>Player 2</h2>
+      </div>
     </div>
   )
 }
