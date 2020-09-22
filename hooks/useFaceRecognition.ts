@@ -66,11 +66,9 @@ export default function useFaceRecognition(videoRef: any) {
                     let player1 = 0;
                     let player2 = 1;
 
-                    if (detections.length === 2) {
-                        if (detections[0].detection.box.x > detections[1].detection.box.x) {
+                    if (detections.length === 2 && detections[0].detection.box.x > detections[1].detection.box.x) {
                             player1 = 1;
                             player2 = 0;
-                        }
                     }
 
 
@@ -80,11 +78,11 @@ export default function useFaceRecognition(videoRef: any) {
                     if (detections.length === 2) {
                         setPlayer2(returnEmoji(expressions[player2]));
                     } else {
-                        setPlayer2('😶');
+                        setPlayer2('');
                     }
                 } else {
-                    setPlayer1('😶');
-                    setPlayer2('😶');
+                    setPlayer1('');
+                    setPlayer2('');
                 }
             }, 100)
         }
