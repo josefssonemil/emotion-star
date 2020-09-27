@@ -1,98 +1,54 @@
-import { useState, useEffect } from 'react';
-import * as faceapi from 'face-api.js';
+import * as faceapi from "face-api.js";
+import { MutableRefObject, useEffect, useState } from "react";
 
-export default function useFaceRecognition(videoRef: any) {
-    const [player1, setPlayer1] = useState('?');
-    const [player2, setPlayer2] = useState('?');
-    //const [emoji, setEmoji] = useState('😐');
+export default function useFaceRecognition(
+  canvasRef: MutableRefObject<HTMLCanvasElement>
+) {
+  const [loading, setLoading] = useState(true);
+  const [expression, setExpression] = useState<string | null>(null);
 
-    useEffect(() => {
-        Promise.all([
-            faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-            faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-            faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-            faceapi.nets.faceExpressionNet.loadFromUri('/models')
-        ]).then(() => {
-            navigator.getUserMedia(
-                { video: {} },
-                stream => {
-                    if (videoRef.current) {
-                        videoRef.current.srcObject = stream
-                    }
-                },
-                err => console.error(err)
-            )
-        });
+  useEffect(() => {
+    Promise.all([
+      faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
+      faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
+      faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
+      faceapi.nets.faceExpressionNet.loadFromUri("/models"),
+    ]).then(() => {
+      setLoading(false);
+    });
+  }, []);
 
-        function getHighestExpressionValue(val: faceapi.FaceExpressions) {
-            const sortedKeys = Object.keys(val).sort((a, b) => {
-                const valueA = val[a];
-                const valueB = val[b];
+  useEffect(() => {
+    if (!loading && canvasRef.current) {
+      let running = true;
 
-                return valueB - valueA;
-            });
+      const execute = async () => {
+        const detections = await faceapi
+          .detectAllFaces(
+            canvasRef.current,
+            new faceapi.TinyFaceDetectorOptions()
+          )
+          .withFaceExpressions();
 
-            return sortedKeys[0];
+        if (detections && detections.length > 0) {
+          const expressions = detections[0].expressions.asSortedArray();
+          setExpression(expressions[0].expression);
+        } else {
+          setExpression(null);
         }
 
-        function returnEmoji(expression: any){
-            if (expression === "happy"){
-                return '😁';
-            } 
-            else if (expression === 'angry'){
-                return '😡';
-            }
-            else if (expression === 'surprised'){
-                return '😯';
-            }
-            else if (expression === 'sad'){
-                return '😢';
-            }
-            else if (expression === 'disgusted'){
-                return '🤢';
-            }
-            else if (expression === 'fearful'){
-                return '😰';
-            }
-            else{
-                return '😐';
-            }
+        if (running) {
+          setTimeout(execute, 100);
         }
+      };
 
-        function onPlay() {
-            setInterval(async () => {
-                const detections = await faceapi.detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions()).withFaceExpressions()
-                if (detections && detections.length > 0) {
-                    let player1 = 0;
-                    let player2 = 1;
+      execute();
 
-                    if (detections.length === 2 && detections[0].detection.box.x > detections[1].detection.box.x) {
-                            player1 = 1;
-                            player2 = 0;
-                    }
+      return () => {
+        running = false;
+      };
+    }
+  }, [loading, canvasRef.current]);
 
-
-                    const expressions = detections.map(detection => getHighestExpressionValue(detection.expressions));
-                    setPlayer1(returnEmoji(expressions[player1]));
-
-                    if (detections.length === 2) {
-                        setPlayer2(returnEmoji(expressions[player2]));
-                    } else {
-                        setPlayer2('');
-                    }
-                } else {
-                    setPlayer1('');
-                    setPlayer2('');
-                }
-            }, 100)
-        }
-
-        videoRef.current?.addEventListener('play', onPlay);
-
-        return () => {
-            videoRef.current?.removeEventListener('play', onPlay);
-        };
-    }, [videoRef]);
-
-    return { player1, player2 };
+  return { loading, expression };
 }
