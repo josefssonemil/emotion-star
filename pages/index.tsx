@@ -7,10 +7,10 @@ export default function Home() {
   const videoRef = useRef<HTMLVideoElement>();
   const canvasLeftRef = useRef<HTMLCanvasElement>();
   const canvasRightRef = useRef<HTMLCanvasElement>();
-  const camera = useCameraSplit(videoRef, canvasLeftRef, canvasRightRef);
-
   const player1 = useFaceRecognition(canvasLeftRef);
   const player2 = useFaceRecognition(canvasRightRef);
+
+  useCameraSplit(videoRef, canvasLeftRef, canvasRightRef);
 
   return (
     <div>
@@ -44,32 +44,4 @@ export default function Home() {
       </div>
     </div>
   );
-
-  /*const { player1, player2 } = useFaceRecognition(videoRef);
-
-  if (player2 === "")
-    return (
-      <div id="camera">
-        <video ref={videoRef} width="720" height="560" autoPlay muted></video>
-        <div id="player1">
-          <div className="emoji">{player1}</div>
-          <h2>Player 1</h2>
-        </div>
-        <div id="player2"></div>
-      </div>
-    );
-  else
-    return (
-      <div id="camera">
-        <video ref={videoRef} width="720" height="560" autoPlay muted></video>
-        <div id="player1">
-          <div className="emoji">{player2}</div>
-          <h2>Player 1</h2>
-        </div>
-        <div id="player2">
-          <div className="emoji">{player1}</div>
-          <h2>Player 2</h2>
-        </div>
-      </div>
-    );*/
 }
