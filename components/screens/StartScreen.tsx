@@ -1,10 +1,10 @@
 import HighScore from '../HighScore'
-import StartScreenStyles from "../../styles/module/StartScreen.module.css";
 
 const StartScreen = () => (
-    <div className={StartScreenStyles["container"]}>
+    <div id="start-screen" className="">
+
         <div>Placeholder video</div>
-        <h1 className={StartScreenStyles["test"]}> Hello World! </h1>
+        <h1 className=""> Hello World! </h1>
 
         <HighScore />
 

@@ -1,35 +1,31 @@
-import HighScoreStyles from "../../styles/module/HighScore.module.css";
-
 const HighScore = () => (
-    <table>
-        <thead>
-            <tr>
-                <th>High Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>👠</td>
-                <td>2454</td>
-            </tr>
-            <tr>
-                <td>🧦</td>
-                <td>2045</td>
-            </tr>
-            <tr>
-                <td>🧤</td>
-                <td>1742</td>
-            </tr>
-            <tr>
-                <td>👚</td>
-                <td>3856</td>
-            </tr>
-            <tr>
-                <td>�</td>
-                <td>5345</td>
-            </tr>
-        </tbody>
-    </table>
+    <div id="high-score">
+        <h1>High Score</h1>
+        <table>
+            <tbody>
+                <tr>
+                    <td>👠</td>
+                    <td>2454</td>
+                </tr>
+                <tr>
+                    <td>🧦</td>
+                    <td>2045</td>
+                </tr>
+                <tr>
+                    <td>🧤</td>
+                    <td>1742</td>
+                </tr>
+                <tr>
+                    <td>👚</td>
+                    <td>3856</td>
+                </tr>
+                <tr>
+                    <td>�</td>
+                    <td>5345</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 );
 
 const scores = [{
