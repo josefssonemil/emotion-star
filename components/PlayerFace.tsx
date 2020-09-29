@@ -1,18 +1,17 @@
 import { MutableRefObject } from "react";
+import { Expression } from "../types/Expressions";
 
 const emojis = {
   happy: "😁",
   angry: "😡",
   surprised: "😯",
   sad: "😢",
-  disgusted: "🤢",
-  fearful: "😰",
   neutral: "😐",
 };
 
 interface Props {
   canvasRef: MutableRefObject<HTMLCanvasElement>;
-  expression: string;
+  expression: Expression;
 }
 
 export default function PlayerFace(props: Props) {

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import PlayerFace from "../components/PlayerFace";
+import GameScreen from "../components/screens/GameScreen";
 import useCameraSplit from "../hooks/useCameraSplit";
 import useFaceRecognition from "../hooks/useFaceRecognition";
 
@@ -12,8 +12,6 @@ export default function Home() {
 
   useCameraSplit(videoRef, canvasLeftRef, canvasRightRef);
 
-  // todo: <StartScreen />
-
   return (
     <div>
       <div>
@@ -25,24 +23,12 @@ export default function Home() {
           autoPlay
           muted
         />
-        <div
-          style={{
-            display: "flex",
-            height: "100vh",
-            flexDirection: "column",
-            justifyContent: "space-around",
-            paddingLeft: 50,
-          }}
-        >
-          <PlayerFace
-            canvasRef={canvasLeftRef}
-            expression={player1.expression}
-          />
-          <PlayerFace
-            canvasRef={canvasRightRef}
-            expression={player2.expression}
-          />
-        </div>
+        <GameScreen
+          canvasLeftRef={canvasLeftRef}
+          canvasRightRef={canvasRightRef}
+          expressionLeft={player1.expression}
+          expressionRight={player2.expression}
+        />
       </div>
     </div>
   );

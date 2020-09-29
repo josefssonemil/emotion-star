@@ -1,9 +1,10 @@
 import * as faceapi from "face-api.js";
 import { MutableRefObject, useEffect, useState } from "react";
+import { Expression } from "../types/Expressions";
 
 export default function useFaceRecognition(
   canvasRef: MutableRefObject<HTMLCanvasElement>
-) {
+): { loading: boolean; expression: Expression } {
   const [loading, setLoading] = useState(true);
   const [expression, setExpression] = useState<string | null>(null);
 
@@ -50,5 +51,5 @@ export default function useFaceRecognition(
     }
   }, [loading, canvasRef.current]);
 
-  return { loading, expression };
+  return { loading, expression: expression as Expression };
 }
