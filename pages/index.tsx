@@ -36,7 +36,11 @@ export default function Home() {
 
         {currentScreen === "start" && <StartScreen />}
 
-        {currentScreen === "warmUp" && <WarmUpScreen />}
+        {currentScreen === "warmUp" && <WarmUpScreen
+          expressionLeft={player1.expression}
+          expressionRight={player2.expression}
+
+        />}
 
         {currentScreen === "game" && (
           <GameScreen
