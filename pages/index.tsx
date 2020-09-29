@@ -12,6 +12,8 @@ export default function Home() {
 
   useCameraSplit(videoRef, canvasLeftRef, canvasRightRef);
 
+  // todo: <StartScreen />
+
   return (
     <div>
       <div>
@@ -44,3 +46,4 @@ export default function Home() {
       </div>
     </div>
   );
+}
