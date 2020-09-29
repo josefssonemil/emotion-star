@@ -62,7 +62,7 @@ const WarmUp = (props: Props) => {
         }
 
         if (!facesTwo[faceTwo] && faceTwo) {
-            setFacesOne(prevValue => {
+            setFacesTwo(prevValue => {
                 return {
                     ...prevValue,
                     [faceTwo]: true
