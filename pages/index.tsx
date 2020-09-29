@@ -11,7 +11,7 @@ export default function Home() {
   const canvasLeftRef = useRef<HTMLCanvasElement>();
   const canvasRightRef = useRef<HTMLCanvasElement>();
   const { playing } = useCameraSplit(videoRef, canvasLeftRef, canvasRightRef);
-  const { loading, players } = useFaceRecognition(videoRef, playing);
+  const { loading, players, faceBoxes } = useFaceRecognition(videoRef, playing);
 
   const [currentScreen, setCurrentScreen] = useState("start");
 
@@ -41,6 +41,7 @@ export default function Home() {
             canvasLeftRef={canvasLeftRef}
             canvasRightRef={canvasRightRef}
             players={players}
+            faceBoxes={faceBoxes}
           />
         )}
 

@@ -6,6 +6,7 @@ import { Expression } from "../types/Expressions";
 interface FaceRecognitionState {
   loading: boolean;
   players: Expression[];
+  faceBoxes: any[];
 }
 
 export default function useFaceRecognition(
@@ -14,6 +15,7 @@ export default function useFaceRecognition(
 ): FaceRecognitionState {
   const [loading, setLoading] = useState(true);
   const [players, setPlayers] = useState<Expression[]>([undefined, undefined]);
+  const [faceBoxes, setFaceBoxes] = useState<any[]>([undefined, undefined]);
 
   useEffect(() => {
     Promise.all([
@@ -35,6 +37,7 @@ export default function useFaceRecognition(
 
     const execute = async () => {
       const playerExpressions = [undefined, undefined];
+      const playerFaceBoxes = [undefined, undefined];
 
       if (
         videoRef.current &&
@@ -92,10 +95,12 @@ export default function useFaceRecognition(
         expressions.forEach((expressions, index) => {
           const playerIndex = playerIndexForFace[index];
           playerExpressions[playerIndex] = expressions[0].expression;
+          playerFaceBoxes[playerIndex] = playerFaces[index].detection.box;
         });
       }
 
       setPlayers(playerExpressions);
+      setFaceBoxes(playerFaceBoxes);
 
       if (running) {
         setTimeout(execute, 100);
@@ -112,5 +117,6 @@ export default function useFaceRecognition(
   return {
     loading,
     players,
+    faceBoxes,
   };
 }

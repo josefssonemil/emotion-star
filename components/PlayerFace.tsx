@@ -5,11 +5,23 @@ import { Expression } from "../types/Expressions";
 interface Props {
   canvasRef: MutableRefObject<HTMLCanvasElement>;
   expression?: Expression;
+  faceBox?: any;
 }
 
 export default function PlayerFace(props: Props) {
   return (
-    <div style={{ position: "relative", width: 640 / 2 }}>
+    <div className="relative" style={{ width: 640 / 2 }}>
+      {!!props.faceBox && (
+        <div
+          className="absolute border-yellow-400 border-2 z-10"
+          style={{
+            left: props.faceBox.left / 2,
+            top: props.faceBox.top / 2,
+            width: props.faceBox.width / 2,
+            height: props.faceBox.height / 2,
+          }}
+        />
+      )}
       <canvas
         ref={props.canvasRef}
         width="640"
@@ -20,22 +32,7 @@ export default function PlayerFace(props: Props) {
           height: 720 / 2,
         }}
       />
-      <div
-        style={{
-          fontSize: 72,
-          position: "absolute",
-          bottom: -10,
-          right: -10,
-          boxShadow: "0 5px 15px rgba(0,0,0,.2)",
-          backgroundColor: "#fff",
-          width: 100,
-          height: 100,
-          borderRadius: 20,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <div className="text-6xl absolute shadow-xl bg-white w-24 h-24 rounded-lg flex items-center justify-center right-0 bottom-0 -mb-4 -mr-4">
         {emojis[props.expression] || "?"}
       </div>
     </div>

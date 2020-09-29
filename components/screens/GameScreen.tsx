@@ -6,6 +6,7 @@ interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
   canvasRightRef: MutableRefObject<HTMLCanvasElement>;
   players: Expression[];
+  faceBoxes: any[];
 }
 
 export default function GameScreen(props: Props) {
@@ -22,10 +23,12 @@ export default function GameScreen(props: Props) {
       <PlayerFace
         canvasRef={props.canvasLeftRef}
         expression={props.players[0]}
+        faceBox={props.faceBoxes[0]}
       />
       <PlayerFace
         canvasRef={props.canvasRightRef}
         expression={props.players[1]}
+        faceBox={props.faceBoxes[1]}
       />
     </div>
   );
