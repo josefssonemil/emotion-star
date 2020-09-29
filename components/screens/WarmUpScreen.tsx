@@ -1,10 +1,12 @@
 import { Expression } from "../../types/Expressions";
-import { useEffect, useMemo, useState } from 'react';
+import { MutableRefObject, useEffect, useMemo, useState } from 'react';
+import PlayerFace from '../PlayerFace';
 
 interface Props {
-    players: Expression[]
+    canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
+    canvasRightRef: MutableRefObject<HTMLCanvasElement>;
+    players: Expression[];
 }
-
 const WarmUp = (props: Props) => {
 
     /* Could be merged into one? */
@@ -85,9 +87,16 @@ const WarmUp = (props: Props) => {
             </div>
 
 
-            <div className="mx-auto bg-gray-800 w-full h-64">
-                Video Placeholder
-        </div>
+            <div className="mx-auto bg-gray-800 w-full flex flex-row justify-around">
+                <PlayerFace
+                    canvasRef={props.canvasLeftRef}
+                    expression={props.players[0]}
+                />
+                <PlayerFace
+                    canvasRef={props.canvasRightRef}
+                    expression={props.players[1]}
+                />
+            </div>
 
             <div className="flex flex-row justify-between">
 
