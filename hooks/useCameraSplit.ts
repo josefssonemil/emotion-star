@@ -32,7 +32,12 @@ export default function useCameraSplit(
 
   // Draw video stream to canvas
   useEffect(() => {
-    if (!playing || !canvasLeftRef.current || !canvasRightRef.current) {
+    if (
+      !playing ||
+      !canvasLeftRef.current ||
+      !canvasRightRef.current ||
+      !videoRef.current
+    ) {
       return;
     }
 

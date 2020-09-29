@@ -24,17 +24,25 @@ export default function useFaceRecognition(
       let running = true;
 
       const execute = async () => {
-        const detections = await faceapi
-          .detectAllFaces(
-            canvasRef.current,
-            new faceapi.TinyFaceDetectorOptions()
-          )
-          .withFaceExpressions();
+        if (canvasRef.current) {
+          const detections = await faceapi
+            .detectAllFaces(
+              canvasRef.current,
+              new faceapi.TinyFaceDetectorOptions()
+            )
+            .withFaceExpressions();
 
-        if (detections && detections.length > 0) {
-          const expressions = detections[0].expressions.asSortedArray();
-          const filteredExpressions = expressions.filter(expression => ['happy', 'angry', 'surprised', 'sad', 'neutral'].includes(expression.expression));
-          setExpression(filteredExpressions[0].expression);
+          if (detections && detections.length > 0) {
+            const expressions = detections[0].expressions.asSortedArray();
+            const filteredExpressions = expressions.filter((expression) =>
+              ["happy", "angry", "surprised", "sad", "neutral"].includes(
+                expression.expression
+              )
+            );
+            setExpression(filteredExpressions[0].expression);
+          } else {
+            setExpression(null);
+          }
         } else {
           setExpression(null);
         }
