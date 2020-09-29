@@ -11,7 +11,7 @@ const emojis = {
 
 interface Props {
   canvasRef: MutableRefObject<HTMLCanvasElement>;
-  expression: Expression;
+  expression?: Expression;
 }
 
 export default function PlayerFace(props: Props) {

@@ -5,8 +5,8 @@ import PlayerFace from "../PlayerFace";
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
   canvasRightRef: MutableRefObject<HTMLCanvasElement>;
-  expressionLeft: Expression;
-  expressionRight: Expression;
+  player1?: Expression;
+  player2?: Expression;
 }
 
 export default function GameScreen(props: Props) {
@@ -20,14 +20,8 @@ export default function GameScreen(props: Props) {
         paddingLeft: 50,
       }}
     >
-      <PlayerFace
-        canvasRef={props.canvasLeftRef}
-        expression={props.expressionLeft}
-      />
-      <PlayerFace
-        canvasRef={props.canvasRightRef}
-        expression={props.expressionRight}
-      />
+      <PlayerFace canvasRef={props.canvasLeftRef} expression={props.player1} />
+      <PlayerFace canvasRef={props.canvasRightRef} expression={props.player2} />
     </div>
   );
 }
