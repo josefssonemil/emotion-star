@@ -13,10 +13,11 @@ export default function PlayerFace(props: Props) {
     <div className="relative" style={{ width: 640 / 2 }}>
       {!!props.faceBox && (
         <div
-          className="absolute border-yellow-400 border-2 z-10"
+          className="absolute border-yellow-400 border-2 z-10 rounded-full border-dashed transition-all duration-75 -mt-2"
           style={{
-            left: props.faceBox.left / 2,
-            top: props.faceBox.top / 2,
+            transform: `translate(${props.faceBox.left / 2}px, ${
+              props.faceBox.top / 2
+            }px)`,
             width: props.faceBox.width / 2,
             height: props.faceBox.height / 2,
           }}

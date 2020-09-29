@@ -27,18 +27,28 @@ export default function Home() {
           muted
         />
 
-        <button onClick={() => setCurrentScreen("start")}>Start</button>
-        <button onClick={() => setCurrentScreen("warmUp")}>Warm up</button>
-        <button onClick={() => setCurrentScreen("game")}>Game</button>
-        <button onClick={() => setCurrentScreen("final")}>Final</button>
+        <button className="mr-4" onClick={() => setCurrentScreen("start")}>
+          Start
+        </button>
+        <button className="mr-4" onClick={() => setCurrentScreen("warmUp")}>
+          Warm up
+        </button>
+        <button className="mr-4" onClick={() => setCurrentScreen("game")}>
+          Game
+        </button>
+        <button className="mr-4" onClick={() => setCurrentScreen("final")}>
+          Final
+        </button>
 
         {currentScreen === "start" && <StartScreen />}
 
-        {currentScreen === "warmUp" && <WarmUpScreen
-          players={players}
-          canvasLeftRef={canvasLeftRef}
-          canvasRightRef={canvasRightRef}
-        />}
+        {currentScreen === "warmUp" && (
+          <WarmUpScreen
+            players={players}
+            canvasLeftRef={canvasLeftRef}
+            canvasRightRef={canvasRightRef}
+          />
+        )}
 
         {currentScreen === "game" && (
           <GameScreen

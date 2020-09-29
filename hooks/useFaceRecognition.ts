@@ -74,7 +74,7 @@ export default function useFaceRecognition(
         // Create an array that maps face index to player index
         const playerIndexForFace = playerFaces.map((face) => {
           // Player 2 is on the left half of the screen
-          if (face.detection.box.x <= 1280 / 2) {
+          if (face.detection.box.left <= 1280 / 2) {
             return 1;
           }
 
@@ -95,7 +95,21 @@ export default function useFaceRecognition(
         expressions.forEach((expressions, index) => {
           const playerIndex = playerIndexForFace[index];
           playerExpressions[playerIndex] = expressions[0].expression;
-          playerFaceBoxes[playerIndex] = playerFaces[index].detection.box;
+
+          const box = playerFaces[index].detection.box.toSquare();
+
+          playerFaceBoxes[playerIndex] = {
+            left: 0,
+            top: box.top,
+            width: box.width,
+            height: box.height,
+          };
+
+          if (playerIndex === 0) {
+            playerFaceBoxes[playerIndex].left = 1280 - box.right;
+          } else {
+            playerFaceBoxes[playerIndex].left = 1280 / 2 - box.right;
+          }
         });
       }
 
