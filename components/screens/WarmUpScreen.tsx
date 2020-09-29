@@ -1,28 +1,77 @@
 import { Expression } from "../../types/Expressions";
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 interface Props {
     players: Expression[]
 }
 
-
 const WarmUp = (props: Props) => {
 
     /* Could be merged into one? */
-    const [faceCountOne, setFaceCountOne] = useState(0);
+    const [facesOne, setFacesOne] = useState({
+        happy: false,
+        angry: false,
+        surprised: false,
+        sad: false,
+        neutral: false,
+    });
 
+    const [facesTwo, setFacesTwo] = useState({
+        happy: false,
+        angry: false,
+        surprised: false,
+        sad: false,
+        neutral: false,
+    });
 
-    const [faceCountTwo, setFaceCountTwo] = useState(0);
+    const faceCountOne = useMemo(() => Object.values(facesOne).filter(value => value).length, [facesOne]);
+    const faceCountTwo = useMemo(() => Object.values(facesTwo).filter(value => value).length, [facesTwo]);
+
 
 
     useEffect(() => {
+
         /*
             TODO:
+
             1) Time face expression
             2) Update count of total expressions (x/5)
             3) Animate
-
+    
         */
+
+        const faceOne = props.players[0];
+        const faceTwo = props.players[1];
+
+        // check if faces already have been achieved
+
+        if (!facesOne[faceOne]) {
+            //start timer
+
+            // check if face is still active each call
+
+            setFacesOne(prevValue => {
+                return {
+                    ...prevValue,
+                    faceOne: true
+                }
+            });
+
+
+        }
+
+        if (!faceTwo[faceTwo]) {
+            setFacesOne(prevValue => {
+                return {
+                    ...prevValue,
+                    faceTwo: true
+                }
+            });
+        }
+
+
+
+
 
     }, [props.players]);
 
