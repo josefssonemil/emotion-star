@@ -2,11 +2,25 @@ import * as faceapi from "face-api.js";
 import { MutableRefObject, useEffect, useState } from "react";
 import { Expression } from "../types/Expressions";
 
+export const allowedExpressions = [
+  "happy",
+  "angry",
+  "surprised",
+  "sad",
+  "neutral",
+];
+
+interface FaceRecognitionState {
+  loading: boolean;
+  players: Expression[];
+}
+
 export default function useFaceRecognition(
-  canvasRef: MutableRefObject<HTMLCanvasElement>
-): { loading: boolean; expression: Expression } {
+  videoRef: MutableRefObject<HTMLVideoElement>,
+  playing: boolean
+): FaceRecognitionState {
   const [loading, setLoading] = useState(true);
-  const [expression, setExpression] = useState<string | null>(null);
+  const [players, setPlayers] = useState<Expression[]>([undefined, undefined]);
 
   useEffect(() => {
     Promise.all([
@@ -20,45 +34,81 @@ export default function useFaceRecognition(
   }, []);
 
   useEffect(() => {
-    if (!loading && canvasRef.current) {
-      let running = true;
+    let running = true;
 
-      const execute = async () => {
-        if (canvasRef.current) {
-          const detections = await faceapi
-            .detectAllFaces(
-              canvasRef.current,
-              new faceapi.TinyFaceDetectorOptions()
-            )
-            .withFaceExpressions();
+    const execute = async () => {
+      const playerExpressions = [undefined, undefined];
 
-          if (detections && detections.length > 0) {
-            const expressions = detections[0].expressions.asSortedArray();
-            const filteredExpressions = expressions.filter((expression) =>
-              ["happy", "angry", "surprised", "sad", "neutral"].includes(
-                expression.expression
-              )
-            );
-            setExpression(filteredExpressions[0].expression);
-          } else {
-            setExpression(null);
-          }
-        } else {
-          setExpression(null);
+      if (!videoRef.current || loading || !playing) {
+        setPlayers(playerExpressions);
+        return;
+      }
+
+      // Obtain faces from the video frame
+      const allFaces = await faceapi
+        .detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions())
+        .withFaceExpressions();
+
+      // Sort faces by the X axis
+      const allFacesSorted = allFaces.sort((a, b) => {
+        if (a.detection.box.x > b.detection.box.x) {
+          return 1;
         }
 
-        if (running) {
-          setTimeout(execute, 100);
+        if (a.detection.box.x < b.detection.box.x) {
+          return -1;
         }
-      };
 
-      execute();
+        return 0;
+      });
 
-      return () => {
-        running = false;
-      };
-    }
-  }, [loading, canvasRef.current]);
+      // Take the first (left-most) and the last face (right-most)
+      const playerFaces = [allFacesSorted.shift(), allFacesSorted.pop()].filter(
+        (el) => el !== undefined
+      );
 
-  return { loading, expression: expression as Expression };
+      // Create an array that maps face index to player index
+      const playerIndexForFace = playerFaces.map((face) => {
+        // Player 2 is on the left half of the screen
+        if (face.detection.box.x <= 1280 / 2) {
+          return 1;
+        }
+
+        // Player 1 is to the right
+        return 0;
+      });
+
+      // Get the sorted expressions for each face
+      const expressions = playerFaces.map((face) =>
+        face.expressions
+          .asSortedArray()
+          .filter((expression) =>
+            allowedExpressions.includes(expression.expression)
+          )
+      );
+
+      // Finally assign the resulting top expression
+      expressions.forEach((expressions, index) => {
+        const playerIndex = playerIndexForFace[index];
+        playerExpressions[playerIndex] = expressions[0].expression;
+      });
+
+      setPlayers(playerExpressions);
+
+      if (running) {
+        setTimeout(execute, 100);
+      }
+    };
+
+    execute();
+
+    return () => {
+      running = false;
+    };
+  }, [loading, videoRef.current, playing]);
+
+  return {
+    loading,
+    players,
+  };
 }
