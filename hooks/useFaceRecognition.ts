@@ -33,7 +33,8 @@ export default function useFaceRecognition(
 
         if (detections && detections.length > 0) {
           const expressions = detections[0].expressions.asSortedArray();
-          setExpression(expressions[0].expression);
+          const filteredExpressions = expressions.filter(expression => ['happy', 'angry', 'surprised', 'sad', 'neutral'].includes(expression.expression));
+          setExpression(filteredExpressions[0].expression);
         } else {
           setExpression(null);
         }
