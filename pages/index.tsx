@@ -21,18 +21,27 @@ export default function Home() {
     <div>
       <div>
         <video
-          className="opacity-0 absolute pointer-events-none"
+          className="opacity-0 absolute pointer-events-none hidden"
           ref={videoRef}
           width="1280"
           height="720"
           autoPlay
           muted
         />
-
-        <button onClick={() => setCurrentScreen("start")}>Start</button>
-        <button onClick={() => setCurrentScreen("warmUp")}>Warm up</button>
-        <button onClick={() => setCurrentScreen("game")}>Game</button>
-        <button onClick={() => setCurrentScreen("final")}>Final</button>
+        <nav className="absolute top-0 inset-x-auto z-50">
+          <button className="p-2" onClick={() => setCurrentScreen("start")}>
+            Start
+          </button>
+          <button className="p-2" onClick={() => setCurrentScreen("warmUp")}>
+            Warm up
+          </button>
+          <button className="p-2" onClick={() => setCurrentScreen("game")}>
+            Game
+          </button>
+          <button className="p-2" onClick={() => setCurrentScreen("final")}>
+            Final
+          </button>
+        </nav>
 
         {currentScreen === "start" && <StartScreen />}
 
