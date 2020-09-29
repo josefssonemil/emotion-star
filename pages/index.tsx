@@ -45,8 +45,7 @@ export default function Home() {
           <GameScreen
             canvasLeftRef={canvasLeftRef}
             canvasRightRef={canvasRightRef}
-            player1={players[0]}
-            player2={players[1]}
+            players={players}
           />
         )}
 
