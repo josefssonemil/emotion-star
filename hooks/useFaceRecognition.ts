@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import * as faceapi from 'face-api.js';
 
 export default function useFaceRecognition(videoRef: any) {
-    const [player1, setPlayer1] = useState('?');
-    const [player2, setPlayer2] = useState('?');
+    const [player1, setPlayer1] = useState('');
+    const [player2, setPlayer2] = useState('');
     //const [emoji, setEmoji] = useState('😐');
 
     useEffect(() => {

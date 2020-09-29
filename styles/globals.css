@@ -14,33 +14,61 @@ a {
 * {
   box-sizing: border-box;
 }
+
 video {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
-#camera{
+
+#camera {
   position: relative;
   width: 720px;
   height: 560px;
   margin: 0 auto;
 }
-h2{
+
+h2 {
   margin-top: 1rem;
   font-size: 2rem;
 }
-.emoji{
+
+h1 {
+  color: var(--main-color);
+}
+
+.emoji {
   text-align: center;
   font-size: 80px;
 }
-#player1{
+
+#player1 {
   margin: 0;
   position: absolute;
   bottom: -4rem;
   left: 0;
 }
-#player2{
+
+#player2 {
   margin: 0;
   position: absolute;
   bottom: -4rem;
   right: 0;
+}
+
+#start-screen{
+  position: relative;
+  background-color: rgb(180, 161, 247);
+  width: 100vw;
+  height: 100vh;
+}
+
+#high-score{
+  padding: 1rem;
+  width: 20%;
+  position: absolute;
+  right: 0;
+}
+
+#high-score td{
+  font-size: 1.5rem;
 }
