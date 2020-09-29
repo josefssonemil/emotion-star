@@ -15,8 +15,6 @@ export default function Home() {
 
   const [currentScreen, setCurrentScreen] = useState("start");
 
-  console.log(players);
-
   return (
     <div>
       <div>
@@ -36,10 +34,7 @@ export default function Home() {
 
         {currentScreen === "start" && <StartScreen />}
 
-        {currentScreen === "warmUp" && <WarmUpScreen
-          players={players}
-
-        />}
+        {currentScreen === "warmUp" && <WarmUpScreen players={players} />}
 
         {currentScreen === "game" && (
           <GameScreen
