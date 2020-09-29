@@ -27,6 +27,7 @@ const WarmUp = (props: Props) => {
     const faceCountOne = useMemo(() => Object.values(facesOne).filter(value => value).length, [facesOne]);
     const faceCountTwo = useMemo(() => Object.values(facesTwo).filter(value => value).length, [facesTwo]);
 
+    console.log("Faces one:", facesOne, "Face two", facesTwo);
 
 
     useEffect(() => {
@@ -45,7 +46,7 @@ const WarmUp = (props: Props) => {
 
         // check if faces already have been achieved
 
-        if (!facesOne[faceOne]) {
+        if (!facesOne[faceOne] && faceOne) {
             //start timer
 
             // check if face is still active each call
@@ -53,18 +54,18 @@ const WarmUp = (props: Props) => {
             setFacesOne(prevValue => {
                 return {
                     ...prevValue,
-                    faceOne: true
+                    [faceOne]: true
                 }
             });
 
 
         }
 
-        if (!faceTwo[faceTwo]) {
+        if (!facesTwo[faceTwo] && faceTwo) {
             setFacesOne(prevValue => {
                 return {
                     ...prevValue,
-                    faceTwo: true
+                    [faceTwo]: true
                 }
             });
         }
@@ -74,6 +75,7 @@ const WarmUp = (props: Props) => {
 
 
     }, [props.players]);
+
 
     return (
         <div className="container mx-auto">
