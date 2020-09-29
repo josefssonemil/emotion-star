@@ -1,14 +1,7 @@
 import * as faceapi from "face-api.js";
 import { MutableRefObject, useEffect, useState } from "react";
+import { allowedExpressions } from "../config";
 import { Expression } from "../types/Expressions";
-
-export const allowedExpressions = [
-  "happy",
-  "angry",
-  "surprised",
-  "sad",
-  "neutral",
-];
 
 interface FaceRecognitionState {
   loading: boolean;
