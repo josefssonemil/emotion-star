@@ -16,17 +16,16 @@ export default function Home() {
   const [currentScreen, setCurrentScreen] = useState("start");
 
   return (
-    <div>
-      <div>
-        <video
-          className="opacity-0 absolute pointer-events-none"
-          ref={videoRef}
-          width="1280"
-          height="720"
-          autoPlay
-          muted
-        />
-
+    <div className="w-screen h-screen p-5">
+      <video
+        className="opacity-0 absolute pointer-events-none"
+        ref={videoRef}
+        width="1280"
+        height="720"
+        autoPlay
+        muted
+      />
+      <nav className="absolute top-0">
         <button className="mr-4" onClick={() => setCurrentScreen("start")}>
           Start
         </button>
@@ -39,28 +38,28 @@ export default function Home() {
         <button className="mr-4" onClick={() => setCurrentScreen("final")}>
           Final
         </button>
+      </nav>
 
-        {currentScreen === "start" && <StartScreen />}
+      {currentScreen === "start" && <StartScreen />}
 
-        {currentScreen === "warmUp" && (
-          <WarmUpScreen
-            players={players}
-            canvasLeftRef={canvasLeftRef}
-            canvasRightRef={canvasRightRef}
-          />
-        )}
+      {currentScreen === "warmUp" && (
+        <WarmUpScreen
+          players={players}
+          canvasLeftRef={canvasLeftRef}
+          canvasRightRef={canvasRightRef}
+        />
+      )}
 
-        {currentScreen === "game" && (
-          <GameScreen
-            canvasLeftRef={canvasLeftRef}
-            canvasRightRef={canvasRightRef}
-            players={players}
-            faceBoxes={faceBoxes}
-          />
-        )}
+      {currentScreen === "game" && (
+        <GameScreen
+          canvasLeftRef={canvasLeftRef}
+          canvasRightRef={canvasRightRef}
+          players={players}
+          faceBoxes={faceBoxes}
+        />
+      )}
 
-        {currentScreen === "final" && <FinalScreen />}
-      </div>
+      {currentScreen === "final" && <FinalScreen />}
     </div>
   );
 }

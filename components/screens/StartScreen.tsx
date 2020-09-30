@@ -1,14 +1,13 @@
-import HighScore from '../HighScore'
+import HighScore from "../HighScore";
 
 const StartScreen = () => (
-    <div id="start-screen" className="">
+  <div className="container p-4">
+    <div>Placeholder video</div>
+    <h1 className=""> Hello World! </h1>
 
-        <div>Placeholder video</div>
-        <h1 className=""> Hello World! </h1>
+    <HighScore />
 
-        <HighScore />
-
-        <h3>Do "faces" to start game</h3>
-    </div>
+    <h3>Do "faces" to start game</h3>
+  </div>
 );
 export default StartScreen;

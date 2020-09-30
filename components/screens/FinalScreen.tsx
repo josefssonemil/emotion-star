@@ -9,10 +9,8 @@ const data = {
 function blaha() {}
 export default function FinalScreen() {
   return (
-    <div className="bg-gray-500 w-screen h-screen">
-      <div className="max-w-lg max-h-lg mx-auto my-auto">
-        <RadarChart performance={data.performance} />
-      </div>
+    <div className="w-screen h-screen place-content-center flex flex-col">
+      <RadarChart className="flex" performance={data.performance} />
     </div>
   );
 }
