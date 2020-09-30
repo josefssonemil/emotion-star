@@ -1,4 +1,9 @@
 import RadarChart from "../RadarChart";
+/*
+  TODO:
+  * Insert Grid system
+  * 
+*/
 const data = {
   performance: {
     player1: [70, 50, 70, 80, 50],
@@ -9,7 +14,7 @@ const data = {
 function blaha() {}
 export default function FinalScreen() {
   return (
-    <div className="w-screen h-screen place-content-center flex flex-col">
+    <div className="w-full h-full place-content-center flex flex-col">
       <RadarChart className="flex" performance={data.performance} />
     </div>
   );
