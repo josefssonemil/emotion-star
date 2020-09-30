@@ -14,7 +14,7 @@ export default function GameScreen(props: Props) {
     <div
       style={{
         display: "flex",
-        height: "100vh",
+        height: "100%",
         flexDirection: "column",
         justifyContent: "space-around",
         paddingLeft: 50,

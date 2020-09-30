@@ -1,4 +1,5 @@
 import RadarChart from "../RadarChart";
+import Timer from "../Timer";
 /*
   TODO:
   * Insert Grid system
@@ -15,6 +16,7 @@ function blaha() {}
 export default function FinalScreen() {
   return (
     <div className="w-full h-full place-content-center flex flex-col">
+      <Timer />
       <RadarChart className="flex" performance={data.performance} />
     </div>
   );
