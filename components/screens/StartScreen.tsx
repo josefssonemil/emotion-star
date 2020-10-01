@@ -10,11 +10,6 @@ interface Props {
   faceBoxes: any[];
   onStart: () => void;
 }
-const StartScreen = () => (
-  <div className="container p-4 font-logo">
-    <div>Placeholder video</div>
-    <h1 className=""> Hello World! </h1>
-
 export default function StartScreen(props: Props) {
   const playerCount = props.players.filter((expression) => expression).length;
 
