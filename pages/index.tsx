@@ -16,7 +16,7 @@ export default function Home() {
   const [currentScreen, setCurrentScreen] = useState("start");
 
   return (
-    <div className="w-screen h-screen py-5">
+    <div className="w-screen h-screen">
       <video
         className="opacity-0 absolute pointer-events-none"
         ref={videoRef}
@@ -25,7 +25,7 @@ export default function Home() {
         autoPlay
         muted
       />
-      <nav className="absolute top-0">
+      <nav className="absolute top-0 text-white p-2">
         <button className="mr-4" onClick={() => setCurrentScreen("start")}>
           Start
         </button>

@@ -2,6 +2,7 @@ import { MutableRefObject, useEffect } from "react";
 import { Expression } from "../../types/Expressions";
 import HighScore from "../HighScore";
 import PlayerFace from "../PlayerFace";
+import Background from "";
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -24,9 +25,12 @@ export default function StartScreen(props: Props) {
   }, [props.players]);
 
   return (
-    <div className="flex justify-between items-center px-32 h-full">
+    <div
+      style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
+      className="flex justify-between items-center px-32 h-full w-full bg-center bg-cover"
+    >
       <div>
-        <h1 className="font-bold text-4xl mb-8">
+        <h1 className="font-bold text-4xl mb-8 font-logo text-white">
           Recognized {playerCount} out of 2 players
         </h1>
         <div className="flex flex-row mb-16">
@@ -51,7 +55,7 @@ export default function StartScreen(props: Props) {
           </div>
         </div>
 
-        <h1 className="text-2xl">
+        <h1 className="text-2xl font-logo text-white">
           Both of you, make surprised faces to start the game: 😯
         </h1>
       </div>

@@ -20,6 +20,7 @@
     "react-circular-progressbar": "^2.0.3",
     "react-dom": "16.13.1",
     "react-use-measure": "^2.0.1",
+    "tailwindcss-border-gradients": "^2.0.3",
     "typeface-luckiest-guy": "^0.0.72"
   },
   "devDependencies": {
