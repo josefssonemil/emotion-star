@@ -16,7 +16,7 @@ export default function Home() {
   const [currentScreen, setCurrentScreen] = useState("start");
 
   return (
-    <div className="w-screen h-screen p-5">
+    <div className="w-screen h-screen py-5">
       <video
         className="opacity-0 absolute pointer-events-none"
         ref={videoRef}
