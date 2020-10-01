@@ -1,6 +1,7 @@
 import { MutableRefObject, useEffect, useMemo, useState } from "react";
 import { Expression } from "../../types/Expressions";
 import PlayerFace from "../PlayerFace";
+import useTimer from '../../hooks/useTimer';
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -25,6 +26,9 @@ const WarmUp = (props: Props) => {
     neutral: false,
   });
 
+  const [prevFace, setPrevFace] = useState(null);
+  const [prevFaceTwo, setPrevFaceTwo] = useState(null);
+
   const faceCountOne = useMemo(
     () => Object.values(facesOne).filter((value) => value).length,
     [facesOne]
@@ -34,39 +38,10 @@ const WarmUp = (props: Props) => {
     [facesTwo]
   );
 
-  /* Timer */
-
-  const [seconds, setSeconds] = useState(0);
-  const [isActive, setActive] = useState(false);
-
-  function toggleTimer() {
-    setActive(!isActive);
-  }
-
-  function resetTimer() {
-    setSeconds(0);
-    setActive(false);
-  }
+  const timerOne = useTimer(3);
+  const timerTwo = useTimer(3);
 
   useEffect(() => {
-    let interval = null;
-
-    if (isActive) {
-      interval = setInterval(() => {
-        setSeconds((seconds) => seconds + 1);
-      });
-    }
-  }, [isActive, seconds]);
-
-  useEffect(() => {
-    /*
-            TODO:
-             
-            1) Time face expression
-            2) Update count of total expressions (x/5)
-            3) Animate
-    
-        */
 
     const faceOne = props.players[0];
     const faceTwo = props.players[1];
@@ -75,27 +50,66 @@ const WarmUp = (props: Props) => {
 
     if (!facesOne[faceOne] && faceOne) {
       //start timer
+      setPrevFace(faceOne);
+      timerOne.start();
 
-      toggleTimer();
+      if (prevFace == faceOne) {
+        if (timerOne.seconds > 3) {
 
-      // check if face is still active each call
+          setFacesOne((prevValue) => {
+            return {
+              ...prevValue,
+              [faceOne]: true,
+            };
+          });
+          timerOne.reset();
+        }
+      }
 
-      setFacesOne((prevValue) => {
-        return {
-          ...prevValue,
-          [faceOne]: true,
-        };
-      });
+      else {
+        timerOne.reset();
+      }
+
+
     }
+
+    else {
+      setPrevFace(null);
+    }
+
+    // check if face is still active each call
 
     if (!facesTwo[faceTwo] && faceTwo) {
-      setFacesTwo((prevValue) => {
-        return {
-          ...prevValue,
-          [faceTwo]: true,
-        };
-      });
+      //start timer
+      setPrevFaceTwo(faceTwo);
+      timerTwo.start();
+
+      if (prevFaceTwo == faceTwo) {
+        if (timerTwo.seconds > 3) {
+
+          setFacesTwo((prevValue) => {
+            return {
+              ...prevValue,
+              [faceTwo]: true,
+            };
+          });
+          timerTwo.reset();
+        }
+      }
+
+      else {
+        timerTwo.reset();
+      }
+
+
     }
+
+    else {
+      setPrevFaceTwo(null);
+    }
+
+
+
   }, [props.players]);
 
   return (
@@ -137,6 +151,10 @@ const WarmUp = (props: Props) => {
           </h1>
         </div>
       </div>
+
+      <h1 className="text-5xl mx-auto text-center">
+        FaceOne: {timerOne.seconds}, faceTwo: {timerTwo.seconds}
+      </h1>
 
       <h1 className="text-5xl mx-auto text-center">
         Complete all emojis to continue
