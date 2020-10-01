@@ -7,13 +7,23 @@ interface Props {
   canvasRef: MutableRefObject<HTMLCanvasElement>;
   expression?: Expression;
   faceBox?: any;
+  constrainTo?: "width" | "height";
 }
 
 export default function PlayerFace(props: Props) {
   const [ref, bounds] = useMeasure();
 
-  const width = (640 / 720) * bounds.height;
-  const height = bounds.height;
+  const constrainTo = props.constrainTo || "height";
+
+  let width: number, height: number;
+
+  if (constrainTo === "height") {
+    width = (640 / 720) * bounds.height;
+    height = bounds.height;
+  } else {
+    width = bounds.width;
+    height = (720 / 640) * bounds.width;
+  }
 
   const scaleFactor = width / 640;
 
@@ -26,7 +36,11 @@ export default function PlayerFace(props: Props) {
   });
 
   return (
-    <div className="bg-black relative" ref={ref}>
+    <div
+      className="bg-black relative"
+      ref={ref}
+      style={constrainTo === "height" ? { width } : { height }}
+    >
       <div className="absolute" style={{ width, height }}>
         <div className="top-0 left-0 absolute overflow-hidden">
           {!!props.faceBox && (
