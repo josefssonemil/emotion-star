@@ -18,7 +18,7 @@ export default function PlayField(props) {
     );
   }
   return (
-    <div className="flex flex-row space-x-4 p-4 h-full pl-24 overflow-hidden">
+    <div className="flex flex-row space-x-4 p-4 h-full pl-4 overflow-hidden">
       <PlayFieldCol />
       <PlayFieldCol />
       <PlayFieldCol />
