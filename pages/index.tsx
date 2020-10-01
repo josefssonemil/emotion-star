@@ -47,6 +47,7 @@ export default function Home() {
           players={players}
           canvasLeftRef={canvasLeftRef}
           canvasRightRef={canvasRightRef}
+          faceBoxes={faceBoxes}
         />
       )}
 
