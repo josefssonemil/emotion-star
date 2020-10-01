@@ -1,7 +1,7 @@
 import HighScore from "../HighScore";
 
 const StartScreen = () => (
-  <div className="container p-4">
+  <div className="container p-4 font-logo">
     <div>Placeholder video</div>
     <h1 className=""> Hello World! </h1>
 

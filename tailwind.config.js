@@ -1,3 +1,5 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
@@ -16,6 +18,9 @@ module.exports = {
       }),
       colors: {
         player1: "#5EFFF5",
+      },
+      fontFamily: {
+        logo: ["Luckiest Guy", "sans-serif"],
       },
     },
   },

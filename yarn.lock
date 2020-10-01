@@ -5970,6 +5970,11 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+typeface-luckiest-guy@^0.0.72:
+  version "0.0.72"
+  resolved "https://registry.yarnpkg.com/typeface-luckiest-guy/-/typeface-luckiest-guy-0.0.72.tgz#4217901be4a180ce3fe168b6ee5dee91c9e2d0b9"
+  integrity sha512-WSILzvS7iJ5LGyYEeZVYgP1du+3HAQNeAw6TeO1Be6wHzeoOf41vH1BsgdgfWEWpr/wlS1T8Ra4DOcXhcwiHJA==
+
 typescript@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.2.tgz#7ea7c88777c723c681e33bf7988be5d008d05ac2"

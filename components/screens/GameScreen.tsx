@@ -15,7 +15,7 @@ interface Props {
 export default function GameScreen(props: Props) {
   return (
     <div className="flex flex-col h-full justify-around bg-gray-700">
-      <VerticalLine player1={"16%"} player2={"33%"} />
+      <VerticalLine player1={"26%"} player2={"23%"} />
 
       <div className="flex flex-1 flex-row justify-start pl-1">
         <PlayerFace
