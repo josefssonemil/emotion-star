@@ -12,8 +12,8 @@ interface Props {
 
 export default function GameScreen(props: Props) {
   return (
-    <div className="flex flex-col h-full justify-around">
-      <div className="flex flex-row justify-start pl-24">
+    <div className="flex flex-col h-screen justify-around">
+      <div className="flex flex-1 flex-row justify-start">
         <PlayerFace
           canvasRef={props.canvasLeftRef}
           expression={props.players[0]}
@@ -22,7 +22,7 @@ export default function GameScreen(props: Props) {
         <div>Playfield: Player 1</div>
       </div>
       <ProgressBar />
-      <div className="flex flex-row justify-start pl-24">
+      <div className="flex flex-1 flex-row justify-start">
         <PlayerFace
           canvasRef={props.canvasRightRef}
           expression={props.players[1]}
