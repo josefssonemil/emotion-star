@@ -14,6 +14,9 @@ module.exports = {
         "screen/5": "calc(100vh / 5)",
         100: "25rem",
       }),
+      colors: {
+        player1: "#5EFFF5",
+      },
     },
   },
   variants: {},
