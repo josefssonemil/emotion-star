@@ -40,7 +40,15 @@ export default function Home() {
         </button>
       </nav>
 
-      {currentScreen === "start" && <StartScreen />}
+      {currentScreen === "start" && (
+        <StartScreen
+          canvasLeftRef={canvasLeftRef}
+          canvasRightRef={canvasRightRef}
+          players={players}
+          faceBoxes={faceBoxes}
+          onStart={() => setCurrentScreen("warmUp")}
+        />
+      )}
 
       {currentScreen === "warmUp" && (
         <WarmUpScreen
