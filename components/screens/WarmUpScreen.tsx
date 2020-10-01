@@ -7,7 +7,9 @@ interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
   canvasRightRef: MutableRefObject<HTMLCanvasElement>;
   players: Expression[];
+  faceBoxes: any[];
 }
+
 const WarmUp = (props: Props) => {
   /* Could be merged into one? */
   const [facesOne, setFacesOne] = useState({
@@ -106,6 +108,7 @@ const WarmUp = (props: Props) => {
           <PlayerFace
             canvasRef={props.canvasLeftRef}
             expression={props.players[0]}
+            faceBox={props.faceBoxes[0]}
             constrainTo="width"
           />
         </div>
@@ -114,6 +117,7 @@ const WarmUp = (props: Props) => {
           <PlayerFace
             canvasRef={props.canvasRightRef}
             expression={props.players[1]}
+            faceBox={props.faceBoxes[1]}
             constrainTo="width"
           />
         </div>
