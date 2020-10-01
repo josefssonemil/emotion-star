@@ -3,6 +3,7 @@ import { Expression } from "../../types/Expressions";
 import PlayerFace from "../PlayerFace";
 import ProgressBar from "../ProgressBar";
 import PlayField from "../PlayField";
+import VerticalLine from "../VerticalLine";
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -14,6 +15,8 @@ interface Props {
 export default function GameScreen(props: Props) {
   return (
     <div className="flex flex-col h-full justify-around bg-gray-700">
+      <VerticalLine player1={"16%"} player2={"33%"} />
+
       <div className="flex flex-1 flex-row justify-start pl-1">
         <PlayerFace
           canvasRef={props.canvasLeftRef}
@@ -22,7 +25,7 @@ export default function GameScreen(props: Props) {
         />
         <PlayField />
       </div>
-      <ProgressBar position={"50%"} />
+      <ProgressBar position={60} />
       <div className="flex flex-1 flex-row justify-start pl-1">
         <PlayerFace
           canvasRef={props.canvasRightRef}
