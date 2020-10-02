@@ -17,10 +17,17 @@ module.exports = {
         100: "25rem",
       }),
       colors: {
+        local: {
+          purple1: "#460270",
+          purple2: "#5100C6,",
+        },
         player1: "#5EFFF5",
       },
       fontFamily: {
         logo: ["Luckiest Guy", "sans-serif"],
+      },
+      boxShadow: {
+        pinkBlur: "0 0 34px 0px rgba(255, 0, 255, 1)",
       },
     },
     linearBorderGradients: {

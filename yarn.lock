@@ -3740,7 +3740,7 @@ lodash.toarray@^4.4.0:
   resolved "https://registry.yarnpkg.com/lodash.toarray/-/lodash.toarray-4.4.0.tgz#24c4bfcd6b2fba38bfd0594db1179d8e9b656561"
   integrity sha1-JMS/zWsvuji/0FlNsRedjptlZWE=
 
-lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.19, lodash@^4.17.20:
+lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
@@ -5803,6 +5803,13 @@ tailwindcss-border-gradients@^2.0.3:
   dependencies:
     color "^3.1.1"
     lodash "^4.17.11"
+
+tailwindcss-typography@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/tailwindcss-typography/-/tailwindcss-typography-3.1.0.tgz#b60690d97a53b0d94eab286cd02f68d6d30e2d3d"
+  integrity sha512-uqovHMt9orPs1kl2U+bidlcO25tmUGJjjluQdI67yRnOy/IlqKe6tYcHHAsQPhehlk3r11/T3CE7Uc0PSUJcNg==
+  dependencies:
+    lodash "^4.17.15"
 
 tailwindcss@^1.8.10:
   version "1.8.10"
