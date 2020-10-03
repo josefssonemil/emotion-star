@@ -2,8 +2,8 @@ import { MutableRefObject } from "react";
 import { Expression } from "../../types/Expressions";
 import PlayerFace from "../PlayerFace";
 import ProgressBar from "../ProgressBar";
-import PlayField from "../PlayField";
-import VerticalLine from "../VerticalLine";
+import { useState, useEffect } from "react";
+import { allowedExpressions } from "../../config";
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -13,30 +13,115 @@ interface Props {
 }
 
 export default function GameScreen(props: Props) {
+  const [dot, setDot] = useState({
+    playerOne: {
+      visible: "",
+      row: undefined,
+    },
+    playerTwo: {
+      visible: "",
+      row: undefined,
+    },
+  });
+  const faceOne = props.players[0];
+  const faceTwo = props.players[1];
+
+  useEffect(() => {
+    if (faceOne != undefined) {
+      setDot((prevValue) => ({
+        ...prevValue,
+        playerOne: {
+          visible: "",
+          row: allowedExpressions.indexOf(faceOne) + 1,
+        },
+      }));
+    } else {
+      setDot((prevValue) => ({
+        ...prevValue,
+        playerOne: {
+          visible: "hidden",
+          row: undefined,
+        },
+      }));
+    }
+
+    if (faceTwo != undefined) {
+      setDot((prevValue) => ({
+        ...prevValue,
+        playerTwo: {
+          visible: "",
+          row: allowedExpressions.indexOf(faceTwo) + 1,
+        },
+      }));
+    } else {
+      setDot((prevValue) => ({
+        ...prevValue,
+        playerTwo: {
+          visible: "hidden",
+          row: undefined,
+        },
+      }));
+    }
+  }, [props.players]);
+
   return (
     <div
       style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
-      className="flex flex-col h-full justify-around bg-gray-700"
+      className="h-full w-full bg-center bg-cover grid grid-cols-12 grid-rows-6 "
     >
-      <VerticalLine player1={"26%"} player2={"23%"} />
+      <div
+        /* Vertical Line */
+        style={{ boxShadow: "0 0 3px 0 #718096" }}
+        className="w-px bg-gray-600 bg-opacity-25 col-start-6 col-span-1 row-start-1 row-end-7 justify-self-center"
+      />
 
-      <div className="w-52 flex flex-row justify-start pl-1">
+      <div className="w-64 justify-self-start self-end col-start-1 col-span-3 row-span-3 row-start-1">
         <PlayerFace
           canvasRef={props.canvasLeftRef}
           expression={props.players[0]}
           faceBox={props.faceBoxes[0]}
+          constrainTo="width"
         />
-        <PlayField />
       </div>
-      <ProgressBar position={60} />
-      <div className="w-52 flex flex-row justify-start pl-1">
+      <div
+        // Playfield player 1
+        className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-start-1 row-span-3"
+      >
+        <div
+          /* Dot Player 1 */
+          style={{
+            boxShadow: "0 0 25px 2px #5EFFF5",
+          }}
+          className={`
+          ${"row-start-" + dot.playerOne.row} ${
+            dot.playerOne.visible
+          } justify-self-center self-center col-start-6 col-span-1 row-span-1 h-4 w-4 border-2 rounded-full border-player1 border-opacity-25 bg-blue-100`}
+        />
+      </div>
+      <div className="w-64 justify-self-start self-start col-start-1 col-span-3 row-span-3 row-end-7">
         <PlayerFace
           canvasRef={props.canvasRightRef}
           expression={props.players[1]}
           faceBox={props.faceBoxes[1]}
+          constrainTo="width"
         />
-
-        <PlayField />
+      </div>
+      <div className="col-start-1 col-span-12 row-start-3 row-span-2 flex items-center">
+        <ProgressBar position={60} />
+      </div>
+      <div
+        // Playfield player 2
+        className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-end-7 row-span-3"
+      >
+        <div
+          /* Dot Player 2 */
+          style={{
+            boxShadow: "0 0 25px 2px #ecc94b",
+          }}
+          className={`${"row-start-" + dot.playerTwo.row} ${
+            dot.playerTwo.visible
+          } justify-self-center self-center col-start-6 col-span-1 row-span-1 h-4 w-4 border-2 rounded-full  border-yellow-500 border-opacity-25 bg-yellow-100`}
+        />
       </div>
     </div>
   );

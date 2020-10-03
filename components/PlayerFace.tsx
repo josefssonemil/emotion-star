@@ -37,7 +37,7 @@ export default function PlayerFace(props: Props) {
 
   return (
     <div
-      className="bg-black relative"
+      className="bg-black relative border-black border-box"
       ref={ref}
       style={constrainTo === "height" ? { width } : { height }}
     >
@@ -45,12 +45,17 @@ export default function PlayerFace(props: Props) {
         <div className="top-0 left-0 absolute overflow-hidden">
           {!!props.faceBox && (
             <div
-              className="absolute border-yellow-400 border-2 z-10 rounded-full border-dashed transition-all duration-75 -mt-2"
+              className="absolute border-white border-opacity-75 shadow-pinkBlur2 border-2 rounded-lg z-10 transition-all duration-75 -mt-2"
               style={getFaceBoxStyles(props.faceBox)}
-            />
+            >
+              <div className="text-6xl absolute shadow-xl w-16 h-16 rounded-full flex items-center justify-center right-0 bottom-0 -mb-4 -mr-4">
+                {emojis[props.expression] || "👤"}
+              </div>
+            </div>
           )}
           <canvas
             ref={props.canvasRef}
+            className=""
             width="640"
             height="720"
             style={{
@@ -59,9 +64,6 @@ export default function PlayerFace(props: Props) {
               height,
             }}
           />
-        </div>
-        <div className="text-6xl absolute shadow-xl bg-white w-24 h-24 rounded-lg flex items-center justify-center right-0 bottom-0 -mb-4 -mr-4">
-          {emojis[props.expression] || "?"}
         </div>
       </div>
     </div>

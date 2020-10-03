@@ -28,6 +28,9 @@ module.exports = {
       },
       boxShadow: {
         pinkBlur: "0 0 34px 0px rgba(255, 0, 255, 1)",
+        pinkBlur2:
+          "0 0 17px 0px rgba(255, 0, 255, 1), inset 0 0 17px 0px rgba(255, 0, 255, 1)",
+        innerPinkBlur: " inset 0 0 34px 0px rgba(255, 0, 255, 1)",
       },
     },
     linearBorderGradients: {
