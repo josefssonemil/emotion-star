@@ -56,6 +56,7 @@ export default function Home() {
           canvasLeftRef={canvasLeftRef}
           canvasRightRef={canvasRightRef}
           faceBoxes={faceBoxes}
+          onStart={() => setCurrentScreen("game")}
         />
       )}
 

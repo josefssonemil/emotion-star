@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function useTimer(maxCount: number) {
-  const [seconds, setSeconds] = useState(0);
+  const [milliSeconds, setMilliSeconds] = useState(0);
   const [isActive, setActive] = useState(false);
 
   function start() {
@@ -9,21 +9,21 @@ export default function useTimer(maxCount: number) {
   }
 
   function reset() {
-    setSeconds(0);
+    setMilliSeconds(0);
     setActive(false);
   }
 
   useEffect(() => {
     let interval = null;
 
-    if (isActive && seconds <= maxCount) {
+    if (isActive && milliSeconds <= maxCount) {
       interval = setTimeout(() => {
-        setSeconds((seconds) => seconds + 0.1);
-      }, 100);
+        setMilliSeconds((milliSeconds) => milliSeconds + 1);
+      }, 1);
     }
 
     return () => clearTimeout(interval);
-  }, [isActive, seconds, maxCount]);
+  }, [isActive, milliSeconds, maxCount]);
 
-  return { seconds, start, reset };
+  return { milliSeconds, start, reset };
 }
