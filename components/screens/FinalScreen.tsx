@@ -1,5 +1,4 @@
 import RadarChart from "../RadarChart";
-import Timer from "../Timer";
 /*
   TODO:
   * Insert Grid system
@@ -12,12 +11,15 @@ const data = {
     average: [60, 60, 60, 60, 60],
   },
 };
-function blaha() {}
 export default function FinalScreen() {
   return (
-    <div className="w-full h-full place-content-center flex flex-col">
-      <Timer />
-      <RadarChart className="flex" performance={data.performance} />
+    <div
+      style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
+      className="h-full w-full bg-center bg-cover grid grid-cols-12 grid-rows-6"
+    >
+      <div className="col-end-13 col-span-5 row-end-7 row-span-4 place-center">
+        <RadarChart performance={data.performance} />
+      </div>
     </div>
   );
 }
