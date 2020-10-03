@@ -26,12 +26,12 @@ export default function StartScreen(props: Props) {
   return (
     <div
       style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
-      className="flex justify-between items-center pl-32 h-full w-full bg-center bg-cover"
+      className="h-full w-full bg-center bg-cover justify-between items-center flex"
     >
-      <div>
+      <div className="flex flex-col flex-grow">
         <h1
           style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-          className="font-bold text-4xl mb-8 font-logo text-white text-center"
+          className="font-bold text-4xl mb-8 font-luckiest text-white text-center tracking-wider"
         >
           Recognized {playerCount} out of 2 players
         </h1>
@@ -59,12 +59,12 @@ export default function StartScreen(props: Props) {
 
         <h1
           style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-          className="text-center text-2xl font-logo text-white"
+          className="text-center text-2xl font-luckiest text-white tracking-wider"
         >
           Both of you, make surprised faces to start the game: 😯
         </h1>
       </div>
-      <div className="justify-self-end self-start p-10">
+      <div className="self-start flex p-10">
         <HighScore />
       </div>
     </div>

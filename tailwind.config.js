@@ -24,7 +24,7 @@ module.exports = {
         player1: "#5EFFF5",
       },
       fontFamily: {
-        logo: ["Luckiest Guy", "sans-serif"],
+        luckiest: ["Luckiest Guy", "sans-serif"],
       },
       boxShadow: {
         pinkBlur: "0 0 34px 0px rgba(255, 0, 255, 1)",
