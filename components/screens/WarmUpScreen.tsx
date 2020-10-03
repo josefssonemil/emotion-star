@@ -135,7 +135,7 @@ const WarmUp = (props: Props) => {
         className="text-2xl text-white text-right col-span-2 col-end-12 row-span-1 row-start-1"
       ></h1>
 
-      <div className="w-64 mx-auto col-span-3 col-start-3 row-span-3 row-start-2">
+      <div className="w-64 place-self-center col-span-3 col-start-3 row-span-3 row-start-2">
         <PlayerFace
           canvasRef={props.canvasLeftRef}
           expression={props.players[0]}
@@ -144,7 +144,7 @@ const WarmUp = (props: Props) => {
         />
       </div>
 
-      <div className="w-64 mx-auto col-span-3 col-start-8 row-span-3 row-start-2">
+      <div className="w-64 place-self-center col-span-3 col-start-8 row-span-3 row-start-2">
         <PlayerFace
           canvasRef={props.canvasRightRef}
           expression={props.players[1]}

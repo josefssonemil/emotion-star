@@ -1,6 +1,6 @@
 export default function VercticalLine(props) {
   return (
-    <div style={{ left: "50%" }} className="fixed inset-y-0 w-4 z-50">
+    <div>
       <div
         /* Dot Player 1 */
         style={{
