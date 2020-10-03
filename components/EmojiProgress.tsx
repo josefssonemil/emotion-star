@@ -12,7 +12,7 @@ export default function EmojiProgress(props) {
       <div className="absolute inset-0 flex justify-center items-center text-6xl">
         <div>{emojis[props.emoji]}</div>
       </div>
-      <div className="w-20 h-20">
+      <div className="w-20 h-20 rounded-full shadow-pinkBlur">
         <CircularProgressbar
           value={props.expression ? 100 : (props.timer * 100) / 3}
           styles={buildStyles({

@@ -103,7 +103,6 @@ const WarmUp = (props: Props) => {
               [faceTwo]: true,
             };
           });
-          timer.two[faceTwo].reset();
         }
       } else {
         timer.two[faceTwo].reset();

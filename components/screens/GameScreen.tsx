@@ -14,10 +14,13 @@ interface Props {
 
 export default function GameScreen(props: Props) {
   return (
-    <div className="flex flex-col h-full justify-around bg-gray-700">
+    <div
+      style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
+      className="flex flex-col h-full justify-around bg-gray-700"
+    >
       <VerticalLine player1={"26%"} player2={"23%"} />
 
-      <div className="flex flex-1 flex-row justify-start pl-1">
+      <div className="w-52 flex flex-row justify-start pl-1">
         <PlayerFace
           canvasRef={props.canvasLeftRef}
           expression={props.players[0]}
@@ -26,7 +29,7 @@ export default function GameScreen(props: Props) {
         <PlayField />
       </div>
       <ProgressBar position={60} />
-      <div className="flex flex-1 flex-row justify-start pl-1">
+      <div className="w-52 flex flex-row justify-start pl-1">
         <PlayerFace
           canvasRef={props.canvasRightRef}
           expression={props.players[1]}
