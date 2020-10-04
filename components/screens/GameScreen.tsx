@@ -4,15 +4,29 @@ import PlayerFace from "../PlayerFace";
 import ProgressBar from "../ProgressBar";
 import { useState, useEffect } from "react";
 import { allowedExpressions } from "../../config";
+import useTimer from "../../hooks/useTimer";
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
   canvasRightRef: MutableRefObject<HTMLCanvasElement>;
   players: Expression[];
   faceBoxes: any[];
+  onStart: () => void;
+  gameTime: number;
 }
 
 export default function GameScreen(props: Props) {
+  const gameTime = props.gameTime;
+  const gameTimer = useTimer(gameTime);
+  const [gameProgress, setGameProgress] = useState(0);
+  useEffect(() => {
+    gameTimer.start();
+    if (gameTimer.seconds >= gameTime) {
+      props.onStart();
+    }
+    setGameProgress((gameTimer.seconds / gameTime) * 100);
+  });
+
   const [dot, setDot] = useState({
     playerOne: {
       visible: "",
@@ -77,6 +91,7 @@ export default function GameScreen(props: Props) {
 
       <div className="w-64 justify-self-start self-end col-start-1 col-span-3 row-span-3 row-start-1">
         <PlayerFace
+          // Player One video
           canvasRef={props.canvasLeftRef}
           expression={props.players[0]}
           faceBox={props.faceBoxes[0]}
@@ -100,6 +115,7 @@ export default function GameScreen(props: Props) {
       </div>
       <div className="w-64 justify-self-start self-start col-start-1 col-span-3 row-span-3 row-end-7">
         <PlayerFace
+          // Player Two video
           canvasRef={props.canvasRightRef}
           expression={props.players[1]}
           faceBox={props.faceBoxes[1]}
@@ -107,7 +123,7 @@ export default function GameScreen(props: Props) {
         />
       </div>
       <div className="col-start-1 col-span-12 row-start-3 row-span-2 flex items-center">
-        <ProgressBar position={60} />
+        <ProgressBar position={gameProgress} />
       </div>
       <div
         // Playfield player 2

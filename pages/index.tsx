@@ -16,7 +16,7 @@ export default function Home() {
   const [currentScreen, setCurrentScreen] = useState("start");
 
   return (
-    <div className="w-screen h-screen">
+    <div className="w-screen h-screen overflow-hidden">
       <video
         className="opacity-0 absolute pointer-events-none"
         ref={videoRef}
@@ -66,6 +66,8 @@ export default function Home() {
           canvasRightRef={canvasRightRef}
           players={players}
           faceBoxes={faceBoxes}
+          onStart={() => setCurrentScreen("final")}
+          gameTime={30}
         />
       )}
 
