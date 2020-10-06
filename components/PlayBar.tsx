@@ -12,7 +12,10 @@ export default function PlayBar(props) {
           ${"row-start-" + props.data.row} ${props.data.visible} bg-gray-900 h-1/3 flex flex-row self-center col-start-6 col-span-1 row-span-1`}>
 
 
-            <div>😡</div>
+            <div className="bg-white">
+                😡
+            </div>
+
             <div>
 
                 <Dot />
