@@ -31,7 +31,7 @@ export default function EmojiProgress(props: Props) {
             }, 100%, 50%)`,
             trailColor: "rgba(0,0,0,0)",
           })}
-          strokeWidth={props.completed ? 10 : 9}
+          strokeWidth={props.completed ? 10 : 7}
         />
       </div>
     </div>

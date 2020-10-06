@@ -28,12 +28,14 @@ export default function WarmUp(props: Props) {
   }, [props.expression, currentExpression]);
 
   useEffect(() => {
-    if (timer.seconds === 3 && currentExpression) {
+    if (timer.seconds >= 3 && currentExpression) {
+      setExpressionStatus((prevState) => ({
+        ...prevState,
+        [currentExpression]: true,
+      }));
+
       setCurrentExpression(null);
       timer.reset();
-      /*setExpressionStatus({
-        ...
-      })*/
     }
   }, [timer.seconds, currentExpression]);
 
@@ -50,7 +52,7 @@ export default function WarmUp(props: Props) {
             key={expression}
             emoji={expression as Expression}
             completed={expressionStatus[expression]}
-            progress={expression === currentExpression ? timer.seconds : 0}
+            progress={expression === currentExpression ? timer.seconds / 3 : 0}
           />
         ))}
       </div>
