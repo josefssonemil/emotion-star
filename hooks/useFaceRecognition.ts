@@ -74,7 +74,10 @@ export default function useFaceRecognition(
         // Create an array that maps face index to player index
         const playerIndexForFace = playerFaces.map((face) => {
           // Player 2 is on the left half of the screen
-          if (face.detection.box.left <= 1280 / 2) {
+          if (
+            face.detection.box.left + face.detection.box.width / 2 <=
+            1280 / 2
+          ) {
             return 1;
           }
 
