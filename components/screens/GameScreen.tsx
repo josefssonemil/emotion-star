@@ -123,7 +123,7 @@ export default function GameScreen(props: Props) {
         />
       </div>
       <div className="col-start-1 col-span-12 row-start-3 row-span-2 flex items-center">
-        <ProgressBar position={gameProgress} />
+        <ProgressBar position={gameProgress} gameTime={gameTime} />
       </div>
       <div
         // Playfield player 2

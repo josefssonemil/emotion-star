@@ -3,6 +3,7 @@ import useTimer from "../../hooks/useTimer";
 import { Expression } from "../../types/Expressions";
 import PlayerFace from "../PlayerFace";
 import EmojiProgress from "../EmojiProgress";
+import { motion } from "framer-motion";
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -135,16 +136,18 @@ const WarmUp = (props: Props) => {
         className="text-2xl text-white text-right col-span-2 col-end-12 row-span-1 row-start-1"
       ></h1>
 
-      <div className="w-64 place-self-center col-span-3 col-start-3 row-span-3 row-start-2">
-        <PlayerFace
-          canvasRef={props.canvasLeftRef}
-          expression={props.players[0]}
-          faceBox={props.faceBoxes[0]}
-          constrainTo="width"
-        />
+      <div className=" place-self-stretch col-span-3 col-end-6 row-span-3 row-start-2">
+        <div className="w-64">
+          <PlayerFace
+            canvasRef={props.canvasLeftRef}
+            expression={props.players[0]}
+            faceBox={props.faceBoxes[0]}
+            constrainTo="width"
+          />
+        </div>
       </div>
 
-      <div className="w-64 place-self-center col-span-3 col-start-8 row-span-3 row-start-2">
+      <div className="w-64 place-self-stretch col-span-3 col-start-8 row-span-3 row-start-2">
         <PlayerFace
           canvasRef={props.canvasRightRef}
           expression={props.players[1]}

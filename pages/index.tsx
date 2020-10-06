@@ -67,7 +67,7 @@ export default function Home() {
           players={players}
           faceBoxes={faceBoxes}
           onStart={() => setCurrentScreen("final")}
-          gameTime={30}
+          gameTime={120}
         />
       )}
 
