@@ -9,6 +9,7 @@ interface Props {
   faceBox?: any;
   constrainTo?: "width" | "height";
   player: 1 | 2;
+  noBorder: boolean;
 }
 
 export default function PlayerFace(props: Props) {
@@ -48,7 +49,7 @@ export default function PlayerFace(props: Props) {
 
   return (
     <div
-      className="relative border-black border-box font-sans"
+      className="relative border-box font-sans"
       ref={ref}
       style={
         constrainTo === "height"
@@ -58,7 +59,9 @@ export default function PlayerFace(props: Props) {
     >
       <div className="absolute" style={{ width, height }}>
         <div
-          className="inset-0 absolute overflow-hidden"
+          className={`inset-0 absolute ${
+            props.noBorder ? "" : "overflow-hidden"
+          }`}
           style={{ borderRadius: 20, borderWidth: 6 }}
         >
           {!!props.faceBox && (
@@ -73,7 +76,7 @@ export default function PlayerFace(props: Props) {
                   transform: `scale(${getScale(props.faceBox)})`,
                 }}
               >
-                {emojis[props.expression] || "👤"}
+                {emojis[props.expression] || "?"}
               </div>
             </div>
           )}
@@ -88,10 +91,11 @@ export default function PlayerFace(props: Props) {
             transform: "scaleX(-1)",
             width,
             height,
-            borderRadius: 20,
-            borderWidth: 6,
+            //borderRadius: props.noBorder ? 0 : 20,
+            borderBottomLeftRadius: "20",
+            borderWidth: props.noBorder ? 0 : 6,
             borderColor: playerColor,
-            boxShadow: `0 0 15px ${playerColor}`,
+            boxShadow: props.noBorder ? "" : `0 0 15px ${playerColor}`,
           }}
         />
       </div>

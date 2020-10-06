@@ -2,6 +2,7 @@ import { MutableRefObject, useEffect } from "react";
 import { Expression } from "../../types/Expressions";
 import HighScore from "../HighScore";
 import PlayerFace from "../PlayerFace";
+import EmptyCamPlaceholder from "../EmptyCamPlaceholder";
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -18,11 +19,11 @@ export default function StartScreen(props: Props) {
       (expression) => expression === "surprised"
     ).length;
 
-    if (surprisedCount === 2) {
+    if (!props.players.includes(undefined)) {
       props.onStart();
     }
   }, [props.players]);
-
+  console.log(props.players);
   return (
     <div
       style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
@@ -32,38 +33,33 @@ export default function StartScreen(props: Props) {
         style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
         className="text-5xl text-center text-white font-luckiest col-start-3 col-span-8 row-span-1 row-start-1 self-end"
       >
-        Recognized {playerCount} out of 2 players
+        Enter play area!
       </h1>
 
-      <div className="w-64 justify-self-center col-span-3 col-end-7 row-span-3 row-start-2">
+      <div className="w-64 justify-self-end col-span-3 col-end-7 row-span-3 row-start-2 relative">
         <PlayerFace
           canvasRef={props.canvasLeftRef}
           expression={props.players[0]}
           faceBox={props.faceBoxes[0]}
           constrainTo="width"
           player={1}
+          noBorder={true}
         />
+        {props.players[0] === undefined && <EmptyCamPlaceholder player="1" />}
       </div>
-      <div className="w-64 justify-self-center col-span-3 col-start-7 row-span-3 row-start-2">
+      <div className="w-64 justify-self-start col-span-3 col-start-7 row-span-3 row-start-2 relative">
         <PlayerFace
           canvasRef={props.canvasRightRef}
           expression={props.players[1]}
           faceBox={props.faceBoxes[1]}
           constrainTo="width"
           player={2}
+          noBorder={true}
         />
-      </div>
-
-      <h1
-        style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-        className="text-3xl font-luckiest text-white tracking-wider text-center col-start-3 col-span-8 row-end-6 row-span-1"
-      >
-        Both of you, make surprised faces to start the game: 😯
-      </h1>
-
-      <div className="place-self-center col-span-3 col-end-13 row-span-4 row-start-1">
-        <HighScore />
+        {props.players[1] === undefined && <EmptyCamPlaceholder player="2" />}
       </div>
     </div>
   );
 }
+/* Vector 5 (Stroke) */
+//box-shadow: 0px 0px 15px #4BFAF0, inset 0px 0px 5px rgba(75, 250, 240, 0.25);
