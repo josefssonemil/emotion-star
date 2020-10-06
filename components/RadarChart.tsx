@@ -1,5 +1,6 @@
 import React from "react";
 import { Radar, defaults } from "react-chartjs-2";
+import "chartjs-plugin-style";
 
 export default function RadarChart(props) {
   const performance = props.performance;
