@@ -25,7 +25,8 @@
     "react-use-measure": "^2.0.1",
     "tailwindcss-border-gradients": "^2.0.3",
     "tailwindcss-typography": "^3.1.0",
-    "typeface-luckiest-guy": "^0.0.72"
+    "typeface-luckiest-guy": "^0.0.72",
+    "use-sound": "^1.0.2"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^3.0.0",
