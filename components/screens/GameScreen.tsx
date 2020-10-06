@@ -4,6 +4,10 @@ import useTimer from "../../hooks/useTimer";
 import { Expression } from "../../types/Expressions";
 import PlayerFace from "../PlayerFace";
 import ProgressBar from "../ProgressBar";
+import PlayBar from '../PlayBar';
+import PlayField from "../PlayField";
+import Dot from "../Dot";
+
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -123,30 +127,20 @@ export default function GameScreen(props: Props) {
           // Playfield player 1
           className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-start-1 row-span-3"
         >
-          <div
-            /* Dot Player 1 */
-            style={{
-              boxShadow: "0 0 25px 2px #5EFFF5",
-            }}
-            className={`
-          ${"row-start-" + dot.playerOne.row} ${
-              dot.playerOne.visible
-            } justify-self-center self-center col-start-6 col-span-1 row-span-1 h-4 w-4 border-2 rounded-full border-player1 border-opacity-25 bg-blue-100`}
-          />
+
+          <PlayBar data={dot.playerOne} />
+
+
         </div>
         <div
           // Playfield player 2
           className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-end-7 row-span-3"
         >
-          <div
-            /* Dot Player 2 */
-            style={{
-              boxShadow: "0 0 25px 2px #ecc94b",
-            }}
-            className={`${"row-start-" + dot.playerTwo.row} ${
-              dot.playerTwo.visible
-            } justify-self-center self-center col-start-6 col-span-1 row-span-1 h-4 w-4 border-2 rounded-full  border-yellow-500 border-opacity-25 bg-yellow-100`}
-          />
+
+          <PlayBar data={dot.playerTwo} />
+
+
+
         </div>
       </div>
     </div>
