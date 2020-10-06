@@ -70,7 +70,9 @@ export default function PlayerFace(props: Props) {
               style={getFaceBoxStyles(props.faceBox)}
             >
               <div
-                className="text-6xl absolute shadow-xl w-16 h-16 rounded-full flex items-center justify-center right-0 bottom-0 -mb-4 -mr-4"
+                className={`${
+                  props.player == 1 ? "left-0 -ml-8" : "right-0 -mr-4"
+                } text-6xl absolute shadow-xl w-16 h-16 rounded-full flex items-center justify-center  bottom-0 -mb-4`}
                 style={{
                   transformOrigin: "bottom right",
                   transform: `scale(${getScale(props.faceBox)})`,

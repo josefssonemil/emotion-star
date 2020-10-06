@@ -2,6 +2,8 @@ import { MutableRefObject, useEffect, useState } from "react";
 import { Expression } from "../../types/Expressions";
 import PlayerFace from "../PlayerFace";
 import WarmUp from "../WarmUp";
+import { motion } from "framer-motion";
+import EmptyCamPlaceholder from "../EmptyCamPlaceholder";
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -14,6 +16,7 @@ interface Props {
 
 export default function WarmUpScreen(props: Props) {
   const [playersDone, setPlayersDone] = useState([false, false]);
+  const [x, setX] = useState(0);
 
   useEffect(() => {
     if (playersDone[0] && playersDone[1]) {
@@ -21,6 +24,14 @@ export default function WarmUpScreen(props: Props) {
     }
   }, [playersDone]);
 
+  useEffect(() => {
+    if (!props.players.includes(undefined)) {
+      setX(200);
+    }
+    if (props.players === [undefined, undefined]) {
+      setX(0);
+    }
+  }, [props.players]);
   return (
     <div
       style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
@@ -37,34 +48,60 @@ export default function WarmUpScreen(props: Props) {
         Team name: {props.teamName}
       </h1>
 
-      <div className="place-self-middle col-span-3 col-end-6 row-span-4 row-start-2">
-        <div className="w-64 mx-auto mb-6">
-          <PlayerFace
-            canvasRef={props.canvasLeftRef}
-            expression={props.players[0]}
-            faceBox={props.faceBoxes[0]}
-            constrainTo="width"
-            player={1}
-          />
-        </div>
+      <motion.div
+        initial={{
+          marginRight: "0",
+        }}
+        animate={{
+          marginRight: x,
+        }}
+        transition={{
+          duration: 1,
+          ease: "easeInOut",
+        }}
+        className="w-64 justify-self-end col-span-3 col-end-7 row-span-3 row-start-2 relative"
+      >
+        <PlayerFace
+          canvasRef={props.canvasLeftRef}
+          expression={props.players[0]}
+          faceBox={props.faceBoxes[0]}
+          constrainTo="width"
+          player={1}
+          noBorder={true}
+        />
+        {props.players[0] === undefined && <EmptyCamPlaceholder player="1" />}
+      </motion.div>
 
+      <motion.div
+        initial={{
+          marginLeft: "0",
+        }}
+        animate={{
+          marginLeft: x,
+        }}
+        transition={{
+          duration: 1,
+          ease: "easeInOut",
+        }}
+        className="w-64 justify-self-start col-span-3 col-start-7 row-span-3 row-start-2 relative"
+      >
+        <PlayerFace
+          canvasRef={props.canvasRightRef}
+          expression={props.players[1]}
+          faceBox={props.faceBoxes[1]}
+          constrainTo="width"
+          player={2}
+          noBorder={true}
+        />
+        {props.players[1] === undefined && <EmptyCamPlaceholder player="2" />}
+      </motion.div>
+      <div className="col-span-4 col-start-2 row-span-1 row-start-5">
         <WarmUp
           expression={props.players[0]}
           onComplete={() => setPlayersDone((prevState) => [true, prevState[1]])}
         />
       </div>
-
-      <div className="place-self-middle col-span-3 col-start-8 row-span-4 row-start-2">
-        <div className="w-64 mx-auto mb-6">
-          <PlayerFace
-            canvasRef={props.canvasRightRef}
-            expression={props.players[1]}
-            faceBox={props.faceBoxes[1]}
-            constrainTo="width"
-            player={2}
-          />
-        </div>
-
+      <div className="col-span-4 col-end-12 row-span-1 row-start-5">
         <WarmUp
           expression={props.players[1]}
           onComplete={() => setPlayersDone((prevState) => [prevState[0], true])}
