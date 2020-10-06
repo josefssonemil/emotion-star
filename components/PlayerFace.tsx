@@ -36,11 +36,19 @@ export default function PlayerFace(props: Props) {
     height: box.height * scaleFactor,
   });
 
+  const getScale = (box: any) => {
+    if (box) {
+      return box.width / 400;
+    }
+
+    return 1;
+  };
+
   const playerColor = props.player === 1 ? "#4BFAF0" : "#86E409";
 
   return (
     <div
-      className="relative border-black border-box"
+      className="relative border-black border-box font-sans"
       ref={ref}
       style={
         constrainTo === "height"
@@ -58,7 +66,13 @@ export default function PlayerFace(props: Props) {
               className="absolute border-white border-opacity-75 shadow-pinkBlur2 border-2 rounded-lg z-10 duration-75 -mt-2"
               style={getFaceBoxStyles(props.faceBox)}
             >
-              <div className="text-6xl absolute shadow-xl w-16 h-16 rounded-full flex items-center justify-center right-0 bottom-0 -mb-4 -mr-4">
+              <div
+                className="text-6xl absolute shadow-xl w-16 h-16 rounded-full flex items-center justify-center right-0 bottom-0 -mb-4 -mr-4"
+                style={{
+                  transformOrigin: "bottom right",
+                  transform: `scale(${getScale(props.faceBox)})`,
+                }}
+              >
                 {emojis[props.expression] || "👤"}
               </div>
             </div>

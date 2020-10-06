@@ -33,14 +33,16 @@ export default function HighScore() {
         borderRadius: "16px",
         padding: "4px",
         backgroundImage: "linear-gradient(to top, #460270, #5100C6)",
+        boxShadow: "0 0 35px 15px rgba(43, 5, 93, .5)",
       }}
       className=""
     >
       <div
         style={{
           borderRadius: "14px",
+          boxShadow: "inset 0 0 30px 5px rgba(43, 5, 93, 1)",
         }}
-        className="p-4 bg-black bg-opacity-75"
+        className="p-4 pb-8 bg-black bg-opacity-75"
       >
         <div className="grid grid-cols-3 grid-rows-7 text-white text-center">
           <div className="grid col-span-3 col-start-1 row-span-1 row-start-1">

@@ -122,7 +122,23 @@ export default function GameScreen(props: Props) {
           style={{ boxShadow: "0 0 3px 0 #718096" }}
           className="w-px bg-gray-600 bg-opacity-25 col-start-6 col-span-1 row-start-1 row-end-7 justify-self-center"
         />
-
+      </div>
+      <div className="w-64 justify-self-start self-start col-start-1 col-span-3 row-span-3 row-end-7">
+        <PlayerFace
+          // Player Two video
+          canvasRef={props.canvasRightRef}
+          expression={props.players[1]}
+          faceBox={props.faceBoxes[1]}
+          constrainTo="width"
+        />
+      </div>
+      <div className="col-start-1 col-span-12 row-start-3 row-span-2 flex items-center">
+        <ProgressBar position={gameProgress} gameTime={gameTime} />
+      </div>
+      <div
+        // Playfield player 2
+        className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-end-7 row-span-3"
+      >
         <div
           // Playfield player 1
           className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-start-1 row-span-3"
