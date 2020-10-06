@@ -1,31 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, MutableRefObject } from "react";
 
-export default function useAudioAPI() {
 
-    const [playing, setPlaying] = useState(false);
 
-    const audioCtx = new AudioContext();
+export default function useAudioAPI(audioRef: MutableRefObject<HTMLAudioElement>) {
 
-    const audioElement = new Audio();
-    // add file here
-    audioElement.src = '/img/gaga.mp3';
-
-    audioElement.preload = 'auto';
-
-    audioElement.autoplay = true;
-    console.log(audioElement);
-
-    const audioSourceNode = audioCtx.createMediaElementSource(audioElement);
-
+    const [playing, setPlaying] = useState(true);
 
     function start() {
-        audioElement.play;
-        setPlaying(true);
+        if (audioRef.current) {
+            audioRef.current.play();
+        }
+
     }
 
     function stop() {
-        audioElement.pause;
-        setPlaying(false);
+        if (audioRef.current) {
+            audioRef.current.pause();
+        }
     }
 
     function resume() {
@@ -35,33 +26,31 @@ export default function useAudioAPI() {
 
 
 
-    //Analyser - if we need to analyze frequencies, otherwise we hardcode
-    const analyserNode = audioCtx.createAnalyser();
-
-    analyserNode.fftSize = 256;
-    const bufferLength = analyserNode.frequencyBinCount;
-
-    const dataArray = new Float32Array(bufferLength);
-
-    //Set up audio node network
-    audioSourceNode.connect(analyserNode);
-    analyserNode.connect(audioCtx.destination);
-
+    /* //Analyser - if we need to analyze frequencies, otherwise we hardcode
+     const analyserNode = audioCtx.createAnalyser();
+ 
+     analyserNode.fftSize = 256;
+     const bufferLength = analyserNode.frequencyBinCount;
+ 
+     const dataArray = new Float32Array(bufferLength);
+ 
+     //Set up audio node network
+     audioSourceNode.connect(analyserNode);
+     analyserNode.connect(audioCtx.destination);*/
 
 
     useEffect(() => {
         if (playing) {
-
-        }
-
-        else {
             start();
+        } else {
+            stop();
         }
+
         return () => {
             stop();
         }
-    }, [playing])
+    }, [playing, audioRef.current])
 
-    return { start, stop };
+    return { start: () => setPlaying(true), stop: () => setPlaying(false) };
 
 }
