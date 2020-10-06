@@ -12,13 +12,23 @@ const data = {
   },
 };
 export default function FinalScreen() {
+
+  const textGlow = {
+    textShadow: "0 0 35px rgb(255, 0, 255)"
+  };
+
+  const borderGlow = {
+    boxShadow: "0 0 rgb(255, 0, 255)"
+  };
+
   return (
     <div
       style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
       className="h-screen w-full bg-center bg-cover"
     >
 
-      <h1 className="text-6xl p-6">
+      <h1 className="text-6xl p-6 text-white"
+        style={textGlow}>
         Expression Score
       </h1>
 
@@ -32,21 +42,21 @@ export default function FinalScreen() {
 
         </div>
 
-        <div className="w-7/12 bg-red-200">
+        <div className="w-7/12 " style={borderGlow}>
 
-          <div className="flex flex-row bg-red-500">
+          <div className="flex flex-row ">
 
-            <div className="w-2/3 flex flex-col justify-around bg-blue-100">
+            <div className="w-2/3 flex flex-col justify-around ">
 
               <div className="flex flex-row flex-1">
 
-                <div className="w-1/3 p-6 bg-gray-600">
+                <div className="w-1/3 p-6">
                   <img src="https://raw.githubusercontent.com/julien-gargot/images-placeholder/master/placeholder-portrait.png"></img>
                 </div>
 
                 <div className="flex-1">
                   <div className="flex flex-col  p-6">
-                    Player One
+                    <h1 className="text-3xl">Player One</h1>
 
                     <div>
                       Item1
@@ -63,13 +73,13 @@ export default function FinalScreen() {
               </div>
               <div className="flex flex-row flex-1">
 
-                <div className="w-1/3 p-6 bg-gray-600">
+                <div className="w-1/3 p-6">
                   <img src="https://raw.githubusercontent.com/julien-gargot/images-placeholder/master/placeholder-portrait.png"></img>
                 </div>
 
                 <div className="flex-1">
                   <div className="flex flex-col  p-6">
-                    Player One
+                    <h1 className="text-3xl">Player Two</h1>
 
                     <div>
                       Item1
@@ -88,10 +98,10 @@ export default function FinalScreen() {
             </div>
 
 
-            <div className="w-1/3 flex flex-col justify-between text-right bg-blue-300">
-              <div>Team</div>
+            <div className="w-1/3 flex flex-col justify-between text-right ">
+              <h1 className="text-white text-3xl" style={textGlow}>Team: 🌭</h1>
 
-              <div>Score</div>
+              <h1 className="text-white text-6xl" style={textGlow}>3250p</h1>
             </div>
 
 

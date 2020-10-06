@@ -8,6 +8,8 @@ import PlayBar from '../PlayBar';
 import PlayField from "../PlayField";
 import Dot from "../Dot";
 
+import useAudioAPI from '../../hooks/useAudioAPI';
+
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -21,9 +23,11 @@ interface Props {
 export default function GameScreen(props: Props) {
   const gameTime = props.gameTime;
   const gameTimer = useTimer(gameTime);
+  const audio = useAudioAPI();
   const [gameProgress, setGameProgress] = useState(0);
   useEffect(() => {
     gameTimer.start();
+    audio.start();
     if (gameTimer.seconds >= gameTime) {
       //props.onStart();
     }
