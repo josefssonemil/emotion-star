@@ -31,7 +31,7 @@ export default function StartScreen(props: Props) {
       <div className="flex flex-col flex-grow">
         <h1
           style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-          className="font-bold text-4xl mb-8 font-luckiest text-white text-center tracking-wider"
+          className="font-bold text-4xl mb-8 text-white text-center tracking-wider"
         >
           Recognized {playerCount} out of 2 players
         </h1>
@@ -61,7 +61,7 @@ export default function StartScreen(props: Props) {
 
         <h1
           style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-          className="text-center text-2xl font-luckiest text-white tracking-wider"
+          className="text-center text-2xl text-white tracking-wider"
         >
           Both of you, make surprised faces to start the game: 😯
         </h1>

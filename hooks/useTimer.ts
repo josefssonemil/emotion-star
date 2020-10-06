@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function useTimer(maxCount: number) {
   const [seconds, setSeconds] = useState(0);
   const [isActive, setActive] = useState(false);
 
   function start() {
+    setSeconds(0);
     setActive(true);
   }
 

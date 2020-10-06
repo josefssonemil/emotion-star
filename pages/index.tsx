@@ -16,7 +16,7 @@ export default function Home() {
   const [currentScreen, setCurrentScreen] = useState("start");
 
   return (
-    <div className="w-screen h-screen overflow-hidden">
+    <div className="w-screen h-screen overflow-hidden font-luckiest">
       <video
         className="opacity-0 absolute pointer-events-none"
         ref={videoRef}
