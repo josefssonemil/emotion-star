@@ -21,6 +21,7 @@ interface Note {
   duration: number;
 }
 const duration = 3000;
+
 export const gameLayer: Note[] = [
   {
     expression: "happy",
