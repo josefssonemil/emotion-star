@@ -4,12 +4,11 @@ import useTimer from "../../hooks/useTimer";
 import { Expression } from "../../types/Expressions";
 import PlayerFace from "../PlayerFace";
 import ProgressBar from "../ProgressBar";
-import PlayBar from '../PlayBar';
+import PlayBar from "../PlayBar";
 import PlayField from "../PlayField";
 import Dot from "../Dot";
 
-import useAudioAPI from '../../hooks/useAudioAPI';
-
+import useAudioAPI from "../../hooks/useAudioAPI";
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -27,14 +26,13 @@ export default function GameScreen(props: Props) {
   const audioRef = useRef<HTMLAudioElement>();
   const audio = useAudioAPI(audioRef);
   const [gameProgress, setGameProgress] = useState(0);
-  useEffect(() => {
+  /*useEffect(() => {
     gameTimer.start();
     if (gameTimer.seconds >= gameTime) {
       //props.onStart();
     }
     setGameProgress((gameTimer.seconds / gameTime) * 100);
-  });
-
+  });*/
 
   const [dot, setDot] = useState({
     playerOne: {
@@ -88,7 +86,6 @@ export default function GameScreen(props: Props) {
   }, [props.players]);
 
   return (
-
     <div>
       <audio src="/img/gaga.mp3" ref={audioRef}></audio>
 
@@ -96,7 +93,6 @@ export default function GameScreen(props: Props) {
         style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
         className="h-screen bg-center bg-cover flex"
       >
-
         <div className="absolute w-full -mt-2 z-10" style={{ top: "50%" }}>
           <ProgressBar position={gameProgress} />
         </div>
@@ -127,36 +123,26 @@ export default function GameScreen(props: Props) {
           </div>
         </div>
 
-        <div className="flex-1 h-screen grid grid-cols-12 grid-rows-6">
+        <div className="flex-1 h-screen grid grid-cols-12 grid-rows-2">
           <div
             /* Vertical Line */
             style={{ boxShadow: "0 0 3px 0 #718096" }}
-            className="w-px bg-gray-600 bg-opacity-25 col-start-6 col-span-1 row-start-1 row-end-7 justify-self-center"
+            className="w-px bg-gray-600 bg-opacity-25 col-start-4 col-span-1 row-start-1 row-end-7 justify-self-center"
           />
-        </div>
-
-        <div className="col-start-1 col-span-12 row-start-3 row-span-2 flex items-center">
-          <ProgressBar position={gameProgress} gameTime={gameTime} />
-        </div>
-        <div
-          // Playfield player 2
-          className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-end-7 row-span-3"
-        >
           <div
             // Playfield player 1
-            className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-start-1 row-span-3"
+            className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-start-1 row-span-1"
           >
-            <PlayBar data={dot.playerOne} />
+            <Dot data={dot.playerOne} />
           </div>
           <div
             // Playfield player 2
-            className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-end-7 row-span-3"
+            className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-end-3 row-span-1"
           >
-            <PlayBar data={dot.playerTwo} />
+            <Dot data={dot.playerTwo} />
           </div>
         </div>
       </div>
     </div>
-
   );
 }
