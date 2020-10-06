@@ -41,6 +41,7 @@ export default function StartScreen(props: Props) {
           expression={props.players[0]}
           faceBox={props.faceBoxes[0]}
           constrainTo="width"
+          player={1}
         />
       </div>
       <div className="w-64 justify-self-center col-span-3 col-start-7 row-span-3 row-start-2">
@@ -49,6 +50,7 @@ export default function StartScreen(props: Props) {
           expression={props.players[1]}
           faceBox={props.faceBoxes[1]}
           constrainTo="width"
+          player={2}
         />
       </div>
 

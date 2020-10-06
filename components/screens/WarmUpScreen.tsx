@@ -1,8 +1,6 @@
 import { MutableRefObject, useEffect, useState } from "react";
 import { Expression } from "../../types/Expressions";
 import PlayerFace from "../PlayerFace";
-import EmojiProgress from "../EmojiProgress";
-import { motion } from "framer-motion";
 import WarmUp from "../WarmUp";
 
 interface Props {
@@ -38,22 +36,37 @@ export default function WarmUpScreen(props: Props) {
         Team name: 🌭
       </h1>
 
-      <div className=" place-self-stretch col-span-3 col-end-6 row-span-3 row-start-2">
-        <div className="w-64">
+      <div className="place-self-middle col-span-3 col-end-6 row-span-4 row-start-2">
+        <div className="w-64 mx-auto mb-6">
           <PlayerFace
             canvasRef={props.canvasLeftRef}
             expression={props.players[0]}
             faceBox={props.faceBoxes[0]}
             constrainTo="width"
+            player={1}
           />
         </div>
+
+        <WarmUp
+          expression={props.players[0]}
+          onComplete={() => setPlayersDone((c) => c + 1)}
+        />
       </div>
 
-      <div className="w-64 place-self-stretch col-span-3 col-start-8 row-span-3 row-start-2">
-        <PlayerFace
-          canvasRef={props.canvasRightRef}
+      <div className="place-self-middle col-span-3 col-start-8 row-span-4 row-start-2">
+        <div className="w-64 mx-auto mb-6">
+          <PlayerFace
+            canvasRef={props.canvasRightRef}
+            expression={props.players[1]}
+            faceBox={props.faceBoxes[1]}
+            constrainTo="width"
+            player={2}
+          />
+        </div>
+
+        <WarmUp
           expression={props.players[1]}
-          onComplete={() => setPlayersDone((count) => count + 1)}
+          onComplete={() => setPlayersDone((c) => c + 1)}
         />
       </div>
 

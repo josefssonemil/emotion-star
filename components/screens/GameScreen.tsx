@@ -2,12 +2,9 @@ import { MutableRefObject, useEffect, useState } from "react";
 import { allowedExpressions } from "../../config";
 import useTimer from "../../hooks/useTimer";
 import { Expression } from "../../types/Expressions";
+import PlayBar from "../PlayBar";
 import PlayerFace from "../PlayerFace";
 import ProgressBar from "../ProgressBar";
-import PlayBar from '../PlayBar';
-import PlayField from "../PlayField";
-import Dot from "../Dot";
-
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -123,15 +120,7 @@ export default function GameScreen(props: Props) {
           className="w-px bg-gray-600 bg-opacity-25 col-start-6 col-span-1 row-start-1 row-end-7 justify-self-center"
         />
       </div>
-      <div className="w-64 justify-self-start self-start col-start-1 col-span-3 row-span-3 row-end-7">
-        <PlayerFace
-          // Player Two video
-          canvasRef={props.canvasRightRef}
-          expression={props.players[1]}
-          faceBox={props.faceBoxes[1]}
-          constrainTo="width"
-        />
-      </div>
+
       <div className="col-start-1 col-span-12 row-start-3 row-span-2 flex items-center">
         <ProgressBar position={gameProgress} gameTime={gameTime} />
       </div>
@@ -143,20 +132,13 @@ export default function GameScreen(props: Props) {
           // Playfield player 1
           className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-start-1 row-span-3"
         >
-
           <PlayBar data={dot.playerOne} />
-
-
         </div>
         <div
           // Playfield player 2
           className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-end-7 row-span-3"
         >
-
           <PlayBar data={dot.playerTwo} />
-
-
-
         </div>
       </div>
     </div>
