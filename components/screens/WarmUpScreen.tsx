@@ -13,10 +13,10 @@ interface Props {
 }
 
 export default function WarmUpScreen(props: Props) {
-  const [playersDone, setPlayersDone] = useState(0);
+  const [playersDone, setPlayersDone] = useState([false, false]);
 
   useEffect(() => {
-    if (playersDone === 2) {
+    if (playersDone[0] && playersDone[1]) {
       props.onStart();
     }
   }, [playersDone]);
@@ -50,7 +50,7 @@ export default function WarmUpScreen(props: Props) {
 
         <WarmUp
           expression={props.players[0]}
-          onComplete={() => setPlayersDone((c) => c + 1)}
+          onComplete={() => setPlayersDone((prevState) => [true, prevState[1]])}
         />
       </div>
 
@@ -67,7 +67,7 @@ export default function WarmUpScreen(props: Props) {
 
         <WarmUp
           expression={props.players[1]}
-          onComplete={() => setPlayersDone((c) => c + 1)}
+          onComplete={() => setPlayersDone((prevState) => [prevState[0], true])}
         />
       </div>
 

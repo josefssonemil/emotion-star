@@ -1,14 +1,11 @@
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { allowedExpressions } from "../../config";
+import useAudioAPI from "../../hooks/useAudioAPI";
 import useTimer from "../../hooks/useTimer";
 import { Expression } from "../../types/Expressions";
+import Dot from "../Dot";
 import PlayerFace from "../PlayerFace";
 import ProgressBar from "../ProgressBar";
-import PlayBar from "../PlayBar";
-import PlayField from "../PlayField";
-import Dot from "../Dot";
-
-import useAudioAPI from "../../hooks/useAudioAPI";
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -25,14 +22,12 @@ export default function GameScreen(props: Props) {
   const gameTimer = useTimer(gameTime);
   const audioRef = useRef<HTMLAudioElement>();
   const audio = useAudioAPI(audioRef);
-  const [gameProgress, setGameProgress] = useState(0);
-  /*useEffect(() => {
+
+  useEffect(() => {
     gameTimer.start();
-    if (gameTimer.seconds >= gameTime) {
-      //props.onStart();
-    }
-    setGameProgress((gameTimer.seconds / gameTime) * 100);
-  });*/
+  }, []);
+
+  const gameProgress = gameTimer.seconds / gameTime;
 
   const [dot, setDot] = useState({
     playerOne: {
@@ -94,7 +89,7 @@ export default function GameScreen(props: Props) {
         className="h-screen bg-center bg-cover flex"
       >
         <div className="absolute w-full -mt-2 z-10" style={{ top: "50%" }}>
-          <ProgressBar position={gameProgress} />
+          <ProgressBar position={gameProgress * 100} />
         </div>
 
         <div className="flex flex-col">
