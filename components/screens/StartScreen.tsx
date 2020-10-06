@@ -42,6 +42,7 @@ export default function StartScreen(props: Props) {
               expression={props.players[0]}
               faceBox={props.faceBoxes[0]}
               constrainTo="width"
+              player={1}
             />
           </div>
 
@@ -53,6 +54,7 @@ export default function StartScreen(props: Props) {
               expression={props.players[1]}
               faceBox={props.faceBoxes[1]}
               constrainTo="width"
+              player={2}
             />
           </div>
         </div>

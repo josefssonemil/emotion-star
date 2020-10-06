@@ -1,8 +1,8 @@
 import { MutableRefObject, useEffect, useMemo, useState } from "react";
 import useTimer from "../../hooks/useTimer";
 import { Expression } from "../../types/Expressions";
-import PlayerFace from "../PlayerFace";
 import EmojiProgress from "../EmojiProgress";
+import PlayerFace from "../PlayerFace";
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -141,6 +141,7 @@ const WarmUp = (props: Props) => {
           expression={props.players[0]}
           faceBox={props.faceBoxes[0]}
           constrainTo="width"
+          player={1}
         />
       </div>
 
@@ -150,6 +151,7 @@ const WarmUp = (props: Props) => {
           expression={props.players[1]}
           faceBox={props.faceBoxes[1]}
           constrainTo="width"
+          player={2}
         />
       </div>
 
