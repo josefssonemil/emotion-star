@@ -8,6 +8,7 @@ interface Props {
   expression?: Expression;
   faceBox?: any;
   constrainTo?: "width" | "height";
+  player: 1 | 2;
 }
 
 export default function PlayerFace(props: Props) {
@@ -35,9 +36,11 @@ export default function PlayerFace(props: Props) {
     height: box.height * scaleFactor,
   });
 
+  const playerColor = props.player === 1 ? "#4BFAF0" : "#86E409";
+
   return (
     <div
-      className="bg-black relative border-black border-box"
+      className="relative border-black border-box"
       ref={ref}
       style={
         constrainTo === "height"
@@ -46,10 +49,13 @@ export default function PlayerFace(props: Props) {
       }
     >
       <div className="absolute" style={{ width, height }}>
-        <div className="top-0 left-0 absolute overflow-hidden">
+        <div
+          className="inset-0 absolute overflow-hidden"
+          style={{ borderRadius: 20, borderWidth: 6 }}
+        >
           {!!props.faceBox && (
             <div
-              className="absolute border-white border-opacity-75 shadow-pinkBlur2 border-2 rounded-lg z-10 transition-all duration-75 -mt-2"
+              className="absolute border-white border-opacity-75 shadow-pinkBlur2 border-2 rounded-lg z-10 duration-75 -mt-2"
               style={getFaceBoxStyles(props.faceBox)}
             >
               <div className="text-6xl absolute shadow-xl w-16 h-16 rounded-full flex items-center justify-center right-0 bottom-0 -mb-4 -mr-4">
@@ -57,18 +63,23 @@ export default function PlayerFace(props: Props) {
               </div>
             </div>
           )}
-          <canvas
-            ref={props.canvasRef}
-            className=""
-            width="640"
-            height="720"
-            style={{
-              transform: "scaleX(-1)",
-              width,
-              height,
-            }}
-          />
         </div>
+
+        <canvas
+          className="bg-black"
+          ref={props.canvasRef}
+          width="640"
+          height="720"
+          style={{
+            transform: "scaleX(-1)",
+            width,
+            height,
+            borderRadius: 20,
+            borderWidth: 6,
+            borderColor: playerColor,
+            boxShadow: `0 0 15px ${playerColor}`,
+          }}
+        />
       </div>
     </div>
   );

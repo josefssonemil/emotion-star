@@ -87,25 +87,27 @@ export default function GameScreen(props: Props) {
       </div>
 
       <div className="flex flex-col">
-        <div className="flex-1">
+        <div className="flex-1 py-12 pl-4">
           <PlayerFace
             // Player One video
             canvasRef={props.canvasLeftRef}
             expression={props.players[0]}
             faceBox={props.faceBoxes[0]}
             constrainTo="height"
+            player={1}
           />
         </div>
 
         <div className="h-2" />
 
-        <div className="flex-1">
+        <div className="flex-1 py-12 pl-4">
           <PlayerFace
             // Player Two video
             canvasRef={props.canvasRightRef}
             expression={props.players[1]}
             faceBox={props.faceBoxes[1]}
             constrainTo="height"
+            player={2}
           />
         </div>
       </div>
@@ -119,7 +121,7 @@ export default function GameScreen(props: Props) {
 
         <div
           // Playfield player 1
-          className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-12 row-start-1 row-span-3"
+          className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-start-1 row-span-3"
         >
           <div
             /* Dot Player 1 */
