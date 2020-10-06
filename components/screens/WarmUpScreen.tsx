@@ -9,6 +9,7 @@ interface Props {
   players: Expression[];
   faceBoxes: any[];
   onStart: () => void;
+  teamName: string;
 }
 
 export default function WarmUpScreen(props: Props) {
@@ -33,7 +34,7 @@ export default function WarmUpScreen(props: Props) {
       </h1>
 
       <h1 className="text-2xl text-white text-right col-span-2 col-end-12 row-span-1 row-start-1">
-        Team name: 🌭
+        Team name: {props.teamName}
       </h1>
 
       <div className="place-self-middle col-span-3 col-end-6 row-span-4 row-start-2">

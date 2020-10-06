@@ -7,7 +7,7 @@ export const allowedExpressions = [
 ];
 
 export const emojis = {
-  happy: "😁",
+  happy: "😄",
   angry: "😡",
   surprised: "😯",
   sad: "😢",

@@ -13,6 +13,7 @@ interface Props {
   faceBoxes: any[];
   onStart: () => void;
   gameTime: number;
+  teamName: string;
 }
 
 export default function GameScreen(props: Props) {

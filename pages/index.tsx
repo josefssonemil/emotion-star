@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import randomEmoji from "random-emoji";
+import { useMemo, useRef, useState } from "react";
 import FinalScreen from "../components/screens/FinalScreen";
 import GameScreen from "../components/screens/GameScreen";
 import StartScreen from "../components/screens/StartScreen";
@@ -14,6 +15,11 @@ export default function Home() {
   const { loading, players, faceBoxes } = useFaceRecognition(videoRef, playing);
 
   const [currentScreen, setCurrentScreen] = useState("start");
+
+  const teamName = useMemo(() => {
+    const results = randomEmoji.random({ count: 1 });
+    return results[0].character;
+  }, []);
 
   return (
     <div className="w-screen h-screen overflow-hidden font-luckiest">
@@ -57,6 +63,7 @@ export default function Home() {
           canvasRightRef={canvasRightRef}
           faceBoxes={faceBoxes}
           onStart={() => setCurrentScreen("game")}
+          teamName={teamName}
         />
       )}
 
@@ -68,6 +75,7 @@ export default function Home() {
           faceBoxes={faceBoxes}
           onStart={() => setCurrentScreen("final")}
           gameTime={120}
+          teamName={teamName}
         />
       )}
 
