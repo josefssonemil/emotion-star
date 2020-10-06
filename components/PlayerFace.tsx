@@ -39,7 +39,11 @@ export default function PlayerFace(props: Props) {
     <div
       className="bg-black relative border-black border-box"
       ref={ref}
-      style={constrainTo === "height" ? { width } : { height }}
+      style={
+        constrainTo === "height"
+          ? { width, height: "100%" }
+          : { height, width: "100%" }
+      }
     >
       <div className="absolute" style={{ width, height }}>
         <div className="top-0 left-0 absolute overflow-hidden">

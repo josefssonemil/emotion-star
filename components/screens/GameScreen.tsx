@@ -1,10 +1,9 @@
-import { MutableRefObject } from "react";
+import { MutableRefObject, useEffect, useState } from "react";
+import { allowedExpressions } from "../../config";
+import useTimer from "../../hooks/useTimer";
 import { Expression } from "../../types/Expressions";
 import PlayerFace from "../PlayerFace";
 import ProgressBar from "../ProgressBar";
-import { useState, useEffect } from "react";
-import { allowedExpressions } from "../../config";
-import useTimer from "../../hooks/useTimer";
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -22,7 +21,7 @@ export default function GameScreen(props: Props) {
   useEffect(() => {
     gameTimer.start();
     if (gameTimer.seconds >= gameTime) {
-      props.onStart();
+      //props.onStart();
     }
     setGameProgress((gameTimer.seconds / gameTime) * 100);
   });
@@ -81,63 +80,72 @@ export default function GameScreen(props: Props) {
   return (
     <div
       style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
-      className="h-full w-full bg-center bg-cover grid grid-cols-12 grid-rows-6 "
+      className="h-screen bg-center bg-cover flex"
     >
-      <div
-        /* Vertical Line */
-        style={{ boxShadow: "0 0 3px 0 #718096" }}
-        className="w-px bg-gray-600 bg-opacity-25 col-start-6 col-span-1 row-start-1 row-end-7 justify-self-center"
-      />
-
-      <div className="w-64 justify-self-start self-end col-start-1 col-span-3 row-span-3 row-start-1">
-        <PlayerFace
-          // Player One video
-          canvasRef={props.canvasLeftRef}
-          expression={props.players[0]}
-          faceBox={props.faceBoxes[0]}
-          constrainTo="width"
-        />
-      </div>
-      <div
-        // Playfield player 1
-        className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-start-1 row-span-3"
-      >
-        <div
-          /* Dot Player 1 */
-          style={{
-            boxShadow: "0 0 25px 2px #5EFFF5",
-          }}
-          className={`
-          ${"row-start-" + dot.playerOne.row} ${
-            dot.playerOne.visible
-          } justify-self-center self-center col-start-6 col-span-1 row-span-1 h-4 w-4 border-2 rounded-full border-player1 border-opacity-25 bg-blue-100`}
-        />
-      </div>
-      <div className="w-64 justify-self-start self-start col-start-1 col-span-3 row-span-3 row-end-7">
-        <PlayerFace
-          // Player Two video
-          canvasRef={props.canvasRightRef}
-          expression={props.players[1]}
-          faceBox={props.faceBoxes[1]}
-          constrainTo="width"
-        />
-      </div>
-      <div className="col-start-1 col-span-12 row-start-3 row-span-2 flex items-center">
+      <div className="absolute w-full -mt-2 z-10" style={{ top: "50%" }}>
         <ProgressBar position={gameProgress} />
       </div>
-      <div
-        // Playfield player 2
-        className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-end-7 row-span-3"
-      >
+
+      <div className="flex flex-col">
+        <div className="flex-1">
+          <PlayerFace
+            // Player One video
+            canvasRef={props.canvasLeftRef}
+            expression={props.players[0]}
+            faceBox={props.faceBoxes[0]}
+            constrainTo="height"
+          />
+        </div>
+
+        <div className="h-2" />
+
+        <div className="flex-1">
+          <PlayerFace
+            // Player Two video
+            canvasRef={props.canvasRightRef}
+            expression={props.players[1]}
+            faceBox={props.faceBoxes[1]}
+            constrainTo="height"
+          />
+        </div>
+      </div>
+
+      <div className="flex-1 h-screen grid grid-cols-12 grid-rows-6">
         <div
-          /* Dot Player 2 */
-          style={{
-            boxShadow: "0 0 25px 2px #ecc94b",
-          }}
-          className={`${"row-start-" + dot.playerTwo.row} ${
-            dot.playerTwo.visible
-          } justify-self-center self-center col-start-6 col-span-1 row-span-1 h-4 w-4 border-2 rounded-full  border-yellow-500 border-opacity-25 bg-yellow-100`}
+          /* Vertical Line */
+          style={{ boxShadow: "0 0 3px 0 #718096" }}
+          className="w-px bg-gray-600 bg-opacity-25 col-start-6 col-span-1 row-start-1 row-end-7 justify-self-center"
         />
+
+        <div
+          // Playfield player 1
+          className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-12 row-start-1 row-span-3"
+        >
+          <div
+            /* Dot Player 1 */
+            style={{
+              boxShadow: "0 0 25px 2px #5EFFF5",
+            }}
+            className={`
+          ${"row-start-" + dot.playerOne.row} ${
+              dot.playerOne.visible
+            } justify-self-center self-center col-start-6 col-span-1 row-span-1 h-4 w-4 border-2 rounded-full border-player1 border-opacity-25 bg-blue-100`}
+          />
+        </div>
+        <div
+          // Playfield player 2
+          className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-end-7 row-span-3"
+        >
+          <div
+            /* Dot Player 2 */
+            style={{
+              boxShadow: "0 0 25px 2px #ecc94b",
+            }}
+            className={`${"row-start-" + dot.playerTwo.row} ${
+              dot.playerTwo.visible
+            } justify-self-center self-center col-start-6 col-span-1 row-span-1 h-4 w-4 border-2 rounded-full  border-yellow-500 border-opacity-25 bg-yellow-100`}
+          />
+        </div>
       </div>
     </div>
   );
