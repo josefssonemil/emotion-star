@@ -25,7 +25,7 @@ export default function Home() {
         autoPlay
         muted
       />
-      <nav className="absolute top-0 text-white p-2">
+      <nav className="absolute top-0 text-white p-2 z-20">
         <button className="mr-4" onClick={() => setCurrentScreen("start")}>
           Start
         </button>
