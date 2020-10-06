@@ -27,6 +27,16 @@ export default function WarmUp(props: Props) {
     }
   }, [props.expression, currentExpression]);
 
+  useEffect(() => {
+    if (timer.seconds === 3 && currentExpression) {
+      setCurrentExpression(null);
+      timer.reset();
+      /*setExpressionStatus({
+        ...
+      })*/
+    }
+  }, [timer.seconds, currentExpression]);
+
   const count = useMemo(
     () => Object.values(expressionStatus).filter((value) => value).length,
     [expressionStatus]
