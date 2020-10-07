@@ -63,7 +63,7 @@ export default function WarmUp(props: Props) {
 
   return (
     <div className="text-center">
-      <div className="flex space-x-4">
+      <div className="flex flex-col space-y-2">
         {Object.keys(expressionStatus).map((expression) => (
           <EmojiProgress
             key={expression}
@@ -75,7 +75,9 @@ export default function WarmUp(props: Props) {
           />
         ))}
       </div>
-      <div className="mt-4 text-white text-2xl">{count} / 5</div>
+      {
+        //<div className="mt-4 text-white text-2xl hidden">{count} / 5</div>
+      }
     </div>
   );
 }

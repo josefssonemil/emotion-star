@@ -101,6 +101,7 @@ export default function GameScreen(props: Props) {
               faceBox={props.faceBoxes[0]}
               constrainTo="height"
               player={1}
+              connected={false}
             />
           </div>
 
@@ -114,6 +115,7 @@ export default function GameScreen(props: Props) {
               faceBox={props.faceBoxes[1]}
               constrainTo="height"
               player={2}
+              connected={false}
             />
           </div>
         </div>

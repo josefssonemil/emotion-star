@@ -15,6 +15,16 @@ module.exports = {
         "screen/4": "calc(100vh / 4)",
         "screen/5": "calc(100vh / 5)",
         100: "25rem",
+        warmupCam: "25vh",
+      }),
+      height: (theme) => ({
+        "screen-2/3": "66vw",
+        "screen/2": "50vw",
+        "screen/3": "calc(100vw / 3)",
+        "screen/4": "calc(100vw / 4)",
+        "screen/5": "calc(100vw / 5)",
+        100: "25rem",
+        88: "22rem",
       }),
       colors: {
         local: {

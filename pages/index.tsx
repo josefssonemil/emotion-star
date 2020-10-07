@@ -14,7 +14,7 @@ export default function Home() {
   const { playing } = useCameraSplit(videoRef, canvasLeftRef, canvasRightRef);
   const { loading, players, faceBoxes } = useFaceRecognition(videoRef, playing);
 
-  const [currentScreen, setCurrentScreen] = useState("start");
+  const [currentScreen, setCurrentScreen] = useState("warmUp");
 
   const teamName = useMemo(() => {
     const results = randomEmoji.random({ count: 1 });
@@ -32,9 +32,6 @@ export default function Home() {
         muted
       />
       <nav className="absolute top-0 text-white p-2 z-20">
-        <button className="mr-4" onClick={() => setCurrentScreen("start")}>
-          Start
-        </button>
         <button className="mr-4" onClick={() => setCurrentScreen("warmUp")}>
           Warm up
         </button>

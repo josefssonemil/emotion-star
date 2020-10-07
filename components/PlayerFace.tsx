@@ -2,6 +2,9 @@ import { MutableRefObject } from "react";
 import useMeasure from "react-use-measure";
 import { emojis } from "../config";
 import { Expression } from "../types/Expressions";
+import EmptyCamPlaceholder from "./EmptyCamPlaceholder";
+
+import { motion } from "framer-motion";
 
 interface Props {
   canvasRef: MutableRefObject<HTMLCanvasElement>;
@@ -9,7 +12,7 @@ interface Props {
   faceBox?: any;
   constrainTo?: "width" | "height";
   player: 1 | 2;
-  noBorder: boolean;
+  connected: boolean;
 }
 
 export default function PlayerFace(props: Props) {
@@ -60,7 +63,7 @@ export default function PlayerFace(props: Props) {
       <div className="absolute" style={{ width, height }}>
         <div
           className={`inset-0 absolute ${
-            props.noBorder ? "" : "overflow-hidden"
+            props.connected ? "" : "overflow-hidden"
           }`}
           style={{ borderRadius: 20, borderWidth: 6 }}
         >
@@ -93,13 +96,30 @@ export default function PlayerFace(props: Props) {
             transform: "scaleX(-1)",
             width,
             height,
-            //borderRadius: props.noBorder ? 0 : 20,
-            borderBottomLeftRadius: "20",
-            borderWidth: props.noBorder ? 0 : 6,
+            // Top right
+            borderTopLeftRadius: props.player == 1 && props.connected ? 0 : 20,
+            // Top left
+            borderTopRightRadius: props.player == 2 && props.connected ? 0 : 20,
+            // Bottom left
+            borderBottomRightRadius:
+              props.player == 2 && props.connected ? 0 : 20,
+            // Bottom right
+            borderBottomLeftRadius:
+              props.player == 1 && props.connected ? 0 : 20,
+
+            borderTopWidth: 6,
+            borderBottomWidth: 6,
+            // Border right
+            borderLeftWidth: props.connected && props.player == 1 ? 0 : 6,
+            // Border left
+            borderRightWidth: props.connected && props.player == 2 ? 0 : 6,
             borderColor: playerColor,
-            boxShadow: props.noBorder ? "" : `0 0 15px ${playerColor}`,
+            boxShadow: props.connected ? "" : `0 0 15px ${playerColor}`,
           }}
         />
+        {props.expression === undefined && (
+          <EmptyCamPlaceholder player={props.player} />
+        )}
       </div>
     </div>
   );
