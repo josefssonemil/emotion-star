@@ -7,7 +7,7 @@ interface Props {
 export default function ProgressBar(props: Props) {
   return (
     <div className="relative w-full h-4">
-      <div className="absolute inset-0 z-0 w-full h-2 my-1 bg-pink-200 bg-opacity-25" />
+      <div className="absolute inset-0 z-0 w-full h-2 my-1 bg-pink-200 bg-opacity-25 rounded-lg" />
       <motion.div
         style={{
           boxShadow: "0 0 10px 1px #ed64a6",
@@ -21,7 +21,7 @@ export default function ProgressBar(props: Props) {
         transition={{
           ease: "linear",
         }}
-        className="absolute inset-y-0 left-0 h-2 my-1 bg-pink-500"
+        className="absolute inset-y-0 left-0 h-2 my-1 bg-pink-500 rounded-lg"
       />
       <motion.div
         style={{

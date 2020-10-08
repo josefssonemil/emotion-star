@@ -18,6 +18,49 @@ export const emojis = {
 
 export const exampleNotes: Note[] = [
   {
+    duration: 6,
+  },
+  {
+    expression: "happy",
+    duration: 3,
+  },
+  {
+    expression: "angry",
+    duration: 3,
+  },
+  {
+    expression: "happy",
+    duration: 3,
+  },
+  {
+    expression: "surprised",
+    duration: 3,
+  },
+  {
+    expression: "sad",
+    duration: 3,
+  },
+  {
+    expression: "happy",
+    duration: 3,
+  },
+  {
+    expression: "neutral",
+    duration: 3,
+  },
+  {
+    expression: "surprised",
+    duration: 3,
+  },
+  {
+    expression: "neutral",
+    duration: 3,
+  },
+  {
+    expression: "angry",
+    duration: 3,
+  },
+  {
     expression: "happy",
     duration: 3,
   },

@@ -5,6 +5,7 @@ import { Note } from "../types/Level";
 export interface FieldState {
   notes: Note[];
   currentIndex: number;
+  currentNote: Note;
 }
 
 export default function useFieldState(
@@ -40,6 +41,10 @@ export default function useFieldState(
   return {
     notes: notesWithStartValues,
     currentIndex,
+    currentNote:
+      currentIndex <= notesWithStartValues.length - 1
+        ? notesWithStartValues[currentIndex]
+        : undefined,
   };
 }
 

@@ -31,6 +31,12 @@ export default function GameScreen(props: Props) {
     game.start();
   }, []);
 
+  useEffect(() => {
+    if (game.progress === 1) {
+      props.onFinish();
+    }
+  }, [game.progress, props.onFinish]);
+
   const barPositionLeft =
     gameConstants.historyDuration * gameConstants.pixelsPerSecond;
 
@@ -42,8 +48,27 @@ export default function GameScreen(props: Props) {
         style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
         className="flex h-screen bg-center bg-cover"
       >
-        <div className="absolute z-10 w-full -mt-2" style={{ top: "50%" }}>
-          <ProgressBar progress={game.progress} />
+        <div
+          className="absolute z-10 flex items-center w-full px-12 -mt-10 space-x-8"
+          style={{ top: "50%" }}
+        >
+          <h1
+            style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
+            className="-mt-1 text-4xl text-white"
+          >
+            Team: {props.teamName}
+          </h1>
+
+          <div className="flex-1 -mt-3">
+            <ProgressBar progress={game.progress} />
+          </div>
+
+          <h1
+            style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
+            className="text-6xl text-white"
+          >
+            {game.score}
+          </h1>
         </div>
 
         <div className="flex flex-col mr-8">
