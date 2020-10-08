@@ -1,6 +1,6 @@
-import { useMemo } from "react";
 import { Expression } from "../types/Expressions";
 import { Note } from "../types/Level";
+import useFieldState from "./useFieldState";
 import useTimer from "./useTimer";
 
 export default function useGameLoop(
@@ -8,32 +8,18 @@ export default function useGameLoop(
   notes: [Note[], Note[]],
   players: [Expression, Expression]
 ) {
-  const notesWithStartValues = useMemo(
-    () => [calculateStartValues(notes[0]), calculateStartValues(notes[1])],
-    [notes]
-  );
-
   const timer = useTimer(duration);
   const progress = timer.seconds / duration;
 
+  const fieldState = [
+    useFieldState(timer.seconds, notes[0]),
+    useFieldState(timer.seconds, notes[1]),
+  ];
+
   return {
-    start: timer.start,
-    offset: [0, 0],
-    notes: notesWithStartValues,
-    time: timer.seconds,
     progress,
+    start: timer.start,
+    fieldState,
+    time: timer.seconds,
   };
-}
-
-function calculateStartValues(notes: Note[]) {
-  let sum = 0;
-
-  return notes.map((note) => {
-    sum += note.duration;
-
-    return {
-      ...note,
-      start: sum - note.duration,
-    };
-  });
 }

@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 import { gameConstants } from "../config";
-import { Note } from "../types/Level";
+import { FieldState } from "../hooks/useFieldState";
 import NoteBar from "./NoteBar";
 
 interface Props {
-  notes: Note[];
-  offset: number;
+  state: FieldState;
   gameTime: number;
 }
 
@@ -16,8 +15,13 @@ export default function PlayerField(props: Props) {
       animate={{ x: -props.gameTime * gameConstants.pixelsPerSecond }}
     >
       <div className="grid h-full grid-rows-5">
-        {props.notes.map((note, i) => (
-          <NoteBar key={props.offset + i} note={note} />
+        {props.state.notes.map((note, i) => (
+          <NoteBar
+            key={i}
+            note={note}
+            isPast={i < props.state.currentIndex}
+            isCurrent={props.state.currentIndex === i}
+          />
         ))}
       </div>
     </motion.div>

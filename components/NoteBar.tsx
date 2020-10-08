@@ -1,8 +1,11 @@
+import classnames from "classnames";
 import { allowedExpressions, emojis, gameConstants } from "../config";
 import { Note } from "../types/Level";
 
 interface Props {
   note: Note;
+  isPast: boolean;
+  isCurrent: boolean;
 }
 
 export default function NoteBar(props: Props) {
@@ -14,9 +17,13 @@ export default function NoteBar(props: Props) {
 
   return (
     <div
-      className={`${
-        "row-start-" + row
-      } self-center col-span-1 col-start-1 row-span-1 relative`}
+      className={classnames(
+        "self-center col-span-1 col-start-1 row-span-1 relative transition-all duration-500",
+        `row-start-${row}`,
+        {
+          "opacity-0": props.isPast,
+        }
+      )}
     >
       <div
         className="absolute top-0 bottom-0 flex items-center"
@@ -24,8 +31,8 @@ export default function NoteBar(props: Props) {
           left,
         }}
       >
-        <div className="h-12 bg-red-500" style={{ width }}>
-          <div>{emojis[expression]}</div>
+        <div className="h-12 bg-white" style={{ width }}>
+          <div className="text-4xl">{emojis[expression]}</div>
         </div>
       </div>
     </div>

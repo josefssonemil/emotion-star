@@ -85,20 +85,12 @@ export default function GameScreen(props: Props) {
           />
 
           <div className="relative row-span-1 row-start-1">
-            <PlayerField
-              offset={game.offset[0]}
-              notes={game.notes[0]}
-              gameTime={game.time}
-            />
+            <PlayerField state={game.fieldState[0]} gameTime={game.time} />
             <PlayerDot expression={props.players[0]} />
           </div>
 
           <div className="relative row-span-1 row-end-3">
-            <PlayerField
-              offset={game.offset[1]}
-              notes={game.notes[1]}
-              gameTime={game.time}
-            />
+            <PlayerField state={game.fieldState[1]} gameTime={game.time} />
             <PlayerDot expression={props.players[1]} />
           </div>
         </div>

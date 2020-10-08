@@ -61,7 +61,9 @@ export default function PlayerFace(props: Props) {
     >
       <div className="absolute" style={{ width, height }}>
         <div
-          className={`inset-0 absolute overflow-hidden`}
+          className={`inset-0 absolute ${
+            props.connected ? "" : "overflow-hidden"
+          }`}
           style={{ borderRadius: 20, borderWidth: 6 }}
         >
           {!!props.faceBox && (
