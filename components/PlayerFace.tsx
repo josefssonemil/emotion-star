@@ -52,7 +52,7 @@ export default function PlayerFace(props: Props) {
 
   return (
     <div
-      className="relative border-box font-sans"
+      className="relative font-sans border-box"
       ref={ref}
       style={
         constrainTo === "height"
@@ -69,7 +69,7 @@ export default function PlayerFace(props: Props) {
         >
           {!!props.faceBox && (
             <div
-              className="absolute border-white border-opacity-75 shadow-pinkBlur2 border-2 rounded-lg z-10 duration-75 -mt-2"
+              className="absolute z-10 -mt-2 duration-75 border-2 border-white border-opacity-75 rounded-lg shadow-pinkBlur2"
               style={getFaceBoxStyles(props.faceBox)}
             >
               <div

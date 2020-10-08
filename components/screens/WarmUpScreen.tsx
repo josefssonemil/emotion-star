@@ -18,7 +18,7 @@ export default function WarmUpScreen(props: Props) {
   const [playersDone, setPlayersDone] = useState([false, false]);
   const [x, setX] = useState(0);
   const [warmup, setWarmup] = useState(false);
-  const [test, setTest] = useState("start");
+  const [test, setTest] = useState(false);
 
   const timer = useTimer(3);
 
@@ -28,7 +28,7 @@ export default function WarmUpScreen(props: Props) {
     }
   }, [playersDone]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (!props.players.includes(undefined)) {
       setX(200);
       setWarmup(true);
@@ -40,28 +40,47 @@ export default function WarmUpScreen(props: Props) {
 
       setTest("start");
     }
+  }, [props.players, timer.seconds]);*/
+  useEffect(() => {
+    if (test) {
+      setX(200);
+      setWarmup(true);
+    }
+    if (!test) {
+      setTimeout(() => {}, 3000);
+      setX(0);
+      setTimeout(() => {
+        setWarmup(false);
+      }, 1500);
+    }
   }, [props.players, timer.seconds]);
   return (
     <div
       style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
-      className="h-full w-full bg-center bg-cover justify-between items-center grid grid-cols-12 grid-rows-6"
+      className="grid items-center justify-between w-full h-full grid-cols-12 grid-rows-6 bg-center bg-cover"
     >
+      <button
+        className="col-span-1 col-start-2 row-span-1 row-start-1 text-white"
+        onClick={() => (test ? setTest(false) : setTest(true))}
+      >
+        Test
+      </button>
       <h1
         style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-        className="text-5xl text-center text-white col-start-3 col-span-8 row-span-1 row-start-1 self-center"
+        className="self-center col-span-8 col-start-3 row-span-1 row-start-1 text-5xl text-center text-white"
       >
         {warmup ? "Practice your face expressions" : "Enter Play Area"}
       </h1>
       {warmup && (
         <h1
           style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-          className="text-4xl text-center text-white col-start-6 col-span-2 row-span-2 row-start-1 self-end p-4"
+          className="self-end col-span-2 col-start-6 row-span-2 row-start-1 p-4 text-4xl text-center text-white"
         >
           Welcome team: {props.teamName}
         </h1>
       )}
       {warmup && (
-        <div className="col-span-1 col-end-7 row-span-4 row-end-7 self-center justify-self-start">
+        <div className="self-center col-span-1 col-end-7 row-span-4 row-end-7 justify-self-start">
           <WarmUp
             expression={props.players[0]}
             onComplete={() =>
@@ -71,7 +90,7 @@ export default function WarmUpScreen(props: Props) {
         </div>
       )}
       {warmup && (
-        <div className="col-span-1 col-start-7 row-span-4 row-end-7 self-center justify-self-end">
+        <div className="self-center col-span-1 col-start-7 row-span-4 row-end-7 justify-self-end">
           <WarmUp
             expression={props.players[1]}
             onComplete={() =>
@@ -91,7 +110,7 @@ export default function WarmUpScreen(props: Props) {
           duration: 1,
           ease: "easeInOut",
         }}
-        className="w-full justify-self-end self-start col-span-4 col-end-7 row-span-4 row-start-2 relative"
+        className="relative self-start w-full col-span-4 col-end-7 row-span-4 row-start-2 justify-self-end"
       >
         <div className="flex-1">
           <PlayerFace
@@ -116,7 +135,7 @@ export default function WarmUpScreen(props: Props) {
           duration: 1,
           ease: "easeInOut",
         }}
-        className="w-full flex justify-self-start self-start col-span-4 col-start-7 row-span-4 row-start-2 relative"
+        className="relative flex self-start w-full col-span-4 col-start-7 row-span-4 row-start-2 justify-self-start"
       >
         <div className="flex-1">
           <PlayerFace
@@ -132,7 +151,7 @@ export default function WarmUpScreen(props: Props) {
 
       {false && (
         <div
-          className="text-center col-start-1 col-span-12 row-start-5 row-span-1 text-2xl text-white"
+          className="col-span-12 col-start-1 row-span-1 row-start-5 text-2xl text-center text-white"
           style={{
             textShadow: "rgb(255, 0, 255) 0px 0px 35px",
           }}
