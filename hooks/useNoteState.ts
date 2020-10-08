@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { gameConstants } from "../config";
 import { Expression } from "../types/Expressions";
 import { Note } from "../types/Level";
 
@@ -25,7 +26,7 @@ export default function useNoteState(
   // Track the current note
   useEffect(() => {
     setNoteState((prevState) => {
-      if (!currentNote) {
+      if (!currentNote || !currentNote.expression) {
         return prevState;
       }
 
@@ -50,11 +51,25 @@ export default function useNoteState(
         // Currently correct but has no ongoing interval
         if (!lastInterval || lastInterval.stop) {
           // Was this the first interval and we started on/before time?
-          current.isPerfect = gameTimeRef.current <= currentNote.start;
+          const diff =
+            gameTimeRef.current +
+            gameConstants.historyDuration -
+            currentNote.start;
+          current.isPerfect = !lastInterval && diff < 0.5;
+
+          let start = current.isPerfect
+            ? 0
+            : gameTimeRef.current +
+              gameConstants.historyDuration -
+              currentNote.start;
+
+          if (start < 0) {
+            start = 0;
+          }
 
           // Start new interval
           current.intervals.push({
-            start: gameTimeRef.current,
+            start,
           });
 
           changed = true;
@@ -64,9 +79,13 @@ export default function useNoteState(
         if (lastInterval && !lastInterval.stop) {
           // Stop old interval
           lastInterval = { ...lastInterval };
-          lastInterval.stop = gameTimeRef.current;
-          current.intervals[current.intervals.length - 1] = lastInterval;
+          lastInterval.stop =
+            gameTimeRef.current +
+            gameConstants.historyDuration -
+            (currentNote.start + lastInterval.start);
 
+          current.intervals[current.intervals.length - 1] = lastInterval;
+          current.isPerfect = false;
           changed = true;
         }
       }

@@ -84,27 +84,11 @@ export const exampleNotes: Note[] = [
     expression: "happy",
     duration: 3,
   },
-  {
-    expression: "neutral",
-    duration: 3,
-  },
-  {
-    expression: "surprised",
-    duration: 3,
-  },
-  {
-    expression: "neutral",
-    duration: 3,
-  },
-  {
-    expression: "angry",
-    duration: 3,
-  },
 ];
 
 export const exampleLevel: Level = {
   audioUrl: "/img/gaga.mp3",
-  duration: 60,
+  duration: 55,
   notes: [exampleNotes, exampleNotes],
 };
 

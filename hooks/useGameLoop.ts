@@ -1,8 +1,8 @@
 import { Expression } from "../types/Expressions";
 import { Note } from "../types/Level";
 import useExpressionHistory from "./useExpressionHistory";
-import useFieldState from "./useFieldState";
-import useNoteState from "./useNoteState";
+import useFieldState, { FieldState } from "./useFieldState";
+import useNoteState, { NoteState } from "./useNoteState";
 import useTimer from "./useTimer";
 
 export default function useGameLoop(
@@ -15,13 +15,13 @@ export default function useGameLoop(
   const finished = progress === 1;
 
   // Movement the notes in the level field
-  const fieldState = [
+  const fieldState: [FieldState, FieldState] = [
     useFieldState(timer.seconds, notes[0]),
     useFieldState(timer.seconds, notes[1]),
   ];
 
   // Note state per player
-  const noteState = [
+  const noteState: [NoteState[], NoteState[]] = [
     useNoteState(
       timer.seconds,
       players[0],
@@ -43,6 +43,7 @@ export default function useGameLoop(
     useExpressionHistory(timer.seconds, players[1], finished),
   ];
 
+  // todo...
   const score = 0;
 
   return {

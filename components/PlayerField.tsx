@@ -1,11 +1,14 @@
 import { motion } from "framer-motion";
 import { gameConstants } from "../config";
 import { FieldState } from "../hooks/useFieldState";
+import { NoteState } from "../hooks/useNoteState";
 import NoteBar from "./NoteBar";
 
 interface Props {
-  state: FieldState;
+  fieldState: FieldState;
+  noteState: NoteState[];
   gameTime: number;
+  player: number;
 }
 
 export default function PlayerField(props: Props) {
@@ -21,7 +24,7 @@ export default function PlayerField(props: Props) {
       style={{ width: gameConstants.pixelsPerSecond * 60 }}
     >
       <div className="grid h-full grid-rows-5">
-        {props.state.notes.map((note, i) => {
+        {props.fieldState.notes.map((note, i) => {
           const left = gameConstants.pixelsPerSecond * note.start;
           const width = gameConstants.pixelsPerSecond * note.duration;
 
@@ -39,9 +42,18 @@ export default function PlayerField(props: Props) {
               key={i}
               width={width}
               left={left}
+              note={note}
+              gameTime={props.gameTime}
+              player={props.player}
               expression={note.expression}
-              isPast={i < props.state.currentIndex}
-              isCurrent={props.state.currentIndex === i}
+              isPast={i < props.fieldState.currentIndex}
+              isCurrent={props.fieldState.currentIndex === i}
+              state={
+                props.noteState[i] || {
+                  isPerfect: false,
+                  intervals: [],
+                }
+              }
             />
           );
         })}
