@@ -5,7 +5,7 @@ import { Expression } from "../types/Expressions";
 
 interface FaceRecognitionState {
   loading: boolean;
-  players: Expression[];
+  players: [Expression, Expression];
   faceBoxes: any[];
 }
 
@@ -14,7 +14,10 @@ export default function useFaceRecognition(
   playing: boolean
 ): FaceRecognitionState {
   const [loading, setLoading] = useState(true);
-  const [players, setPlayers] = useState<Expression[]>([undefined, undefined]);
+  const [players, setPlayers] = useState<[Expression, Expression]>([
+    undefined,
+    undefined,
+  ]);
   const [faceBoxes, setFaceBoxes] = useState<any[]>([undefined, undefined]);
 
   useEffect(() => {

@@ -1,98 +1,52 @@
-import { MutableRefObject, useEffect, useRef, useState } from "react";
-import { allowedExpressions } from "../../config";
+import { MutableRefObject, useEffect, useRef } from "react";
+import { gameConstants } from "../../config";
 import useAudioAPI from "../../hooks/useAudioAPI";
-import useTimer from "../../hooks/useTimer";
+import useGameLoop from "../../hooks/useGameLoop";
 import { Expression } from "../../types/Expressions";
-import Dot from "../Dot";
+import { Level } from "../../types/Level";
+import PlayerDot from "../PlayerDot";
 import PlayerFace from "../PlayerFace";
+import PlayerField from "../PlayerField";
 import ProgressBar from "../ProgressBar";
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
   canvasRightRef: MutableRefObject<HTMLCanvasElement>;
-  players: Expression[];
+  players: [Expression, Expression];
   faceBoxes: any[];
-  onStart: () => void;
-  gameTime: number;
+  onFinish: () => void;
+  level: Level;
   teamName: string;
 }
 
 export default function GameScreen(props: Props) {
-  const gameTime = props.gameTime;
-  const gameTimer = useTimer(gameTime);
-  const audioRef = useRef<HTMLAudioElement>();
-  const audio = useAudioAPI(audioRef);
+  const { notes, duration, audioUrl } = props.level;
+  const game = useGameLoop(duration, notes, props.players);
 
+  const audioRef = useRef<HTMLAudioElement>();
+  useAudioAPI(audioRef);
+
+  // todo: start first when the audio loaded
   useEffect(() => {
-    gameTimer.start();
+    game.start();
   }, []);
 
-  const gameProgress = gameTimer.seconds / gameTime;
-
-  const [dot, setDot] = useState({
-    playerOne: {
-      visible: "",
-      row: undefined,
-    },
-    playerTwo: {
-      visible: "",
-      row: undefined,
-    },
-  });
-  const faceOne = props.players[0];
-  const faceTwo = props.players[1];
-
-  useEffect(() => {
-    if (faceOne != undefined) {
-      setDot((prevValue) => ({
-        ...prevValue,
-        playerOne: {
-          visible: "",
-          row: allowedExpressions.indexOf(faceOne) + 1,
-        },
-      }));
-    } else {
-      setDot((prevValue) => ({
-        ...prevValue,
-        playerOne: {
-          visible: "hidden",
-          row: undefined,
-        },
-      }));
-    }
-
-    if (faceTwo != undefined) {
-      setDot((prevValue) => ({
-        ...prevValue,
-        playerTwo: {
-          visible: "",
-          row: allowedExpressions.indexOf(faceTwo) + 1,
-        },
-      }));
-    } else {
-      setDot((prevValue) => ({
-        ...prevValue,
-        playerTwo: {
-          visible: "hidden",
-          row: undefined,
-        },
-      }));
-    }
-  }, [props.players]);
+  const barPositionLeft =
+    gameConstants.historyDuration * gameConstants.pixelsPerSecond;
 
   return (
     <div>
-      <audio src="/img/gaga.mp3" ref={audioRef}></audio>
+      <audio src={audioUrl} ref={audioRef} />
 
       <div
         style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
-        className="h-screen bg-center bg-cover flex"
+        className="flex h-screen bg-center bg-cover"
       >
-        <div className="absolute w-full -mt-2 z-10" style={{ top: "50%" }}>
-          <ProgressBar position={gameProgress * 100} />
+        <div className="absolute z-10 w-full -mt-2" style={{ top: "50%" }}>
+          <ProgressBar progress={game.progress} />
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col mr-8">
           <div className="flex-1 py-12 pl-4">
             <PlayerFace
               // Player One video
@@ -120,23 +74,32 @@ export default function GameScreen(props: Props) {
           </div>
         </div>
 
-        <div className="flex-1 h-screen grid grid-cols-12 grid-rows-2">
+        <div className="relative grid flex-1 h-screen grid-rows-2 overflow-hidden">
           <div
             /* Vertical Line */
-            style={{ boxShadow: "0 0 3px 0 #718096" }}
-            className="w-px bg-gray-600 bg-opacity-25 col-start-4 col-span-1 row-start-1 row-end-7 justify-self-center"
+            style={{
+              boxShadow: "0 0 3px 0 #718096",
+              left: barPositionLeft,
+            }}
+            className="absolute top-0 bottom-0 w-px bg-gray-600 bg-opacity-25"
           />
-          <div
-            // Playfield player 1
-            className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-start-1 row-span-1"
-          >
-            <Dot data={dot.playerOne} />
+
+          <div className="relative row-span-1 row-start-1">
+            <PlayerField
+              offset={game.offset[0]}
+              notes={game.notes[0]}
+              gameTime={game.time}
+            />
+            <PlayerDot expression={props.players[0]} />
           </div>
-          <div
-            // Playfield player 2
-            className="grid grid-rows-5 grid-cols-12 col-start-1 col-end-13 row-end-3 row-span-1"
-          >
-            <Dot data={dot.playerTwo} />
+
+          <div className="relative row-span-1 row-end-3">
+            <PlayerField
+              offset={game.offset[1]}
+              notes={game.notes[1]}
+              gameTime={game.time}
+            />
+            <PlayerDot expression={props.players[1]} />
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Expression } from "./types/Expressions";
+import { Level, Note } from "./types/Level";
 
 export const allowedExpressions = [
   "happy",
@@ -16,57 +16,56 @@ export const emojis = {
   neutral: "😐",
 };
 
-interface Note {
-  expression?: Expression;
-  duration: number;
-}
-const duration = 3000;
-
-export const gameLayer: Note[] = [
+export const exampleNotes: Note[] = [
   {
     expression: "happy",
-    duration: duration,
+    duration: 3,
   },
   {
     expression: "angry",
-    duration: duration,
+    duration: 3,
   },
   {
     expression: "happy",
-    duration: duration,
+    duration: 3,
   },
   {
     expression: "surprised",
-    duration: duration,
+    duration: 3,
   },
   {
     expression: "sad",
-    duration: duration,
+    duration: 3,
   },
   {
     expression: "happy",
-    duration: duration,
+    duration: 3,
   },
   {
     expression: "neutral",
-    duration: duration,
+    duration: 3,
   },
   {
     expression: "surprised",
-    duration: duration,
+    duration: 3,
   },
   {
     expression: "neutral",
-    duration: duration,
+    duration: 3,
   },
   {
     expression: "angry",
-    duration: duration,
+    duration: 3,
   },
 ];
-/*
-{
-    expression: allowedExpressions[Math.floor(Math.random()*5)],
-    duration: duration,
-  },
-*/
+
+export const exampleLevel: Level = {
+  audioUrl: "/img/gaga.mp3",
+  duration: 60,
+  notes: [exampleNotes, exampleNotes],
+};
+
+export const gameConstants = {
+  pixelsPerSecond: 100,
+  historyDuration: 3,
+};

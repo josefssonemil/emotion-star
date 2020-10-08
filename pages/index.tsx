@@ -3,6 +3,7 @@ import { useMemo, useRef, useState } from "react";
 import FinalScreen from "../components/screens/FinalScreen";
 import GameScreen from "../components/screens/GameScreen";
 import WarmUpScreen from "../components/screens/WarmUpScreen";
+import { exampleLevel } from "../config";
 import useCameraSplit from "../hooks/useCameraSplit";
 import useFaceRecognition from "../hooks/useFaceRecognition";
 
@@ -23,14 +24,14 @@ export default function Home() {
   return (
     <div className="w-screen h-screen overflow-hidden font-luckiest">
       <video
-        className="opacity-0 absolute pointer-events-none"
+        className="absolute opacity-0 pointer-events-none"
         ref={videoRef}
         width="1280"
         height="720"
         autoPlay
         muted
       />
-      <nav className="absolute top-0 text-white p-2 z-20">
+      <nav className="absolute top-0 z-20 p-2 text-white">
         <button className="mr-4" onClick={() => setCurrentScreen("warmUp")}>
           Warm up
         </button>
@@ -59,8 +60,8 @@ export default function Home() {
           canvasRightRef={canvasRightRef}
           players={players}
           faceBoxes={faceBoxes}
-          onStart={() => setCurrentScreen("final")}
-          gameTime={120}
+          onFinish={() => setCurrentScreen("final")}
+          level={exampleLevel}
           teamName={teamName}
         />
       )}
