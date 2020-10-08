@@ -1,10 +1,9 @@
+import classnames from "classnames";
 import { MutableRefObject } from "react";
 import useMeasure from "react-use-measure";
 import { emojis } from "../config";
 import { Expression } from "../types/Expressions";
 import EmptyCamPlaceholder from "./EmptyCamPlaceholder";
-
-import { motion } from "framer-motion";
 
 interface Props {
   canvasRef: MutableRefObject<HTMLCanvasElement>;
@@ -52,7 +51,7 @@ export default function PlayerFace(props: Props) {
 
   return (
     <div
-      className="relative border-box font-sans"
+      className="relative font-sans border-box"
       ref={ref}
       style={
         constrainTo === "height"
@@ -62,14 +61,18 @@ export default function PlayerFace(props: Props) {
     >
       <div className="absolute" style={{ width, height }}>
         <div
-          className={`inset-0 absolute ${
-            props.connected ? "" : "overflow-hidden"
-          }`}
+          className={`inset-0 absolute overflow-hidden`}
           style={{ borderRadius: 20, borderWidth: 6 }}
         >
           {!!props.faceBox && (
             <div
-              className="absolute border-white border-opacity-75 shadow-pinkBlur2 border-2 rounded-lg z-10 duration-75 -mt-2"
+              className={classnames(
+                "absolute border-white border-opacity-75 border-2 rounded-lg z-10 duration-75 -mt-2",
+                {
+                  "shadow-blueBlur": props.player === 1,
+                  "shadow-greenBlur": props.player === 2,
+                }
+              )}
               style={getFaceBoxStyles(props.faceBox)}
             >
               <div

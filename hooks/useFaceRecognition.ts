@@ -39,7 +39,10 @@ export default function useFaceRecognition(
     let running = true;
 
     const execute = async () => {
-      const playerExpressions = [undefined, undefined];
+      const playerExpressions: [Expression, Expression] = [
+        undefined,
+        undefined,
+      ];
       const playerFaceBoxes = [undefined, undefined];
 
       if (
@@ -100,7 +103,8 @@ export default function useFaceRecognition(
         // Finally assign the resulting top expression
         expressions.forEach((expressions, index) => {
           const playerIndex = playerIndexForFace[index];
-          playerExpressions[playerIndex] = expressions[0].expression;
+          playerExpressions[playerIndex] = expressions[0]
+            .expression as Expression;
 
           const box = playerFaces[index].detection.box.toSquare();
 
