@@ -55,7 +55,7 @@ export default function WarmUpScreen(props: Props) {
       {warmup && (
         <h1
           style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-          className="text-4xl text-center text-white col-start-6 col-span-2 row-span-2 row-start-2 self-end p-4"
+          className="text-4xl text-center text-white col-start-6 col-span-2 row-span-2 row-start-1 self-end p-4"
         >
           Welcome team: {props.teamName}
         </h1>

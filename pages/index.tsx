@@ -2,7 +2,6 @@ import randomEmoji from "random-emoji";
 import { useMemo, useRef, useState } from "react";
 import FinalScreen from "../components/screens/FinalScreen";
 import GameScreen from "../components/screens/GameScreen";
-import StartScreen from "../components/screens/StartScreen";
 import WarmUpScreen from "../components/screens/WarmUpScreen";
 import useCameraSplit from "../hooks/useCameraSplit";
 import useFaceRecognition from "../hooks/useFaceRecognition";
