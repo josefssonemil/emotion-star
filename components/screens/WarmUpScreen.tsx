@@ -19,8 +19,9 @@ export default function WarmUpScreen(props: Props) {
   const [x, setX] = useState(0);
   const [warmup, setWarmup] = useState(false);
   const [connected, setConnected] = useState(true);
-
+  const [idle, setIdle] = useState(true);
   const timer = useTimer(3);
+  const delay = 3;
 
   useEffect(() => {
     if (playersDone[0] && playersDone[1]) {
@@ -29,32 +30,39 @@ export default function WarmUpScreen(props: Props) {
   }, [playersDone]);
 
   useEffect(() => {
-    if (!props.players.includes(undefined)) {
+    if (!props.players.includes(undefined) && connected) {
       setX(200);
       setWarmup(true);
       setConnected(false);
     }
-    if (props.players[0] == undefined && props.players[1] == undefined) {
+  }, [props.players, connected]);
+
+  useEffect(() => {
+    props.players[0] == undefined && props.players[1] == undefined
+      ? setIdle(true)
+      : setIdle(false);
+  }, [props.players]);
+
+  useEffect(() => {
+    if (idle && warmup && timer.seconds == 0) {
+      timer.start();
+    }
+    if (!idle) {
+      timer.reset();
+    }
+    if (idle && warmup && timer.seconds >= delay) {
       setX(0);
       setWarmup(false);
+      timer.reset();
     }
-  }, [props.players]);
+  }, [props.players, idle, warmup, timer.seconds]);
+
   const onCamStart = () => x == 500 && setWarmup(true);
   const onCamComplete = () => x == 0 && setConnected(true);
 
-  const delay = 2;
   const duration = 1;
   // CAM ANIMATION
-  const camTransition = warmup
-    ? {
-        duration: duration,
-        ease: "easeInOut",
-      }
-    : {
-        delay: delay,
-        duration: duration,
-        ease: "easeInOut",
-      };
+  const camTransition = { duration: duration, ease: "easeInOut" };
 
   // H1 ANIMATION
   const h1Variants = {
@@ -65,16 +73,10 @@ export default function WarmUpScreen(props: Props) {
       opacity: 0,
     },
   };
-  const h1Transition = warmup
-    ? {
-        duration: 0.1,
-        ease: "easeInOut",
-      }
-    : {
-        delay: delay,
-        duration: 0.1,
-        ease: "easeInOut",
-      };
+  const h1Transition = {
+    duration: 0.1,
+    ease: "easeInOut",
+  };
 
   return (
     <div
@@ -186,21 +188,16 @@ export default function WarmUpScreen(props: Props) {
         </div>
       </motion.div>
 
-      {false && (
-        <div
-          className="col-span-12 col-start-1 row-span-1 row-start-5 text-2xl text-center text-white"
-          style={{
-            textShadow: "rgb(255, 0, 255) 0px 0px 35px",
-          }}
-        >
-          {"[" +
-            props.players[0] +
-            ", " +
-            props.players[1] +
-            "] & " +
-            timer.seconds}
-        </div>
-      )}
+      <h1 className="col-span-2 col-start-10 row-span-1 row-start-1 text-white">
+        {"seconds:" +
+          timer.seconds +
+          ", connected: " +
+          connected +
+          ", warmup:" +
+          warmup +
+          ", idle:" +
+          idle}
+      </h1>
     </div>
   );
 }
