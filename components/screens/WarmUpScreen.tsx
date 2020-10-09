@@ -16,8 +16,7 @@ interface Props {
 
 export default function WarmUpScreen(props: Props) {
   const [playersDone, setPlayersDone] = useState([false, false]);
-  const [x, setX] = useState(0);
-  const [warmup, setWarmup] = useState(false);
+  //const [warmup, setWarmup] = useState(false);
   const [test, setTest] = useState(false);
 
   const timer = useTimer(3);
@@ -41,44 +40,96 @@ export default function WarmUpScreen(props: Props) {
       setTest("start");
     }
   }, [props.players, timer.seconds]);*/
-  useEffect(() => {
-    if (test) {
-      setX(200);
-      setWarmup(true);
-    }
-    if (!test) {
-      setTimeout(() => {}, 3000);
-      setX(0);
-      setTimeout(() => {
-        setWarmup(false);
-      }, 1500);
-    }
-  }, [props.players, timer.seconds]);
+  const warmup = test ? true : false;
+  const x = test ? 200 : 0;
+
+  const onClick = () => (test ? setTest(false) : setTest(true));
+  const delay = 2;
+  const duration = 1;
+  // CAM ANIMATION
+  const camTransition = warmup
+    ? {
+        duration: duration,
+        ease: "easeInOut",
+      }
+    : {
+        delay: delay,
+        duration: duration,
+        ease: "easeInOut",
+      };
+
+  // H1 ANIMATION
+  const h1Variants = {
+    active: {
+      opacity: 1,
+    },
+    inactive: {
+      opacity: 0,
+    },
+  };
+  const h1Transition = warmup
+    ? {
+        duration: 0.1,
+        ease: "easeInOut",
+      }
+    : {
+        delay: delay,
+        duration: 0.1,
+        ease: "easeInOut",
+      };
   return (
     <div
       style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
       className="grid items-center justify-between w-full h-full grid-cols-12 grid-rows-6 bg-center bg-cover"
     >
-      <button
+      <motion.button
         className="col-span-1 col-start-2 row-span-1 row-start-1 text-white"
-        onClick={() => (test ? setTest(false) : setTest(true))}
+        onClick={onClick}
       >
         Test
-      </button>
-      <h1
+      </motion.button>
+
+      <motion.h1
+        variants={h1Variants}
+        animate={!warmup ? "active" : "inactive"}
+        transition={h1Transition}
         style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
         className="self-center col-span-8 col-start-3 row-span-1 row-start-1 text-5xl text-center text-white"
       >
-        {warmup ? "Practice your face expressions" : "Enter Play Area"}
-      </h1>
-      {warmup && (
-        <h1
-          style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-          className="self-end col-span-2 col-start-6 row-span-2 row-start-1 p-4 text-4xl text-center text-white"
-        >
-          Welcome team: {props.teamName}
-        </h1>
-      )}
+        Enter Play Area
+      </motion.h1>
+
+      <motion.h1
+        variants={h1Variants}
+        animate={warmup ? "active" : "inactive"}
+        transition={h1Transition}
+        style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
+        className="self-center col-span-8 col-start-3 row-span-1 row-start-1 text-5xl text-center text-white"
+      >
+        Practice your face expressions
+      </motion.h1>
+
+      <motion.h1
+        variants={h1Variants}
+        animate={warmup ? "active" : "inactive"}
+        transition={
+          warmup
+            ? {
+                duration: 0.1,
+                ease: "easeInOut",
+              }
+            : {
+                delay: delay,
+                duration: 1,
+                ease: "easeInOut",
+              }
+        }
+        style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
+        className="self-end col-span-2 col-start-6 row-span-2 row-start-1 p-4 text-4xl text-center text-white"
+      >
+        Welcome team: {props.teamName}
+      </motion.h1>
+
       {warmup && (
         <div className="self-center col-span-1 col-end-7 row-span-4 row-end-7 justify-self-start">
           <WarmUp
@@ -106,10 +157,7 @@ export default function WarmUpScreen(props: Props) {
         animate={{
           marginRight: x,
         }}
-        transition={{
-          duration: 1,
-          ease: "easeInOut",
-        }}
+        transition={camTransition}
         className="relative self-start w-full col-span-4 col-end-7 row-span-4 row-start-2 justify-self-end"
       >
         <div className="flex-1">
@@ -131,10 +179,7 @@ export default function WarmUpScreen(props: Props) {
         animate={{
           marginLeft: x,
         }}
-        transition={{
-          duration: 1,
-          ease: "easeInOut",
-        }}
+        transition={camTransition}
         className="relative flex self-start w-full col-span-4 col-start-7 row-span-4 row-start-2 justify-self-start"
       >
         <div className="flex-1">

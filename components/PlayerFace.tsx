@@ -12,7 +12,7 @@ interface Props {
   faceBox?: any;
   constrainTo?: "width" | "height";
   player: 1 | 2;
-  connected: boolean;
+  connected: any;
 }
 
 export default function PlayerFace(props: Props) {
@@ -87,7 +87,12 @@ export default function PlayerFace(props: Props) {
           )}
         </div>
 
-        <canvas
+        <motion.canvas
+          animate={
+            props.player == 1 && props.connected
+              ? { borderTopLeftRadius: 0 }
+              : { borderTopLeftRadius: 20 }
+          }
           className="bg-black"
           ref={props.canvasRef}
           width="640"
@@ -97,7 +102,9 @@ export default function PlayerFace(props: Props) {
             width,
             height,
             // Top right
-            borderTopLeftRadius: props.player == 1 && props.connected ? 0 : 20,
+            transition: "all",
+            transitionDelay: props.connected ? "1s" : "0s",
+            //borderTopLeftRadius: props.player == 1 && props.connected ? 0 : 20,
             // Top left
             borderTopRightRadius: props.player == 2 && props.connected ? 0 : 20,
             // Bottom left
