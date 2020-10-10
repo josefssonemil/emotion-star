@@ -2,7 +2,7 @@ export default function NoteBarMiddle() {
   return (
     <svg
       style={{
-        height: "1.5rem",
+        height: "50%",
         width: "100%",
       }}
       viewBox="0 0 200 50"

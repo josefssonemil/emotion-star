@@ -78,7 +78,7 @@ export default function NoteBar(props: Props) {
             <NoteBarRight />
           </div>
           <div className="absolute z-30 my-1 ml-1 mr-4 text-4xl text-pink-600">
-            {props.state.isPerfect && "(Perfect)"} {"" + width}
+            {props.state.isPerfect && "(Perfect)"}
           </div>
           <div className="relative h-4 my-4 bg-black">
             {props.state.intervals.map((interval, i) => {

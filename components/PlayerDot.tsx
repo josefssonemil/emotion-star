@@ -1,8 +1,12 @@
 import { allowedExpressions, gameConstants } from "../config";
 import { Expression } from "../types/Expressions";
+import { FieldState } from "../hooks/useFieldState";
+import { motion } from "framer-motion";
 
 interface Props {
   expression?: Expression;
+  player: number;
+  fieldState: FieldState;
 }
 
 export default function PlayerDot(props: Props) {
@@ -21,12 +25,21 @@ export default function PlayerDot(props: Props) {
     >
       <div
         style={{
-          boxShadow: "0 0 25px 2px #5EFFF5",
-          opacity: props.expression ? 1 : 0,
+          boxShadow:
+            props.expression === props.fieldState.currentNote.expression
+              ? `0 0 15px 10px ${props.player == 2 ? "#86E409" : "#5EFFF5"}`
+              : `0 0 15px 0px ${props.player == 2 ? "#86E409" : "#5EFFF5"}`,
+          opacity: props.expression
+            ? props.expression === props.fieldState.currentNote.expression
+              ? 1
+              : 0.75
+            : 0,
         }}
         className={`${
           "row-start-" + row
-        } justify-self-center self-center h-4 w-4 -ml-2 border-2 rounded-full border-player1 border-opacity-25 bg-blue-100 z-10`}
+        } justify-self-center self-center h-4 w-4 -ml-2 border-2 rounded-full ${
+          props.player == 1 ? "border-player1" : "border-player2"
+        } border-opacity-75 bg-blue-100 z-10`}
       />
     </div>
   );

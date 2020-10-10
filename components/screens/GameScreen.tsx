@@ -39,7 +39,7 @@ export default function GameScreen(props: Props) {
 
   const barPositionLeft =
     gameConstants.historyDuration * gameConstants.pixelsPerSecond;
-
+  console.log(game.fieldState);
   return (
     <div>
       <audio src={audioUrl} ref={audioRef} />
@@ -116,7 +116,12 @@ export default function GameScreen(props: Props) {
               noteState={game.noteState[0]}
               gameTime={game.time}
             />
-            <PlayerDot expression={props.players[0]} />
+
+            <PlayerDot
+              player={1}
+              fieldState={game.fieldState[0]}
+              expression={props.players[0]}
+            />
           </div>
 
           <div className="relative row-span-1 row-end-3">
@@ -126,7 +131,11 @@ export default function GameScreen(props: Props) {
               noteState={game.noteState[1]}
               gameTime={game.time}
             />
-            <PlayerDot expression={props.players[1]} />
+            <PlayerDot
+              player={2}
+              fieldState={game.fieldState[1]}
+              expression={props.players[1]}
+            />
           </div>
         </div>
       </div>

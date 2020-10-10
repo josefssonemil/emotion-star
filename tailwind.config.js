@@ -32,6 +32,7 @@ module.exports = {
           purple2: "#5100C6,",
         },
         player1: "#5EFFF5",
+        player2: "#86E409",
       },
       fontFamily: {
         luckiest: ["Luckiest Guy", "sans-serif"],

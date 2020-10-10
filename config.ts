@@ -22,15 +22,15 @@ export const exampleNotes: Note[] = [
   },
   {
     expression: "happy",
-    duration: 3,
+    duration: 0.5,
   },
   {
     expression: "angry",
-    duration: 3,
+    duration: 0.5,
   },
   {
     expression: "happy",
-    duration: 3,
+    duration: 0.5,
   },
   {
     expression: "surprised",
