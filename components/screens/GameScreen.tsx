@@ -103,10 +103,10 @@ export default function GameScreen(props: Props) {
           <div
             /* Vertical Line */
             style={{
-              boxShadow: "0 0 3px 0 #718096",
+              boxShadow: "0 0 6px 3px #FF36C7",
               left: barPositionLeft,
             }}
-            className="absolute top-0 bottom-0 w-px bg-gray-600 bg-opacity-25"
+            className="absolute top-0 bottom-0 z-10 w-px bg-white bg-opacity-50"
           />
 
           <div className="relative row-span-1 row-start-1">

@@ -60,9 +60,12 @@ export default function WarmUpScreen(props: Props) {
   const onCamStart = () => x == 500 && setWarmup(true);
   const onCamComplete = () => x == 0 && setConnected(true);
 
-  const duration = 1;
+  const duration = x != 0 ? 1 : 1;
   // CAM ANIMATION
-  const camTransition = { duration: duration, ease: "easeInOut" };
+  const camTransition =
+    x != 0
+      ? { duration: duration, ease: "easeOut" }
+      : { duration: duration, ease: "easeIn" };
 
   // H1 ANIMATION
   const h1Variants = {
@@ -74,7 +77,7 @@ export default function WarmUpScreen(props: Props) {
     },
   };
   const h1Transition = {
-    duration: 0.1,
+    duration: 0.3,
     ease: "easeInOut",
   };
 
@@ -101,27 +104,14 @@ export default function WarmUpScreen(props: Props) {
       >
         Practice your face expressions
       </motion.h1>
-
-      <motion.h1
-        variants={h1Variants}
-        animate={warmup ? "active" : "inactive"}
-        transition={
-          warmup
-            ? {
-                duration: 0.1,
-                ease: "easeInOut",
-              }
-            : {
-                delay: delay,
-                duration: 1,
-                ease: "easeInOut",
-              }
-        }
-        style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-        className="self-end col-span-2 col-start-6 row-span-2 row-start-1 p-4 text-4xl text-center text-white"
-      >
-        Welcome team: {props.teamName}
-      </motion.h1>
+      {!connected && (
+        <h1
+          style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
+          className="self-end col-span-2 col-start-6 row-span-2 row-start-1 p-4 text-4xl text-center text-white"
+        >
+          Welcome team: {props.teamName}
+        </h1>
+      )}
       {!connected && (
         <div className="self-center col-span-1 col-end-7 row-span-4 row-end-7 justify-self-start">
           <WarmUp

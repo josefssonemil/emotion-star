@@ -4,6 +4,9 @@ import { allowedExpressions, emojis, gameConstants } from "../config";
 import { NoteState } from "../hooks/useNoteState";
 import { Expression } from "../types/Expressions";
 import { Note } from "../types/Level";
+import NoteBarLeft from "./NoteBarLeft";
+import NoteBarMiddle from "./NoteBarMiddle";
+import NoteBarRight from "./NoteBarRight";
 
 interface Props {
   expression: Expression;
@@ -27,6 +30,10 @@ export default function NoteBar(props: Props) {
   }
 
   const playerColor = props.player === 1 ? "#4BFAF0" : "#86E409";
+  const playerGradient =
+    props.player === 1
+      ? "linearGradient(to right, #0472A1, #4BFAF0)"
+      : "linearGradient(to right, #2DA104, #86E409)";
 
   return (
     <div
@@ -45,16 +52,35 @@ export default function NoteBar(props: Props) {
         }}
       >
         <div
-          className={classnames("items-center h-12 bg-white", {
-            "shadow-blueBlur": props.state.isPerfect && props.player === 1,
-            "shadow-greenBlur": props.state.isPerfect && props.player === 2,
+          className={classnames("items-center h-12", {
+            /*"shadow-blueBlur": props.state.isPerfect && props.player === 1,
+            "shadow-greenBlur": props.state.isPerfect && props.player === 2,*/
           })}
           style={{ width: props.width }}
         >
-          <div className="absolute z-10 mr-4 text-4xl text-pink-600">
-            {emojis[props.expression]} {props.state.isPerfect && "(Perfect)"}
+          <div
+            className="absolute z-40 w-12 h-12"
+            style={{
+              left: "-2.5rem",
+            }}
+          >
+            <NoteBarLeft expression={props.expression} />
           </div>
-          <div className="relative h-4 bg-black">
+          <div className="absolute z-20 flex items-center h-12 pl-2 pr-2">
+            <NoteBarMiddle />
+          </div>
+          <div
+            className="absolute z-40 flex items-center w-6 h-12"
+            style={{
+              right: "-1rem",
+            }}
+          >
+            <NoteBarRight />
+          </div>
+          <div className="absolute z-30 my-1 ml-1 mr-4 text-4xl text-pink-600">
+            {props.state.isPerfect && "(Perfect)"} {"" + width}
+          </div>
+          <div className="relative h-4 my-4 bg-black">
             {props.state.intervals.map((interval, i) => {
               const left = interval.start * gameConstants.pixelsPerSecond;
 
@@ -74,7 +100,7 @@ export default function NoteBar(props: Props) {
               return (
                 <motion.div
                   key={i}
-                  className="absolute top-0 bottom-0"
+                  className="absolute top-0 bottom-0 rounded-full"
                   style={{ left, backgroundColor: playerColor }}
                   animate={{ width }}
                   transition={{
