@@ -25,15 +25,18 @@ export default function PlayerDot(props: Props) {
     >
       <div
         style={{
-          boxShadow:
-            props.expression === props.fieldState.currentNote.expression
+          boxShadow: `0 0 15px 3px ${
+            props.player == 2 ? "#86E409" : "#5EFFF5"
+          }`,
+
+          /*props.expression === props.fieldState.currentNote.expression
               ? `0 0 15px 10px ${props.player == 2 ? "#86E409" : "#5EFFF5"}`
               : `0 0 15px 0px ${props.player == 2 ? "#86E409" : "#5EFFF5"}`,
           opacity: props.expression
             ? props.expression === props.fieldState.currentNote.expression
               ? 1
               : 0.75
-            : 0,
+            : 0,*/
         }}
         className={`${
           "row-start-" + row
