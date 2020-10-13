@@ -23,7 +23,7 @@ function randomExpression(): Expression {
   ] as Expression;
   return expression;
 }
-const startDelay = 7;
+const startDelay = 7.9;
 
 export const fearlessPlayer1: Note[] = [
   {
@@ -336,7 +336,7 @@ export const fearlessPlayer1: Note[] = [
   // 39
   {
     expression: "angry",
-    duration: 2.0,
+    duration: 1.5,
   },
   {
     duration: 0.35,
@@ -344,7 +344,47 @@ export const fearlessPlayer1: Note[] = [
   // 40
   {
     expression: "surprised",
-    duration: 2.0,
+    duration: 1.2,
+  },
+  {
+    duration: 0.35,
+  },
+  // 41
+  {
+    expression: "angry",
+    duration: 1.0,
+  },
+  {
+    duration: 0.35,
+  },
+  // 42
+  {
+    expression: "sad",
+    duration: 1.3,
+  },
+  {
+    duration: 0.35,
+  },
+  // 43
+  {
+    expression: "surprised",
+    duration: 1.3,
+  },
+  {
+    duration: 0.35,
+  },
+  // 44
+  {
+    expression: "angry",
+    duration: 0.8,
+  },
+  {
+    duration: 0.35,
+  },
+  // 45
+  {
+    expression: "sad",
+    duration: 0.9,
   },
   {
     duration: 0.35,
@@ -354,7 +394,7 @@ export const fearlessPlayer2: Note[] = [];
 
 export const fearlessLevel: Level = {
   audioUrl: "/sound/fearless.mp3",
-  duration: 82,
+  duration: 90,
   notes: [fearlessPlayer1, fearlessPlayer2],
 };
 
