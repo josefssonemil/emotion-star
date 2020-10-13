@@ -1,6 +1,8 @@
 import { MutableRefObject, useEffect } from "react";
 import { gameConstants } from "../../config";
+import useAudioAPI from '../../hooks/useAudioAPI';
 import useGameLoop from "../../hooks/useGameLoop";
+import useTimer from '../../hooks/useTimer';
 import { Expression } from "../../types/Expressions";
 import { Level } from "../../types/Level";
 import PlayerDot from "../PlayerDot";
@@ -22,12 +24,19 @@ export default function GameScreen(props: Props) {
   const { notes, duration, audioUrl } = props.level;
   const game = useGameLoop(duration, notes, props.players);
 
-  //useAudioAPI();
+  const audioLoaded = useAudioAPI(1, audioUrl);
 
+
+
+  const timer = useTimer(duration);
   // todo: start first when the audio loaded
   useEffect(() => {
-    game.start();
-  }, []);
+    if (audioLoaded) {
+      game.start();
+      timer.start();
+    }
+
+  }, [audioLoaded]);
 
   useEffect(() => {
     if (game.progress === 1) {
@@ -91,6 +100,10 @@ export default function GameScreen(props: Props) {
               player={2}
               connected={false}
             />
+          </div>
+
+          <div className="text-3xl text-white">
+            Time: {Math.round(timer.seconds)}
           </div>
         </div>
 
