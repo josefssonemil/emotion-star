@@ -1,8 +1,8 @@
 import { MutableRefObject, useEffect } from "react";
 import { gameConstants } from "../../config";
-import useAudioAPI from '../../hooks/useAudioAPI';
+import useAudioAPI from "../../hooks/useAudioAPI";
 import useGameLoop from "../../hooks/useGameLoop";
-import useTimer from '../../hooks/useTimer';
+import useTimer from "../../hooks/useTimer";
 import { Expression } from "../../types/Expressions";
 import { Level } from "../../types/Level";
 import PlayerDot from "../PlayerDot";
@@ -17,26 +17,22 @@ interface Props {
   faceBoxes: any[];
   onFinish: () => void;
   level: Level;
-  teamName: string; 
+  teamName: string;
 }
 
 export default function GameScreen(props: Props) {
   const { notes, duration, audioUrl } = props.level;
   const game = useGameLoop(duration, notes, props.players);
 
-  console.log(game.rollingSuccessRate);
   const audioLoaded = useAudioAPI(game.rollingSuccessRate, audioUrl);
 
-
-
   const timer = useTimer(duration);
-  // todo: start first when the audio loaded
+
   useEffect(() => {
     if (audioLoaded) {
       game.start();
       timer.start();
     }
-
   }, [audioLoaded]);
 
   useEffect(() => {
