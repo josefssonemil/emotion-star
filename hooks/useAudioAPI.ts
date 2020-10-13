@@ -1,28 +1,35 @@
 import { useState, useEffect, MutableRefObject } from "react";
 
-let filter, distortion;
+
+
+let filter, filterType, filterHz;
 
 var audioSource;
 
 // Prepare to receive a value which changes the fiter
-var PERCENTAGE_VALUE = 0.5;
-export default function useAudioAPI() {
-    const [value, setValue] = useState(1);
+export default function useAudioAPI(
+    percentageValue: number,
+    audioUrl: string
+) {
 
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        const audio = new Audio('/img/gaga.mp3');
+
+        // Init audio
+        const audio = new Audio(this.props.audioUrl);
         const context = new AudioContext();
         audioSource = context.createMediaElementSource(audio);
 
+        // Create and connect filter
         filter = context.createBiquadFilter();
         audioSource.connect(filter);
         filter.connect(context.destination);
 
+        // Save default filter settings
 
-
-
+        filterType = filter.type;
+        filterHz = filter.frequency.value;
 
 
         audio.addEventListener("canplaythrough", event => {
@@ -41,15 +48,24 @@ export default function useAudioAPI() {
     }, []);
 
     useEffect(() => {
-        if (filter) {
 
-            console.log("changing filter")
-            filter.type = "lowpass";
-            filter.frequency.value = 100;
+        if (filter && loaded && audioSource) {
+
+            if (this.props.percentageValue > 0.8) {
+                filter.type = filterType;
+                filter.frequency.value = filterHz;
+            }
+
+            else {
+                filter.type = "lowpass";
+                filter.frequency.value = filter.frequency.value * this.props.percentageValue;
+            }
         }
-        console.log("effect change called")
 
-    }, []);
+
+
+
+    }, [this.props.percentageValue]);
 
     return loaded;
 
