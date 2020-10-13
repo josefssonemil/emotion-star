@@ -149,7 +149,7 @@ export const fearlessPlayer2: Note[] = [
 ];
 
 export const fearlessLevel: Level = {
-  audioUrl: "/sound/fearless-cut.mp3",
+  audioUrl: "/sound/fearless.mp3",
   duration: 107,
   notes: [fearlessPlayer1, fearlessPlayer2],
 };
