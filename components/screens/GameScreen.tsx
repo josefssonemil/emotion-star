@@ -23,8 +23,7 @@ interface Props {
 export default function GameScreen(props: Props) {
   const gameTime = props.gameTime;
   const gameTimer = useTimer(gameTime);
-  const audioRef = useRef<HTMLAudioElement>();
-  const audio = useAudioAPI(audioRef);
+  const audio = useAudioAPI();
   const [gameProgress, setGameProgress] = useState(0);
   useEffect(() => {
     gameTimer.start();
@@ -89,12 +88,12 @@ export default function GameScreen(props: Props) {
   return (
 
     <div>
-      <audio src="/img/gaga.mp3" ref={audioRef}></audio>
 
       <div
         style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
         className="h-screen bg-center bg-cover flex"
       >
+
 
         <div className="absolute w-full -mt-2 z-10" style={{ top: "50%" }}>
           <ProgressBar position={gameProgress} />
