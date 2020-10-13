@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const ROLLING_SUCCESS_EFFECT = 0.05;
+const ROLLING_SUCCESS_EFFECT = 0.01;
 
 interface ScoreState {
   value: number;
