@@ -51,7 +51,7 @@ export default function FinalScreen(props: Props) {
 
         <div className="flex flex-col">
           <h1 className="text-6xl text-white text-right">
-            Team
+            Team {props.teamName}
           </h1>
           <h1 className="text-6xl text-white text-right">
             Score
@@ -70,14 +70,27 @@ export default function FinalScreen(props: Props) {
         <div className="w-7/12">
 
           <div className="w-full h-64 flex flex-row mb-6 frosted">
-            <PlayerFace
-              canvasRef={props.canvasLeftRef}
-              expression={props.players[0]}
-              faceBox={props.faceBoxes[0]}
-              constrainTo="height"
-              player={1}
-              connected={false}
-            />
+
+            <div>
+              <PlayerFace
+                canvasRef={props.canvasLeftRef}
+                expression={props.players[0]}
+                faceBox={props.faceBoxes[0]}
+                constrainTo="height"
+                player={1}
+                connected={false}
+              />
+            </div>
+
+
+            <div className="bg-gray-700 h-full flex flex-col justify-around">
+              <h1>😡</h1>
+              <h1>😡</h1>
+              <h1>😡</h1>
+              <h1>😡</h1>
+              <h1>😡</h1>
+
+            </div>
 
             <div className="flex flex-row justify-evenly p-6 w-full items-center">
               <div className="text-center">
@@ -146,14 +159,26 @@ export default function FinalScreen(props: Props) {
 
           </div>
           <div className="w-full h-64 flex flex-row frosted">
-            <PlayerFace
-              canvasRef={props.canvasRightRef}
-              expression={props.players[1]}
-              faceBox={props.faceBoxes[1]}
-              constrainTo="height"
-              player={2}
-              connected={false}
-            />
+            <div>
+              <PlayerFace
+                canvasRef={props.canvasLeftRef}
+                expression={props.players[0]}
+                faceBox={props.faceBoxes[0]}
+                constrainTo="height"
+                player={1}
+                connected={false}
+              />
+            </div>
+
+
+            <div className="bg-gray-700 h-full flex flex-col justify-around">
+              <h1>😡</h1>
+              <h1>😡</h1>
+              <h1>😡</h1>
+              <h1>😡</h1>
+              <h1>😡</h1>
+
+            </div>
 
             <div className="flex flex-row justify-evenly w-full p-6 items-center">
               <div className="text-center">
@@ -223,6 +248,6 @@ export default function FinalScreen(props: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
