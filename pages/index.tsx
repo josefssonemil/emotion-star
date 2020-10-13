@@ -66,7 +66,15 @@ export default function Home() {
         />
       )}
 
-      {currentScreen === "final" && <FinalScreen />}
+      {currentScreen === "final" && <FinalScreen
+        canvasLeftRef={canvasLeftRef}
+        canvasRightRef={canvasRightRef}
+        players={players}
+        faceBoxes={faceBoxes}
+        onFinish={() => setCurrentScreen("final")}
+        level={fearlessLevel}
+        teamName={teamName}
+      />}
     </div>
   );
 }
