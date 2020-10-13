@@ -23,6 +23,7 @@ function randomExpression(): Expression {
   ] as Expression;
   return expression;
 }
+const startDelay = 8.5;
 
 export const exampleNotes: Note[] = [
   {
@@ -93,57 +94,57 @@ export const exampleNotes: Note[] = [
     duration: 3,
   },
 ];
+
 export const fearlessPlayer1: Note[] = [
   {
-    duration: 7,
+    duration: startDelay,
   },
   {
     expression: "happy",
     duration: 1,
   },
   {
+    duration: 0.5,
+  },
+  {
     expression: "angry",
     duration: 1,
+  },
+  {
+    duration: 0.5,
   },
   {
     expression: "sad",
     duration: 1,
   },
   {
-    duration: 3,
-  },
-  {
-    expression: randomExpression(),
-    duration: 3,
-  },
-  {
-    expression: randomExpression(),
     duration: 3,
   },
 ];
 export const fearlessPlayer2: Note[] = [
   {
-    duration: 10,
+    duration: startDelay,
+  },
+  {
+    duration: 4.5,
   },
   {
     expression: "happy",
     duration: 1,
   },
   {
+    duration: 0.5,
+  },
+  {
     expression: "angry",
     duration: 1,
   },
   {
+    duration: 0.5,
+  },
+  {
     expression: "sad",
     duration: 1,
-  },
-  {
-    expression: randomExpression(),
-    duration: 3,
-  },
-  {
-    expression: randomExpression(),
-    duration: 3,
   },
 ];
 

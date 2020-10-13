@@ -117,7 +117,7 @@ export default function useNoteState(
   useEffect(() => {
     const prevIndex = currentIndex - 1;
 
-    if (prevIndex < 0 || !lastNoteRef.current.expression) {
+    if (prevIndex < 0 || !lastNoteRef.current?.expression) {
       lastNoteRef.current = currentNoteRef.current;
       return;
     }
@@ -127,6 +127,8 @@ export default function useNoteState(
         if (lastNoteRef.current) {
           finishNote(false, lastNoteRef.current.duration, 0);
         }
+
+        noteUpdate(false);
 
         return prevState;
       }
