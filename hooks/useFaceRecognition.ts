@@ -5,7 +5,7 @@ import { Expression } from "../types/Expressions";
 
 interface FaceRecognitionState {
   loading: boolean;
-  players: Expression[];
+  players: [Expression, Expression];
   faceBoxes: any[];
 }
 
@@ -14,7 +14,10 @@ export default function useFaceRecognition(
   playing: boolean
 ): FaceRecognitionState {
   const [loading, setLoading] = useState(true);
-  const [players, setPlayers] = useState<Expression[]>([undefined, undefined]);
+  const [players, setPlayers] = useState<[Expression, Expression]>([
+    undefined,
+    undefined,
+  ]);
   const [faceBoxes, setFaceBoxes] = useState<any[]>([undefined, undefined]);
 
   useEffect(() => {
@@ -36,7 +39,10 @@ export default function useFaceRecognition(
     let running = true;
 
     const execute = async () => {
-      const playerExpressions = [undefined, undefined];
+      const playerExpressions: [Expression, Expression] = [
+        undefined,
+        undefined,
+      ];
       const playerFaceBoxes = [undefined, undefined];
 
       if (
@@ -74,7 +80,10 @@ export default function useFaceRecognition(
         // Create an array that maps face index to player index
         const playerIndexForFace = playerFaces.map((face) => {
           // Player 2 is on the left half of the screen
-          if (face.detection.box.left <= 1280 / 2) {
+          if (
+            face.detection.box.left + face.detection.box.width / 2 <=
+            1280 / 2
+          ) {
             return 1;
           }
 
@@ -94,7 +103,8 @@ export default function useFaceRecognition(
         // Finally assign the resulting top expression
         expressions.forEach((expressions, index) => {
           const playerIndex = playerIndexForFace[index];
-          playerExpressions[playerIndex] = expressions[0].expression;
+          playerExpressions[playerIndex] = expressions[0]
+            .expression as Expression;
 
           const box = playerFaces[index].detection.box.toSquare();
 

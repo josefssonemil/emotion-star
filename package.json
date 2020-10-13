@@ -17,6 +17,7 @@
     "face-api.js": "^0.22.2",
     "framer-motion": "^2.7.6",
     "next": "9.5.3",
+    "random-emoji": "^1.0.2",
     "react": "16.13.1",
     "react-chartjs-2": "^2.10.0",
     "react-circular-progressbar": "^2.0.3",
@@ -24,7 +25,8 @@
     "react-use-measure": "^2.0.1",
     "tailwindcss-border-gradients": "^2.0.3",
     "tailwindcss-typography": "^3.1.0",
-    "typeface-luckiest-guy": "^0.0.72"
+    "typeface-luckiest-guy": "^0.0.72",
+    "use-sound": "^1.0.2"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^3.0.0",

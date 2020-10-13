@@ -1,7 +1,9 @@
+import classnames from "classnames";
 import { MutableRefObject } from "react";
 import useMeasure from "react-use-measure";
 import { emojis } from "../config";
 import { Expression } from "../types/Expressions";
+import EmptyCamPlaceholder from "./EmptyCamPlaceholder";
 
 interface Props {
   canvasRef: MutableRefObject<HTMLCanvasElement>;
@@ -9,6 +11,7 @@ interface Props {
   faceBox?: any;
   constrainTo?: "width" | "height";
   player: 1 | 2;
+  connected: boolean;
 }
 
 export default function PlayerFace(props: Props) {
@@ -48,7 +51,7 @@ export default function PlayerFace(props: Props) {
 
   return (
     <div
-      className="relative border-black border-box font-sans"
+      className="relative font-sans border-box"
       ref={ref}
       style={
         constrainTo === "height"
@@ -58,22 +61,32 @@ export default function PlayerFace(props: Props) {
     >
       <div className="absolute" style={{ width, height }}>
         <div
-          className="inset-0 absolute overflow-hidden"
+          className={`inset-0 absolute ${
+            props.connected ? "" : "overflow-hidden"
+          }`}
           style={{ borderRadius: 20, borderWidth: 6 }}
         >
           {!!props.faceBox && (
             <div
-              className="absolute border-white border-opacity-75 shadow-pinkBlur2 border-2 rounded-lg z-10 duration-75 -mt-2"
+              className={classnames(
+                "absolute border-white border-opacity-75 border-2 rounded-lg z-10 duration-75 -mt-2",
+                {
+                  "shadow-blueBlur": props.player === 1,
+                  "shadow-greenBlur": props.player === 2,
+                }
+              )}
               style={getFaceBoxStyles(props.faceBox)}
             >
               <div
-                className="text-6xl absolute shadow-xl w-16 h-16 rounded-full flex items-center justify-center right-0 bottom-0 -mb-4 -mr-4"
+                className={`${
+                  props.player == 1 ? "left-0 -ml-8" : "right-0 -mr-4"
+                } text-6xl absolute shadow-xl w-16 h-16 rounded-full flex items-center justify-center  bottom-0 -mb-4`}
                 style={{
                   transformOrigin: "bottom right",
                   transform: `scale(${getScale(props.faceBox)})`,
                 }}
               >
-                {emojis[props.expression] || "👤"}
+                {emojis[props.expression] || "?"}
               </div>
             </div>
           )}
@@ -88,12 +101,30 @@ export default function PlayerFace(props: Props) {
             transform: "scaleX(-1)",
             width,
             height,
-            borderRadius: 20,
-            borderWidth: 6,
+            // Top right
+            borderTopLeftRadius: props.player == 1 && props.connected ? 0 : 20,
+            // Top left
+            borderTopRightRadius: props.player == 2 && props.connected ? 0 : 20,
+            // Bottom left
+            borderBottomRightRadius:
+              props.player == 2 && props.connected ? 0 : 20,
+            // Bottom right
+            borderBottomLeftRadius:
+              props.player == 1 && props.connected ? 0 : 20,
+
+            borderTopWidth: 6,
+            borderBottomWidth: 6,
+            // Border right
+            borderLeftWidth: props.connected && props.player == 1 ? 0 : 6,
+            // Border left
+            borderRightWidth: props.connected && props.player == 2 ? 0 : 6,
             borderColor: playerColor,
-            boxShadow: `0 0 15px ${playerColor}`,
+            boxShadow: props.connected ? "" : `0 0 15px ${playerColor}`,
           }}
         />
+        {props.expression === undefined && (
+          <EmptyCamPlaceholder player={props.player} />
+        )}
       </div>
     </div>
   );

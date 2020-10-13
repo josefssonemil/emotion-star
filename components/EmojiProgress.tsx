@@ -14,12 +14,15 @@ export default function EmojiProgress(props: Props) {
       <div className="absolute inset-0 flex justify-center items-center text-6xl">
         <div>{emojis[props.emoji]}</div>
       </div>
-      <div className="w-20 h-20">
+      <div
+        className="w-20 h-20 rounded-full"
+        style={props.completed ? { boxShadow: "0 0 15px #86e409" } : {}}
+      >
         <CircularProgressbar
           value={props.completed ? 100 : props.progress * 100}
           styles={buildStyles({
             // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-            strokeLinecap: "but",
+            strokeLinecap: "round",
 
             // How long animation takes to go from one percentage to another, in seconds
             //pathTransitionDuration: 1,
@@ -27,11 +30,11 @@ export default function EmojiProgress(props: Props) {
 
             // Colors
             pathColor: `hsl(${
-              props.completed ? 125 : props.progress * 75
-            }, 100%, 50%)`,
+              props.completed ? 125 : props.progress * 86
+            }, 92%, 46%)`,
             trailColor: "rgba(0,0,0,0)",
           })}
-          strokeWidth={props.completed ? 10 : 7}
+          strokeWidth={props.completed ? 10 : 8}
         />
       </div>
     </div>

@@ -15,6 +15,16 @@ module.exports = {
         "screen/4": "calc(100vh / 4)",
         "screen/5": "calc(100vh / 5)",
         100: "25rem",
+        warmupCam: "25vh",
+      }),
+      height: (theme) => ({
+        "screen-2/3": "66vw",
+        "screen/2": "50vw",
+        "screen/3": "calc(100vw / 3)",
+        "screen/4": "calc(100vw / 4)",
+        "screen/5": "calc(100vw / 5)",
+        100: "25rem",
+        88: "22rem",
       }),
       colors: {
         local: {
@@ -22,6 +32,7 @@ module.exports = {
           purple2: "#5100C6,",
         },
         player1: "#5EFFF5",
+        player2: "#86E409",
       },
       fontFamily: {
         luckiest: ["Luckiest Guy", "sans-serif"],
@@ -31,6 +42,8 @@ module.exports = {
         pinkBlur2:
           "0 0 17px 0px rgba(255, 0, 255, 1), inset 0 0 17px 0px rgba(255, 0, 255, 1)",
         innerPinkBlur: " inset 0 0 34px 0px rgba(255, 0, 255, 1)",
+        greenBlur: "0 0 17px 0px #86E409, inset 0 0 17px 0px #86E409",
+        blueBlur: "0 0 17px 0px #4BFAF0, inset 0 0 17px 0px #4BFAF0",
       },
     },
   },
