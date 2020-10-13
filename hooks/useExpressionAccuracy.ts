@@ -1,15 +1,25 @@
 import { useMemo, useState } from "react";
 import { Expression } from "../types/Expressions";
+import { AccuracyObject } from "./useFinalStats";
 
-export default function useExpressionAccuracy() {
-  const [hitDurations, setHitDurations] = useState({
+interface State {
+  accuracy: AccuracyObject;
+  addNote: (
+    expression: Expression,
+    duration: number,
+    hitDuration: number
+  ) => void;
+}
+
+export default function useExpressionAccuracy(): State {
+  const [hitDurations, setHitDurations] = useState<AccuracyObject>({
     happy: 0,
     angry: 0,
     surprised: 0,
     sad: 0,
     neutral: 0,
   });
-  const [totalDurations, setTotalDurations] = useState({
+  const [totalDurations, setTotalDurations] = useState<AccuracyObject>({
     happy: 0,
     angry: 0,
     surprised: 0,
@@ -17,7 +27,7 @@ export default function useExpressionAccuracy() {
     neutral: 0,
   });
 
-  const accuracy = useMemo(() => {
+  const accuracy = useMemo<AccuracyObject>(() => {
     const keys = Object.keys(hitDurations);
 
     let result = {};
@@ -30,7 +40,7 @@ export default function useExpressionAccuracy() {
       }
     });
 
-    return result;
+    return result as AccuracyObject;
   }, [hitDurations, totalDurations]);
 
   const addNote = (

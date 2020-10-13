@@ -62,5 +62,6 @@ export default function useGameLoop(
     rollingSuccessRate: score.rollingSuccessRate,
     time: timer.seconds,
     start: timer.start,
+    accuracy: score.accuracy,
   };
 }

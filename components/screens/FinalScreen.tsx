@@ -1,9 +1,10 @@
-import RadarChart from "../RadarChart";
-
-import PlayerFace from "../PlayerFace";
 import { MutableRefObject } from "react";
+import { FinalStats } from '../../hooks/useFinalStats';
 import { Expression } from "../../types/Expressions";
 import { Level } from "../../types/Level";
+import PlayerFace from "../PlayerFace";
+import RadarChart from "../RadarChart";
+
 
 
 
@@ -24,13 +25,13 @@ interface Props {
   canvasRightRef: MutableRefObject<HTMLCanvasElement>;
   players: [Expression, Expression];
   faceBoxes: any[];
-  onFinish: () => void;
+  onRestart: () => void;
   level: Level;
   teamName: string;
+  stats: FinalStats;
 }
 
 export default function FinalScreen(props: Props) {
-
   const textGlow = {
     textShadow: "0 0 35px rgb(255, 0, 255)",
   };
@@ -40,20 +41,20 @@ export default function FinalScreen(props: Props) {
   return (
     <div
       style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
-      className="h-screen w-full bg-center bg-cover"
+      className="w-full h-screen bg-center bg-cover"
     >
 
-      <div className="flex flex-row justify-between p-6 ml-2 pt-12 ">
+      <div className="flex flex-row justify-between p-6 pt-12 ml-2 ">
         <h1 className="text-6xl text-white" style={textGlow}>
           Emotion Stats
       </h1>
 
 
         <div className="flex flex-col">
-          <h1 className="text-6xl text-white text-right">
+          <h1 className="text-6xl text-right text-white">
             Team {props.teamName}
           </h1>
-          <h1 className="text-6xl text-white text-right">
+          <h1 className="text-6xl text-right text-white">
             Score
           </h1>
         </div>
@@ -62,14 +63,14 @@ export default function FinalScreen(props: Props) {
 
 
 
-      <div className="flex flex-row mx-auto justify-around">
+      <div className="flex flex-row justify-around mx-auto">
         <div className="w-4/12 dark">
           <RadarChart performance={data.performance} />
         </div>
 
         <div className="w-7/12">
 
-          <div className="w-full h-64 flex flex-row mb-6 frosted">
+          <div className="flex flex-row w-full h-64 mb-6 frosted">
 
             <div>
               <PlayerFace
@@ -83,7 +84,7 @@ export default function FinalScreen(props: Props) {
             </div>
 
 
-            <div className="bg-gray-700 h-full flex flex-col justify-around">
+            <div className="flex flex-col justify-around h-full bg-gray-700">
               <h1>😡</h1>
               <h1>😡</h1>
               <h1>😡</h1>
@@ -92,10 +93,10 @@ export default function FinalScreen(props: Props) {
 
             </div>
 
-            <div className="flex flex-row justify-evenly p-6 w-full items-center">
+            <div className="flex flex-row items-center w-full p-6 justify-evenly">
               <div className="text-center">
 
-                <svg className="mx-auto pb-2" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="pb-2 mx-auto" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
                     <path d="M31.2326 10.91V10.2014C29.0611 9.08704 26.6677 8.43848 24.1876 8.43848C15.6419 8.43848 8.68896 15.3774 8.68896 23.9069C8.68896 32.4359 15.6419 39.3753 24.1876 39.3753C32.7337 39.3753 39.6863 32.4359 39.6863 23.9069C39.6863 21.4317 39.0364 19.0429 37.9199 16.8756H37.2095L35.5976 18.4844C36.3887 20.1342 36.8683 21.959 36.8683 23.9069C36.8683 30.8858 31.1802 36.5628 24.1876 36.5628C17.1951 36.5628 11.507 30.8858 11.507 23.9069C11.507 16.928 17.1951 11.2506 24.1876 11.2506C26.1397 11.2506 27.9677 11.7296 29.6207 12.5192L31.2326 10.91Z" fill="white" />
                     <path d="M24.1874 16.8756C24.5194 16.8756 24.8372 16.9291 25.1571 16.9734L27.4688 14.6663C26.437 14.2997 25.3435 14.0635 24.1874 14.0635C18.7495 14.0635 14.3247 18.4796 14.3247 23.9069C14.3247 29.3341 18.7495 33.7503 24.1874 33.7503C29.6252 33.7503 34.05 29.3341 34.05 23.9069C34.05 22.7529 33.813 21.6616 33.446 20.6318L31.1344 22.939C31.1788 23.2583 31.2324 23.5754 31.2324 23.9069C31.2324 27.7836 28.0716 30.9378 24.1874 30.9378C20.3031 30.9378 17.1427 27.7836 17.1427 23.9069C17.1427 20.0302 20.3031 16.8756 24.1874 16.8756Z" fill="white" />
@@ -109,17 +110,17 @@ export default function FinalScreen(props: Props) {
                   </defs>
                 </svg>
 
-                <h1 className="font-quicksand font-bold text-white">
+                <h1 className="font-bold text-white font-quicksand">
                   Accuracy
               </h1>
 
-                <h1 className="text-5xl pt-6 text-white" style={textGlow}>
+                <h1 className="pt-6 text-5xl text-white" style={textGlow}>
                   93%
               </h1>
               </div>
 
               <div className="text-center">
-                <svg className="mx-auto pb-2" width="48" height="55" viewBox="0 0 48 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="pb-2 mx-auto" width="48" height="55" viewBox="0 0 48 55" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M24 51.3751C29.4559 51.3751 34.6883 49.2078 38.5462 45.3499C42.4041 41.492 44.5714 36.2596 44.5714 30.8037C44.5714 25.3478 42.4041 20.1154 38.5462 16.2575C34.6883 12.3996 29.4559 10.2323 24 10.2323C18.5441 10.2323 13.3117 12.3996 9.4538 16.2575C5.59591 20.1154 3.42857 25.3478 3.42857 30.8037C3.42857 36.2596 5.59591 41.492 9.4538 45.3499C13.3117 49.2078 18.5441 51.3751 24 51.3751ZM24 54.8037C30.3652 54.8037 36.4697 52.2751 40.9706 47.7743C45.4714 43.2734 48 37.1689 48 30.8037C48 24.4385 45.4714 18.334 40.9706 13.8331C36.4697 9.33227 30.3652 6.80371 24 6.80371C17.6348 6.80371 11.5303 9.33227 7.02944 13.8331C2.52856 18.334 0 24.4385 0 30.8037C0 37.1689 2.52856 43.2734 7.02944 47.7743C11.5303 52.2751 17.6348 54.8037 24 54.8037Z" fill="white" />
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M15.4282 1.71429C15.4282 1.25963 15.6088 0.823594 15.9303 0.502103C16.2518 0.180612 16.6879 0 17.1425 0L30.8568 0C31.3114 0 31.7475 0.180612 32.069 0.502103C32.3905 0.823594 32.5711 1.25963 32.5711 1.71429C32.5711 2.16894 32.3905 2.60498 32.069 2.92647C31.7475 3.24796 31.3114 3.42857 30.8568 3.42857H17.1425C16.6879 3.42857 16.2518 3.24796 15.9303 2.92647C15.6088 2.60498 15.4282 2.16894 15.4282 1.71429Z" fill="white" />
                   <path d="M20.5718 3.42822H27.4289V10.2854H20.5718V3.42822Z" fill="white" />
@@ -127,21 +128,21 @@ export default function FinalScreen(props: Props) {
                   <rect x="35.2354" y="30.1279" width="4.25486" height="12.7646" rx="2.12743" transform="rotate(90 35.2354 30.1279)" fill="white" />
                 </svg>
 
-                <h1 className="font-quicksand font-bold text-white">
+                <h1 className="font-bold text-white font-quicksand">
                   Time
               </h1>
 
-                <h1 className="text-5xl pt-6 text-white" style={textGlow}>
+                <h1 className="pt-6 text-5xl text-white" style={textGlow}>
                   21s
               </h1>
               </div>
 
 
               <div className="text-center">
-                <svg className="mx-auto pb-2" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="pb-2 mx-auto" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M48 24C48 24.0091 47.9997 24.0181 47.9996 24.0271C47.9996 24.0291 47.9996 24.031 47.9995 24.033C47.991 30.4313 45.4957 36.4453 40.9705 40.9705C36.4375 45.5035 30.4106 48 24 48C17.5894 48 11.5625 45.5035 7.02938 40.9706C2.49647 36.4375 0 30.4106 0 24C0 17.5894 2.49647 11.5625 7.02938 7.02938C11.5623 2.49647 17.5891 9.53674e-05 23.9995 0H23.9996H23.9997H24C24.3659 9.53674e-05 24.7254 0.142876 24.9943 0.411842L47.5881 23.0056C47.857 23.2746 47.9992 23.6341 47.9993 23.9999H48V24ZM2.8125 24C2.8125 29.6594 5.01638 34.98 9.01819 38.9818C13.02 42.9836 18.3406 45.1875 24 45.1875C29.6594 45.1875 34.98 42.9836 38.9818 38.9818C42.6609 35.3027 44.8188 30.5087 45.1432 25.3617C44.199 25.3058 43.2652 25.1961 42.3454 25.0327C41.808 34.6861 33.7854 42.375 24 42.375C13.868 42.375 5.625 34.132 5.625 24C5.625 14.2146 13.3139 6.192 22.9673 5.65453C22.8039 4.73475 22.6943 3.8009 22.6384 2.85675C17.4914 3.18103 12.6973 5.33897 9.01819 9.01809C5.01638 13.02 2.8125 18.3406 2.8125 24ZM19.3566 22.9872L15.7719 26.4814L20.7258 27.2013C21.1838 27.2678 21.5798 27.5555 21.7846 27.9705L24 32.4593L26.2154 27.9704C26.4203 27.5554 26.8162 27.2677 27.2742 27.2012L32.2281 26.4813L28.6434 22.9871C28.312 22.6641 28.1608 22.1986 28.239 21.7424L28.9388 17.6619C28.7783 17.488 28.6202 17.3124 28.4654 17.1346L24.6544 19.1381C24.4495 19.2458 24.2247 19.2997 24 19.2997C23.7753 19.2997 23.5505 19.2458 23.3456 19.1381L18.9148 16.8086L19.761 21.7424C19.8393 22.1987 19.688 22.6642 19.3566 22.9872ZM31.3943 19.9831L31.136 21.4894L36.2316 26.4562C36.6148 26.8298 36.7528 27.3887 36.5873 27.8978C36.422 28.4069 35.9819 28.778 35.4522 28.8548L28.4103 29.8781L25.261 36.2592C25.0241 36.7392 24.5352 37.0431 24 37.0431C23.4648 37.0431 22.9759 36.7392 22.739 36.2592L19.5897 29.8781L12.5478 28.8548C12.0181 28.778 11.578 28.4069 11.4127 27.8978C11.2472 27.3887 11.3852 26.8298 11.7684 26.4562L16.864 21.4894L15.6611 14.4758C15.5707 13.9482 15.7875 13.4151 16.2205 13.1004C16.4656 12.9224 16.7557 12.8318 17.0472 12.8318C17.271 12.8318 17.4957 12.8852 17.7015 12.9934L24 16.3047L26.7219 14.8737C25.3706 12.8888 24.3331 10.7246 23.6367 8.44218C15.2227 8.63588 8.4375 15.5402 8.4375 24C8.4375 32.5812 15.4188 39.5625 24 39.5625C32.4597 39.5625 39.3641 32.7773 39.5579 24.3633C36.5927 23.4586 33.8259 21.98 31.3943 19.9831ZM25.7294 5.12437C26.4765 9.369 28.5009 13.2771 31.6119 16.3881C34.7229 19.4992 38.631 21.5235 42.8756 22.2707L25.7294 5.12437Z" fill="white" />
                 </svg>
-                <h1 className="font-quicksand font-bold text-white pb-6">
+                <h1 className="pb-6 font-bold text-white font-quicksand">
                   Sticker
               </h1>
 
@@ -158,7 +159,7 @@ export default function FinalScreen(props: Props) {
 
 
           </div>
-          <div className="w-full h-64 flex flex-row frosted">
+          <div className="flex flex-row w-full h-64 frosted">
             <div>
               <PlayerFace
                 canvasRef={props.canvasLeftRef}
@@ -171,7 +172,7 @@ export default function FinalScreen(props: Props) {
             </div>
 
 
-            <div className="bg-gray-700 h-full flex flex-col justify-around">
+            <div className="flex flex-col justify-around h-full bg-gray-700">
               <h1>😡</h1>
               <h1>😡</h1>
               <h1>😡</h1>
@@ -180,10 +181,10 @@ export default function FinalScreen(props: Props) {
 
             </div>
 
-            <div className="flex flex-row justify-evenly w-full p-6 items-center">
+            <div className="flex flex-row items-center w-full p-6 justify-evenly">
               <div className="text-center">
 
-                <svg className="mx-auto pb-2" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="pb-2 mx-auto" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
                     <path d="M31.2326 10.91V10.2014C29.0611 9.08704 26.6677 8.43848 24.1876 8.43848C15.6419 8.43848 8.68896 15.3774 8.68896 23.9069C8.68896 32.4359 15.6419 39.3753 24.1876 39.3753C32.7337 39.3753 39.6863 32.4359 39.6863 23.9069C39.6863 21.4317 39.0364 19.0429 37.9199 16.8756H37.2095L35.5976 18.4844C36.3887 20.1342 36.8683 21.959 36.8683 23.9069C36.8683 30.8858 31.1802 36.5628 24.1876 36.5628C17.1951 36.5628 11.507 30.8858 11.507 23.9069C11.507 16.928 17.1951 11.2506 24.1876 11.2506C26.1397 11.2506 27.9677 11.7296 29.6207 12.5192L31.2326 10.91Z" fill="white" />
                     <path d="M24.1874 16.8756C24.5194 16.8756 24.8372 16.9291 25.1571 16.9734L27.4688 14.6663C26.437 14.2997 25.3435 14.0635 24.1874 14.0635C18.7495 14.0635 14.3247 18.4796 14.3247 23.9069C14.3247 29.3341 18.7495 33.7503 24.1874 33.7503C29.6252 33.7503 34.05 29.3341 34.05 23.9069C34.05 22.7529 33.813 21.6616 33.446 20.6318L31.1344 22.939C31.1788 23.2583 31.2324 23.5754 31.2324 23.9069C31.2324 27.7836 28.0716 30.9378 24.1874 30.9378C20.3031 30.9378 17.1427 27.7836 17.1427 23.9069C17.1427 20.0302 20.3031 16.8756 24.1874 16.8756Z" fill="white" />
@@ -197,39 +198,39 @@ export default function FinalScreen(props: Props) {
                   </defs>
                 </svg>
 
-                <h1 className="font-quicksand font-bold text-white">
+                <h1 className="font-bold text-white font-quicksand">
                   Accuracy
               </h1>
 
-                <h1 className="text-5xl pt-6 text-white" style={textGlow}>
+                <h1 className="pt-6 text-5xl text-white" style={textGlow}>
                   93%
               </h1>
               </div>
 
               <div className="text-center ">
-                <svg className="mx-auto pb-2" width="48" height="55" viewBox="0 0 48 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="pb-2 mx-auto" width="48" height="55" viewBox="0 0 48 55" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M24 51.3751C29.4559 51.3751 34.6883 49.2078 38.5462 45.3499C42.4041 41.492 44.5714 36.2596 44.5714 30.8037C44.5714 25.3478 42.4041 20.1154 38.5462 16.2575C34.6883 12.3996 29.4559 10.2323 24 10.2323C18.5441 10.2323 13.3117 12.3996 9.4538 16.2575C5.59591 20.1154 3.42857 25.3478 3.42857 30.8037C3.42857 36.2596 5.59591 41.492 9.4538 45.3499C13.3117 49.2078 18.5441 51.3751 24 51.3751ZM24 54.8037C30.3652 54.8037 36.4697 52.2751 40.9706 47.7743C45.4714 43.2734 48 37.1689 48 30.8037C48 24.4385 45.4714 18.334 40.9706 13.8331C36.4697 9.33227 30.3652 6.80371 24 6.80371C17.6348 6.80371 11.5303 9.33227 7.02944 13.8331C2.52856 18.334 0 24.4385 0 30.8037C0 37.1689 2.52856 43.2734 7.02944 47.7743C11.5303 52.2751 17.6348 54.8037 24 54.8037Z" fill="white" />
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M15.4282 1.71429C15.4282 1.25963 15.6088 0.823594 15.9303 0.502103C16.2518 0.180612 16.6879 0 17.1425 0L30.8568 0C31.3114 0 31.7475 0.180612 32.069 0.502103C32.3905 0.823594 32.5711 1.25963 32.5711 1.71429C32.5711 2.16894 32.3905 2.60498 32.069 2.92647C31.7475 3.24796 31.3114 3.42857 30.8568 3.42857H17.1425C16.6879 3.42857 16.2518 3.24796 15.9303 2.92647C15.6088 2.60498 15.4282 2.16894 15.4282 1.71429Z" fill="white" />
                   <path d="M20.5718 3.42822H27.4289V10.2854H20.5718V3.42822Z" fill="white" />
                   <rect x="22.4707" y="17.3633" width="3.19114" height="17.0194" rx="1.59557" fill="white" />
                   <rect x="35.2354" y="30.1279" width="4.25486" height="12.7646" rx="2.12743" transform="rotate(90 35.2354 30.1279)" fill="white" />
                 </svg>
-                <h1 className="font-quicksand font-bold text-white">
+                <h1 className="font-bold text-white font-quicksand">
                   Time
               </h1>
 
-                <h1 className="text-5xl pt-6 text-white" style={textGlow}>
+                <h1 className="pt-6 text-5xl text-white" style={textGlow}>
                   21s
               </h1>
               </div>
 
 
               <div className="text-center">
-                <svg className="mx-auto pb-2" width="48" height="55" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="pb-2 mx-auto" width="48" height="55" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M48 24C48 24.0091 47.9997 24.0181 47.9996 24.0271C47.9996 24.0291 47.9996 24.031 47.9995 24.033C47.991 30.4313 45.4957 36.4453 40.9705 40.9705C36.4375 45.5035 30.4106 48 24 48C17.5894 48 11.5625 45.5035 7.02938 40.9706C2.49647 36.4375 0 30.4106 0 24C0 17.5894 2.49647 11.5625 7.02938 7.02938C11.5623 2.49647 17.5891 9.53674e-05 23.9995 0H23.9996H23.9997H24C24.3659 9.53674e-05 24.7254 0.142876 24.9943 0.411842L47.5881 23.0056C47.857 23.2746 47.9992 23.6341 47.9993 23.9999H48V24ZM2.8125 24C2.8125 29.6594 5.01638 34.98 9.01819 38.9818C13.02 42.9836 18.3406 45.1875 24 45.1875C29.6594 45.1875 34.98 42.9836 38.9818 38.9818C42.6609 35.3027 44.8188 30.5087 45.1432 25.3617C44.199 25.3058 43.2652 25.1961 42.3454 25.0327C41.808 34.6861 33.7854 42.375 24 42.375C13.868 42.375 5.625 34.132 5.625 24C5.625 14.2146 13.3139 6.192 22.9673 5.65453C22.8039 4.73475 22.6943 3.8009 22.6384 2.85675C17.4914 3.18103 12.6973 5.33897 9.01819 9.01809C5.01638 13.02 2.8125 18.3406 2.8125 24ZM19.3566 22.9872L15.7719 26.4814L20.7258 27.2013C21.1838 27.2678 21.5798 27.5555 21.7846 27.9705L24 32.4593L26.2154 27.9704C26.4203 27.5554 26.8162 27.2677 27.2742 27.2012L32.2281 26.4813L28.6434 22.9871C28.312 22.6641 28.1608 22.1986 28.239 21.7424L28.9388 17.6619C28.7783 17.488 28.6202 17.3124 28.4654 17.1346L24.6544 19.1381C24.4495 19.2458 24.2247 19.2997 24 19.2997C23.7753 19.2997 23.5505 19.2458 23.3456 19.1381L18.9148 16.8086L19.761 21.7424C19.8393 22.1987 19.688 22.6642 19.3566 22.9872ZM31.3943 19.9831L31.136 21.4894L36.2316 26.4562C36.6148 26.8298 36.7528 27.3887 36.5873 27.8978C36.422 28.4069 35.9819 28.778 35.4522 28.8548L28.4103 29.8781L25.261 36.2592C25.0241 36.7392 24.5352 37.0431 24 37.0431C23.4648 37.0431 22.9759 36.7392 22.739 36.2592L19.5897 29.8781L12.5478 28.8548C12.0181 28.778 11.578 28.4069 11.4127 27.8978C11.2472 27.3887 11.3852 26.8298 11.7684 26.4562L16.864 21.4894L15.6611 14.4758C15.5707 13.9482 15.7875 13.4151 16.2205 13.1004C16.4656 12.9224 16.7557 12.8318 17.0472 12.8318C17.271 12.8318 17.4957 12.8852 17.7015 12.9934L24 16.3047L26.7219 14.8737C25.3706 12.8888 24.3331 10.7246 23.6367 8.44218C15.2227 8.63588 8.4375 15.5402 8.4375 24C8.4375 32.5812 15.4188 39.5625 24 39.5625C32.4597 39.5625 39.3641 32.7773 39.5579 24.3633C36.5927 23.4586 33.8259 21.98 31.3943 19.9831ZM25.7294 5.12437C26.4765 9.369 28.5009 13.2771 31.6119 16.3881C34.7229 19.4992 38.631 21.5235 42.8756 22.2707L25.7294 5.12437Z" fill="white" />
                 </svg>
 
-                <h1 className="font-quicksand font-bold text-white pb-6">
+                <h1 className="pb-6 font-bold text-white font-quicksand">
                   Sticker
               </h1>
 

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Note } from "../types/Level";
 import useExpressionAccuracy from "./useExpressionAccuracy";
+import { AccuracyObject } from "./useFinalStats";
 
 const ROLLING_SUCCESS_EFFECT = 0.01;
 
@@ -98,6 +99,9 @@ export default function useScore(gameTime: number) {
     finishNote,
     bothOnNote,
     rollingSuccessRate,
-    accuracy: accuracy.map((item) => item.accuracy),
+    accuracy: accuracy.map((item) => item.accuracy) as [
+      AccuracyObject,
+      AccuracyObject
+    ],
   };
 }
