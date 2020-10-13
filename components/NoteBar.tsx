@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import { motion } from "framer-motion";
-import { allowedExpressions, emojis, gameConstants } from "../config";
+import { allowedExpressions, gameConstants } from "../config";
 import { NoteState } from "../hooks/useNoteState";
 import { Expression } from "../types/Expressions";
 import { Note } from "../types/Level";
@@ -83,19 +83,19 @@ export default function NoteBar(props: Props) {
           <div className="relative h-4 my-4 bg-black">
             {props.state.intervals.map((interval, i) => {
               const left = interval.start * gameConstants.pixelsPerSecond;
-
               let stopTime = interval.stop;
 
-              if (!stopTime && props.isPast) {
-                stopTime = props.note.duration - interval.start;
-              } else if (!stopTime && props.isCurrent) {
+              if (!stopTime && props.isCurrent) {
                 stopTime =
-                  props.gameTime +
+                  Math.min(props.gameTime +
                   gameConstants.historyDuration -
-                  (props.note.start + interval.start);
+                  props.note.start, props.note.duration);
               }
 
-              const width = stopTime * gameConstants.pixelsPerSecond;
+              console.log(stopTime);
+
+              const width =
+                (stopTime - interval.start) * gameConstants.pixelsPerSecond;
 
               return (
                 <motion.div

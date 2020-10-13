@@ -53,6 +53,7 @@ export default function useNoteState(
       }
 
       const isCorrect = currentNote.expression === expression;
+      const playerDotTime = gameTimeRef.current + gameConstants.historyDuration;
 
       let lastInterval = current.intervals[current.intervals.length - 1];
       let changed = false;
@@ -63,18 +64,13 @@ export default function useNoteState(
         // Currently correct but has no ongoing interval
         if (!lastInterval || lastInterval.stop) {
           // Was this the first interval and we started on/before time?
-          const diff =
-            gameTimeRef.current +
-            gameConstants.historyDuration -
-            currentNote.start;
+          const diff = playerDotTime - currentNote.start;
 
           current.isPerfect = !lastInterval && diff < 0.5;
 
           let start = current.isPerfect
             ? 0
-            : gameTimeRef.current +
-              gameConstants.historyDuration -
-              currentNote.start;
+            : Math.max(playerDotTime - currentNote.start, 0);
 
           if (start < 0) {
             start = 0;
@@ -92,10 +88,11 @@ export default function useNoteState(
         if (lastInterval && !lastInterval.stop) {
           // Stop old interval
           lastInterval = { ...lastInterval };
-          lastInterval.stop =
-            gameTimeRef.current +
-            gameConstants.historyDuration -
-            (currentNote.start + lastInterval.start);
+
+          lastInterval.stop = Math.min(
+            playerDotTime - currentNote.start,
+            currentNote.duration
+          );
 
           current.intervals[current.intervals.length - 1] = lastInterval;
           current.isPerfect = false;
@@ -138,13 +135,10 @@ export default function useNoteState(
         ? [...values[prevIndex].intervals]
         : [];
 
-      if (
-        intervals.length &&
-        !intervals[intervals.length - 1].stop &&
-        lastNoteRef.current
-      ) {
-        intervals[intervals.length - 1].stop =
-          lastNoteRef.current.duration - intervals[intervals.length - 1].start;
+      const lastInterval = intervals[intervals.length - 1];
+
+      if (intervals.length && !lastInterval.stop && lastNoteRef.current) {
+        lastInterval.stop = lastNoteRef.current.duration;
       }
 
       values[prevIndex].intervals = intervals;
@@ -161,10 +155,10 @@ export default function useNoteState(
         );
       }
 
+      lastNoteRef.current = currentNoteRef.current;
+
       return values;
     });
-
-    lastNoteRef.current = currentNoteRef.current;
   }, [currentIndex]);
 
   return noteState;
