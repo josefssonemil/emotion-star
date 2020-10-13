@@ -80,11 +80,11 @@ export default function useScore(gameTime: number): ScoreState {
     // Update score
     let nextScore = 0;
 
-    if (isOnNote[0]) {
+    if (hasNote[0] && isOnNote[0]) {
       nextScore += 1;
     }
 
-    if (isOnNote[1]) {
+    if (hasNote[1] && isOnNote[1]) {
       nextScore += 1;
     }
 
