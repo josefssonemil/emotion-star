@@ -19,7 +19,7 @@ export default function useNoteState(
   noteUpdate: (isOnNote: boolean) => void,
   finishNote: (
     isPerfect: boolean,
-    duration: number,
+    note: Note,
     totalIntervalDuration: number
   ) => void
 ): NoteState[] {
@@ -37,6 +37,7 @@ export default function useNoteState(
   useEffect(() => {
     setNoteState((prevState) => {
       if (!currentNote || !currentNote.expression) {
+        noteUpdate(false);
         return prevState;
       }
 
@@ -115,6 +116,7 @@ export default function useNoteState(
     const prevIndex = currentIndex - 1;
 
     if (prevIndex < 0 || !lastNoteRef.current?.expression) {
+      noteUpdate(false);
       lastNoteRef.current = currentNoteRef.current;
       return;
     }
@@ -122,7 +124,7 @@ export default function useNoteState(
     setNoteState((prevState) => {
       if (!prevState[prevIndex]) {
         if (lastNoteRef.current) {
-          finishNote(false, lastNoteRef.current.duration, 0);
+          finishNote(false, lastNoteRef.current, 0);
         }
 
         noteUpdate(false);
@@ -150,7 +152,7 @@ export default function useNoteState(
 
         finishNote(
           values[prevIndex].isPerfect,
-          lastNoteRef.current.duration,
+          lastNoteRef.current,
           totalIntervalDuration
         );
       }

@@ -92,8 +92,6 @@ export default function NoteBar(props: Props) {
                   props.note.start, props.note.duration);
               }
 
-              console.log(stopTime);
-
               const width =
                 (stopTime - interval.start) * gameConstants.pixelsPerSecond;
 

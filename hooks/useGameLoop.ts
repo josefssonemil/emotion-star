@@ -31,8 +31,8 @@ export default function useGameLoop(
       fieldState[0].currentIndex,
       fieldState[0].currentNote,
       (isOnNote) => score.noteUpdate(0, isOnNote, !!fieldState[0].currentNote),
-      (isPerfect, duration, totalIntervalDuration) =>
-        score.finishNote(0, isPerfect, duration, totalIntervalDuration)
+      (isPerfect, note, totalIntervalDuration) =>
+        score.finishNote(0, isPerfect, note, totalIntervalDuration)
     ),
 
     useNoteState(
@@ -41,8 +41,8 @@ export default function useGameLoop(
       fieldState[1].currentIndex,
       fieldState[1].currentNote,
       (isOnNote) => score.noteUpdate(1, isOnNote, !!fieldState[1].currentNote),
-      (isPerfect, duration, totalIntervalDuration) =>
-        score.finishNote(1, isPerfect, duration, totalIntervalDuration)
+      (isPerfect, note, totalIntervalDuration) =>
+        score.finishNote(1, isPerfect, note, totalIntervalDuration)
     ),
   ];
 

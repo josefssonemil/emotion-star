@@ -1,24 +1,14 @@
 import { useEffect, useRef, useState } from "react";
+import { Note } from "../types/Level";
+import useExpressionAccuracy from "./useExpressionAccuracy";
 
 const ROLLING_SUCCESS_EFFECT = 0.01;
 
-interface ScoreState {
-  value: number;
-  noteUpdate: (player: number, isOnNote: boolean, hasNote: boolean) => void;
-  finishNote: (
-    player: number,
-    isPerfect: boolean,
-    duration: number,
-    totalIntervalDuration: number
-  ) => void;
-  bothOnNote: boolean;
-  rollingSuccessRate: number;
-}
-
-export default function useScore(gameTime: number): ScoreState {
+export default function useScore(gameTime: number) {
   const [value, setValue] = useState(0);
   const [bothOnNote, setBothOnNote] = useState(false);
   const [rollingSuccessRate, setRollingSuccessRate] = useState(1);
+  const accuracy = [useExpressionAccuracy(), useExpressionAccuracy()];
 
   const isOnNoteRef = useRef([false, false]);
   const hasNoteRef = useRef([false, false]);
@@ -31,12 +21,18 @@ export default function useScore(gameTime: number): ScoreState {
   const finishNote = (
     player: number,
     isPerfect: boolean,
-    duration: number,
+    note: Note,
     totalIntervalDuration: number
   ) => {
     if (isPerfect) {
-      setValue((v) => v + duration * 10);
+      setValue((v) => v + note.duration * 10);
     }
+
+    accuracy[player].addNote(
+      note.expression,
+      note.duration,
+      totalIntervalDuration
+    );
   };
 
   useEffect(() => {
@@ -102,5 +98,6 @@ export default function useScore(gameTime: number): ScoreState {
     finishNote,
     bothOnNote,
     rollingSuccessRate,
+    accuracy: accuracy.map((item) => item.accuracy),
   };
 }
