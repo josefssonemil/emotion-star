@@ -6,6 +6,8 @@ let filter, filterType, filterHz;
 
 var audioSource;
 
+let LOWEST, HIGHEST;
+
 // Prepare to receive a value which changes the fiter
 export default function useAudioAPI(
     percentageValue: number,
@@ -28,8 +30,14 @@ export default function useAudioAPI(
 
         // Save default filter settings
 
-        filterType = filter.type;
-        filterHz = filter.frequency.value;
+        filterType = "lowpass";
+        filterHz = 24000;
+
+        filter.type = filterType;
+        filter.frequency.value = filterHz;
+
+        LOWEST = 400;
+        HIGHEST = 1200;
 
 
         audio.addEventListener("canplaythrough", event => {
@@ -38,11 +46,7 @@ export default function useAudioAPI(
             audio.play();
         });
 
-        /*setTimeout(() => {
-            setValue(0.5);
-            setValue(0.2);
 
-        }, 2000);*/
 
         return () => audio.pause();
     }, []);
@@ -57,12 +61,13 @@ export default function useAudioAPI(
             }
 
             else {
+                let scaledPercentageValue = scaleVal(percentageValue);
                 filter.type = "lowpass";
-                filter.frequency.value = filter.frequency.value * percentageValue;
+                filter.frequency.value = scaledPercentageValue;
             }
+
+
         }
-
-
 
 
     }, [percentageValue]);
@@ -71,3 +76,8 @@ export default function useAudioAPI(
 
 }
 
+
+const scaleVal = (value) => {
+    let scaled = ((HIGHEST - LOWEST) * value) + LOWEST;
+    return scaled;
+}
