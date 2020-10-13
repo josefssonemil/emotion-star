@@ -17,7 +17,7 @@ interface Props {
   faceBoxes: any[];
   onFinish: () => void;
   level: Level;
-  teamName: string;
+  teamName: string; 
 }
 
 export default function GameScreen(props: Props) {
