@@ -95,6 +95,8 @@ export default function NoteBar(props: Props) {
               const width =
                 (stopTime - interval.start) * gameConstants.pixelsPerSecond;
 
+                console.log(interval.start, interval.stop)
+
               return (
                 <motion.div
                   key={i}
