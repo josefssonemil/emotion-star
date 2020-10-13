@@ -17,7 +17,7 @@ export default function useAudioAPI(
     useEffect(() => {
 
         // Init audio
-        const audio = new Audio(this.props.audioUrl);
+        const audio = new Audio(audioUrl);
         const context = new AudioContext();
         audioSource = context.createMediaElementSource(audio);
 
@@ -51,21 +51,21 @@ export default function useAudioAPI(
 
         if (filter && loaded && audioSource) {
 
-            if (this.props.percentageValue > 0.8) {
+            if (percentageValue > 0.8) {
                 filter.type = filterType;
                 filter.frequency.value = filterHz;
             }
 
             else {
                 filter.type = "lowpass";
-                filter.frequency.value = filter.frequency.value * this.props.percentageValue;
+                filter.frequency.value = filter.frequency.value * percentageValue;
             }
         }
 
 
 
 
-    }, [this.props.percentageValue]);
+    }, [percentageValue]);
 
     return loaded;
 
