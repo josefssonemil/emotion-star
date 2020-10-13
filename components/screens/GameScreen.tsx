@@ -23,8 +23,7 @@ export default function GameScreen(props: Props) {
   const { notes, duration, audioUrl } = props.level;
   const game = useGameLoop(duration, notes, props.players);
 
-  const audioRef = useRef<HTMLAudioElement>();
-  useAudioAPI(audioRef);
+  //useAudioAPI();
 
   // todo: start first when the audio loaded
   useEffect(() => {
@@ -42,7 +41,6 @@ export default function GameScreen(props: Props) {
   console.log(game.fieldState);
   return (
     <div>
-      <audio src={audioUrl} ref={audioRef} />
 
       <div
         style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
