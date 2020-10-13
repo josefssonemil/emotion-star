@@ -4,7 +4,7 @@ import PlayerFace from "../PlayerFace";
 import { MutableRefObject } from "react";
 import { Expression } from "../../types/Expressions";
 import { Level } from "../../types/Level";
-
+import useActiveExpression from "../../hooks/useActiveExpression";
 
 
 // Todo pass this data from gamescreen
@@ -34,6 +34,11 @@ export default function FinalScreen(props: Props) {
   const textGlow = {
     textShadow: "0 0 35px rgb(255, 0, 255)",
   };
+
+  const activeExpression = [
+    useActiveExpression(this.props.players[0]),
+    useActiveExpression(this.props.players[1]),
+  ];
 
 
 
