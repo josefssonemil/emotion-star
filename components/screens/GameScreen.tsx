@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useRef } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { gameConstants } from "../../config";
 import useAudioAPI from "../../hooks/useAudioAPI";
 import useGameLoop from "../../hooks/useGameLoop";
@@ -8,6 +8,7 @@ import PlayerDot from "../PlayerDot";
 import PlayerFace from "../PlayerFace";
 import PlayerField from "../PlayerField";
 import ProgressBar from "../ProgressBar";
+import useTimer from '../../hooks/useTimer';
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -25,11 +26,16 @@ export default function GameScreen(props: Props) {
 
   const audioLoaded = useAudioAPI(1, audioUrl);
 
+
+
+  const timer = useTimer(duration);
   // todo: start first when the audio loaded
   useEffect(() => {
     if (audioLoaded) {
       game.start();
+      timer.start();
     }
+
   }, [audioLoaded]);
 
   useEffect(() => {
@@ -96,6 +102,10 @@ export default function GameScreen(props: Props) {
               player={2}
               connected={false}
             />
+          </div>
+
+          <div className="text-3xl text-white">
+            Time: {Math.round(timer.seconds)}
           </div>
         </div>
 
