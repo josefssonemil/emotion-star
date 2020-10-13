@@ -3,7 +3,7 @@ import { useMemo, useRef, useState } from "react";
 import FinalScreen from "../components/screens/FinalScreen";
 import GameScreen from "../components/screens/GameScreen";
 import WarmUpScreen from "../components/screens/WarmUpScreen";
-import { exampleLevel } from "../config";
+import { fearlessLevel } from "../config";
 import useCameraSplit from "../hooks/useCameraSplit";
 import useFaceRecognition from "../hooks/useFaceRecognition";
 
@@ -61,7 +61,7 @@ export default function Home() {
           players={players}
           faceBoxes={faceBoxes}
           onFinish={() => setCurrentScreen("final")}
-          level={exampleLevel}
+          level={fearlessLevel}
           teamName={teamName}
         />
       )}
