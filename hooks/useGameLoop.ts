@@ -30,7 +30,7 @@ export default function useGameLoop(
       players[0],
       fieldState[0].currentIndex,
       fieldState[0].currentNote,
-      (isOnNote) => score.noteUpdate(0, isOnNote),
+      (isOnNote) => score.noteUpdate(0, isOnNote, !!fieldState[0].currentNote),
       (isPerfect, duration, totalIntervalDuration) =>
         score.finishNote(0, isPerfect, duration, totalIntervalDuration)
     ),
@@ -40,7 +40,7 @@ export default function useGameLoop(
       players[1],
       fieldState[1].currentIndex,
       fieldState[1].currentNote,
-      (isOnNote) => score.noteUpdate(1, isOnNote),
+      (isOnNote) => score.noteUpdate(1, isOnNote, !!fieldState[1].currentNote),
       (isPerfect, duration, totalIntervalDuration) =>
         score.finishNote(1, isPerfect, duration, totalIntervalDuration)
     ),
@@ -59,6 +59,7 @@ export default function useGameLoop(
     expressionHistory,
     noteState,
     progress,
+    rollingSuccessRate: score.rollingSuccessRate,
     time: timer.seconds,
     start: timer.start,
   };

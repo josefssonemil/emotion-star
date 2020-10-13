@@ -24,7 +24,8 @@ export default function GameScreen(props: Props) {
   const { notes, duration, audioUrl } = props.level;
   const game = useGameLoop(duration, notes, props.players);
 
-  const audioLoaded = useAudioAPI(1, audioUrl);
+  console.log(game.rollingSuccessRate);
+  const audioLoaded = useAudioAPI(game.rollingSuccessRate, audioUrl);
 
 
 
