@@ -1,6 +1,7 @@
 import { MutableRefObject, useEffect } from "react";
 import { gameConstants } from "../../config";
 import useAudioAPI from "../../hooks/useAudioAPI";
+import { AccuracyObject } from "../../hooks/useFinalStats";
 import useGameLoop from "../../hooks/useGameLoop";
 import useTimer from "../../hooks/useTimer";
 import { Expression } from "../../types/Expressions";
@@ -15,7 +16,7 @@ interface Props {
   canvasRightRef: MutableRefObject<HTMLCanvasElement>;
   players: [Expression, Expression];
   faceBoxes: any[];
-  onFinish: () => void;
+  onFinish: (accuracy: [AccuracyObject, AccuracyObject]) => void;
   level: Level;
   teamName: string;
 }
@@ -37,7 +38,7 @@ export default function GameScreen(props: Props) {
 
   useEffect(() => {
     if (game.progress === 1) {
-      props.onFinish();
+      props.onFinish(game.accuracy);
     }
   }, [game.progress, props.onFinish]);
 
