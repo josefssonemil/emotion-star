@@ -23,12 +23,14 @@ export default function GameScreen(props: Props) {
   const { notes, duration, audioUrl } = props.level;
   const game = useGameLoop(duration, notes, props.players);
 
-  //useAudioAPI();
+  const audioLoaded = useAudioAPI(1, audioUrl);
 
   // todo: start first when the audio loaded
   useEffect(() => {
-    game.start();
-  }, []);
+    if (audioLoaded) {
+      game.start();
+    }
+  }, [audioLoaded]);
 
   useEffect(() => {
     if (game.progress === 1) {
