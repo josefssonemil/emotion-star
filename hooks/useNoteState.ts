@@ -15,9 +15,19 @@ export default function useNoteState(
   gameTime: number,
   expression: Expression,
   currentIndex: number,
-  currentNote: Note
+  currentNote: Note,
+  noteUpdate: (isOnNote: boolean) => void,
+  finishNote: (
+    isPerfect: boolean,
+    duration: number,
+    totalIntervalDuration: number
+  ) => void
 ): NoteState[] {
+  const lastNoteRef = useRef<Note>();
   const [noteState, setNoteState] = useState<NoteState[]>([]);
+
+  const currentNoteRef = useRef(currentNote);
+  currentNoteRef.current = currentNote;
 
   // Track reference to game time for easy access
   const gameTimeRef = useRef(gameTime);
@@ -47,6 +57,8 @@ export default function useNoteState(
       let lastInterval = current.intervals[current.intervals.length - 1];
       let changed = false;
 
+      noteUpdate(isCorrect);
+
       if (isCorrect) {
         // Currently correct but has no ongoing interval
         if (!lastInterval || lastInterval.stop) {
@@ -55,6 +67,7 @@ export default function useNoteState(
             gameTimeRef.current +
             gameConstants.historyDuration -
             currentNote.start;
+
           current.isPerfect = !lastInterval && diff < 0.5;
 
           let start = current.isPerfect
@@ -99,6 +112,58 @@ export default function useNoteState(
       return items;
     });
   }, [currentIndex, currentNote, expression]);
+
+  // Finish off previous note
+  useEffect(() => {
+    const prevIndex = currentIndex - 1;
+
+    if (prevIndex < 0 || !lastNoteRef.current.expression) {
+      lastNoteRef.current = currentNoteRef.current;
+      return;
+    }
+
+    setNoteState((prevState) => {
+      if (!prevState[prevIndex]) {
+        if (lastNoteRef.current) {
+          finishNote(false, lastNoteRef.current.duration, 0);
+        }
+
+        return prevState;
+      }
+
+      const values = [...prevState];
+      const intervals = values[prevIndex]
+        ? [...values[prevIndex].intervals]
+        : [];
+
+      if (
+        intervals.length &&
+        !intervals[intervals.length - 1].stop &&
+        lastNoteRef.current
+      ) {
+        intervals[intervals.length - 1].stop =
+          lastNoteRef.current.duration - intervals[intervals.length - 1].start;
+      }
+
+      values[prevIndex].intervals = intervals;
+
+      if (lastNoteRef.current) {
+        const totalIntervalDuration = intervals
+          .map((interval) => interval.stop - interval.start)
+          .reduce((a, b) => a + b, 0);
+
+        finishNote(
+          values[prevIndex].isPerfect,
+          lastNoteRef.current.duration,
+          totalIntervalDuration
+        );
+      }
+
+      return values;
+    });
+
+    lastNoteRef.current = currentNoteRef.current;
+  }, [currentIndex]);
 
   return noteState;
 }

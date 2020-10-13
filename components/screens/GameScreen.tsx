@@ -1,6 +1,5 @@
-import { MutableRefObject, useEffect, useRef } from "react";
+import { MutableRefObject, useEffect } from "react";
 import { gameConstants } from "../../config";
-import useAudioAPI from "../../hooks/useAudioAPI";
 import useGameLoop from "../../hooks/useGameLoop";
 import { Expression } from "../../types/Expressions";
 import { Level } from "../../types/Level";
@@ -38,10 +37,8 @@ export default function GameScreen(props: Props) {
 
   const barPositionLeft =
     gameConstants.historyDuration * gameConstants.pixelsPerSecond;
-  console.log(game.fieldState);
   return (
     <div>
-
       <div
         style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
         className="flex h-screen bg-center bg-cover"
@@ -63,7 +60,7 @@ export default function GameScreen(props: Props) {
 
           <h1
             style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-            className="text-6xl text-white"
+            className="w-32 text-6xl text-right text-white"
           >
             {game.score}
           </h1>

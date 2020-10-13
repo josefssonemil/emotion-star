@@ -3,6 +3,7 @@ import { Note } from "../types/Level";
 import useExpressionHistory from "./useExpressionHistory";
 import useFieldState, { FieldState } from "./useFieldState";
 import useNoteState, { NoteState } from "./useNoteState";
+import useScore from "./useScore";
 import useTimer from "./useTimer";
 
 export default function useGameLoop(
@@ -20,20 +21,28 @@ export default function useGameLoop(
     useFieldState(timer.seconds, notes[1]),
   ];
 
+  const score = useScore(timer.seconds);
+
   // Note state per player
   const noteState: [NoteState[], NoteState[]] = [
     useNoteState(
       timer.seconds,
       players[0],
       fieldState[0].currentIndex,
-      fieldState[0].currentNote
+      fieldState[0].currentNote,
+      (isOnNote) => score.noteUpdate(0, isOnNote),
+      (isPerfect, duration, totalIntervalDuration) =>
+        score.finishNote(0, isPerfect, duration, totalIntervalDuration)
     ),
 
     useNoteState(
       timer.seconds,
       players[1],
       fieldState[1].currentIndex,
-      fieldState[1].currentNote
+      fieldState[1].currentNote,
+      (isOnNote) => score.noteUpdate(1, isOnNote),
+      (isPerfect, duration, totalIntervalDuration) =>
+        score.finishNote(1, isPerfect, duration, totalIntervalDuration)
     ),
   ];
 
@@ -43,12 +52,9 @@ export default function useGameLoop(
     useExpressionHistory(timer.seconds, players[1], finished),
   ];
 
-  // todo...
-  const score = 0;
-
   return {
     finished,
-    score,
+    score: score.value,
     fieldState,
     expressionHistory,
     noteState,

@@ -1,7 +1,6 @@
 import { allowedExpressions, gameConstants } from "../config";
-import { Expression } from "../types/Expressions";
 import { FieldState } from "../hooks/useFieldState";
-import { motion } from "framer-motion";
+import { Expression } from "../types/Expressions";
 
 interface Props {
   expression?: Expression;
@@ -13,6 +12,10 @@ export default function PlayerDot(props: Props) {
   const row = props.expression
     ? allowedExpressions.indexOf(props.expression) + 1
     : 0;
+
+  if (!props.expression) {
+    return <div />;
+  }
 
   const left = gameConstants.historyDuration * gameConstants.pixelsPerSecond;
 
