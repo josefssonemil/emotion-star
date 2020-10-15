@@ -1,6 +1,8 @@
 import { Expression } from "../types/Expressions";
 import { Note } from "../types/Level";
-import useExpressionHistory from "./useExpressionHistory";
+import useExpressionHistory, {
+  ExpressionInterval,
+} from "./useExpressionHistory";
 import useFieldState, { FieldState } from "./useFieldState";
 import useNoteState, { NoteState } from "./useNoteState";
 import useScore from "./useScore";
@@ -47,7 +49,7 @@ export default function useGameLoop(
   ];
 
   // Expression history per player
-  const expressionHistory = [
+  const expressionHistory: [ExpressionInterval[], ExpressionInterval[]] = [
     useExpressionHistory(timer.seconds, players[0], finished),
     useExpressionHistory(timer.seconds, players[1], finished),
   ];

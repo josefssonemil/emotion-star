@@ -6,7 +6,7 @@ import WarmUpScreen from "../components/screens/WarmUpScreen";
 import { fearlessLevel } from "../config";
 import useCameraSplit from "../hooks/useCameraSplit";
 import useFaceRecognition from "../hooks/useFaceRecognition";
-import useFinalStats, { AccuracyObject } from '../hooks/useFinalStats';
+import useFinalStats, { FinalStatsData } from "../hooks/useFinalStats";
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>();
@@ -63,8 +63,8 @@ export default function Home() {
           canvasRightRef={canvasRightRef}
           players={players}
           faceBoxes={faceBoxes}
-          onFinish={(accuracy: [AccuracyObject, AccuracyObject]) => {
-            stats.setData(accuracy);
+          onFinish={(data: FinalStatsData) => {
+            stats.setData(data);
             setCurrentScreen("final");
           }}
           level={fearlessLevel}
@@ -72,19 +72,21 @@ export default function Home() {
         />
       )}
 
-      {currentScreen === "final" && <FinalScreen
-        canvasLeftRef={canvasLeftRef}
-        canvasRightRef={canvasRightRef}
-        players={players}
-        faceBoxes={faceBoxes}
-        stats={stats.results}
-        onRestart={() => {
-          // todo: reset stuff
-          setCurrentScreen("game")
-        }}
-        level={fearlessLevel}
-        teamName={teamName}
-      />}
+      {currentScreen === "final" && (
+        <FinalScreen
+          canvasLeftRef={canvasLeftRef}
+          canvasRightRef={canvasRightRef}
+          players={players}
+          faceBoxes={faceBoxes}
+          stats={stats.results}
+          onRestart={() => {
+            // todo: reset stuff
+            setCurrentScreen("game");
+          }}
+          level={fearlessLevel}
+          teamName={teamName}
+        />
+      )}
     </div>
   );
 }
