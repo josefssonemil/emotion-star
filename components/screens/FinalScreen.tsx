@@ -9,10 +9,9 @@ import RadarChart from "../RadarChart";
 
 
 
-// Todo pass this data from gamescreen
-// also pass all stats data we need
-// And add logic for changing data type (when changing face)
-
+// TODO :
+// * Add indicator for selected emotion 
+// * Add time spent
 
 
 interface Props {
