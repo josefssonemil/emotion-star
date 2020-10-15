@@ -2,11 +2,14 @@ import randomEmoji from "random-emoji";
 import { useMemo, useRef, useState } from "react";
 import FinalScreen from "../components/screens/FinalScreen";
 import GameScreen from "../components/screens/GameScreen";
+import ScoreScreen from "../components/screens/ScoreScreen";
 import WarmUpScreen from "../components/screens/WarmUpScreen";
 import { fearlessLevel } from "../config";
 import useCameraSplit from "../hooks/useCameraSplit";
 import useFaceRecognition from "../hooks/useFaceRecognition";
 import useFinalStats, { FinalStatsData } from "../hooks/useFinalStats";
+
+
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>();
@@ -14,6 +17,7 @@ export default function Home() {
   const canvasRightRef = useRef<HTMLCanvasElement>();
   const { playing } = useCameraSplit(videoRef, canvasLeftRef, canvasRightRef);
   const { loading, players, faceBoxes } = useFaceRecognition(videoRef, playing);
+
 
   const [currentScreen, setCurrentScreen] = useState("warmUp");
 
@@ -25,7 +29,10 @@ export default function Home() {
   const stats = useFinalStats();
 
   return (
-    <div className="w-screen h-screen overflow-hidden font-luckiest">
+    <div 
+      style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
+      className="w-screen h-screen overflow-hidden bg-center bg-cover font-luckiest" 
+    >
       <video
         className="absolute opacity-0 pointer-events-none"
         ref={videoRef}
@@ -40,6 +47,9 @@ export default function Home() {
         </button>
         <button className="mr-4" onClick={() => setCurrentScreen("game")}>
           Game
+        </button>
+        <button className="mr-4" onClick={() => setCurrentScreen("score")}>
+          Score
         </button>
         <button className="mr-4" onClick={() => setCurrentScreen("final")}>
           Final
@@ -65,11 +75,16 @@ export default function Home() {
           faceBoxes={faceBoxes}
           onFinish={(data: FinalStatsData) => {
             stats.setData(data);
-            setCurrentScreen("final");
+            setCurrentScreen("score");
           }}
           level={fearlessLevel}
           teamName={teamName}
         />
+      )}
+      {currentScreen == "score" && (
+        <ScoreScreen 
+          onStart={() => setCurrentScreen("final")} 
+          stats={stats.results}/>
       )}
 
       {currentScreen === "final" && (

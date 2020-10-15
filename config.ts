@@ -1,7 +1,7 @@
 import { Expression } from "./types/Expressions";
 import { Level, Note } from "./types/Level";
-import { fearlessPlayer1 } from "./public/fearless/fearlessPlayer1";
-import { fearlessPlayer2 } from "./public/fearless/fearlessPlayer2";
+import { fearlessPlayer1 } from "./public/songLevels/fearless/fearlessPlayer1";
+import { fearlessPlayer2 } from "./public/songLevels/fearless/fearlessPlayer2";
 
 
 export const allowedExpressions = [
