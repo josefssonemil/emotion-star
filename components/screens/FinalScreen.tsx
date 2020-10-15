@@ -42,11 +42,11 @@ export default function FinalScreen(props: Props) {
 
   const data = {
     performance: {
-      player1: [props.stats.accuracy[0].happy, props.stats.accuracy[0].surprised, props.stats.accuracy[0].angry, props.stats.accuracy[0].sad, props.stats.accuracy[0].neutral],
-      player2: [props.stats.accuracy[1].happy, props.stats.accuracy[1].surprised, props.stats.accuracy[1].angry, props.stats.accuracy[1].sad, props.stats.accuracy[1].neutral],
-      average: [(props.stats.accuracy[0].happy + props.stats.accuracy[1].happy) / 2, (props.stats.accuracy[0].surprised + props.stats.accuracy[1].surprised) / 2,
-      (props.stats.accuracy[0].angry + props.stats.accuracy[1].angry) / 2, (props.stats.accuracy[0].surprised + props.stats.accuracy[1].surprised) / 2,
-      (props.stats.accuracy[0].neutral + props.stats.accuracy[1].neutral) / 2],
+      player1: [props.stats.accuracy[0].happy * 100, props.stats.accuracy[0].surprised * 100, props.stats.accuracy[0].angry * 100, props.stats.accuracy[0].sad * 100, props.stats.accuracy[0].neutral * 100],
+      player2: [props.stats.accuracy[1].happy * 100, props.stats.accuracy[1].surprised * 100, props.stats.accuracy[1].angry * 100, props.stats.accuracy[1].sad * 100, props.stats.accuracy[1].neutral * 100],
+      average: [((props.stats.accuracy[0].happy + props.stats.accuracy[1].happy) / 2) * 100, ((props.stats.accuracy[0].surprised + props.stats.accuracy[1].surprised) / 2) * 100,
+      ((props.stats.accuracy[0].angry + props.stats.accuracy[1].angry) / 2) * 100, ((props.stats.accuracy[0].surprised + props.stats.accuracy[1].surprised) / 2) * 100,
+      ((props.stats.accuracy[0].neutral + props.stats.accuracy[1].neutral) / 2) * 100],
     },
   };
 
