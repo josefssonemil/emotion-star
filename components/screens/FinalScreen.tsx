@@ -32,14 +32,12 @@ export default function FinalScreen(props: Props) {
   };
 
 
-  if (props.players[0] && props.players[0]) {
-    const activeExpression = [
+  const activeExpression = [
+    useActiveExpression(props.players[0]),
+    useActiveExpression(props.players[1]),
+  ];
 
-      useActiveExpression(this.props.players[0]),
-      useActiveExpression(this.props.players[1]),
-    ];
 
-  }
 
   const data = {
     performance: {
@@ -130,7 +128,7 @@ export default function FinalScreen(props: Props) {
               </h1>
 
                 <h1 className="pt-6 text-5xl text-white" style={textGlow}>
-                  93%
+                  {props.stats.accuracy[0][activeExpression[0]]}%
               </h1>
               </div>
 
@@ -218,7 +216,7 @@ export default function FinalScreen(props: Props) {
               </h1>
 
                 <h1 className="pt-6 text-5xl text-white" style={textGlow}>
-                  93%
+                  {props.stats.accuracy[1][activeExpression[1]]}%
               </h1>
               </div>
 
