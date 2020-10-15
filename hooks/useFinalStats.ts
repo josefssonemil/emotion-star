@@ -14,11 +14,13 @@ export interface TimePerExpressionObject {}
 export interface FinalStatsData {
   accuracy: [AccuracyObject, AccuracyObject];
   expressionHistory: [ExpressionInterval[], ExpressionInterval[]];
+  score: number
 }
 
 export interface FinalStats {
   accuracy: [AccuracyObject, AccuracyObject];
   timePerExpression: [TimePerExpressionObject, TimePerExpressionObject];
+  score: number
 }
 
 const defaults = { happy: 0, angry: 0, surprised: 0, sad: 0, neutral: 0 };
@@ -37,9 +39,11 @@ export default function useFinalStats() {
     },
     { ...defaults },
   ]);
+  const [score, setScore] = useState(0)
 
   const setData = (data: FinalStatsData) => {
     setAccuracy(data.accuracy);
+    setScore(data.score);
 
     calculateTimePerExpression(0, data.expressionHistory[0]);
     calculateTimePerExpression(1, data.expressionHistory[1]);
@@ -60,7 +64,7 @@ export default function useFinalStats() {
     });
   };
 
-  const results: FinalStats = { accuracy, timePerExpression };
+  const results: FinalStats = { accuracy, timePerExpression, score };
 
   return { results, setData };
 }

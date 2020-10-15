@@ -41,6 +41,7 @@ export default function GameScreen(props: Props) {
       props.onFinish({
         accuracy: game.accuracy,
         expressionHistory: game.expressionHistory,
+        score: game.score
       });
     }
   }, [game.progress, props.onFinish]);
