@@ -22,13 +22,12 @@ export default function useTimer(maxCount: number) {
 
     if (isActive && seconds <= maxCount) {
       interval = setTimeout(() => {
-        setSeconds((seconds) => {
-          const diff = startTimeRef.current
-            ? new Date().getTime() - startTimeRef.current
-            : 0;
-          const result = diff / 1000;
-          return result >= maxCount ? maxCount : result;
-        });
+        const diff = startTimeRef.current
+          ? new Date().getTime() - startTimeRef.current
+          : 0;
+        const result = diff / 1000;
+        const time = result >= maxCount ? maxCount : result;
+        setSeconds(time);
       }, 100);
     }
 

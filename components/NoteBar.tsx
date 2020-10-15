@@ -86,16 +86,16 @@ export default function NoteBar(props: Props) {
               let stopTime = interval.stop;
 
               if (!stopTime && props.isCurrent) {
-                stopTime =
-                  Math.min(props.gameTime +
-                  gameConstants.historyDuration -
-                  props.note.start, props.note.duration);
+                stopTime = Math.min(
+                  props.gameTime +
+                    gameConstants.historyDuration -
+                    props.note.start,
+                  props.note.duration
+                );
               }
 
               const width =
                 (stopTime - interval.start) * gameConstants.pixelsPerSecond;
-
-                console.log(interval.start, interval.stop)
 
               return (
                 <motion.div
