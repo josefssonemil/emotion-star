@@ -16,6 +16,8 @@ interface Props {
 export default function PlayerField(props: Props) {
   const x = useMotionValue(0);
 
+  console.log(-props.duration * gameConstants.pixelsPerSecond);
+
   useEffect(() => {
     const controls = animate(
       x,
