@@ -12,13 +12,7 @@ import RadarChart from "../RadarChart";
 // Todo pass this data from gamescreen
 // also pass all stats data we need
 // And add logic for changing data type (when changing face)
-const data = {
-  performance: {
-    player1: [70, 50, 70, 80, 50],
-    player2: [30, 50, 40, 50, 80],
-    average: [60, 60, 60, 60, 60],
-  },
-};
+
 
 
 interface Props {
@@ -37,10 +31,23 @@ export default function FinalScreen(props: Props) {
     textShadow: "0 0 35px rgb(255, 0, 255)",
   };
 
+
   const activeExpression = [
-    useActiveExpression(this.props.players[0]),
-    useActiveExpression(this.props.players[1]),
+    useActiveExpression(props.players[0]),
+    useActiveExpression(props.players[1]),
   ];
+
+
+
+  const data = {
+    performance: {
+      player1: [props.stats.accuracy[0].happy, props.stats.accuracy[0].surprised, props.stats.accuracy[0].angry, props.stats.accuracy[0].sad, props.stats.accuracy[0].neutral],
+      player2: [props.stats.accuracy[1].happy, props.stats.accuracy[1].surprised, props.stats.accuracy[1].angry, props.stats.accuracy[1].sad, props.stats.accuracy[1].neutral],
+      average: [(props.stats.accuracy[0].happy + props.stats.accuracy[1].happy) / 2, (props.stats.accuracy[0].surprised + props.stats.accuracy[1].surprised) / 2,
+      (props.stats.accuracy[0].angry + props.stats.accuracy[1].angry) / 2, (props.stats.accuracy[0].surprised + props.stats.accuracy[1].surprised) / 2,
+      (props.stats.accuracy[0].neutral + props.stats.accuracy[1].neutral) / 2],
+    },
+  };
 
 
 
@@ -121,7 +128,7 @@ export default function FinalScreen(props: Props) {
               </h1>
 
                 <h1 className="pt-6 text-5xl text-white" style={textGlow}>
-                  93%
+                  {props.stats.accuracy[0][activeExpression[0]]}%
               </h1>
               </div>
 
@@ -209,7 +216,7 @@ export default function FinalScreen(props: Props) {
               </h1>
 
                 <h1 className="pt-6 text-5xl text-white" style={textGlow}>
-                  93%
+                  {props.stats.accuracy[1][activeExpression[1]]}%
               </h1>
               </div>
 

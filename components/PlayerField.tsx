@@ -9,6 +9,7 @@ interface Props {
   noteState: NoteState[];
   gameTime: number;
   player: number;
+  duration: number
 }
 
 export default function PlayerField(props: Props) {
@@ -20,8 +21,9 @@ export default function PlayerField(props: Props) {
       animate={{ x: offset }}
       transition={{
         ease: "linear",
+        duration: .1,
       }}
-      style={{ width: gameConstants.pixelsPerSecond * 60 }}
+      style={{ width: gameConstants.pixelsPerSecond * props.duration }}
     >
       <div className="grid h-full grid-rows-5">
         {props.fieldState.notes.map((note, i) => {
