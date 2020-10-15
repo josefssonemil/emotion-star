@@ -20,7 +20,7 @@ export default function useTimer(maxCount: number) {
     if (isActive && seconds <= maxCount) {
       interval = setTimeout(() => {
         setSeconds((seconds) => {
-          const result = seconds + 0.1;
+          const result = seconds + .1;
           return result >= maxCount ? maxCount : result;
         });
       }, 100);

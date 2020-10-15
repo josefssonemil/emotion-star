@@ -1,5 +1,5 @@
 import { MutableRefObject, useEffect } from "react";
-import { gameConstants } from "../../config";
+import { gameConstants, fearlessLevel } from "../../config";
 import useAudioAPI from "../../hooks/useAudioAPI";
 import { AccuracyObject } from "../../hooks/useFinalStats";
 import useGameLoop from "../../hooks/useGameLoop";
@@ -121,6 +121,7 @@ export default function GameScreen(props: Props) {
               fieldState={game.fieldState[0]}
               noteState={game.noteState[0]}
               gameTime={game.time}
+              duration={fearlessLevel.duration}
             />
 
             <PlayerDot
@@ -136,6 +137,7 @@ export default function GameScreen(props: Props) {
               fieldState={game.fieldState[1]}
               noteState={game.noteState[1]}
               gameTime={game.time}
+              duration={fearlessLevel.duration}
             />
             <PlayerDot
               player={2}

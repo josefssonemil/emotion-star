@@ -389,12 +389,129 @@ export const fearlessPlayer1: Note[] = [
   {
     duration: 0.35,
   },
+  // 46
+  {
+    expression: "neutral",
+    duration: 0.6,
+  },
+  {
+    duration: 0.35,
+  },
+  // 47
+  {
+    expression: "angry",
+    duration: 1.0,
+  },
+  {
+    duration: 0.35,
+  },
+  // 48
+  {
+    expression: "happy",
+    duration: 0.8,
+  },
+  {
+    duration: 0.35,
+  },
+  // 49
+  {
+    expression: "angry",
+    duration: 1.2,
+  },
+  {
+    duration: 0.35,
+  },
+  // 50
+  {
+    expression: "happy",
+    duration: 1.3,
+  },
+  {
+    duration: 0.35,
+  },
+  // 51
+  {
+    expression: "angry",
+    duration: 1.0,
+  },
+  {
+    duration: 0.35,
+  },
+  // 52
+  {
+    expression: "sad",
+    duration: 1.1,
+  },
+  {
+    duration: 0.35,
+  },
+  // 53
+  {
+    expression: "angry",
+    duration: 1.0,
+  },
+  {
+    duration: 0.35,
+  },
+  // 54
+  {
+    expression: "surprised",
+    duration: 0.6,
+  },
+  {
+    duration: 0.35,
+  },
+  // 55
+  {
+    expression: "sad",
+    duration: 1.2,
+  },
+  {
+    duration: 0.35,
+  },
+  // 56
+  {
+    expression: "surprised",
+    duration: 1.0,
+  },
+  {
+    duration: 0.35,
+  },
+  // 57
+  {
+    expression: "neutral",
+    duration: 1.5,
+  },
+  {
+    duration: 0.35,
+  },
+  // 58
+  {
+    expression: "happy",
+    duration: 0.8,
+  },
+  {
+    duration: 0.35,
+  },
+  // 59
+  {
+    expression: "angry",
+    duration: 1.5,
+  },
+  {
+    duration: 0.35,
+  },
+  // 60
+  {
+    expression: "sad",
+    duration: 1.3,
+  },
 ];
 export const fearlessPlayer2: Note[] = [];
 
 export const fearlessLevel: Level = {
   audioUrl: "/sound/fearless.mp3",
-  duration: 90,
+  duration: 107,
   notes: [fearlessPlayer1, fearlessPlayer2],
 };
 
