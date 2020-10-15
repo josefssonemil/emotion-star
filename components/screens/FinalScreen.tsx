@@ -9,10 +9,9 @@ import RadarChart from "../RadarChart";
 
 
 
-// Todo pass this data from gamescreen
-// also pass all stats data we need
-// And add logic for changing data type (when changing face)
-
+// TODO :
+// * Add indicator for selected emotion 
+// * Add time spent
 
 
 interface Props {
@@ -175,11 +174,11 @@ export default function FinalScreen(props: Props) {
           <div className="flex flex-row w-full h-64 frosted">
             <div>
               <PlayerFace
-                canvasRef={props.canvasLeftRef}
-                expression={props.players[0]}
-                faceBox={props.faceBoxes[0]}
+                canvasRef={props.canvasRightRef}
+                expression={props.players[1]}
+                faceBox={props.faceBoxes[1]}
                 constrainTo="height"
-                player={1}
+                player={2}
                 connected={false}
               />
             </div>
