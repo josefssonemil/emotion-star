@@ -45,7 +45,9 @@ export default function FinalScreen(props: Props) {
     performance: {
       player1: [props.stats.accuracy[0].happy, props.stats.accuracy[0].surprised, props.stats.accuracy[0].angry, props.stats.accuracy[0].sad, props.stats.accuracy[0].neutral],
       player2: [props.stats.accuracy[1].happy, props.stats.accuracy[1].surprised, props.stats.accuracy[1].angry, props.stats.accuracy[1].sad, props.stats.accuracy[1].neutral],
-      average: [60, 60, 60, 60, 60],
+      average: [(props.stats.accuracy[0].happy + props.stats.accuracy[1].happy) / 2, (props.stats.accuracy[0].surprised + props.stats.accuracy[1].surprised) / 2,
+      (props.stats.accuracy[0].angry + props.stats.accuracy[1].angry) / 2, (props.stats.accuracy[0].surprised + props.stats.accuracy[1].surprised) / 2,
+      (props.stats.accuracy[0].neutral + props.stats.accuracy[1].neutral) / 2],
     },
   };
 
