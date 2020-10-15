@@ -6,6 +6,7 @@ import { Level } from "../../types/Level";
 import PlayerFace from "../PlayerFace";
 import RadarChart from "../RadarChart";
 import EmojiProgress from '../EmojiProgress';
+import FinalScreenEmoji from "../FinalScreenEmoji";
 
 
 
@@ -97,13 +98,26 @@ export default function FinalScreen(props: Props) {
             </div>
 
 
-            <div className="flex flex-col justify-around h-full bg-gray-700">
-              <EmojiProgress emoji="happy" />
-              <EmojiProgress emoji="sad" />
-              <EmojiProgress emoji="angry" />
-              <EmojiProgress emoji="surprised" />
-              <EmojiProgress emoji="neutral" />
+            <div className="flex flex-col justify-around h-full ">
+              <FinalScreenEmoji emoji="happy"
+                progress={props.players[0] === 'happy' ? activeExpression[0].timer.seconds : 0}
+                completed={activeExpression[0].selectedExpression == 'happy'} />
 
+              <FinalScreenEmoji emoji="sad"
+                progress={props.players[0] === 'sad' ? activeExpression[0].timer.seconds : 0}
+                completed={activeExpression[0].selectedExpression == 'sad'} />
+
+              <FinalScreenEmoji emoji="surprised"
+                progress={props.players[0] === 'surprised' ? activeExpression[0].timer.seconds : 0}
+                completed={activeExpression[0].selectedExpression == 'surprised'} />
+
+              <FinalScreenEmoji emoji="angry"
+                progress={props.players[0] === 'angry' ? activeExpression[0].timer.seconds : 0}
+                completed={activeExpression[0].selectedExpression == 'angry'} />
+
+              <FinalScreenEmoji emoji="neutral"
+                progress={props.players[0] === 'neutral' ? activeExpression[0].timer.seconds : 0}
+                completed={activeExpression[0].selectedExpression == 'neutral'} />
 
             </div>
 
@@ -129,7 +143,7 @@ export default function FinalScreen(props: Props) {
               </h1>
 
                 <h1 className="pt-6 text-5xl text-white" style={textGlow}>
-                  {Math.round((props.stats.accuracy[0][activeExpression[0]])) * 100}%
+                  {Math.round((props.stats.accuracy[0][activeExpression[0].selectedExpression])) * 100}%
               </h1>
               </div>
 
@@ -147,7 +161,7 @@ export default function FinalScreen(props: Props) {
               </h1>
 
                 <h1 className="pt-6 text-5xl text-white" style={textGlow}>
-                  21s
+                  {props.stats.timePerExpression[0][activeExpression[0].selectedExpression]}s
               </h1>
               </div>
 
@@ -186,14 +200,28 @@ export default function FinalScreen(props: Props) {
             </div>
 
 
-            <div className="flex flex-col justify-around h-full bg-gray-700">
-              <EmojiProgress emoji="happy" />
-              <EmojiProgress emoji="sad" />
-              <EmojiProgress emoji="angry" />
-              <EmojiProgress emoji="surprised" />
-              <EmojiProgress emoji="neutral" />
+            <div className="flex flex-col justify-around h-full">
 
 
+              <FinalScreenEmoji emoji="happy"
+                progress={activeExpression[1].selectedExpression == 'happy' ? activeExpression[1].timer.seconds : 0}
+                completed={activeExpression[1].selectedExpression == 'happy'} />
+
+              <FinalScreenEmoji emoji="sad"
+                progress={activeExpression[1].selectedExpression == 'sad' ? activeExpression[1].timer.seconds : 0}
+                completed={activeExpression[1].selectedExpression == 'sad'} />
+
+              <FinalScreenEmoji emoji="surprised"
+                progress={activeExpression[1].selectedExpression == 'surprised' ? activeExpression[1].timer.seconds : 0}
+                completed={activeExpression[1].selectedExpression == 'surprised'} />
+
+              <FinalScreenEmoji emoji="angry"
+                progress={activeExpression[1].selectedExpression == 'angry' ? activeExpression[1].timer.seconds : 0}
+                completed={activeExpression[1].selectedExpression == 'angry'} />
+
+              <FinalScreenEmoji emoji="neutral"
+                progress={activeExpression[1].selectedExpression == 'neutral' ? activeExpression[1].timer.seconds : 0}
+                completed={activeExpression[1].selectedExpression == 'neutral'} />
 
 
             </div>
@@ -220,7 +248,7 @@ export default function FinalScreen(props: Props) {
               </h1>
 
                 <h1 className="pt-6 text-5xl text-white" style={textGlow}>
-                  {Math.round((props.stats.accuracy[1][activeExpression[1]])) * 100}%
+                  {Math.round((props.stats.accuracy[1][activeExpression[1].selectedExpression])) * 100}%
               </h1>
               </div>
 
@@ -237,7 +265,7 @@ export default function FinalScreen(props: Props) {
               </h1>
 
                 <h1 className="pt-6 text-5xl text-white" style={textGlow}>
-                  21s
+                  {props.stats.timePerExpression[1][activeExpression[1].selectedExpression]}s
               </h1>
               </div>
 

@@ -5,36 +5,37 @@ import { useState } from 'react';
 
 export default function useActiveExpression(expression: Expression) {
 
-    const maxCount = 2;
+    const maxCount = 5;
     const timer = useTimer(maxCount);
     const [currentExpression, setCurrentExpression] = useState(expression);
     const [selectedExpression, setSelectedExpression] = useState(expression);
 
     useEffect(() => {
-        if (expression !== selectedExpression && timer.seconds == 0) {
-            setCurrentExpression(expression);
+        if (expression !== currentExpression && timer.seconds == 0) {
+            setSelectedExpression(expression);
             timer.start();
             console.log("starting timer");
         }
-    }, [expression, selectedExpression]);
+    }, [expression, currentExpression]);
 
     useEffect(() => {
-        if (currentExpression !== expression && timer.seconds > 0) {
+        if (selectedExpression !== expression && timer.seconds > 0) {
             timer.reset();
-            console.log("stopping timer");
+            console.log("face changed during timer, stopping timer");
         }
-    }, [currentExpression, expression]);
+    }, [selectedExpression, expression]);
 
     useEffect(() => {
         if (timer.seconds >= maxCount) {
-            setCurrentExpression(null);
-            setSelectedExpression(currentExpression);
-            console.log("expression changed! stopping timer");
+
+
+            console.log(selectedExpression);
+            console.log("expression change complete! stopping timer");
             timer.reset();
         }
     }, [timer.seconds, currentExpression]);
 
-    return selectedExpression;
+    return { selectedExpression, timer };
 }
 
 
