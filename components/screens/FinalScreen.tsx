@@ -175,11 +175,11 @@ export default function FinalScreen(props: Props) {
           <div className="flex flex-row w-full h-64 frosted">
             <div>
               <PlayerFace
-                canvasRef={props.canvasLeftRef}
-                expression={props.players[0]}
-                faceBox={props.faceBoxes[0]}
+                canvasRef={props.canvasRightRef}
+                expression={props.players[1]}
+                faceBox={props.faceBoxes[1]}
                 constrainTo="height"
-                player={1}
+                player={2}
                 connected={false}
               />
             </div>

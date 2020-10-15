@@ -5,44 +5,37 @@ import { useState } from 'react';
 
 export default function useActiveExpression(expression: Expression) {
 
-    const maxCount = 3;
+    const maxCount = 2;
     const timer = useTimer(maxCount);
-    const [faceDone, setFaceDone] = useState(false);
-
-    const [firstExpression, setFirstExpression] = useState(expression);
-
-    const [currentExpression, setCurrentExpression] = useState(firstExpression);
-
+    const [currentExpression, setCurrentExpression] = useState(expression);
+    const [selectedExpression, setSelectedExpression] = useState(expression);
 
     useEffect(() => {
-        setCurrentExpression(expression);
-    }, [])
-
-
-    useEffect(() => {
-
-
-
-
-        return () => {
-
+        if (expression !== selectedExpression && timer.seconds == 0) {
+            setCurrentExpression(expression);
+            timer.start();
+            console.log("starting timer");
         }
-    }, [expression])
+    }, [expression, selectedExpression]);
 
-    return expression;
+    useEffect(() => {
+        if (currentExpression !== expression && timer.seconds > 0) {
+            timer.reset();
+            console.log("stopping timer");
+        }
+    }, [currentExpression, expression]);
+
+    useEffect(() => {
+        if (timer.seconds >= maxCount) {
+            setCurrentExpression(null);
+            setSelectedExpression(currentExpression);
+            console.log("expression changed! stopping timer");
+            timer.reset();
+        }
+    }, [timer.seconds, currentExpression]);
+
+    return selectedExpression;
 }
 
 
 
-/*
-Default state: current expression
-
-if new expression detected {
-    start timer
-        om nytt expression kvar under varje tick -> fortsätt
-            om nytt expression kvar efter tid -> return nytt expression
-        om nytt expression borta -> cancel
-            -> return gammalt expression
-}
-
-*/
