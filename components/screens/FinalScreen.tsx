@@ -5,6 +5,7 @@ import { Expression } from "../../types/Expressions";
 import { Level } from "../../types/Level";
 import PlayerFace from "../PlayerFace";
 import RadarChart from "../RadarChart";
+import EmojiProgress from '../EmojiProgress';
 
 
 
@@ -97,11 +98,12 @@ export default function FinalScreen(props: Props) {
 
 
             <div className="flex flex-col justify-around h-full bg-gray-700">
-              <h1>😡</h1>
-              <h1>😡</h1>
-              <h1>😡</h1>
-              <h1>😡</h1>
-              <h1>😡</h1>
+              <EmojiProgress emoji="happy" />
+              <EmojiProgress emoji="sad" />
+              <EmojiProgress emoji="angry" />
+              <EmojiProgress emoji="surprised" />
+              <EmojiProgress emoji="neutral" />
+
 
             </div>
 
@@ -127,7 +129,7 @@ export default function FinalScreen(props: Props) {
               </h1>
 
                 <h1 className="pt-6 text-5xl text-white" style={textGlow}>
-                  {props.stats.accuracy[0][activeExpression[0]]}%
+                  {Math.round((props.stats.accuracy[0][activeExpression[0]])) * 100}%
               </h1>
               </div>
 
@@ -185,11 +187,14 @@ export default function FinalScreen(props: Props) {
 
 
             <div className="flex flex-col justify-around h-full bg-gray-700">
-              <h1>😡</h1>
-              <h1>😡</h1>
-              <h1>😡</h1>
-              <h1>😡</h1>
-              <h1>😡</h1>
+              <EmojiProgress emoji="happy" />
+              <EmojiProgress emoji="sad" />
+              <EmojiProgress emoji="angry" />
+              <EmojiProgress emoji="surprised" />
+              <EmojiProgress emoji="neutral" />
+
+
+
 
             </div>
 
@@ -215,7 +220,7 @@ export default function FinalScreen(props: Props) {
               </h1>
 
                 <h1 className="pt-6 text-5xl text-white" style={textGlow}>
-                  {props.stats.accuracy[1][activeExpression[1]]}%
+                  {Math.round((props.stats.accuracy[1][activeExpression[1]])) * 100}%
               </h1>
               </div>
 
