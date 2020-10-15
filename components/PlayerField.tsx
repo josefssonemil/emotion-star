@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { animate, motion, useMotionValue } from "framer-motion";
+import { useEffect } from "react";
 import { gameConstants } from "../config";
 import { FieldState } from "../hooks/useFieldState";
 import { NoteState } from "../hooks/useNoteState";
@@ -9,21 +10,34 @@ interface Props {
   noteState: NoteState[];
   gameTime: number;
   player: number;
-  duration: number
+  duration: number;
 }
 
 export default function PlayerField(props: Props) {
-  const offset = -props.gameTime * gameConstants.pixelsPerSecond;
+  const x = useMotionValue(0);
+
+  console.log(-props.duration * gameConstants.pixelsPerSecond);
+
+  useEffect(() => {
+    const controls = animate(
+      x,
+      -props.duration * gameConstants.pixelsPerSecond,
+      {
+        type: "tween",
+        ease: "linear",
+        duration: props.duration,
+      }
+    );
+
+    return controls.stop;
+  }, []);
+
+  const offset = x.get();
 
   return (
     <motion.div
       className="h-full"
-      animate={{ x: offset }}
-      transition={{
-        ease: "linear",
-        duration: .1,
-      }}
-      style={{ width: gameConstants.pixelsPerSecond * props.duration }}
+      style={{ x, width: gameConstants.pixelsPerSecond * props.duration }}
     >
       <div className="grid h-full grid-rows-5">
         {props.fieldState.notes.map((note, i) => {
