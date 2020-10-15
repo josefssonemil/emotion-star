@@ -45,23 +45,8 @@ export default function useFinalStats() {
     calculateTimePerExpression(1, data.expressionHistory[1]);
   };
 
-  const calculateTimePerExpression = (
-    index: number,
-    history: ExpressionInterval[]
-  ) => {
+  const calculateTimePerExpression = (index, history) => {
     const result: TimePerExpressionObject = {};
-
-    history.forEach((item) => {
-      if (!result[item.expression]) {
-        result[item.expression] = 0;
-      }
-
-      if (item.stopTime) {
-        result[item.expression] += item.stopTime - item.startTime;
-      }
-    });
-
-    console.log(result);
 
     setTimePerExpression((prevState) => {
       const values = [...prevState] as [
