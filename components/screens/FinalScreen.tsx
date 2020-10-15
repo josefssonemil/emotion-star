@@ -50,26 +50,24 @@ export default function FinalScreen(props: Props) {
     },
   };
 
-
-
   return (
     <div
       style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
       className="w-full h-screen bg-center bg-cover"
     >
 
-      <div className="flex flex-row justify-between p-6 pt-12 ml-2 ">
+      <div className="flex flex-row justify-between p-6 pt-12 mx-6 ">
         <h1 className="text-6xl text-white" style={textGlow}>
           Emotion Stats
-      </h1>
+        </h1>
 
 
         <div className="flex flex-col">
-          <h1 className="text-6xl text-right text-white">
-            Team {props.teamName}
+          <h1 className="text-4xl text-right text-white">
+            Team: {props.teamName}
           </h1>
-          <h1 className="text-6xl text-right text-white">
-            Score
+          <h1 className="text-4xl text-right text-white">
+            Score: {props.stats.score}
           </h1>
         </div>
 
@@ -143,7 +141,7 @@ export default function FinalScreen(props: Props) {
               </h1>
 
                 <h1 className="pt-6 text-5xl text-white" style={textGlow}>
-                  {Math.round((props.stats.accuracy[0][activeExpression[0].selectedExpression])) * 100}%
+                  {Math.round((props.stats.accuracy[0]*[activeExpression[0].selectedExpression])) * 100}%
               </h1>
               </div>
 

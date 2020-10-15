@@ -177,17 +177,6 @@ export default function WarmUpScreen(props: Props) {
           />
         </div>
       </motion.div>
-
-      <h1 className="col-span-2 col-start-10 row-span-1 row-start-1 text-white">
-        {"seconds:" +
-          timer.seconds +
-          ", connected: " +
-          connected +
-          ", warmup:" +
-          warmup +
-          ", idle:" +
-          idle}
-      </h1>
     </div>
   );
 }

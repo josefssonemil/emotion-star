@@ -124,7 +124,7 @@ export default function RadarChart(props) {
     <div
       ref={ref}
       style={{ width, height: "100%" }}
-      className="flex self-center relative"
+      className="relative flex self-center"
     >
       <div
         style={{
@@ -132,7 +132,7 @@ export default function RadarChart(props) {
           top: 0,
           left: "50%",
         }}
-        className="text-5xl -ml-6"
+        className="-ml-6 text-5xl"
       >
         😁
       </div>
@@ -192,7 +192,7 @@ export default function RadarChart(props) {
           paddingTop: "62px",
           paddingBottom: "48px",
         }}
-        className="absolute inset-0 flex justify-center items-center "
+        className="absolute inset-0 flex items-center justify-center "
       >
         <Circle size={100} />
       </div>
@@ -203,7 +203,7 @@ export default function RadarChart(props) {
           paddingTop: "62px",
           paddingBottom: "48px",
         }}
-        className="absolute inset-0 flex justify-center items-center"
+        className="absolute inset-0 flex items-center justify-center"
       >
         <Circle size={75} />
       </div>
@@ -214,7 +214,7 @@ export default function RadarChart(props) {
           paddingTop: "62px",
           paddingBottom: "48px",
         }}
-        className="absolute inset-0 flex justify-center items-center"
+        className="absolute inset-0 flex items-center justify-center"
       >
         <Circle size={50} />
       </div>
@@ -225,7 +225,7 @@ export default function RadarChart(props) {
           paddingTop: "62px",
           paddingBottom: "48px",
         }}
-        className="absolute inset-0 flex justify-center items-center"
+        className="absolute inset-0 flex items-center justify-center"
       >
         <Circle size={25} />
       </div>
@@ -293,24 +293,24 @@ const Circle = (props) => {
   );
 };
 /*
-<div className="flex w-56 h-56 self-center relative">
-      <div className="absolute top-0 inset-x-0 flex justify-center">
-        <div className="text-3xl flex">😁</div>
+<div className="relative flex self-center w-56 h-56">
+      <div className="absolute inset-x-0 top-0 flex justify-center">
+        <div className="flex text-3xl">😁</div>
       </div>
       <div className="absolute inset-0 flex content-center">
-        <div className="flex self-center justify-center space-x-40 w-full h-24">
+        <div className="flex self-center justify-center w-full h-24 space-x-40">
           <div className="text-3xl">😮</div>
           <div className="text-3xl">😡</div>
         </div>
       </div>
-      <div className="absolute bottom-0 inset-x-0 flex justify-center space-x-20">
-        <div className="text-3xl flex">😥</div>
-        <div className="text-3xl flex">😐</div>
+      <div className="absolute inset-x-0 bottom-0 flex justify-center space-x-20">
+        <div className="flex text-3xl">😥</div>
+        <div className="flex text-3xl">😐</div>
       </div>
-      <div className="h-48 w-48 p-4 m-auto">
+      <div className="w-48 h-48 p-4 m-auto">
         <Radar data={data} options={options} />
       </div>
-      <div className="w-64 h-64 col-start-1 col-span-5 row-start-1 row-span-5 place-self-center">
+      <div className="w-64 h-64 col-span-5 col-start-1 row-span-5 row-start-1 place-self-center">
         <Radar data={data} options={options} />
       </div>
     </div>
@@ -318,22 +318,22 @@ const Circle = (props) => {
       style={{ width: "100vh / 3", height: "100vh / 3" }}
       className="grid grid-cols-5 grid-rows-5"
     >
-      <div className="text-5xl col-start-3 col-span-1 row-start-1 row-span-1">
+      <div className="col-span-1 col-start-3 row-span-1 row-start-1 text-5xl">
         😁
       </div>
-      <div className="text-5xl col-start-1 col-span-1 row-start-2 row-span-1">
+      <div className="col-span-1 col-start-1 row-span-1 row-start-2 text-5xl">
         😮
       </div>
-      <div className="text-5xl col-start-5 col-span-1 row-start-2 row-span-1">
+      <div className="col-span-1 col-start-5 row-span-1 row-start-2 text-5xl">
         😡
       </div>
-      <div className="text-5xl col-start-2 col-span-1 row-start-5 row-span-1">
+      <div className="col-span-1 col-start-2 row-span-1 row-start-5 text-5xl">
         😥
       </div>
-      <div className="text-5xl col-start-4 col-span-1 row-start-5 row-span-1">
+      <div className="col-span-1 col-start-4 row-span-1 row-start-5 text-5xl">
         😐
       </div>
-      <div className="h-64 w-64 p-4 m-auto">
+      <div className="w-64 h-64 p-4 m-auto">
         <Radar data={data} options={options} />
       </div>
     </div>
