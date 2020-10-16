@@ -151,7 +151,7 @@ export default function WarmUpScreen(props: Props) {
             faceBox={props.faceBoxes[0]}
             constrainTo="width"
             player={1}
-            connected={!connected ? false : true}
+            border={!connected ? "regular" : "connected"}
           />
         </div>
       </motion.div>
@@ -173,7 +173,7 @@ export default function WarmUpScreen(props: Props) {
             faceBox={props.faceBoxes[1]}
             constrainTo="width"
             player={2}
-            connected={!connected ? false : true}
+            border={!connected ? "regular" : "connected"}
           />
         </div>
       </motion.div>

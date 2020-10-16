@@ -15,26 +15,42 @@ a {
   box-sizing: border-box;
 }
 
-
-.frosted {
+.frosted-blue {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 
-  border-radius: 15px;
+  border-radius: 1.5rem;
 
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(70, 100, 130, 0.5);
 
-  border-color: #4BFAF0;
+  border-color: #4bfaf0;
   border-width: 4px;
+
+  box-shadow: 0px 0px 40px #4bfaf0;
 }
 
+.frosted-green {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
+  border-radius: 1.5rem;
+
+  background-color: rgba(100, 180, 100, 0.5);
+
+  border-color: #86e409;
+  border-width: 4px;
+
+  box-shadow: 0px 0px 40px #86e409;
+}
 .dark {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   background-color: rgba(0, 0, 0, 0.5);
 
-  border-radius: 10px;
+  border-radius: 1.5rem;
 
-  border-color: #4BFAF0;
-  border-width: 2px;
+  border-color: #851af0;
+  border-width: 0px;
+
+  box-shadow: 0px 0px 15px black;
 }

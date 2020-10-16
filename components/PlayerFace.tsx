@@ -11,7 +11,7 @@ interface Props {
   faceBox?: any;
   constrainTo?: "width" | "height";
   player: 1 | 2;
-  connected: boolean;
+  border?: "none" | "connected" | "regular"
 }
 
 export default function PlayerFace(props: Props) {
@@ -62,9 +62,9 @@ export default function PlayerFace(props: Props) {
       <div className="absolute" style={{ width, height }}>
         <div
           className={`inset-0 absolute ${
-            props.connected ? "" : "overflow-hidden"
+            props.border === "connected" ? "" : "overflow-hidden"
           }`}
-          style={{ borderRadius: 20, borderWidth: 6 }}
+          style={props.border=="none" ? {borderRadius: 0, borderWidth: 0 } : { borderRadius: 20, borderWidth: 6 }}
         >
           {!!props.faceBox && (
             <div
@@ -80,8 +80,9 @@ export default function PlayerFace(props: Props) {
               <div
                 className={`${
                   props.player == 1 ? "left-0 -ml-8" : "right-0 -mr-4"
-                } text-6xl absolute shadow-xl w-16 h-16 rounded-full flex items-center justify-center  bottom-0 -mb-4`}
+                } absolute shadow-xl w-16 h-16 rounded-full flex items-center justify-center  bottom-0 -mb-4`}
                 style={{
+                  fontSize: props.border == "none" ? "2rem": "4rem",
                   transformOrigin: "bottom right",
                   transform: `scale(${getScale(props.faceBox)})`,
                 }}
@@ -102,24 +103,24 @@ export default function PlayerFace(props: Props) {
             width,
             height,
             // Top right
-            borderTopLeftRadius: props.player == 1 && props.connected ? 0 : 20,
+            borderTopLeftRadius: (props.player == 1 && props.border === "connected") || props.border==="none" ? 0 : 20,
             // Top left
-            borderTopRightRadius: props.player == 2 && props.connected ? 0 : 20,
+            borderTopRightRadius: (props.player == 2 && props.border === "connected") || props.border==="none" ? 0 : 20,
             // Bottom left
             borderBottomRightRadius:
-              props.player == 2 && props.connected ? 0 : 20,
+              (props.player == 2 && props.border === "connected") || props.border==="none" ? 0 : 20,
             // Bottom right
             borderBottomLeftRadius:
-              props.player == 1 && props.connected ? 0 : 20,
+              (props.player == 1 && props.border === "connected") || props.border==="none" ? 0 : 20,
 
-            borderTopWidth: 6,
-            borderBottomWidth: 6,
+            borderTopWidth: props.border==="none" ? 0 : 6,
+            borderBottomWidth: props.border==="none" ? 0 : 6,
             // Border right
-            borderLeftWidth: props.connected && props.player == 1 ? 0 : 6,
+            borderLeftWidth: (props.border === "connected" && props.player == 1) || props.border==="none" ? 0 : 6,
             // Border left
-            borderRightWidth: props.connected && props.player == 2 ? 0 : 6,
+            borderRightWidth: (props.border === "connected" && props.player == 2) || props.border==="none" ? 0 : 6,
             borderColor: playerColor,
-            boxShadow: props.connected ? "" : `0 0 15px ${playerColor}`,
+            boxShadow: props.border === "connected" || props.border==="none" ? "" : `0 0 15px ${playerColor}`,
           }}
         />
         {props.expression === undefined && (

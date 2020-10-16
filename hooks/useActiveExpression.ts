@@ -3,39 +3,38 @@ import useTimer from './useTimer';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-export default function useActiveExpression(expression: Expression) {
+export default function useActiveExpression(expression: Expression, maxCount: number) {
 
-    const maxCount = 5;
     const timer = useTimer(maxCount);
-    const [currentExpression, setCurrentExpression] = useState(expression);
-    const [selectedExpression, setSelectedExpression] = useState(expression);
+    const [currentExpression, setCurrentExpression] = useState(undefined);
+    const [selectedExpression, setSelectedExpression] = useState(undefined);
 
     useEffect(() => {
         if (expression !== currentExpression && timer.seconds == 0) {
-            setSelectedExpression(expression);
+            setCurrentExpression(expression)
             timer.start();
-            console.log("starting timer");
+            //console.log("starting timer");
         }
-    }, [expression, currentExpression]);
+    }, [expression, currentExpression, timer.seconds]);
 
     useEffect(() => {
-        if (selectedExpression !== expression && timer.seconds > 0) {
+        if (currentExpression !== expression && timer.seconds > 0) {
+            setCurrentExpression(expression)
             timer.reset();
-            console.log("face changed during timer, stopping timer");
+            //console.log("face changed during timer, stopping timer");
         }
-    }, [selectedExpression, expression]);
+    }, [expression, currentExpression, timer.seconds]);
 
     useEffect(() => {
         if (timer.seconds >= maxCount) {
-
-
-            console.log(selectedExpression);
-            console.log("expression change complete! stopping timer");
+            setSelectedExpression(expression);
+            //console.log(selectedExpression);
+            //console.log("expression change complete! stopping timer");
             timer.reset();
         }
-    }, [timer.seconds, currentExpression]);
+    }, [timer.seconds, currentExpression, maxCount]);
 
-    return { selectedExpression, timer };
+    return { selectedExpression, timer, currentExpression };
 }
 
 

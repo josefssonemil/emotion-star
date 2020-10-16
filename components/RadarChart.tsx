@@ -124,7 +124,7 @@ export default function RadarChart(props) {
     <div
       ref={ref}
       style={{ width, height: "100%" }}
-      className="relative flex self-center"
+      className="relative flex mx-auto"
     >
       <div
         style={{
