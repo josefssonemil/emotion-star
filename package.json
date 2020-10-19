@@ -17,6 +17,7 @@
     "face-api.js": "^0.22.2",
     "framer-motion": "^2.7.6",
     "next": "9.5.3",
+    "prettier": "^2.1.2",
     "random-emoji": "^1.0.2",
     "react": "16.13.1",
     "react-chartjs-2": "^2.10.0",

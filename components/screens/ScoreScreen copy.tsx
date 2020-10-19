@@ -4,23 +4,18 @@ import { motion } from "framer-motion";
 
 interface Props {
   stats: FinalStats;
+  onStart: () => void;
 }
 
 export default function ScoreScreen(props: Props) {
+  useEffect(()=>{
+    setTimeout(() => {
+      props.onStart()
+    }, 6000);
+  })
  
   return (
-    <motion.div 
-      className="absolute top-0 left-0 z-20 w-full h-full overflow-hidden"
-      initial={{
-        opacity:1
-      }}
-      animate={{
-        opacity:0
-      }}
-      transition={{
-        delay: 6
-      }}
-    >
+    <div className="relative w-screen h-screen">
       <video 
         autoPlay 
         muted 
@@ -45,6 +40,6 @@ export default function ScoreScreen(props: Props) {
 
         </motion.h1>
       </div>
-    </motion.div>
+    </div>
   );
 }

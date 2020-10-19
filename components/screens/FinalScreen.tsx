@@ -1,4 +1,5 @@
-import { MutableRefObject } from "react";
+import { motion } from "framer-motion";
+import React, { MutableRefObject } from "react";
 import useActiveExpression from "../../hooks/useActiveExpression";
 import { FinalStats } from '../../hooks/useFinalStats';
 import { Expression } from "../../types/Expressions";
@@ -7,6 +8,7 @@ import PlayerFace from "../PlayerFace";
 import RadarChart from "../RadarChart";
 import EmojiProgress from '../EmojiProgress';
 import FinalScreenEmoji from "../FinalScreenEmoji";
+import ScoreScreen from "./ScoreScreen";
 
 
 
@@ -71,9 +73,31 @@ export default function FinalScreen(props: Props) {
   };
 
   return (
-    <div
+    <motion.div
+      initial={{
+        opacity: 0
+      }}
+      animate={{
+        opacity:1
+      }}
+      transition={{
+        delay:1
+      }}
       className="grid w-screen h-screen grid-cols-12 grid-rows-6 gap-6 p-10"
     >
+      <ScoreScreen stats={props.stats}/>
+      <div 
+            style={{
+              height: "5rem",
+              width: "auto",
+              left: "2rem",
+              bottom: "2rem"
+            }}
+            className="absolute"
+          >
+            <img className="h-full" src="/img/logo.png"/>
+
+          </div>
       <h1 className="self-center col-span-5 col-start-1 row-start-1 text-6xl text-white" style={textGlow}>
         Emotion Stats
       </h1>
@@ -333,6 +357,6 @@ export default function FinalScreen(props: Props) {
 
       </div>
     
-    </div >
+    </motion.div >
   );
 }

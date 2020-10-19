@@ -251,7 +251,7 @@ const Circle = (props) => {
           cy="287.908"
           r="281.438"
           stroke="rgba(255,255,255, .3)"
-          stroke-width="2"
+          strokeWidth="2"
         />
       </g>
       <defs>
@@ -262,9 +262,9 @@ const Circle = (props) => {
           width="574.876"
           height="574.876"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -292,49 +292,3 @@ const Circle = (props) => {
     </svg>
   );
 };
-/*
-<div className="relative flex self-center w-56 h-56">
-      <div className="absolute inset-x-0 top-0 flex justify-center">
-        <div className="flex text-3xl">😁</div>
-      </div>
-      <div className="absolute inset-0 flex content-center">
-        <div className="flex self-center justify-center w-full h-24 space-x-40">
-          <div className="text-3xl">😮</div>
-          <div className="text-3xl">😡</div>
-        </div>
-      </div>
-      <div className="absolute inset-x-0 bottom-0 flex justify-center space-x-20">
-        <div className="flex text-3xl">😥</div>
-        <div className="flex text-3xl">😐</div>
-      </div>
-      <div className="w-48 h-48 p-4 m-auto">
-        <Radar data={data} options={options} />
-      </div>
-      <div className="w-64 h-64 col-span-5 col-start-1 row-span-5 row-start-1 place-self-center">
-        <Radar data={data} options={options} />
-      </div>
-    </div>
-    <div
-      style={{ width: "100vh / 3", height: "100vh / 3" }}
-      className="grid grid-cols-5 grid-rows-5"
-    >
-      <div className="col-span-1 col-start-3 row-span-1 row-start-1 text-5xl">
-        😁
-      </div>
-      <div className="col-span-1 col-start-1 row-span-1 row-start-2 text-5xl">
-        😮
-      </div>
-      <div className="col-span-1 col-start-5 row-span-1 row-start-2 text-5xl">
-        😡
-      </div>
-      <div className="col-span-1 col-start-2 row-span-1 row-start-5 text-5xl">
-        😥
-      </div>
-      <div className="col-span-1 col-start-4 row-span-1 row-start-5 text-5xl">
-        😐
-      </div>
-      <div className="w-64 h-64 p-4 m-auto">
-        <Radar data={data} options={options} />
-      </div>
-    </div>
-*/

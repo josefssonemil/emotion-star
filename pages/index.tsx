@@ -1,8 +1,9 @@
 import randomEmoji from "random-emoji";
-import { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import FinalScreen from "../components/screens/FinalScreen";
 import GameScreen from "../components/screens/GameScreen";
 import ScoreScreen from "../components/screens/ScoreScreen";
+import SummaryScreen from "../components/screens/SummaryScreen";
 import WarmUpScreen from "../components/screens/WarmUpScreen";
 import { fearlessLevel } from "../config";
 import useCameraSplit from "../hooks/useCameraSplit";
@@ -41,7 +42,7 @@ export default function Home() {
         autoPlay
         muted
       />
-      <nav className="absolute top-0 z-20 p-2 text-white">
+      <nav className="absolute top-0 z-50 p-2 text-white">
         <button className="mr-4" onClick={() => setCurrentScreen("warmUp")}>
           Warm up
         </button>
@@ -53,6 +54,9 @@ export default function Home() {
         </button>
         <button className="mr-4" onClick={() => setCurrentScreen("final")}>
           Final
+        </button>
+        <button className="mr-4" onClick={() => setCurrentScreen("summary")}>
+          Summary
         </button>
       </nav>
 
@@ -83,7 +87,7 @@ export default function Home() {
       )}
       {currentScreen == "score" && (
         <ScoreScreen 
-          onStart={() => setCurrentScreen("final")} 
+          //onStart={() => setCurrentScreen("final")} 
           stats={stats.results}/>
       )}
 
@@ -99,6 +103,17 @@ export default function Home() {
             setCurrentScreen("game");
           }}
           level={fearlessLevel}
+          teamName={teamName}
+        />
+      )}
+      {currentScreen === "summary" && (
+        <SummaryScreen
+          players={players}
+          stats={stats.results}
+          onRestart={() => {
+            // todo: reset stuff
+            setCurrentScreen("game");
+          }}
           teamName={teamName}
         />
       )}

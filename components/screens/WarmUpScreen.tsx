@@ -4,6 +4,7 @@ import useTimer from "../../hooks/useTimer";
 import { Expression } from "../../types/Expressions";
 import PlayerFace from "../PlayerFace";
 import WarmUp from "../WarmUp";
+import ScoreScreen from "./ScoreScreen";
 
 interface Props {
   canvasLeftRef: MutableRefObject<HTMLCanvasElement>;
@@ -84,14 +85,25 @@ export default function WarmUpScreen(props: Props) {
   return (
     <div
       style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
-      className="grid items-center justify-between w-full h-full grid-cols-12 grid-rows-6 bg-center bg-cover"
-    >
+      className="grid items-center justify-between w-full h-full grid-cols-12 grid-rows-6 p-10 bg-center bg-cover"
+    > 
+      
+      <div 
+            style={{
+              height: "8rem",
+              width: "auto",
+            }}
+            className="flex justify-center col-span-4 col-start-5 row-start-1"
+          >
+            <img className="h-full" src="/img/logo.png"/>
+
+          </div>
       <motion.h1
         variants={h1Variants}
         animate={!warmup ? "active" : "inactive"}
         transition={h1Transition}
         style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-        className="self-center col-span-8 col-start-3 row-span-1 row-start-1 text-5xl text-center text-white"
+        className="self-center col-span-8 col-start-3 row-span-1 row-start-2 text-5xl text-center text-white"
       >
         Enter Play Area
       </motion.h1>
@@ -100,18 +112,11 @@ export default function WarmUpScreen(props: Props) {
         animate={warmup ? "active" : "inactive"}
         transition={h1Transition}
         style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-        className="self-center col-span-8 col-start-3 row-span-1 row-start-1 text-5xl text-center text-white"
+        className="self-center col-span-10 col-end-12 row-span-1 row-start-2 text-4xl text-center text-white"
       >
-        Practice your face expressions
+        Welcome team: <span className="text-5xl">{props.teamName}</span>  <br/> Practice your expressions
       </motion.h1>
-      {!connected && (
-        <h1
-          style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-          className="self-end col-span-2 col-start-6 row-span-2 row-start-1 p-4 text-4xl text-center text-white"
-        >
-          Welcome team: {props.teamName}
-        </h1>
-      )}
+
       {!connected && (
         <div className="self-center col-span-1 col-end-7 row-span-4 row-end-7 justify-self-start">
           <WarmUp
@@ -134,22 +139,22 @@ export default function WarmUpScreen(props: Props) {
       )}
       <motion.div
         initial={{
-          marginRight: "0",
+          paddingRight: "0",
         }}
         animate={{
-          marginRight: x,
+          paddingRight: x,
         }}
         transition={camTransition}
         onAnimationStart={onCamStart}
         onAnimationComplete={onCamComplete}
-        className="relative self-start w-full col-span-4 col-end-7 row-span-4 row-start-2 justify-self-end"
+        className="relative flex w-full h-full col-span-6 col-end-7 row-span-4 row-end-7"
       >
-        <div className="flex-1">
+        <div className="ml-auto">
           <PlayerFace
             canvasRef={props.canvasLeftRef}
             expression={props.players[0]}
             faceBox={props.faceBoxes[0]}
-            constrainTo="width"
+            constrainTo="height"
             player={1}
             border={!connected ? "regular" : "connected"}
           />
@@ -158,20 +163,20 @@ export default function WarmUpScreen(props: Props) {
 
       <motion.div
         initial={{
-          marginLeft: "0",
+          paddingLeft: "0",
         }}
         animate={{
-          marginLeft: x,
+          paddingLeft: x,
         }}
         transition={camTransition}
-        className="relative flex self-start w-full col-span-4 col-start-7 row-span-4 row-start-2 justify-self-start"
+        className="relative flex w-full h-full col-span-5 col-start-7 row-span-4 row-end-7"
       >
-        <div className="flex-1">
+        <div className="mr-auto">
           <PlayerFace
             canvasRef={props.canvasRightRef}
             expression={props.players[1]}
             faceBox={props.faceBoxes[1]}
-            constrainTo="width"
+            constrainTo="height"
             player={2}
             border={!connected ? "regular" : "connected"}
           />

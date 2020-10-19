@@ -58,6 +58,7 @@ export default function GameScreen(props: Props) {
           className="absolute z-10 flex items-center w-full px-12 -mt-10 space-x-8"
           style={{ top: "50%" }}
         >
+          
           <h1
             style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
             className="-mt-1 text-4xl text-white"
@@ -103,10 +104,19 @@ export default function GameScreen(props: Props) {
               border="regular"
             />
           </div>
+          <div 
+            style={{
+              height: "5rem",
+              width: "auto",
+              top: "2rem",
+              right: "2rem"
+            }}
+            className="absolute"
+          >
+            <img className="h-full" src="/img/logo.png"/>
 
-          <div className="text-3xl text-white">
-            Time: {Math.round(timer.seconds)}
           </div>
+          
         </div>
 
         <div className="relative grid flex-1 h-screen grid-rows-2 overflow-hidden">
