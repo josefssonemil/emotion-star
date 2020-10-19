@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MutableRefObject, useEffect, useState } from "react";
+import useSound from "use-sound";
 import useTimer from "../../hooks/useTimer";
 import { Expression } from "../../types/Expressions";
 import PlayerFace from "../PlayerFace";
@@ -23,13 +24,17 @@ export default function WarmUpScreen(props: Props) {
   const [idle, setIdle] = useState(true);
   const timer = useTimer(3);
   const delay = 3;
-
+  const [play] = useSound("/sound/bye.mp3", {
+      volume: 1,
+      playbackRate: 1,
+  });
+  
   useEffect(() => {
     if (playersDone[0] && playersDone[1]) {
       props.onStart();
     }
   }, [playersDone]);
-
+  
   useEffect(() => {
     if (!props.players.includes(undefined) && connected) {
       setX(200);
@@ -55,6 +60,7 @@ export default function WarmUpScreen(props: Props) {
       setX(0);
       setWarmup(false);
       timer.reset();
+      play();
     }
   }, [props.players, idle, warmup, timer.seconds]);
 
@@ -88,22 +94,12 @@ export default function WarmUpScreen(props: Props) {
       className="grid items-center justify-between w-full h-full grid-cols-12 grid-rows-6 p-10 bg-center bg-cover"
     > 
       
-      <div 
-            style={{
-              height: "8rem",
-              width: "auto",
-            }}
-            className="flex justify-center col-span-4 col-start-5 row-start-1"
-          >
-            <img className="h-full" src="/img/logo.png"/>
-
-          </div>
       <motion.h1
         variants={h1Variants}
         animate={!warmup ? "active" : "inactive"}
         transition={h1Transition}
         style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-        className="self-center col-span-8 col-start-3 row-span-1 row-start-2 text-5xl text-center text-white"
+        className="self-center col-span-8 col-start-3 row-span-1 row-start-1 text-5xl text-center text-white"
       >
         Enter Play Area
       </motion.h1>
@@ -112,13 +108,13 @@ export default function WarmUpScreen(props: Props) {
         animate={warmup ? "active" : "inactive"}
         transition={h1Transition}
         style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
-        className="self-center col-span-10 col-end-12 row-span-1 row-start-2 text-4xl text-center text-white"
+        className="self-center col-span-10 col-end-12 row-span-1 row-start-1 text-4xl text-center text-white"
       >
         Welcome team: <span className="text-5xl">{props.teamName}</span>  <br/> Practice your expressions
       </motion.h1>
 
       {!connected && (
-        <div className="self-center col-span-1 col-end-7 row-span-4 row-end-7 justify-self-start">
+        <div className="self-center col-span-1 col-end-7 row-span-4 row-end-6 justify-self-start">
           <WarmUp
             expression={props.players[0]}
             onComplete={() =>
@@ -128,7 +124,7 @@ export default function WarmUpScreen(props: Props) {
         </div>
       )}
       {!connected && (
-        <div className="self-center col-span-1 col-start-7 row-span-4 row-end-7 justify-self-end">
+        <div className="self-center col-span-1 col-start-7 row-span-4 row-end-6 justify-self-end">
           <WarmUp
             expression={props.players[1]}
             onComplete={() =>
@@ -147,7 +143,7 @@ export default function WarmUpScreen(props: Props) {
         transition={camTransition}
         onAnimationStart={onCamStart}
         onAnimationComplete={onCamComplete}
-        className="relative flex w-full h-full col-span-6 col-end-7 row-span-4 row-end-7"
+        className="relative flex w-full h-full col-span-6 col-end-7 row-span-4 row-end-6"
       >
         <div className="ml-auto">
           <PlayerFace
@@ -169,7 +165,7 @@ export default function WarmUpScreen(props: Props) {
           paddingLeft: x,
         }}
         transition={camTransition}
-        className="relative flex w-full h-full col-span-5 col-start-7 row-span-4 row-end-7"
+        className="relative flex w-full h-full col-span-5 col-start-7 row-span-4 row-end-6"
       >
         <div className="mr-auto">
           <PlayerFace

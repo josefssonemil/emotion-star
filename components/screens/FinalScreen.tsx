@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { MutableRefObject } from "react";
+import React, { MutableRefObject, useEffect, useState } from "react";
 import useActiveExpression from "../../hooks/useActiveExpression";
 import { FinalStats } from '../../hooks/useFinalStats';
 import { Expression } from "../../types/Expressions";
@@ -9,6 +9,8 @@ import RadarChart from "../RadarChart";
 import EmojiProgress from '../EmojiProgress';
 import FinalScreenEmoji from "../FinalScreenEmoji";
 import ScoreScreen from "./ScoreScreen";
+import useTimer from '../../hooks/useTimer';
+import useIdle from '../../hooks/useIdle';
 
 
 
@@ -24,12 +26,15 @@ interface Props {
   players: [Expression, Expression];
   faceBoxes: any[];
   onRestart: () => void;
+  onIdle: () => void;
   level: Level;
   teamName: string;
   stats: FinalStats;
 }
 
 export default function FinalScreen(props: Props) {
+  useIdle(props.onIdle, props.players)
+  
   const textGlow = {
     textShadow: "0 0 35px rgb(255, 0, 255)",
   };
@@ -86,18 +91,6 @@ export default function FinalScreen(props: Props) {
       className="grid w-screen h-screen grid-cols-12 grid-rows-6 gap-6 p-10"
     >
       <ScoreScreen stats={props.stats}/>
-      <div 
-            style={{
-              height: "5rem",
-              width: "auto",
-              left: "2rem",
-              bottom: "2rem"
-            }}
-            className="absolute"
-          >
-            <img className="h-full" src="/img/logo.png"/>
-
-          </div>
       <h1 className="self-center col-span-5 col-start-1 row-start-1 text-6xl text-white" style={textGlow}>
         Emotion Stats
       </h1>
@@ -106,7 +99,7 @@ export default function FinalScreen(props: Props) {
         <span><span className="text-3xl">Team: </span> {props.teamName}</span>
       </h1>
       
-      <div style={{textShadow: "0px 0px 34px #FCD932"}} className="self-center col-span-3 col-end-13 row-start-1 text-6xl text-right text-white">
+      <div style={{textShadow: "0px 0px 34px #FCD932"}} className="self-center col-span-3 col-end-9 row-start-1 text-6xl text-right text-white">
         <h1>
           <span>{props.stats.score}<span className="text-3xl"> P.</span></span>
         </h1>

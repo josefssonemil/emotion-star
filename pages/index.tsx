@@ -42,15 +42,24 @@ export default function Home() {
         autoPlay
         muted
       />
+      <div 
+        style={{
+          height: "6rem",
+          width: "auto",
+          top: "2.5rem",
+          right: "2.5rem"
+        }}
+        className="absolute z-0"
+      >
+        <img className="h-full" src="/img/logo.png"/>
+
+      </div>
       <nav className="absolute top-0 z-50 p-2 text-white">
         <button className="mr-4" onClick={() => setCurrentScreen("warmUp")}>
           Warm up
         </button>
         <button className="mr-4" onClick={() => setCurrentScreen("game")}>
           Game
-        </button>
-        <button className="mr-4" onClick={() => setCurrentScreen("score")}>
-          Score
         </button>
         <button className="mr-4" onClick={() => setCurrentScreen("final")}>
           Final
@@ -79,16 +88,12 @@ export default function Home() {
           faceBoxes={faceBoxes}
           onFinish={(data: FinalStatsData) => {
             stats.setData(data);
-            setCurrentScreen("score");
+            setCurrentScreen("final");
           }}
           level={fearlessLevel}
           teamName={teamName}
+          onIdle={() => setCurrentScreen("warmUp")}
         />
-      )}
-      {currentScreen == "score" && (
-        <ScoreScreen 
-          //onStart={() => setCurrentScreen("final")} 
-          stats={stats.results}/>
       )}
 
       {currentScreen === "final" && (
@@ -104,11 +109,11 @@ export default function Home() {
           }}
           level={fearlessLevel}
           teamName={teamName}
+          onIdle={() => setCurrentScreen("warmUp")}
         />
       )}
       {currentScreen === "summary" && (
         <SummaryScreen
-          players={players}
           stats={stats.results}
           onRestart={() => {
             // todo: reset stuff

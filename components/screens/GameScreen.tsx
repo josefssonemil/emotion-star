@@ -3,6 +3,7 @@ import { gameConstants, fearlessLevel } from "../../config";
 import useAudioAPI from "../../hooks/useAudioAPI";
 import { FinalStatsData } from "../../hooks/useFinalStats";
 import useGameLoop from "../../hooks/useGameLoop";
+import useIdle from "../../hooks/useIdle";
 import useTimer from "../../hooks/useTimer";
 import { Expression } from "../../types/Expressions";
 import { Level } from "../../types/Level";
@@ -19,15 +20,19 @@ interface Props {
   onFinish: (stats: FinalStatsData) => void;
   level: Level;
   teamName: string;
+  onIdle: () => void;
 }
 
 export default function GameScreen(props: Props) {
+  useIdle(props.onIdle, props.players)
+  
   const { notes, duration, audioUrl } = props.level;
   const game = useGameLoop(duration, notes, props.players);
 
   const audioLoaded = useAudioAPI(game.rollingSuccessRate, audioUrl);
 
   const timer = useTimer(duration);
+  
 
   useEffect(() => {
     if (audioLoaded) {
@@ -103,18 +108,6 @@ export default function GameScreen(props: Props) {
               player={2}
               border="regular"
             />
-          </div>
-          <div 
-            style={{
-              height: "5rem",
-              width: "auto",
-              top: "2rem",
-              right: "2rem"
-            }}
-            className="absolute"
-          >
-            <img className="h-full" src="/img/logo.png"/>
-
           </div>
           
         </div>

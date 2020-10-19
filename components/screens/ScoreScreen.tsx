@@ -1,13 +1,17 @@
 import { FinalStats } from "../../hooks/useFinalStats";
 import { useEffect } from 'react';
 import { motion } from "framer-motion";
+import useSound from "use-sound";
 
 interface Props {
   stats: FinalStats;
 }
 
 export default function ScoreScreen(props: Props) {
- 
+  const [play] = useSound("/sound/cheer.mp3", {
+    volume: 0.3,
+    playbackRate: 1,
+  });
   return (
     <motion.div 
       className="absolute top-0 left-0 z-20 w-full h-full overflow-hidden"
@@ -21,6 +25,21 @@ export default function ScoreScreen(props: Props) {
         delay: 6
       }}
     >
+      <audio autoPlay>
+        <source src="/sound/cheer.mp3" type="audio/mp3"/>
+      </audio>
+      <div 
+        style={{
+          height: "6rem",
+          width: "auto",
+          top: "2.5rem",
+          right: "2.5rem"
+        }}
+        className="absolute z-0 opacity-50"
+      >
+        <img className="h-full" src="/img/logo.png"/>
+
+      </div>
       <video 
         autoPlay 
         muted 

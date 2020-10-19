@@ -4,7 +4,7 @@ export const fearlessPlayer1: Note[] = [
     {
       duration: 7.9,
     },
-    // 1 player 1
+    // 1
     {
       expression: "happy",
       duration: 1.7,
@@ -12,15 +12,15 @@ export const fearlessPlayer1: Note[] = [
     {
       duration: 0.5,
     },
-    // 2 player 2
+    // 2
     {
-      //expression: "angry",
+      //expression: "",
       duration: 1.8,
     },
     {
       duration: 0.5,
     },
-    // 3 player 1
+    // 3
     {
       expression: "neutral",
       duration: 1.5,
@@ -28,15 +28,15 @@ export const fearlessPlayer1: Note[] = [
     {
       duration: 0.5,
     },
-    // 4 player 2
+    // 4
     {
-      //expression: "happy",
+      //expression: "",
       duration: 1.8,
     },
     {
       duration: 0.5,
     },
-    // 5 player 1
+    // 5
     {
       expression: "neutral",
       duration: 1.1,
@@ -44,17 +44,17 @@ export const fearlessPlayer1: Note[] = [
     {
       duration: 0.5,
     },
-    // 6 player 2
+    // 6
     {
-      //expression: "surprised",
-      duration: 1,
+      //expression: "",
+      duration: 1.1,
     },
     {
       duration: 0.5,
     },
     // 7
     {
-      expression: "angry",
+      expression: "surprised",
       duration: 1.4,
     },
     {
@@ -70,7 +70,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 9
     {
-      //expression: "happy",
+      //expression: "",
       duration: 1.6,
     },
     {
@@ -78,7 +78,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 10
     {
-      //expression: "neutral",
+      //expression: "",
       duration: 2,
     },
     {
@@ -110,7 +110,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 14
     {
-      //expression: "neutral",
+      //expression: "",
       duration: 1.4,
     },
     {
@@ -118,7 +118,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 15
     {
-      //expression: "happy",
+      //expression: "",
       duration: 1.5,
     },
     {
@@ -134,7 +134,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 17
     {
-      //expression: "happy",
+      //expression: "",
       duration: 1,
     },
     {
@@ -142,7 +142,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 18
     {
-      //expression: "neutral",
+      //expression: "",
       duration: 1,
     },
     {
@@ -159,22 +159,22 @@ export const fearlessPlayer1: Note[] = [
     // 20
     {
       expression: "sad",
-      duration: 2.2,
+      duration: 1.5,
     },
     {
       duration: 0.5,
     },
     // 21
     {
-      //expression: "neutral",
-      duration: 2,
+      //expression: "",
+      duration: 1.3,
     },
     {
       duration: 0.5,
     },
     // 22
     {
-      expression: "angry",
+      expression: "sad",
       duration: 2,
     },
     {
@@ -182,7 +182,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 23
     {
-      //expression: "neutral",
+      //expression: "",
       duration: 1.5,
     },
     {
@@ -214,7 +214,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 27
     {
-      //expression: "angry",
+      //expression: "",
       duration: 1.5,
     },
     {
@@ -222,7 +222,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 28
     {
-      //expression: "happy",
+      //expression: "",
       duration: 1.4,
     },
     {
@@ -254,8 +254,8 @@ export const fearlessPlayer1: Note[] = [
     },
     // 32
     {
-      //expression: "surprised",
-      duration: 1.4,
+      //expression: "",
+      duration: 1.7,
     },
     {
       duration: 0.5,
@@ -270,7 +270,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 34
     {
-      expression: "angry",
+      expression: "neutral",
       duration: 1.5,
     },
     {
@@ -286,7 +286,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 36
     {
-      //expression: "neutral",
+      //expression: "",
       duration: 1,
     },
     {
@@ -318,15 +318,15 @@ export const fearlessPlayer1: Note[] = [
     },
     // 40
     {
-      //expression: "surprised",
-      duration: 1.7,
+      //expression: "",
+      duration: 2.1,
     },
     {
       duration: 0.5,
     },
-    // 41 ---
+    // 41
     {
-      expression: "angry",
+      expression: "neutral",
       duration: 1.5,
     },
     {
@@ -334,8 +334,8 @@ export const fearlessPlayer1: Note[] = [
     },
     // 42
     {
-      //expression: "sad",
-      duration: 1.8,
+      //expression: "",
+      duration: 2,
     },
     {
       duration: 0.5,
@@ -350,7 +350,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 44
     {
-      //expression: "angry",
+      expression: "angry",
       duration: 1.3,
     },
     {
@@ -358,7 +358,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 45
     {
-      expression: "sad",
+      expression: "happy",
       duration: 1.4,
     },
     {
@@ -366,7 +366,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 46
     {
-      //expression: "neutral",
+      //expression: "",
       duration: 1.1,
     },
     {
@@ -382,15 +382,15 @@ export const fearlessPlayer1: Note[] = [
     },
     // 48
     {
-      //expression: "happy",
-      duration: 1.3,
+      //expression: "",
+      duration: 1.4,
     },
     {
       duration: 0.5,
     },
     // 49
     {
-      expression: "angry",
+      expression: "happy",
       duration: 1.7,
     },
     {
@@ -398,7 +398,7 @@ export const fearlessPlayer1: Note[] = [
     },
     // 50
     {
-      //expression: "happy",
+      //expression: "",
       duration: 1.8,
     },
     {

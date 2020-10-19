@@ -26,10 +26,10 @@ export default function SummaryScreen(props: Props) {
     >
       <div 
             style={{
-              height: "5rem",
+              height: "6rem",
               width: "auto",
-              left: "2rem",
-              bottom: "2rem"
+              top: "2.5rem",
+              right: "2.5rem"
             }}
             className="absolute"
           >
@@ -44,7 +44,7 @@ export default function SummaryScreen(props: Props) {
         <span><span className="text-3xl">Team: </span> {props.teamName}</span>
       </h1>
       
-      <div style={{textShadow: "0px 0px 34px #FCD932"}} className="self-center col-span-3 col-end-13 row-start-1 text-6xl text-right text-white">
+      <div style={{textShadow: "0px 0px 34px #FCD932"}} className="self-center col-span-3 col-end-9 row-start-1 text-6xl text-right text-white">
         <h1>
           <span>{props.stats.score}<span className="text-3xl"> P.</span></span>
         </h1>
