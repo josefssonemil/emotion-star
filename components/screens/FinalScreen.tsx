@@ -30,7 +30,7 @@ interface Props {
 }
 
 export default function FinalScreen(props: Props) {
-  useIdle(props.onIdle, props.players);
+  //useIdle(props.onIdle, props.players);
 
   const textGlow = {
     textShadow: "0 0 35px rgb(255, 0, 255)",
@@ -159,7 +159,7 @@ export default function FinalScreen(props: Props) {
         </h1>
       </div>
 
-      <div className="relative col-span-5 col-start-1 row-span-4 row-start-2 py-4 dark">
+      <div className="relative col-span-4 col-start-1 row-span-4 row-start-2 py-4 dark">
         <div className="absolute top-0 left-0 flex flex-col pt-4 pl-8 text-xl font-quicksand">
           <span style={textGlowBlue} className="text-player1">
             Player 1
@@ -179,7 +179,7 @@ export default function FinalScreen(props: Props) {
         <RadarChart performance={data.performance} />
       </div>
 
-      <div className="flex flex-row col-span-7 col-end-13 row-span-2 row-start-2 overflow-hidden frosted-blue">
+      <div className="flex flex-row col-span-5 col-end-10 row-span-2 row-start-2 overflow-hidden frosted-blue">
         <div>
           <PlayerFace
             canvasRef={props.canvasLeftRef}
@@ -406,7 +406,7 @@ export default function FinalScreen(props: Props) {
         </div>
       </div>
 
-      <div className="flex flex-row col-span-7 col-end-13 row-span-2 row-end-6 overflow-hidden frosted-green">
+      <div className="flex flex-row col-span-5 col-end-10 row-span-2 row-end-6 overflow-hidden frosted-green">
         <div>
           <PlayerFace
             canvasRef={props.canvasRightRef}

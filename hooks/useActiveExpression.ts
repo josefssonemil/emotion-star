@@ -36,3 +36,4 @@ export default function useActiveExpression(
   }, [timer.seconds, currentExpression, maxCount]);
 
   return { selectedExpression, timer, currentExpression };
+}
