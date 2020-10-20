@@ -355,9 +355,9 @@ export default function FinalScreen(props: Props) {
               ) : (
                 <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
                   {
-                    props.stats.timePerExpression[0][
-                    activeExpression[0].selectedExpression
-                    ]
+                    Math.round(props.stats.timePerExpression[0][
+                      activeExpression[0].selectedExpression
+                    ])
                   }
                   <span className="text-3xl">s</span>
                 </h1>
@@ -582,10 +582,11 @@ export default function FinalScreen(props: Props) {
               ) : (
                 <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
                   {
-                    props.stats.timePerExpression[1][
-                    activeExpression[1].selectedExpression
-                    ]
+                    Math.round(props.stats.timePerExpression[1][
+                      activeExpression[1].selectedExpression
+                    ])
                   }
+
                   <span className="text-3xl">s</span>
                 </h1>
               )}
