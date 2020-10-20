@@ -37,7 +37,7 @@ export default function WarmUpScreen(props: Props) {
   
   useEffect(() => {
     if (!props.players.includes(undefined) && connected) {
-      setX(200);
+      setX(250);
       setWarmup(true);
       setConnected(false);
     }
