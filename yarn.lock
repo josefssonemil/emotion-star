@@ -6652,6 +6652,11 @@ typeface-luckiest-guy@^0.0.72:
   resolved "https://registry.yarnpkg.com/typeface-luckiest-guy/-/typeface-luckiest-guy-0.0.72.tgz#4217901be4a180ce3fe168b6ee5dee91c9e2d0b9"
   integrity sha512-WSILzvS7iJ5LGyYEeZVYgP1du+3HAQNeAw6TeO1Be6wHzeoOf41vH1BsgdgfWEWpr/wlS1T8Ra4DOcXhcwiHJA==
 
+typeface-quicksand@^1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/typeface-quicksand/-/typeface-quicksand-1.1.13.tgz#c408be6f5e09fda5379d74fe44c47938436c321b"
+  integrity sha512-sStzisPEpHfgPDE7EQvaDj9j5kxF56xeJgVc/8F2cchmI1IeuQ5ZE3ufTchSSpKbGRddgjgfWGUyjb7RqtJORA==
+
 typescript@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.2.tgz#7ea7c88777c723c681e33bf7988be5d008d05ac2"
