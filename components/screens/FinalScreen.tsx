@@ -175,6 +175,70 @@ export default function FinalScreen(props: Props) {
         <RadarChart performance={data.performance} />
       </div>
 
+      <div className="relative col-span-3 col-end-13 row-span-4 row-start-2 p-5 dark">
+        <h1 style={textGlow} className="w-full text-5xl text-center text-white">
+          High scores
+        </h1>
+
+        <div className="flex justify-around w-full">
+          <h1
+            style={textGlow}
+            className="w-1/3 text-2xl text-center text-white"
+          >
+            #
+          </h1>
+          <h1
+            style={textGlow}
+            className="w-1/3 text-2xl text-center text-white"
+          >
+            Team
+          </h1>
+          <h1
+            style={textGlow}
+            className="w-1/3 text-2xl text-center text-white"
+          >
+            Score
+          </h1>
+        </div>
+        {!!props.highscores &&
+          props.highscores
+            .filter((_, i) => i < 9)
+            .map((entry, i) => (
+              <div className="flex justify-around w-full" key={entry.id}>
+                <h1 className="w-1/3 text-xl text-center text-gray-500 font-regular font-quicksand">
+                  {i + 1}
+                </h1>
+                <h1 className="w-1/3 text-xl text-center">{entry.emoji}</h1>
+                <h1 className="w-1/3 text-xl text-center text-gray-500 font-regular font-quicksand">
+                  {entry.score}
+                </h1>
+              </div>
+            ))}
+
+        {!!props.playerHighscore && (
+          <div className="flex pt-2 border-t-4 border-white border-opacity-25 border-dashed">
+            <h1
+              style={textGlow}
+              className="w-1/3 text-xl text-center text-white font-quicksand"
+            >
+              {props.playerHighscore.index + 1}
+            </h1>
+            <h1
+              style={textGlow}
+              className="w-1/3 text-xl text-center font-quicksand"
+            >
+              {props.playerHighscore.emoji}
+            </h1>
+            <h1
+              style={textGlow}
+              className="w-1/3 text-xl text-center text-white font-quicksand"
+            >
+              {props.playerHighscore.score}
+            </h1>
+          </div>
+        )}
+      </div>
+
       <div className="flex flex-row col-span-5 col-end-10 row-span-2 row-start-2 overflow-hidden frosted-blue">
         <div>
           <PlayerFace

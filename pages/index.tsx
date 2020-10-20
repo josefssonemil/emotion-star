@@ -3,7 +3,6 @@ import randomEmoji from "random-emoji";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import FinalScreen from "../components/screens/FinalScreen";
 import GameScreen from "../components/screens/GameScreen";
-import SummaryScreen from "../components/screens/SummaryScreen";
 import WarmUpScreen from "../components/screens/WarmUpScreen";
 import { fearlessLevel } from "../config";
 import useCameraSplit from "../hooks/useCameraSplit";
@@ -93,9 +92,6 @@ export default function Home() {
         <button className="mr-4" onClick={() => setCurrentScreen("final")}>
           Final
         </button>
-        <button className="mr-4" onClick={() => setCurrentScreen("summary")}>
-          Summary
-        </button>
       </nav>
 
       {currentScreen === "warmUp" && (
@@ -136,15 +132,6 @@ export default function Home() {
           teamName={teamName}
           onRestart={onRestart}
           highscores={highscores.data}
-          playerHighscore={playerHighscore}
-        />
-      )}
-      {currentScreen === "summary" && (
-        <SummaryScreen
-          stats={stats.results}
-          onRestart={onRestart}
-          highscores={highscores.data}
-          teamName={teamName}
           playerHighscore={playerHighscore}
         />
       )}

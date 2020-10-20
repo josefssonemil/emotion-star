@@ -8,7 +8,7 @@ export default function useIdle(
     //delay: number, 
     players: [Expression, Expression]
 ) {
-    const delay = 3
+    const delay = 5
     const timer = useTimer(delay);
     const [idle, setIdle] = useState(false);
 
