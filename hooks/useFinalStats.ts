@@ -57,7 +57,16 @@ export default function useFinalStats() {
     calculateTimePerExpression(1, data.expressionHistory[1]);
   };
 
-  const calculateTimePerExpression = (index, history: ExpressionInterval[]) => {
+  const reset = () => {
+    setAccuracy([{ ...defaults }, { ...defaults }]);
+    setTimePerExpression([{ ...defaults }, { ...defaults }]);
+    setScore(0);
+  };
+
+  const calculateTimePerExpression = (
+    index: number,
+    history: ExpressionInterval[]
+  ) => {
     const result: TimePerExpressionObject = {
       ...defaults,
     };
@@ -109,5 +118,5 @@ export default function useFinalStats() {
     teamAccuracy,
   };
 
-  return { results, setData };
+  return { results, setData, reset };
 }

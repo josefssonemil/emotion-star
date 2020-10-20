@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import React, { MutableRefObject, useMemo } from "react";
 import useActiveExpression from "../../hooks/useActiveExpression";
 import { FinalStats } from "../../hooks/useFinalStats";
+import useIdle from "../../hooks/useIdle";
 import { HighscoreEntry } from "../../types/Database";
 import { Expression } from "../../types/Expressions";
 import { Level } from "../../types/Level";
@@ -22,7 +23,6 @@ interface Props {
   players: [Expression, Expression];
   faceBoxes: any[];
   onRestart: () => void;
-  onIdle: () => void;
   level: Level;
   teamName: string;
   stats: FinalStats;
@@ -31,7 +31,7 @@ interface Props {
 }
 
 export default function FinalScreen(props: Props) {
-  //useIdle(props.onIdle, props.players);
+  useIdle(props.onRestart, props.players);
 
   const textGlow = {
     textShadow: "0 0 35px rgb(255, 0, 255)",

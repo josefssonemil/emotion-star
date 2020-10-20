@@ -1,5 +1,5 @@
 import { MutableRefObject, useEffect } from "react";
-import { gameConstants, fearlessLevel } from "../../config";
+import { fearlessLevel, gameConstants } from "../../config";
 import useAudioAPI from "../../hooks/useAudioAPI";
 import { FinalStatsData } from "../../hooks/useFinalStats";
 import useGameLoop from "../../hooks/useGameLoop";
@@ -20,19 +20,18 @@ interface Props {
   onFinish: (stats: FinalStatsData) => void;
   level: Level;
   teamName: string;
-  onIdle: () => void;
+  onRestart: () => void;
 }
 
 export default function GameScreen(props: Props) {
-  useIdle(props.onIdle, props.players)
-  
+  useIdle(props.onRestart, props.players);
+
   const { notes, duration, audioUrl } = props.level;
   const game = useGameLoop(duration, notes, props.players);
 
   const audioLoaded = useAudioAPI(game.rollingSuccessRate, audioUrl);
 
   const timer = useTimer(duration);
-  
 
   useEffect(() => {
     if (audioLoaded) {
@@ -46,7 +45,7 @@ export default function GameScreen(props: Props) {
       props.onFinish({
         accuracy: game.accuracy,
         expressionHistory: game.expressionHistory,
-        score: game.score
+        score: game.score,
       });
     }
   }, [game.progress, props.onFinish]);
@@ -63,7 +62,6 @@ export default function GameScreen(props: Props) {
           className="absolute z-10 flex items-center w-full px-12 -mt-10 space-x-8"
           style={{ top: "50%" }}
         >
-          
           <h1
             style={{ textShadow: "0 0 35px rgb(255, 0, 255)" }}
             className="-mt-1 text-4xl text-white"
@@ -109,7 +107,6 @@ export default function GameScreen(props: Props) {
               border="regular"
             />
           </div>
-          
         </div>
 
         <div className="relative grid flex-1 h-screen grid-rows-2 overflow-hidden">
