@@ -32,7 +32,7 @@ interface Props {
 
 export default function FinalScreen(props: Props) {
   useIdle(props.onIdle, props.players)
-  
+
   const textGlow = {
     textShadow: "0 0 35px rgb(255, 0, 255)",
   };
@@ -86,27 +86,27 @@ export default function FinalScreen(props: Props) {
     performance: {
       player1: [
         props.stats.accuracy[0] !== undefined &&
-          props.stats.accuracy[0].happy * 100,
+        props.stats.accuracy[0].happy * 100,
         props.stats.accuracy[0] !== undefined &&
-          props.stats.accuracy[0].surprised * 100,
+        props.stats.accuracy[0].surprised * 100,
         props.stats.accuracy[0] !== undefined &&
-          props.stats.accuracy[0].angry * 100,
+        props.stats.accuracy[0].angry * 100,
         props.stats.accuracy[0] !== undefined &&
-          props.stats.accuracy[0].sad * 100,
+        props.stats.accuracy[0].sad * 100,
         props.stats.accuracy[0] !== undefined &&
-          props.stats.accuracy[0].neutral * 100,
+        props.stats.accuracy[0].neutral * 100,
       ],
       player2: [
         props.stats.accuracy[1] !== undefined &&
-          props.stats.accuracy[1].happy * 100,
+        props.stats.accuracy[1].happy * 100,
         props.stats.accuracy[1] !== undefined &&
-          props.stats.accuracy[1].surprised * 100,
+        props.stats.accuracy[1].surprised * 100,
         props.stats.accuracy[1] !== undefined &&
-          props.stats.accuracy[1].angry * 100,
+        props.stats.accuracy[1].angry * 100,
         props.stats.accuracy[1] !== undefined &&
-          props.stats.accuracy[1].sad * 100,
+        props.stats.accuracy[1].sad * 100,
         props.stats.accuracy[1] !== undefined &&
-          props.stats.accuracy[1].neutral * 100,
+        props.stats.accuracy[1].neutral * 100,
       ],
       average: [
         average.happy * 100,
@@ -285,12 +285,12 @@ export default function FinalScreen(props: Props) {
             <h1 className="font-bold text-white font-quicksand">Accuracy</h1>
 
             {activeExpression[0].currentExpression == undefined || activeExpression[0].selectedExpression == undefined
-              ? <div className="w-16 h-16 my-4"></div> 
+              ? <div className="w-16 h-16 my-4"></div>
               : <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
-                  {Math.round((props.stats.accuracy[0][activeExpression[0].selectedExpression])*100)}<span className="text-3xl">%</span>
-                </h1>
+                {Math.round((props.stats.accuracy[0][activeExpression[0].selectedExpression]) * 100)}<span className="text-3xl">%</span>
+              </h1>
             }
-            
+
           </div>
 
           <div className="flex flex-col items-center w-1/3 text-center">
@@ -306,19 +306,20 @@ export default function FinalScreen(props: Props) {
               Time
             </h1>
             {activeExpression[0].currentExpression == undefined || activeExpression[0].selectedExpression == undefined
-              ? <div className="w-16 h-16 my-4"></div> 
+              ? <div className="w-16 h-16 my-4"></div>
               : <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
-                  {props.stats.timePerExpression[0][activeExpression[0].selectedExpression]}<span className="text-3xl">s</span>
-                </h1>
+                {props.stats.timePerExpression[0][activeExpression[0].selectedExpression]}<span className="text-3xl">s</span>
+                {console.log("TIme for expression:" + props.stats.timePerExpression[0][activeExpression[0].selectedExpression])}
+              </h1>
             }
           </div>
 
 
           <div className="flex flex-col items-center w-1/3 text-center">
             <svg width="34" height="48" viewBox="0 0 34 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M23 36.6C22.1 36.6 21.5 36.3 20.6 36L17 34.5L13.4 36C12.8 36.3 11.9 36.6 11 36.6C10.4 36.6 10.1 36.6 9.5 36.3L8 48L17 42L26 48L24.2 36.3C23.9 36.6 23.3 36.6 23 36.6Z" fill="white"/>
-              <path d="M31.7 17.7C31.4 17.1 31.4 16.2 31.7 15.6L33.5 12C34.1 10.8 33.5 9.3 32 8.7L28.1 7.2C27.5 6.9 26.9 6.3 26.6 5.7L25.1 1.8C24.8 0.6 23.9 0 23 0C22.7 0 22.1 0 21.8 0.3L17.9 2.1H17C16.7 2.1 16.4 2.1 16.1 1.8L12.2 0.3C11.9 0 11.3 0 11 0C10.1 0 9.20003 0.6 8.60003 1.5L7.10003 5.7C7.10003 6.3 6.50003 6.9 5.90003 7.2L1.70003 8.7C0.500032 9 -0.0999687 10.5 0.500031 12L2.30003 15.9C2.60003 16.5 2.60003 17.4 2.30003 18L0.500031 21.6C-0.0999687 22.8 0.500031 24.3 2.00003 24.9L5.90003 26.4C6.50003 26.7 7.10003 27.3 7.40003 27.9L8.90003 31.8C9.20003 33 10.1 33.6 11 33.6C11.3 33.6 11.6 33.6 11.9 33.3L15.8 31.5C16.1 31.5 16.4 31.2 16.7 31.2C17 31.2 17.3 31.2 17.6 31.5L21.5 33.3C21.8 33.6 22.1 33.6 22.4 33.6C23.3 33.6 24.2 33 24.8 32.1L26.3 28.2C26.6 27.6 27.2 27 27.8 26.7L31.7 25.2C32.9 24.6 33.8 23.1 33.2 21.9L31.7 17.7V17.7ZM17 28.8C10.4 28.8 5.00003 23.4 5.00003 16.8C5.00003 10.2 10.4 4.8 17 4.8C23.6 4.8 29 10.2 29 16.8C29 23.4 23.6 28.8 17 28.8Z" fill="white"/>
-              <path d="M26 16.7998C26 19.1868 25.0518 21.4759 23.364 23.1638C21.6761 24.8516 19.3869 25.7998 17 25.7998C14.6131 25.7998 12.3239 24.8516 10.636 23.1638C8.94821 21.4759 8 19.1868 8 16.7998C8 14.4129 8.94821 12.1237 10.636 10.4358C12.3239 8.74802 14.6131 7.7998 17 7.7998C19.3869 7.7998 21.6761 8.74802 23.364 10.4358C25.0518 12.1237 26 14.4129 26 16.7998V16.7998Z" fill="white"/>
+              <path d="M23 36.6C22.1 36.6 21.5 36.3 20.6 36L17 34.5L13.4 36C12.8 36.3 11.9 36.6 11 36.6C10.4 36.6 10.1 36.6 9.5 36.3L8 48L17 42L26 48L24.2 36.3C23.9 36.6 23.3 36.6 23 36.6Z" fill="white" />
+              <path d="M31.7 17.7C31.4 17.1 31.4 16.2 31.7 15.6L33.5 12C34.1 10.8 33.5 9.3 32 8.7L28.1 7.2C27.5 6.9 26.9 6.3 26.6 5.7L25.1 1.8C24.8 0.6 23.9 0 23 0C22.7 0 22.1 0 21.8 0.3L17.9 2.1H17C16.7 2.1 16.4 2.1 16.1 1.8L12.2 0.3C11.9 0 11.3 0 11 0C10.1 0 9.20003 0.6 8.60003 1.5L7.10003 5.7C7.10003 6.3 6.50003 6.9 5.90003 7.2L1.70003 8.7C0.500032 9 -0.0999687 10.5 0.500031 12L2.30003 15.9C2.60003 16.5 2.60003 17.4 2.30003 18L0.500031 21.6C-0.0999687 22.8 0.500031 24.3 2.00003 24.9L5.90003 26.4C6.50003 26.7 7.10003 27.3 7.40003 27.9L8.90003 31.8C9.20003 33 10.1 33.6 11 33.6C11.3 33.6 11.6 33.6 11.9 33.3L15.8 31.5C16.1 31.5 16.4 31.2 16.7 31.2C17 31.2 17.3 31.2 17.6 31.5L21.5 33.3C21.8 33.6 22.1 33.6 22.4 33.6C23.3 33.6 24.2 33 24.8 32.1L26.3 28.2C26.6 27.6 27.2 27 27.8 26.7L31.7 25.2C32.9 24.6 33.8 23.1 33.2 21.9L31.7 17.7V17.7ZM17 28.8C10.4 28.8 5.00003 23.4 5.00003 16.8C5.00003 10.2 10.4 4.8 17 4.8C23.6 4.8 29 10.2 29 16.8C29 23.4 23.6 28.8 17 28.8Z" fill="white" />
+              <path d="M26 16.7998C26 19.1868 25.0518 21.4759 23.364 23.1638C21.6761 24.8516 19.3869 25.7998 17 25.7998C14.6131 25.7998 12.3239 24.8516 10.636 23.1638C8.94821 21.4759 8 19.1868 8 16.7998C8 14.4129 8.94821 12.1237 10.636 10.4358C12.3239 8.74802 14.6131 7.7998 17 7.7998C19.3869 7.7998 21.6761 8.74802 23.364 10.4358C25.0518 12.1237 26 14.4129 26 16.7998V16.7998Z" fill="white" />
             </svg>
 
 
@@ -326,14 +327,14 @@ export default function FinalScreen(props: Props) {
               Badge
             </h1>
             {activeExpression[0].currentExpression == undefined || activeExpression[0].selectedExpression == undefined || props.stats.accuracy[0][activeExpression[0].selectedExpression] < 0.5
-              ? <div className="w-16 h-16 my-4"></div> 
-              : <Badge 
-                  accuracy={props.stats.accuracy[0][activeExpression[0].selectedExpression]} 
-                  expression={activeExpression[0].selectedExpression}
-                />
+              ? <div className="w-16 h-16 my-4"></div>
+              : <Badge
+                accuracy={props.stats.accuracy[0][activeExpression[0].selectedExpression]}
+                expression={activeExpression[0].selectedExpression}
+              />
             }
 
-            
+
 
           </div>
         </div>
@@ -352,16 +353,16 @@ export default function FinalScreen(props: Props) {
         </div>
 
         <div className="relative flex flex-row items-center justify-around w-full p-6">
-          <div 
-              style={{
-                left:"-1.5rem"
-              }} 
-              className="absolute flex flex-col items-center justify-around w-12 h-full"
-            >
-              <FinalScreenEmoji emoji="happy"
-                progress={props.players[1] === 'happy' ? activeExpression[1].timer.seconds : 0}
-                completed={activeExpression[1].selectedExpression == 'happy'}
-                maxCount={maxCount} 
+          <div
+            style={{
+              left: "-1.5rem"
+            }}
+            className="absolute flex flex-col items-center justify-around w-12 h-full"
+          >
+            <FinalScreenEmoji emoji="happy"
+              progress={props.players[1] === 'happy' ? activeExpression[1].timer.seconds : 0}
+              completed={activeExpression[1].selectedExpression == 'happy'}
+              maxCount={maxCount}
             />
 
             <FinalScreenEmoji
@@ -440,10 +441,10 @@ export default function FinalScreen(props: Props) {
             <h1 className="font-bold text-white font-quicksand">Accuracy</h1>
 
             {activeExpression[1].currentExpression == undefined || activeExpression[1].selectedExpression == undefined
-              ? <div className="w-16 h-16 my-4"></div> 
+              ? <div className="w-16 h-16 my-4"></div>
               : <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
-                  {Math.round((props.stats.accuracy[1][activeExpression[1].selectedExpression])*100)}<span className="text-3xl">%</span>
-                </h1>
+                {Math.round((props.stats.accuracy[1][activeExpression[1].selectedExpression]) * 100)}<span className="text-3xl">%</span>
+              </h1>
             }
           </div>
 
@@ -460,34 +461,34 @@ export default function FinalScreen(props: Props) {
             </h1>
 
             {activeExpression[1].currentExpression == undefined || activeExpression[1].selectedExpression == undefined
-              ? <div className="w-16 h-16 my-4"></div> 
+              ? <div className="w-16 h-16 my-4"></div>
               : <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
-                  {props.stats.timePerExpression[1][activeExpression[1].selectedExpression]}<span className="text-3xl">s</span>
-                </h1>
+                {props.stats.timePerExpression[1][activeExpression[1].selectedExpression]}<span className="text-3xl">s</span>
+              </h1>
             }
           </div>
 
 
           <div className="flex flex-col items-center w-1/3 text-center">
-          <svg width="34" height="48" viewBox="0 0 34 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M23 36.6C22.1 36.6 21.5 36.3 20.6 36L17 34.5L13.4 36C12.8 36.3 11.9 36.6 11 36.6C10.4 36.6 10.1 36.6 9.5 36.3L8 48L17 42L26 48L24.2 36.3C23.9 36.6 23.3 36.6 23 36.6Z" fill="white"/>
-              <path d="M31.7 17.7C31.4 17.1 31.4 16.2 31.7 15.6L33.5 12C34.1 10.8 33.5 9.3 32 8.7L28.1 7.2C27.5 6.9 26.9 6.3 26.6 5.7L25.1 1.8C24.8 0.6 23.9 0 23 0C22.7 0 22.1 0 21.8 0.3L17.9 2.1H17C16.7 2.1 16.4 2.1 16.1 1.8L12.2 0.3C11.9 0 11.3 0 11 0C10.1 0 9.20003 0.6 8.60003 1.5L7.10003 5.7C7.10003 6.3 6.50003 6.9 5.90003 7.2L1.70003 8.7C0.500032 9 -0.0999687 10.5 0.500031 12L2.30003 15.9C2.60003 16.5 2.60003 17.4 2.30003 18L0.500031 21.6C-0.0999687 22.8 0.500031 24.3 2.00003 24.9L5.90003 26.4C6.50003 26.7 7.10003 27.3 7.40003 27.9L8.90003 31.8C9.20003 33 10.1 33.6 11 33.6C11.3 33.6 11.6 33.6 11.9 33.3L15.8 31.5C16.1 31.5 16.4 31.2 16.7 31.2C17 31.2 17.3 31.2 17.6 31.5L21.5 33.3C21.8 33.6 22.1 33.6 22.4 33.6C23.3 33.6 24.2 33 24.8 32.1L26.3 28.2C26.6 27.6 27.2 27 27.8 26.7L31.7 25.2C32.9 24.6 33.8 23.1 33.2 21.9L31.7 17.7V17.7ZM17 28.8C10.4 28.8 5.00003 23.4 5.00003 16.8C5.00003 10.2 10.4 4.8 17 4.8C23.6 4.8 29 10.2 29 16.8C29 23.4 23.6 28.8 17 28.8Z" fill="white"/>
-              <path d="M26 16.7998C26 19.1868 25.0518 21.4759 23.364 23.1638C21.6761 24.8516 19.3869 25.7998 17 25.7998C14.6131 25.7998 12.3239 24.8516 10.636 23.1638C8.94821 21.4759 8 19.1868 8 16.7998C8 14.4129 8.94821 12.1237 10.636 10.4358C12.3239 8.74802 14.6131 7.7998 17 7.7998C19.3869 7.7998 21.6761 8.74802 23.364 10.4358C25.0518 12.1237 26 14.4129 26 16.7998V16.7998Z" fill="white"/>
+            <svg width="34" height="48" viewBox="0 0 34 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M23 36.6C22.1 36.6 21.5 36.3 20.6 36L17 34.5L13.4 36C12.8 36.3 11.9 36.6 11 36.6C10.4 36.6 10.1 36.6 9.5 36.3L8 48L17 42L26 48L24.2 36.3C23.9 36.6 23.3 36.6 23 36.6Z" fill="white" />
+              <path d="M31.7 17.7C31.4 17.1 31.4 16.2 31.7 15.6L33.5 12C34.1 10.8 33.5 9.3 32 8.7L28.1 7.2C27.5 6.9 26.9 6.3 26.6 5.7L25.1 1.8C24.8 0.6 23.9 0 23 0C22.7 0 22.1 0 21.8 0.3L17.9 2.1H17C16.7 2.1 16.4 2.1 16.1 1.8L12.2 0.3C11.9 0 11.3 0 11 0C10.1 0 9.20003 0.6 8.60003 1.5L7.10003 5.7C7.10003 6.3 6.50003 6.9 5.90003 7.2L1.70003 8.7C0.500032 9 -0.0999687 10.5 0.500031 12L2.30003 15.9C2.60003 16.5 2.60003 17.4 2.30003 18L0.500031 21.6C-0.0999687 22.8 0.500031 24.3 2.00003 24.9L5.90003 26.4C6.50003 26.7 7.10003 27.3 7.40003 27.9L8.90003 31.8C9.20003 33 10.1 33.6 11 33.6C11.3 33.6 11.6 33.6 11.9 33.3L15.8 31.5C16.1 31.5 16.4 31.2 16.7 31.2C17 31.2 17.3 31.2 17.6 31.5L21.5 33.3C21.8 33.6 22.1 33.6 22.4 33.6C23.3 33.6 24.2 33 24.8 32.1L26.3 28.2C26.6 27.6 27.2 27 27.8 26.7L31.7 25.2C32.9 24.6 33.8 23.1 33.2 21.9L31.7 17.7V17.7ZM17 28.8C10.4 28.8 5.00003 23.4 5.00003 16.8C5.00003 10.2 10.4 4.8 17 4.8C23.6 4.8 29 10.2 29 16.8C29 23.4 23.6 28.8 17 28.8Z" fill="white" />
+              <path d="M26 16.7998C26 19.1868 25.0518 21.4759 23.364 23.1638C21.6761 24.8516 19.3869 25.7998 17 25.7998C14.6131 25.7998 12.3239 24.8516 10.636 23.1638C8.94821 21.4759 8 19.1868 8 16.7998C8 14.4129 8.94821 12.1237 10.636 10.4358C12.3239 8.74802 14.6131 7.7998 17 7.7998C19.3869 7.7998 21.6761 8.74802 23.364 10.4358C25.0518 12.1237 26 14.4129 26 16.7998V16.7998Z" fill="white" />
             </svg>
 
             <h1 className="pt-2 font-bold text-white font-quicksand">
               Badge
             </h1>
 
-            
+
             {activeExpression[1].currentExpression == undefined || activeExpression[1].selectedExpression == undefined || props.stats.accuracy[1][activeExpression[1].selectedExpression] < 0.5
-              ? <div className="w-16 h-16 my-4"></div> 
-              : <Badge 
-                  accuracy={props.stats.accuracy[1][activeExpression[1].selectedExpression]} 
-                  expression={activeExpression[1].selectedExpression}
-                />
+              ? <div className="w-16 h-16 my-4"></div>
+              : <Badge
+                accuracy={props.stats.accuracy[1][activeExpression[1].selectedExpression]}
+                expression={activeExpression[1].selectedExpression}
+              />
             }
-            
+
 
           </div>
         </div>
