@@ -9,7 +9,13 @@ export interface AccuracyObject {
   neutral: number;
 }
 
-export interface TimePerExpressionObject {}
+export interface TimePerExpressionObject {
+  happy: number;
+  angry: number;
+  surprised: number;
+  sad: number;
+  neutral: number;
+}
 
 export interface FinalStatsData {
   accuracy: [AccuracyObject, AccuracyObject];
@@ -51,8 +57,20 @@ export default function useFinalStats() {
     calculateTimePerExpression(1, data.expressionHistory[1]);
   };
 
-  const calculateTimePerExpression = (index, history) => {
-    const result: TimePerExpressionObject = {};
+  const calculateTimePerExpression = (index, history: ExpressionInterval[]) => {
+    const result: TimePerExpressionObject = {
+      ...defaults,
+    };
+
+    history.forEach((entry) => {
+      if (entry.duration) {
+        if (!result[entry.expression]) {
+          result[entry.expression] = 0;
+        }
+
+        result[entry.expression] += entry.duration;
+      }
+    });
 
     setTimePerExpression((prevState) => {
       const values = [...prevState] as [
@@ -68,11 +86,17 @@ export default function useFinalStats() {
 
   const teamAccuracy = useMemo(() => {
     const result = {
-      ...accuracy[0],
+      happy: 0,
+      angry: 0,
+      surprised: 0,
+      sad: 0,
+      neutral: 0,
     };
 
     Object.keys(result).forEach((key) => {
-      result[key] = (result[key] + accuracy[1]) / 2;
+      const p1 = accuracy[0][key] || 0;
+      const p2 = accuracy[1][key] || 0;
+      result[key] = (p1 + p2) / 2;
     });
 
     return result;

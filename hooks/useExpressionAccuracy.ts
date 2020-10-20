@@ -36,7 +36,7 @@ export default function useExpressionAccuracy(): State {
       if (totalDurations[key]) {
         result[key] = hitDurations[key] / totalDurations[key];
       } else {
-        result[key] = 1;
+        result[key] = 0;
       }
     });
 
