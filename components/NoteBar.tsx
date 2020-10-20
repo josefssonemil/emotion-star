@@ -7,7 +7,6 @@ import { Note } from "../types/Level";
 import NoteBarLeft from "./NoteBarLeft";
 import NoteBarMiddle from "./NoteBarMiddle";
 import NoteBarRight from "./NoteBarRight";
-import { useState } from 'react';
 
 interface Props {
   expression: Expression;
@@ -22,7 +21,6 @@ interface Props {
 }
 
 export default function NoteBar(props: Props) {
-
   const row = props.expression
     ? allowedExpressions.indexOf(props.expression) + 1
     : 0;
@@ -79,44 +77,60 @@ export default function NoteBar(props: Props) {
           >
             <NoteBarRight />
           </div>
-          <div 
-              className={`absolute w-12 h-12 bg-black rounded-full ${props.state.isPerfect && props.isPast ?"":"hidden"}`}
-              style={{
-                right: "-4rem",
-              }}
-            >
-              <img src="/img/nice.png"/>
-            </div>
-          <div className="absolute z-30 my-1 ml-1 mr-4 text-4xl text-pink-600">
+          <div
+            className={`absolute w-12 h-12 bg-black rounded-full ${
+              props.state.isPerfect && props.isPast ? "" : "hidden"
+            }`}
+            style={{
+              right: "-4rem",
+            }}
+          >
+            <img src="/img/nice.png" />
           </div>
+          <div className="absolute z-30 my-1 ml-1 mr-4 text-4xl text-pink-600"></div>
           <div className="relative h-4 my-4 bg-black">
-            
-            {props.state.intervals.map((interval, i) => {
-              const left = interval.start * gameConstants.pixelsPerSecond;
-              let stopTime = interval.stop;
-              if (!stopTime && props.isCurrent) {
-                stopTime =
-                  Math.min(props.gameTime +
-                  gameConstants.historyDuration -
-                  props.note.start, props.note.duration);
-              }
+            {props.state.isPerfect && props.isPast ? (
+              <div
+                className="absolute top-0 bottom-0 left-0 right-0 rounded-full"
+                style={{ backgroundColor: playerColor }}
+              />
+            ) : (
+              props.state.intervals.map((interval, i) => {
+                const left = interval.start * gameConstants.pixelsPerSecond;
+                let stopTime = interval.stop;
+                if (!stopTime && props.isCurrent) {
+                  stopTime = Math.min(
+                    props.gameTime +
+                      gameConstants.historyDuration -
+                      props.note.start,
+                    props.note.duration
+                  );
+                }
 
-              const width = (stopTime - interval.start) * gameConstants.pixelsPerSecond;
+                const width =
+                  (stopTime - interval.start) * gameConstants.pixelsPerSecond;
 
-              return (
+                return (
                   <motion.div
                     key={i}
                     className="absolute top-0 bottom-0 rounded-full"
-                    style={{ left, backgroundColor: playerColor,  }}
-                    animate={props.isPast && props.state.isPerfect ? { width: interval.stop * gameConstants.pixelsPerSecond, }  :{ width: width, }}
+                    style={{ left, backgroundColor: playerColor }}
+                    animate={
+                      props.isPast && props.state.isPerfect
+                        ? {
+                            width:
+                              interval.stop * gameConstants.pixelsPerSecond,
+                          }
+                        : { width: width }
+                    }
                     transition={{
                       ease: "linear",
                       //duration:
                     }}
                   />
-              );
-            })}
-            
+                );
+              })
+            )}
           </div>
         </div>
       </div>
