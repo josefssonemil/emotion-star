@@ -31,6 +31,7 @@
     "tailwindcss-border-gradients": "^2.0.3",
     "tailwindcss-typography": "^3.1.0",
     "typeface-luckiest-guy": "^0.0.72",
+    "typeface-quicksand": "^1.1.13",
     "use-sound": "^1.0.2"
   },
   "devDependencies": {

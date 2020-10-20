@@ -40,47 +40,11 @@ export default function SummaryScreen(props: Props) {
   }, [props.teamName, highscores.data]);
 
   return (
-    <motion.div className="grid w-screen h-screen grid-cols-12 grid-rows-6 gap-6 p-10">
-      <div
-        style={{
-          height: "6rem",
-          width: "auto",
-          top: "2.5rem",
-          right: "2.5rem",
-        }}
-        className="absolute"
-      >
-        <img className="h-full" src="/img/logo.png" />
-      </div>
-      <h1
-        className="self-center col-span-5 col-start-1 row-start-1 text-6xl text-white"
-        style={textGlow}
-      >
-        Summary Screen
-      </h1>
+    <div 
+      className="grid w-screen h-screen grid-cols-12 grid-rows-6 gap-6 p-10"
+    >
 
-      <h1
-        style={{ textShadow: "0px 0px 34px #FCD932" }}
-        className="self-center col-span-3 col-start-6 row-start-1 text-6xl text-left text-white"
-      >
-        <span>
-          <span className="text-3xl">Team: </span> {props.teamName}
-        </span>
-      </h1>
-
-      <div
-        style={{ textShadow: "0px 0px 34px #FCD932" }}
-        className="self-center col-span-3 col-end-9 row-start-1 text-6xl text-right text-white"
-      >
-        <h1>
-          <span>
-            {props.stats.score}
-            <span className="text-3xl"> P.</span>
-          </span>
-        </h1>
-      </div>
-
-      <div className="relative flex-col col-span-5 col-start-1 row-span-4 row-start-2 py-4 space-y-2 dark">
+      <div className="relative flex-col col-span-6 col-start-4 row-span-6 row-start-1 py-4 space-y-2 dark">
         <h1 style={textGlow} className="w-full text-5xl text-center text-white">
           High scores
         </h1>
@@ -111,16 +75,16 @@ export default function SummaryScreen(props: Props) {
             .filter((_, i) => i < 10)
             .map((entry, i) => (
               <div
-                className="flex justify-around font-quicksand"
+                className="flex justify-around"
                 key={entry.id}
               >
-                <h1 className="w-full text-3xl text-center text-gray-500 font-quicksand">
+                <h1 className="w-full text-3xl text-center text-gray-500 font-regular font-quicksand">
                   {i + 1}
                 </h1>
-                <h1 className="w-full text-3xl text-center font-quicksand">
+                <h1 className="w-full text-3xl text-center">
                   {entry.emoji}
                 </h1>
-                <h1 className="w-full text-3xl text-center text-gray-500 font-quicksand">
+                <h1 className="w-full text-3xl text-center text-gray-500 font-regular font-quicksand">
                   {entry.score}
                 </h1>
               </div>
@@ -149,7 +113,6 @@ export default function SummaryScreen(props: Props) {
           </div>
         )}
       </div>
-      <div className="flex flex-row col-span-7 col-end-13 row-span-4 row-start-2 overflow-hidden frosted-blue"></div>
-    </motion.div>
+    </div>
   );
 }
