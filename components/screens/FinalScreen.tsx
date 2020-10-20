@@ -23,7 +23,6 @@ interface Props {
   players: [Expression, Expression];
   faceBoxes: any[];
   onRestart: () => void;
-  onIdle: () => void;
   level: Level;
   teamName: string;
   stats: FinalStats;

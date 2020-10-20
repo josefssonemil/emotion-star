@@ -3,13 +3,17 @@ import randomEmoji from "random-emoji";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import FinalScreen from "../components/screens/FinalScreen";
 import GameScreen from "../components/screens/GameScreen";
-import SummaryScreen from "../components/screens/SummaryScreen";
 import WarmUpScreen from "../components/screens/WarmUpScreen";
 import { fearlessLevel } from "../config";
 import useCameraSplit from "../hooks/useCameraSplit";
 import useFaceRecognition from "../hooks/useFaceRecognition";
 import useFinalStats, { FinalStatsData } from "../hooks/useFinalStats";
 import { HighscoreEntry } from "../types/Database";
+
+const getRandomEmoji = () => {
+  const results = randomEmoji.random({ count: 1 });
+  return results[0].character;
+};
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>();
@@ -20,10 +24,7 @@ export default function Home() {
 
   const [currentScreen, setCurrentScreen] = useState("warmUp");
 
-  const teamName = useMemo(() => {
-    const results = randomEmoji.random({ count: 1 });
-    return results[0].character;
-  }, []);
+  const [teamName, setTeamName] = useState(getRandomEmoji());
 
   const stats = useFinalStats();
 
@@ -50,6 +51,12 @@ export default function Home() {
         .find((item) => item.emoji === teamName);
     }
   }, [teamName, highscores.data]);
+
+  const onRestart = () => {
+    setCurrentScreen("game");
+    stats.reset();
+    setTeamName(getRandomEmoji());
+  };
 
   return (
     <div
@@ -110,7 +117,7 @@ export default function Home() {
           }}
           level={fearlessLevel}
           teamName={teamName}
-          onIdle={() => setCurrentScreen("warmUp")}
+          onRestart={onRestart}
         />
       )}
 
@@ -121,13 +128,9 @@ export default function Home() {
           players={players}
           faceBoxes={faceBoxes}
           stats={stats.results}
-          onRestart={() => {
-            // todo: reset stuff
-            setCurrentScreen("game");
-          }}
           level={fearlessLevel}
           teamName={teamName}
-          onIdle={() => setCurrentScreen("warmUp")}
+          onRestart={onRestart}
           highscores={highscores.data}
           playerHighscore={playerHighscore}
         />
