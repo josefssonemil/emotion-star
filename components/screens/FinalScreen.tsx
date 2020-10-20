@@ -137,14 +137,9 @@ export default function FinalScreen(props: Props) {
         Emotion Stats
       </h1>
 
-      <h1
-        style={{ textShadow: "0px 0px 34px #FCD932" }}
-        className="self-center col-span-2 col-start-5 row-start-1 text-6xl text-left text-white"
-      ></h1>
-
       <div
         style={{ textShadow: "0px 0px 34px #FCD932" }}
-        className="flex self-center justify-between col-start-5 col-end-10 row-start-1 text-6xl text-center text-white"
+        className="flex flex-col self-center justify-between col-span-2 col-start-1 row-start-2 row-end-5 text-6xl text-center text-white"
       >
         <span>
           <span className="text-3xl">Team: </span> {props.teamName}
@@ -161,11 +156,11 @@ export default function FinalScreen(props: Props) {
         )}
       </div>
 
-      <div className="relative flex items-center justify-center col-span-4 col-start-1 row-span-4 row-start-2">
+      <div className="relative flex items-center justify-center col-span-6 col-start-4 row-span-4 row-start-1">
         <RadarChart performance={data.performance} />
       </div>
 
-      <div className="relative flex items-center justify-center col-span-3 col-end-13 row-span-4 row-start-2">
+      <div className="relative flex items-center justify-center col-span-3 col-end-13 row-span-3 row-start-2">
         <div className="w-full p-5 dark">
           <h1
             style={textGlow}
@@ -258,7 +253,7 @@ export default function FinalScreen(props: Props) {
         </div>
       </div>
 
-      <div className="flex flex-row col-span-5 col-end-10 row-span-2 row-start-2 overflow-hidden frosted-blue">
+      <div className="flex flex-row col-span-6 col-start-1 row-span-2 row-end-7 overflow-hidden frosted-blue">
         <div>
           <PlayerFace
             canvasRef={props.canvasLeftRef}
@@ -485,7 +480,7 @@ export default function FinalScreen(props: Props) {
         </div>
       </div>
 
-      <div className="flex flex-row col-span-5 col-end-10 row-span-2 row-end-6 overflow-hidden frosted-green">
+      <div className="flex flex-row col-span-6 col-end-13 row-span-2 row-end-7 overflow-hidden frosted-green">
         <div>
           <PlayerFace
             canvasRef={props.canvasRightRef}
