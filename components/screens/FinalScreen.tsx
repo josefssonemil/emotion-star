@@ -202,13 +202,15 @@ export default function FinalScreen(props: Props) {
                   <h1
                     className={`w-1/3 text-xl text-center font-regular font-quicksand ${
                       !!props.playerHighscore &&
-                      entry.emoji === props.playerHighscore.emoji
+                      entry.emoji === props.playerHighscore.emoji &&
+                      entry.score === props.playerHighscore.score
                         ? "text-white font-bold text-3xl bg-gray-500 bg-opacity-25 rounded-l-full"
                         : "text-gray-500 text-xl"
                     }`}
                     style={
                       !!props.playerHighscore &&
-                      entry.emoji === props.playerHighscore.emoji
+                      entry.emoji === props.playerHighscore.emoji &&
+                      entry.score === props.playerHighscore.score
                         ? textGlowHighscore
                         : {}
                     }
@@ -218,13 +220,15 @@ export default function FinalScreen(props: Props) {
                   <h1
                     className={`w-1/3 text-center font-regular font-quicksand ${
                       !!props.playerHighscore &&
-                      entry.emoji === props.playerHighscore.emoji
+                      entry.emoji === props.playerHighscore.emoji &&
+                      entry.score === props.playerHighscore.score
                         ? "text-3xl bg-gray-500 bg-opacity-25"
                         : "text-xl"
                     }`}
                     style={
                       !!props.playerHighscore &&
-                      entry.emoji === props.playerHighscore.emoji
+                      entry.emoji === props.playerHighscore.emoji &&
+                      entry.score === props.playerHighscore.score
                         ? textGlowHighscore
                         : {}
                     }
@@ -234,13 +238,15 @@ export default function FinalScreen(props: Props) {
                   <h1
                     className={`w-1/3 text-xl text-center font-quicksand ${
                       !!props.playerHighscore &&
-                      entry.emoji === props.playerHighscore.emoji
+                      entry.emoji === props.playerHighscore.emoji &&
+                      entry.score === props.playerHighscore.score
                         ? "text-white font-bold text-3xl bg-gray-500 bg-opacity-25 rounded-r-full"
                         : "text-gray-500 font-regular text-xl"
                     }`}
                     style={
                       !!props.playerHighscore &&
-                      entry.emoji === props.playerHighscore.emoji
+                      entry.emoji === props.playerHighscore.emoji &&
+                      entry.score === props.playerHighscore.score
                         ? textGlowHighscore
                         : {}
                     }
