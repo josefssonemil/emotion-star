@@ -8,8 +8,9 @@ export default function RadarChart(props) {
   const [ref, bounds] = useMeasure();
   let width: number;
   let height: number;
-  height = bounds.height;
-  width = bounds.height;
+
+  height = bounds.width;
+  width = bounds.width;
 
   const data = {
     /*["😁", "😡", "😥", "😐", "😮"]*/
@@ -120,12 +121,34 @@ export default function RadarChart(props) {
       padding: 50,
     },
   };
+  const textGlowBlue = {
+    textShadow: "0 0 20px #4bfaf0",
+  };
+  const textGlowGreen = {
+    textShadow: "0 0 20px #86e409",
+  };
   return (
     <div
       ref={ref}
-      style={{ width, height: "100%" }}
+      style={{ width: "90%", height }}
       className="relative flex mx-auto"
     >
+      <div className="absolute top-0 left-0 flex flex-col text-xl font-semibold font-quicksand ">
+        <span style={textGlowBlue} className="text-player1">
+          Player 1
+        </span>
+        <span style={textGlowGreen} className="text-player2">
+          Player 2
+        </span>
+        <span
+          style={{
+            color: "rgba(255, 0, 255, .9)",
+            textShadow: "0 0 20px rgb(255, 0, 255)",
+          }}
+        >
+          Average
+        </span>
+      </div>
       <div
         style={{
           position: "absolute",

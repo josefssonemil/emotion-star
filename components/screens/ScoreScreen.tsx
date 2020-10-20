@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import useMeasure from "react-use-measure";
 import useSound from "use-sound";
 import { FinalStats } from "../../hooks/useFinalStats";
 
@@ -11,6 +12,11 @@ export default function ScoreScreen(props: Props) {
     volume: 0.3,
     playbackRate: 1,
   });
+  const [ref, bounds] = useMeasure();
+  let width: number;
+  let height: number;
+  height = bounds.height;
+
   return (
     <motion.div
       className="absolute top-0 left-0 z-20 w-screen h-screen overflow-hidden"
@@ -23,6 +29,7 @@ export default function ScoreScreen(props: Props) {
       transition={{
         delay: 6,
       }}
+      ref={ref}
     >
       <audio autoPlay>
         <source src="/sound/cheer.mp3" type="audio/mp3" />
@@ -39,10 +46,14 @@ export default function ScoreScreen(props: Props) {
         <img className="h-full" src="/img/logo.png" />
       </div>
       <video
+        style={{
+          objectFit: "cover",
+          width: "auto",
+          height: "100vh",
+        }}
         autoPlay
         muted
         poster="/img/startscreen-bg.jpg"
-        className="w-auto h-screen"
       >
         <source src="/video/scoreScreen.mp4" type="video/mp4" />
       </video>

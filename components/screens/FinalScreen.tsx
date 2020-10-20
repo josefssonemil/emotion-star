@@ -161,28 +161,12 @@ export default function FinalScreen(props: Props) {
         )}
       </div>
 
-      <div className="relative col-span-4 col-start-1 row-span-4 row-start-2 py-4 dark">
-        <div className="absolute top-0 left-0 flex flex-col pt-4 pl-8 text-xl font-quicksand">
-          <span style={textGlowBlue} className="text-player1">
-            Player 1
-          </span>
-          <span style={textGlowGreen} className="text-player2">
-            Player 2
-          </span>
-          <span
-            style={{
-              color: "rgba(255, 0, 255, .9)",
-              textShadow: "0 0 20px rgb(255, 0, 255)",
-            }}
-          >
-            Average
-          </span>
-        </div>
+      <div className="relative flex items-center justify-center col-span-4 col-start-1 row-span-4 row-start-2">
         <RadarChart performance={data.performance} />
       </div>
 
-      <div className="relative flex items-center justify-center col-span-3 col-end-13 row-span-4 row-start-2 p-5 dark">
-        <div className="w-full ">
+      <div className="relative flex items-center justify-center col-span-3 col-end-13 row-span-4 row-start-2">
+        <div className="w-full p-5 dark">
           <h1
             style={textGlow}
             className="w-full text-4xl text-center text-white"
