@@ -18,7 +18,13 @@ export default function useActiveExpression(
     }
   }, [expression, currentExpression, timer.seconds]);
 
+  useEffect(() => {
+    if (currentExpression !== expression && timer.seconds > 0) {
+      setCurrentExpression(expression);
       timer.reset();
+      //console.log("face changed during timer, stopping timer");
+    }
+  }, [expression, currentExpression, timer.seconds]);
 
   useEffect(() => {
     if (timer.seconds >= maxCount) {
@@ -30,4 +36,3 @@ export default function useActiveExpression(
   }, [timer.seconds, currentExpression, maxCount]);
 
   return { selectedExpression, timer, currentExpression };
-}
