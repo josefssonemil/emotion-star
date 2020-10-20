@@ -15,7 +15,7 @@ export default function useIdle(
     const [play] = useSound("/sound/bye.mp3", {
         volume: 1,
         playbackRate: 1,
-      });
+    });
 
     useEffect(() => {
         players[0] == undefined && players[1] == undefined
