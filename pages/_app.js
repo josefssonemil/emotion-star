@@ -9,6 +9,7 @@ import "../styles/tailwind.css";
 const fuego = new Fuego(firebaseConfig);
 
 require("typeface-luckiest-guy");
+require("typeface-quicksand");
 
 function MyApp({ Component, pageProps }) {
   return (
