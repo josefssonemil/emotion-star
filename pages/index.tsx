@@ -85,9 +85,6 @@ export default function Home() {
         <button className="mr-4" onClick={() => setCurrentScreen("final")}>
           Final
         </button>
-        <button className="mr-4" onClick={() => setCurrentScreen("summary")}>
-          Summary
-        </button>
       </nav>
 
       {currentScreen === "warmUp" && (
@@ -132,18 +129,6 @@ export default function Home() {
           teamName={teamName}
           onIdle={() => setCurrentScreen("warmUp")}
           highscores={highscores.data}
-          playerHighscore={playerHighscore}
-        />
-      )}
-      {currentScreen === "summary" && (
-        <SummaryScreen
-          stats={stats.results}
-          onRestart={() => {
-            // todo: reset stuff
-            setCurrentScreen("game");
-          }}
-          highscores={highscores.data}
-          teamName={teamName}
           playerHighscore={playerHighscore}
         />
       )}
