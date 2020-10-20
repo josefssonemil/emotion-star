@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ExpressionInterval } from "./useExpressionHistory";
 
 export interface AccuracyObject {
@@ -14,13 +14,14 @@ export interface TimePerExpressionObject {}
 export interface FinalStatsData {
   accuracy: [AccuracyObject, AccuracyObject];
   expressionHistory: [ExpressionInterval[], ExpressionInterval[]];
-  score: number
+  score: number;
 }
 
 export interface FinalStats {
   accuracy: [AccuracyObject, AccuracyObject];
   timePerExpression: [TimePerExpressionObject, TimePerExpressionObject];
-  score: number
+  score: number;
+  teamAccuracy: AccuracyObject;
 }
 
 const defaults = { happy: 0, angry: 0, surprised: 0, sad: 0, neutral: 0 };
@@ -39,10 +40,11 @@ export default function useFinalStats() {
     },
     { ...defaults },
   ]);
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(0);
 
   const setData = (data: FinalStatsData) => {
     setAccuracy(data.accuracy);
+
     setScore(data.score);
 
     calculateTimePerExpression(0, data.expressionHistory[0]);
@@ -64,7 +66,24 @@ export default function useFinalStats() {
     });
   };
 
-  const results: FinalStats = { accuracy, timePerExpression, score };
+  const teamAccuracy = useMemo(() => {
+    const result = {
+      ...accuracy[0],
+    };
+
+    Object.keys(result).forEach((key) => {
+      result[key] = (result[key] + accuracy[1]) / 2;
+    });
+
+    return result;
+  }, [accuracy]);
+
+  const results: FinalStats = {
+    accuracy,
+    timePerExpression,
+    score,
+    teamAccuracy,
+  };
 
   return { results, setData };
 }

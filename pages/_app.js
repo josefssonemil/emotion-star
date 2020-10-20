@@ -1,12 +1,21 @@
+import { Fuego, FuegoProvider } from "@nandorojo/swr-firestore";
+import "firebase/firestore";
+import "react-circular-progressbar/dist/styles.css";
+import firebaseConfig from "../firebase-config";
 import "../styles/globals.css";
 import "../styles/tailwind.css";
 
-import "react-circular-progressbar/dist/styles.css";
+// Fuego is some weird codename for the firestore package we're using
+const fuego = new Fuego(firebaseConfig);
 
 require("typeface-luckiest-guy");
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <FuegoProvider fuego={fuego}>
+      <Component {...pageProps} />
+    </FuegoProvider>
+  );
 }
 
 export default MyApp;

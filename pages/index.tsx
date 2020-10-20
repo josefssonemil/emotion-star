@@ -2,7 +2,6 @@ import randomEmoji from "random-emoji";
 import React, { useMemo, useRef, useState } from "react";
 import FinalScreen from "../components/screens/FinalScreen";
 import GameScreen from "../components/screens/GameScreen";
-import ScoreScreen from "../components/screens/ScoreScreen";
 import SummaryScreen from "../components/screens/SummaryScreen";
 import WarmUpScreen from "../components/screens/WarmUpScreen";
 import { fearlessLevel } from "../config";
@@ -10,15 +9,12 @@ import useCameraSplit from "../hooks/useCameraSplit";
 import useFaceRecognition from "../hooks/useFaceRecognition";
 import useFinalStats, { FinalStatsData } from "../hooks/useFinalStats";
 
-
-
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>();
   const canvasLeftRef = useRef<HTMLCanvasElement>();
   const canvasRightRef = useRef<HTMLCanvasElement>();
   const { playing } = useCameraSplit(videoRef, canvasLeftRef, canvasRightRef);
   const { loading, players, faceBoxes } = useFaceRecognition(videoRef, playing);
-
 
   const [currentScreen, setCurrentScreen] = useState("warmUp");
 
@@ -30,9 +26,9 @@ export default function Home() {
   const stats = useFinalStats();
 
   return (
-    <div 
+    <div
       style={{ backgroundImage: "url('/img/startscreen-bg.jpg')" }}
-      className="w-screen h-screen overflow-hidden bg-center bg-cover font-luckiest" 
+      className="w-screen h-screen overflow-hidden bg-center bg-cover font-luckiest"
     >
       <video
         className="absolute opacity-0 pointer-events-none"
@@ -42,17 +38,16 @@ export default function Home() {
         autoPlay
         muted
       />
-      <div 
+      <div
         style={{
           height: "6rem",
           width: "auto",
           top: "2.5rem",
-          right: "2.5rem"
+          right: "2.5rem",
         }}
         className="absolute z-0"
       >
-        <img className="h-full" src="/img/logo.png"/>
-
+        <img className="h-full" src="/img/logo.png" />
       </div>
       <nav className="absolute top-0 z-50 p-2 text-white">
         <button className="mr-4" onClick={() => setCurrentScreen("warmUp")}>
