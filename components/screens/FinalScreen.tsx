@@ -12,7 +12,6 @@ import PlayerFace from "../PlayerFace";
 import RadarChart from "../RadarChart";
 import ScoreScreen from "./ScoreScreen";
 import useTimer from '../../hooks/useTimer';
-import useIdle from '../../hooks/useIdle';
 import Badge from "../Badge";
 
 // TODO :
@@ -32,7 +31,7 @@ interface Props {
 }
 
 export default function FinalScreen(props: Props) {
-  //useIdle(props.onIdle, props.players)
+  useIdle(props.onIdle, props.players)
   
   const textGlow = {
     textShadow: "0 0 35px rgb(255, 0, 255)",
