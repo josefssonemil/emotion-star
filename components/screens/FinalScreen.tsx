@@ -30,7 +30,7 @@ interface Props {
 }
 
 export default function FinalScreen(props: Props) {
-  useIdle(props.onIdle, props.players);
+  //useIdle(props.onIdle, props.players);
 
   const textGlow = {
     textShadow: "0 0 35px rgb(255, 0, 255)",
@@ -85,27 +85,27 @@ export default function FinalScreen(props: Props) {
     performance: {
       player1: [
         props.stats.accuracy[0] !== undefined &&
-          props.stats.accuracy[0].happy * 100,
+        props.stats.accuracy[0].happy * 100,
         props.stats.accuracy[0] !== undefined &&
-          props.stats.accuracy[0].surprised * 100,
+        props.stats.accuracy[0].surprised * 100,
         props.stats.accuracy[0] !== undefined &&
-          props.stats.accuracy[0].angry * 100,
+        props.stats.accuracy[0].angry * 100,
         props.stats.accuracy[0] !== undefined &&
-          props.stats.accuracy[0].sad * 100,
+        props.stats.accuracy[0].sad * 100,
         props.stats.accuracy[0] !== undefined &&
-          props.stats.accuracy[0].neutral * 100,
+        props.stats.accuracy[0].neutral * 100,
       ],
       player2: [
         props.stats.accuracy[1] !== undefined &&
-          props.stats.accuracy[1].happy * 100,
+        props.stats.accuracy[1].happy * 100,
         props.stats.accuracy[1] !== undefined &&
-          props.stats.accuracy[1].surprised * 100,
+        props.stats.accuracy[1].surprised * 100,
         props.stats.accuracy[1] !== undefined &&
-          props.stats.accuracy[1].angry * 100,
+        props.stats.accuracy[1].angry * 100,
         props.stats.accuracy[1] !== undefined &&
-          props.stats.accuracy[1].sad * 100,
+        props.stats.accuracy[1].sad * 100,
         props.stats.accuracy[1] !== undefined &&
-          props.stats.accuracy[1].neutral * 100,
+        props.stats.accuracy[1].neutral * 100,
       ],
       average: [
         average.happy * 100,
@@ -159,7 +159,7 @@ export default function FinalScreen(props: Props) {
         </h1>
       </div>
 
-      <div className="relative col-span-5 col-start-1 row-span-4 row-start-2 py-4 dark">
+      <div className="relative col-span-4 col-start-1 row-span-4 row-start-2 py-4 dark">
         <div className="absolute top-0 left-0 flex flex-col pt-4 pl-8 text-xl font-quicksand">
           <span style={textGlowBlue} className="text-player1">
             Player 1
@@ -179,7 +179,7 @@ export default function FinalScreen(props: Props) {
         <RadarChart performance={data.performance} />
       </div>
 
-      <div className="flex flex-row col-span-7 col-end-13 row-span-2 row-start-2 overflow-hidden frosted-blue">
+      <div className="flex flex-row col-span-5 col-end-10 row-span-2 row-start-2 overflow-hidden frosted-blue">
         <div>
           <PlayerFace
             canvasRef={props.canvasLeftRef}
@@ -290,18 +290,18 @@ export default function FinalScreen(props: Props) {
             <h1 className="font-bold text-white font-quicksand">Accuracy</h1>
 
             {activeExpression[0].currentExpression == undefined ||
-            activeExpression[0].selectedExpression == undefined ? (
-              <div className="w-16 h-16 my-4"></div>
-            ) : (
-              <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
-                {Math.round(
-                  props.stats.accuracy[0][
+              activeExpression[0].selectedExpression == undefined ? (
+                <div className="w-16 h-16 my-4"></div>
+              ) : (
+                <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
+                  {Math.round(
+                    props.stats.accuracy[0][
                     activeExpression[0].selectedExpression
-                  ] * 100
-                )}
-                <span className="text-3xl">%</span>
-              </h1>
-            )}
+                    ] * 100
+                  )}
+                  <span className="text-3xl">%</span>
+                </h1>
+              )}
           </div>
 
           <div className="flex flex-col items-center w-1/3 text-center">
@@ -350,18 +350,18 @@ export default function FinalScreen(props: Props) {
 
             <h1 className="font-bold text-white font-quicksand">Time</h1>
             {activeExpression[0].currentExpression == undefined ||
-            activeExpression[0].selectedExpression == undefined ? (
-              <div className="w-16 h-16 my-4"></div>
-            ) : (
-              <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
-                {
-                  props.stats.timePerExpression[0][
-                    activeExpression[0].selectedExpression
-                  ]
-                }
-                <span className="text-3xl">s</span>
-              </h1>
-            )}
+              activeExpression[0].selectedExpression == undefined ? (
+                <div className="w-16 h-16 my-4"></div>
+              ) : (
+                <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
+                  {
+                    Math.round(props.stats.timePerExpression[0][
+                      activeExpression[0].selectedExpression
+                    ])
+                  }
+                  <span className="text-3xl">s</span>
+                </h1>
+              )}
           </div>
 
           <div className="flex flex-col items-center w-1/3 text-center">
@@ -388,25 +388,25 @@ export default function FinalScreen(props: Props) {
 
             <h1 className="pt-2 font-bold text-white font-quicksand">Badge</h1>
             {activeExpression[0].currentExpression == undefined ||
-            activeExpression[0].selectedExpression == undefined ||
-            props.stats.accuracy[0][activeExpression[0].selectedExpression] <
+              activeExpression[0].selectedExpression == undefined ||
+              props.stats.accuracy[0][activeExpression[0].selectedExpression] <
               0.5 ? (
-              <div className="w-16 h-16 my-4"></div>
-            ) : (
-              <Badge
-                accuracy={
-                  props.stats.accuracy[0][
+                <div className="w-16 h-16 my-4"></div>
+              ) : (
+                <Badge
+                  accuracy={
+                    props.stats.accuracy[0][
                     activeExpression[0].selectedExpression
-                  ]
-                }
-                expression={activeExpression[0].selectedExpression}
-              />
-            )}
+                    ]
+                  }
+                  expression={activeExpression[0].selectedExpression}
+                />
+              )}
           </div>
         </div>
       </div>
 
-      <div className="flex flex-row col-span-7 col-end-13 row-span-2 row-end-6 overflow-hidden frosted-green">
+      <div className="flex flex-row col-span-5 col-end-10 row-span-2 row-end-6 overflow-hidden frosted-green">
         <div>
           <PlayerFace
             canvasRef={props.canvasRightRef}
@@ -517,18 +517,18 @@ export default function FinalScreen(props: Props) {
             <h1 className="font-bold text-white font-quicksand">Accuracy</h1>
 
             {activeExpression[1].currentExpression == undefined ||
-            activeExpression[1].selectedExpression == undefined ? (
-              <div className="w-16 h-16 my-4"></div>
-            ) : (
-              <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
-                {Math.round(
-                  props.stats.accuracy[1][
+              activeExpression[1].selectedExpression == undefined ? (
+                <div className="w-16 h-16 my-4"></div>
+              ) : (
+                <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
+                  {Math.round(
+                    props.stats.accuracy[1][
                     activeExpression[1].selectedExpression
-                  ] * 100
-                )}
-                <span className="text-3xl">%</span>
-              </h1>
-            )}
+                    ] * 100
+                  )}
+                  <span className="text-3xl">%</span>
+                </h1>
+              )}
           </div>
 
           <div className="flex flex-col items-center w-1/3 text-center">
@@ -577,18 +577,19 @@ export default function FinalScreen(props: Props) {
             <h1 className="font-bold text-white font-quicksand">Time</h1>
 
             {activeExpression[1].currentExpression == undefined ||
-            activeExpression[1].selectedExpression == undefined ? (
-              <div className="w-16 h-16 my-4"></div>
-            ) : (
-              <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
-                {
-                  props.stats.timePerExpression[1][
-                    activeExpression[1].selectedExpression
-                  ]
-                }
-                <span className="text-3xl">s</span>
-              </h1>
-            )}
+              activeExpression[1].selectedExpression == undefined ? (
+                <div className="w-16 h-16 my-4"></div>
+              ) : (
+                <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
+                  {
+                    Math.round(props.stats.timePerExpression[1][
+                      activeExpression[1].selectedExpression
+                    ])
+                  }
+
+                  <span className="text-3xl">s</span>
+                </h1>
+              )}
           </div>
 
           <div className="flex flex-col items-center w-1/3 text-center">
@@ -616,20 +617,20 @@ export default function FinalScreen(props: Props) {
             <h1 className="pt-2 font-bold text-white font-quicksand">Badge</h1>
 
             {activeExpression[1].currentExpression == undefined ||
-            activeExpression[1].selectedExpression == undefined ||
-            props.stats.accuracy[1][activeExpression[1].selectedExpression] <
+              activeExpression[1].selectedExpression == undefined ||
+              props.stats.accuracy[1][activeExpression[1].selectedExpression] <
               0.5 ? (
-              <div className="w-16 h-16 my-4"></div>
-            ) : (
-              <Badge
-                accuracy={
-                  props.stats.accuracy[1][
+                <div className="w-16 h-16 my-4"></div>
+              ) : (
+                <Badge
+                  accuracy={
+                    props.stats.accuracy[1][
                     activeExpression[1].selectedExpression
-                  ]
-                }
-                expression={activeExpression[1].selectedExpression}
-              />
-            )}
+                    ]
+                  }
+                  expression={activeExpression[1].selectedExpression}
+                />
+              )}
           </div>
         </div>
       </div>

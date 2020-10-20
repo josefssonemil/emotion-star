@@ -40,31 +40,28 @@ export default function SummaryScreen(props: Props) {
   }, [props.teamName, highscores.data]);
 
   return (
-    <div 
-      className="grid w-screen h-screen grid-cols-12 grid-rows-6 gap-6 p-10"
-    >
-
-      <div className="relative flex-col col-span-6 col-start-4 row-span-6 row-start-1 py-4 space-y-2 dark">
-        <h1 style={textGlow} className="w-full text-5xl text-center text-white">
+    <div className="grid w-screen h-screen grid-cols-12 grid-rows-6 gap-6 p-10">
+      <div className="relative flex-col col-span-3 col-start-4 row-span-6 row-start-1 py-4 space-y-2 dark">
+        <h1 style={textGlow} className="w-full text-4xl text-center text-white">
           High scores
         </h1>
 
         <div className="flex justify-around">
           <h1
             style={textGlow}
-            className="w-full text-3xl text-center text-white"
+            className="w-full text-2xl text-center text-white"
           >
             #
           </h1>
           <h1
             style={textGlow}
-            className="w-full text-3xl text-center text-white"
+            className="w-full text-2xl text-center text-white"
           >
             Team
           </h1>
           <h1
             style={textGlow}
-            className="w-full text-3xl text-center text-white"
+            className="w-full text-2xl text-center text-white"
           >
             Score
           </h1>
@@ -74,16 +71,11 @@ export default function SummaryScreen(props: Props) {
           highscores.data
             .filter((_, i) => i < 10)
             .map((entry, i) => (
-              <div
-                className="flex justify-around"
-                key={entry.id}
-              >
+              <div className="flex justify-around" key={entry.id}>
                 <h1 className="w-full text-3xl text-center text-gray-500 font-regular font-quicksand">
                   {i + 1}
                 </h1>
-                <h1 className="w-full text-3xl text-center">
-                  {entry.emoji}
-                </h1>
+                <h1 className="w-full text-3xl text-center">{entry.emoji}</h1>
                 <h1 className="w-full text-3xl text-center text-gray-500 font-regular font-quicksand">
                   {entry.score}
                 </h1>
