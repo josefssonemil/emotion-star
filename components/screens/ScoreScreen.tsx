@@ -13,7 +13,7 @@ export default function ScoreScreen(props: Props) {
   });
   return (
     <motion.div
-      className="absolute top-0 left-0 z-20 w-full h-full overflow-hidden"
+      className="absolute top-0 left-0 z-20 w-screen h-screen overflow-hidden"
       initial={{
         opacity: 1,
       }}
@@ -42,7 +42,7 @@ export default function ScoreScreen(props: Props) {
         autoPlay
         muted
         poster="/img/startscreen-bg.jpg"
-        className="w-full h-auto min-w-full min-h-full"
+        className="w-auto h-screen"
       >
         <source src="/video/scoreScreen.mp4" type="video/mp4" />
       </video>

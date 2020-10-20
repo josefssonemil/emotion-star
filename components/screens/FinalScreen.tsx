@@ -32,10 +32,13 @@ interface Props {
 }
 
 export default function FinalScreen(props: Props) {
-  useIdle(props.onIdle, props.players);
+  //useIdle(props.onIdle, props.players);
 
   const textGlow = {
     textShadow: "0 0 35px rgb(255, 0, 255)",
+  };
+  const textGlowHighscore = {
+    textShadow: "0 0 20px 30px rgb(255, 0, 255)",
   };
   const textGlowBlue = {
     textShadow: "0 0 20px #4bfaf0",
@@ -137,23 +140,26 @@ export default function FinalScreen(props: Props) {
 
       <h1
         style={{ textShadow: "0px 0px 34px #FCD932" }}
-        className="self-center col-span-3 col-start-6 row-start-1 text-6xl text-left text-white"
+        className="self-center col-span-2 col-start-5 row-start-1 text-6xl text-left text-white"
+      ></h1>
+
+      <div
+        style={{ textShadow: "0px 0px 34px #FCD932" }}
+        className="flex self-center justify-between col-start-5 col-end-10 row-start-1 text-6xl text-center text-white"
       >
         <span>
           <span className="text-3xl">Team: </span> {props.teamName}
         </span>
-      </h1>
-
-      <div
-        style={{ textShadow: "0px 0px 34px #FCD932" }}
-        className="self-center col-span-3 col-end-9 row-start-1 text-6xl text-right text-white"
-      >
-        <h1>
+        <span>
+          {props.stats.score}
+          <span className="text-3xl"> P.</span>
+        </span>
+        {!!props.playerHighscore && (
           <span>
-            {props.stats.score}
-            <span className="text-3xl"> P.</span>
+            <span className="text-3xl">Rank</span>
+            {" " + (props.playerHighscore.index + 1)}
           </span>
-        </h1>
+        )}
       </div>
 
       <div className="relative col-span-4 col-start-1 row-span-4 row-start-2 py-4 dark">
@@ -176,68 +182,91 @@ export default function FinalScreen(props: Props) {
         <RadarChart performance={data.performance} />
       </div>
 
-      <div className="relative col-span-3 col-end-13 row-span-4 row-start-2 p-5 dark">
-        <h1 style={textGlow} className="w-full text-5xl text-center text-white">
-          High scores
-        </h1>
+      <div className="relative flex items-center justify-center col-span-3 col-end-13 row-span-4 row-start-2 p-5 dark">
+        <div className="w-full ">
+          <h1
+            style={textGlow}
+            className="w-full text-4xl text-center text-white"
+          >
+            High scores
+          </h1>
 
-        <div className="flex justify-around w-full">
-          <h1
-            style={textGlow}
-            className="w-1/3 text-2xl text-center text-white"
-          >
-            #
-          </h1>
-          <h1
-            style={textGlow}
-            className="w-1/3 text-2xl text-center text-white"
-          >
-            Team
-          </h1>
-          <h1
-            style={textGlow}
-            className="w-1/3 text-2xl text-center text-white"
-          >
-            Score
-          </h1>
-        </div>
-        {!!props.highscores &&
-          props.highscores
-            .filter((_, i) => i < 9)
-            .map((entry, i) => (
-              <div className="flex justify-around w-full" key={entry.id}>
-                <h1 className="w-1/3 text-xl text-center text-gray-500 font-regular font-quicksand">
-                  {i + 1}
-                </h1>
-                <h1 className="w-1/3 text-xl text-center">{entry.emoji}</h1>
-                <h1 className="w-1/3 text-xl text-center text-gray-500 font-regular font-quicksand">
-                  {entry.score}
-                </h1>
-              </div>
-            ))}
-
-        {!!props.playerHighscore && (
-          <div className="flex pt-2 border-t-4 border-white border-opacity-25 border-dashed">
+          <div className="flex justify-around w-full">
             <h1
               style={textGlow}
-              className="w-1/3 text-xl text-center text-white font-quicksand"
+              className="w-1/3 text-2xl text-center text-white"
             >
-              {props.playerHighscore.index + 1}
+              Rank
             </h1>
             <h1
               style={textGlow}
-              className="w-1/3 text-xl text-center font-quicksand"
+              className="w-1/3 text-2xl text-center text-white"
             >
-              {props.playerHighscore.emoji}
+              Team
             </h1>
             <h1
               style={textGlow}
-              className="w-1/3 text-xl text-center text-white font-quicksand"
+              className="w-1/3 text-2xl text-center text-white"
             >
-              {props.playerHighscore.score}
+              Score
             </h1>
           </div>
-        )}
+          {!!props.highscores &&
+            props.highscores
+              .filter((_, i) => i < 10)
+              .map((entry, i) => (
+                <div className="flex justify-around w-full" key={entry.id}>
+                  <h1
+                    className={`w-1/3 text-xl text-center font-regular font-quicksand ${
+                      !!props.playerHighscore &&
+                      entry.emoji === props.playerHighscore.emoji
+                        ? "text-white font-bold text-3xl bg-gray-500 bg-opacity-25 rounded-l-full"
+                        : "text-gray-500 text-xl"
+                    }`}
+                    style={
+                      !!props.playerHighscore &&
+                      entry.emoji === props.playerHighscore.emoji
+                        ? textGlowHighscore
+                        : {}
+                    }
+                  >
+                    {i + 1}
+                  </h1>
+                  <h1
+                    className={`w-1/3 text-center font-regular font-quicksand ${
+                      !!props.playerHighscore &&
+                      entry.emoji === props.playerHighscore.emoji
+                        ? "text-3xl bg-gray-500 bg-opacity-25"
+                        : "text-xl"
+                    }`}
+                    style={
+                      !!props.playerHighscore &&
+                      entry.emoji === props.playerHighscore.emoji
+                        ? textGlowHighscore
+                        : {}
+                    }
+                  >
+                    {entry.emoji}
+                  </h1>
+                  <h1
+                    className={`w-1/3 text-xl text-center font-quicksand ${
+                      !!props.playerHighscore &&
+                      entry.emoji === props.playerHighscore.emoji
+                        ? "text-white font-bold text-3xl bg-gray-500 bg-opacity-25 rounded-r-full"
+                        : "text-gray-500 font-regular text-xl"
+                    }`}
+                    style={
+                      !!props.playerHighscore &&
+                      entry.emoji === props.playerHighscore.emoji
+                        ? textGlowHighscore
+                        : {}
+                    }
+                  >
+                    {entry.score}
+                  </h1>
+                </div>
+              ))}
+        </div>
       </div>
 
       <div className="flex flex-row col-span-5 col-end-10 row-span-2 row-start-2 overflow-hidden frosted-blue">
