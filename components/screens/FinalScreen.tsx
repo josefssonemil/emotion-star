@@ -1,9 +1,8 @@
-import { useCollection } from "@nandorojo/swr-firestore";
+import { Document } from "@nandorojo/swr-firestore";
 import { motion } from "framer-motion";
 import React, { MutableRefObject, useMemo } from "react";
 import useActiveExpression from "../../hooks/useActiveExpression";
 import { FinalStats } from "../../hooks/useFinalStats";
-import useIdle from "../../hooks/useIdle";
 import { HighscoreEntry } from "../../types/Database";
 import { Expression } from "../../types/Expressions";
 import { Level } from "../../types/Level";
@@ -27,6 +26,8 @@ interface Props {
   level: Level;
   teamName: string;
   stats: FinalStats;
+  highscores: Document<HighscoreEntry>[];
+  playerHighscore: Document<HighscoreEntry> & { index: number };
 }
 
 export default function FinalScreen(props: Props) {
@@ -49,11 +50,6 @@ export default function FinalScreen(props: Props) {
     useActiveExpression(props.players[1], maxCount),
   ];
 
-  const highscores = useCollection<HighscoreEntry>("highscores", {
-    orderBy: ["score", "desc"],
-    listen: true,
-  });
-
   // Calculate the average of all accuracy values in the highscore database
   const average = useMemo(() => {
     const data = {
@@ -64,8 +60,8 @@ export default function FinalScreen(props: Props) {
       neutral: 0,
     };
 
-    if (highscores.data) {
-      highscores.data.forEach((entry) => {
+    if (props.highscores) {
+      props.highscores.forEach((entry) => {
         Object.keys(entry.expressions).forEach((key) => {
           if (entry.expressions[key]) {
             data[key] += entry.expressions[key];
@@ -74,12 +70,12 @@ export default function FinalScreen(props: Props) {
       });
 
       Object.keys(data).forEach((key) => {
-        data[key] = data[key] / highscores.data.length;
+        data[key] = data[key] / props.highscores.length;
       });
     }
 
     return data;
-  }, [highscores.data]);
+  }, [props.highscores]);
 
   const data = {
     performance: {

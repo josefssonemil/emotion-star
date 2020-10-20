@@ -1,6 +1,4 @@
-import { useCollection } from "@nandorojo/swr-firestore";
-import { motion } from "framer-motion";
-import { useEffect, useMemo } from "react";
+import { Document } from "@nandorojo/swr-firestore";
 import { FinalStats } from "../../hooks/useFinalStats";
 import { HighscoreEntry } from "../../types/Database";
 
@@ -8,36 +6,14 @@ interface Props {
   onRestart: () => void;
   teamName: string;
   stats: FinalStats;
+  highscores: Document<HighscoreEntry>[];
+  playerHighscore: Document<HighscoreEntry> & { index: number };
 }
 
 export default function SummaryScreen(props: Props) {
   const textGlow = {
     textShadow: "0 0 35px rgb(255, 0, 255)",
   };
-
-  const highscores = useCollection<HighscoreEntry>("highscores", {
-    orderBy: ["score", "desc"],
-    listen: true,
-  });
-
-  useEffect(() => {
-    if (props.teamName && props.stats.score) {
-      highscores.add({
-        emoji: props.teamName,
-        score: props.stats.score,
-        expressions: props.stats.teamAccuracy,
-        timestamp: new Date(),
-      });
-    }
-  }, [props.teamName, props.stats.score]);
-
-  const playerHighscore = useMemo(() => {
-    if (highscores.data) {
-      return highscores.data
-        .map((item, index) => ({ ...item, index }))
-        .find((item) => item.emoji === props.teamName);
-    }
-  }, [props.teamName, highscores.data]);
 
   return (
     <div className="grid w-screen h-screen grid-cols-12 grid-rows-6 gap-6 p-10">
@@ -67,8 +43,8 @@ export default function SummaryScreen(props: Props) {
           </h1>
         </div>
 
-        {!!highscores.data &&
-          highscores.data
+        {!!props.highscores &&
+          props.highscores
             .filter((_, i) => i < 10)
             .map((entry, i) => (
               <div className="flex justify-around" key={entry.id}>
@@ -82,25 +58,25 @@ export default function SummaryScreen(props: Props) {
               </div>
             ))}
 
-        {!!playerHighscore && (
+        {!!props.playerHighscore && (
           <div className="flex pt-2 border-t-4 border-white border-opacity-25 border-dashed">
             <h1
               style={textGlow}
               className="w-full text-3xl text-center text-white font-quicksand"
             >
-              {playerHighscore.index + 1}
+              {props.playerHighscore.index + 1}
             </h1>
             <h1
               style={textGlow}
               className="w-full text-3xl text-center font-quicksand"
             >
-              {playerHighscore.emoji}
+              {props.playerHighscore.emoji}
             </h1>
             <h1
               style={textGlow}
               className="w-full text-3xl text-center text-white font-quicksand"
             >
-              {playerHighscore.score}
+              {props.playerHighscore.score}
             </h1>
           </div>
         )}
