@@ -1,5 +1,6 @@
+import { useCollection } from "@nandorojo/swr-firestore";
 import randomEmoji from "random-emoji";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import FinalScreen from "../components/screens/FinalScreen";
 import GameScreen from "../components/screens/GameScreen";
 import SummaryScreen from "../components/screens/SummaryScreen";
@@ -8,6 +9,7 @@ import { fearlessLevel } from "../config";
 import useCameraSplit from "../hooks/useCameraSplit";
 import useFaceRecognition from "../hooks/useFaceRecognition";
 import useFinalStats, { FinalStatsData } from "../hooks/useFinalStats";
+import { HighscoreEntry } from "../types/Database";
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>();
@@ -24,6 +26,30 @@ export default function Home() {
   }, []);
 
   const stats = useFinalStats();
+
+  const highscores = useCollection<HighscoreEntry>("highscores", {
+    orderBy: ["score", "desc"],
+    listen: true,
+  });
+
+  useEffect(() => {
+    if (teamName && stats.results.score) {
+      highscores.add({
+        emoji: teamName,
+        score: stats.results.score,
+        expressions: stats.results.teamAccuracy,
+        timestamp: new Date(),
+      });
+    }
+  }, [teamName, stats.results.score]);
+
+  const playerHighscore = useMemo(() => {
+    if (highscores.data) {
+      return highscores.data
+        .map((item, index) => ({ ...item, index }))
+        .find((item) => item.emoji === teamName);
+    }
+  }, [teamName, highscores.data]);
 
   return (
     <div
@@ -105,6 +131,8 @@ export default function Home() {
           level={fearlessLevel}
           teamName={teamName}
           onIdle={() => setCurrentScreen("warmUp")}
+          highscores={highscores.data}
+          playerHighscore={playerHighscore}
         />
       )}
       {currentScreen === "summary" && (
@@ -114,7 +142,9 @@ export default function Home() {
             // todo: reset stuff
             setCurrentScreen("game");
           }}
+          highscores={highscores.data}
           teamName={teamName}
+          playerHighscore={playerHighscore}
         />
       )}
     </div>

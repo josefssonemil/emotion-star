@@ -1,9 +1,8 @@
-import { useCollection } from "@nandorojo/swr-firestore";
+import { Document } from "@nandorojo/swr-firestore";
 import { motion } from "framer-motion";
 import React, { MutableRefObject, useMemo } from "react";
 import useActiveExpression from "../../hooks/useActiveExpression";
 import { FinalStats } from "../../hooks/useFinalStats";
-import useIdle from "../../hooks/useIdle";
 import { HighscoreEntry } from "../../types/Database";
 import { Expression } from "../../types/Expressions";
 import { Level } from "../../types/Level";
@@ -27,6 +26,8 @@ interface Props {
   level: Level;
   teamName: string;
   stats: FinalStats;
+  highscores: Document<HighscoreEntry>[];
+  playerHighscore: Document<HighscoreEntry> & { index: number };
 }
 
 export default function FinalScreen(props: Props) {
@@ -49,11 +50,6 @@ export default function FinalScreen(props: Props) {
     useActiveExpression(props.players[1], maxCount),
   ];
 
-  const highscores = useCollection<HighscoreEntry>("highscores", {
-    orderBy: ["score", "desc"],
-    listen: true,
-  });
-
   // Calculate the average of all accuracy values in the highscore database
   const average = useMemo(() => {
     const data = {
@@ -64,8 +60,8 @@ export default function FinalScreen(props: Props) {
       neutral: 0,
     };
 
-    if (highscores.data) {
-      highscores.data.forEach((entry) => {
+    if (props.highscores) {
+      props.highscores.forEach((entry) => {
         Object.keys(entry.expressions).forEach((key) => {
           if (entry.expressions[key]) {
             data[key] += entry.expressions[key];
@@ -74,38 +70,38 @@ export default function FinalScreen(props: Props) {
       });
 
       Object.keys(data).forEach((key) => {
-        data[key] = data[key] / highscores.data.length;
+        data[key] = data[key] / props.highscores.length;
       });
     }
 
     return data;
-  }, [highscores.data]);
+  }, [props.highscores]);
 
   const data = {
     performance: {
       player1: [
         props.stats.accuracy[0] !== undefined &&
-        props.stats.accuracy[0].happy * 100,
+          props.stats.accuracy[0].happy * 100,
         props.stats.accuracy[0] !== undefined &&
-        props.stats.accuracy[0].surprised * 100,
+          props.stats.accuracy[0].surprised * 100,
         props.stats.accuracy[0] !== undefined &&
-        props.stats.accuracy[0].angry * 100,
+          props.stats.accuracy[0].angry * 100,
         props.stats.accuracy[0] !== undefined &&
-        props.stats.accuracy[0].sad * 100,
+          props.stats.accuracy[0].sad * 100,
         props.stats.accuracy[0] !== undefined &&
-        props.stats.accuracy[0].neutral * 100,
+          props.stats.accuracy[0].neutral * 100,
       ],
       player2: [
         props.stats.accuracy[1] !== undefined &&
-        props.stats.accuracy[1].happy * 100,
+          props.stats.accuracy[1].happy * 100,
         props.stats.accuracy[1] !== undefined &&
-        props.stats.accuracy[1].surprised * 100,
+          props.stats.accuracy[1].surprised * 100,
         props.stats.accuracy[1] !== undefined &&
-        props.stats.accuracy[1].angry * 100,
+          props.stats.accuracy[1].angry * 100,
         props.stats.accuracy[1] !== undefined &&
-        props.stats.accuracy[1].sad * 100,
+          props.stats.accuracy[1].sad * 100,
         props.stats.accuracy[1] !== undefined &&
-        props.stats.accuracy[1].neutral * 100,
+          props.stats.accuracy[1].neutral * 100,
       ],
       average: [
         average.happy * 100,
@@ -290,18 +286,18 @@ export default function FinalScreen(props: Props) {
             <h1 className="font-bold text-white font-quicksand">Accuracy</h1>
 
             {activeExpression[0].currentExpression == undefined ||
-              activeExpression[0].selectedExpression == undefined ? (
-                <div className="w-16 h-16 my-4"></div>
-              ) : (
-                <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
-                  {Math.round(
-                    props.stats.accuracy[0][
+            activeExpression[0].selectedExpression == undefined ? (
+              <div className="w-16 h-16 my-4"></div>
+            ) : (
+              <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
+                {Math.round(
+                  props.stats.accuracy[0][
                     activeExpression[0].selectedExpression
-                    ] * 100
-                  )}
-                  <span className="text-3xl">%</span>
-                </h1>
-              )}
+                  ] * 100
+                )}
+                <span className="text-3xl">%</span>
+              </h1>
+            )}
           </div>
 
           <div className="flex flex-col items-center w-1/3 text-center">
@@ -350,18 +346,18 @@ export default function FinalScreen(props: Props) {
 
             <h1 className="font-bold text-white font-quicksand">Time</h1>
             {activeExpression[0].currentExpression == undefined ||
-              activeExpression[0].selectedExpression == undefined ? (
-                <div className="w-16 h-16 my-4"></div>
-              ) : (
-                <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
-                  {
-                    Math.round(props.stats.timePerExpression[0][
-                      activeExpression[0].selectedExpression
-                    ])
-                  }
-                  <span className="text-3xl">s</span>
-                </h1>
-              )}
+            activeExpression[0].selectedExpression == undefined ? (
+              <div className="w-16 h-16 my-4"></div>
+            ) : (
+              <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
+                {Math.round(
+                  props.stats.timePerExpression[0][
+                    activeExpression[0].selectedExpression
+                  ]
+                )}
+                <span className="text-3xl">s</span>
+              </h1>
+            )}
           </div>
 
           <div className="flex flex-col items-center w-1/3 text-center">
@@ -388,20 +384,20 @@ export default function FinalScreen(props: Props) {
 
             <h1 className="pt-2 font-bold text-white font-quicksand">Badge</h1>
             {activeExpression[0].currentExpression == undefined ||
-              activeExpression[0].selectedExpression == undefined ||
-              props.stats.accuracy[0][activeExpression[0].selectedExpression] <
+            activeExpression[0].selectedExpression == undefined ||
+            props.stats.accuracy[0][activeExpression[0].selectedExpression] <
               0.5 ? (
-                <div className="w-16 h-16 my-4"></div>
-              ) : (
-                <Badge
-                  accuracy={
-                    props.stats.accuracy[0][
+              <div className="w-16 h-16 my-4"></div>
+            ) : (
+              <Badge
+                accuracy={
+                  props.stats.accuracy[0][
                     activeExpression[0].selectedExpression
-                    ]
-                  }
-                  expression={activeExpression[0].selectedExpression}
-                />
-              )}
+                  ]
+                }
+                expression={activeExpression[0].selectedExpression}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -517,18 +513,18 @@ export default function FinalScreen(props: Props) {
             <h1 className="font-bold text-white font-quicksand">Accuracy</h1>
 
             {activeExpression[1].currentExpression == undefined ||
-              activeExpression[1].selectedExpression == undefined ? (
-                <div className="w-16 h-16 my-4"></div>
-              ) : (
-                <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
-                  {Math.round(
-                    props.stats.accuracy[1][
+            activeExpression[1].selectedExpression == undefined ? (
+              <div className="w-16 h-16 my-4"></div>
+            ) : (
+              <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
+                {Math.round(
+                  props.stats.accuracy[1][
                     activeExpression[1].selectedExpression
-                    ] * 100
-                  )}
-                  <span className="text-3xl">%</span>
-                </h1>
-              )}
+                  ] * 100
+                )}
+                <span className="text-3xl">%</span>
+              </h1>
+            )}
           </div>
 
           <div className="flex flex-col items-center w-1/3 text-center">
@@ -577,19 +573,19 @@ export default function FinalScreen(props: Props) {
             <h1 className="font-bold text-white font-quicksand">Time</h1>
 
             {activeExpression[1].currentExpression == undefined ||
-              activeExpression[1].selectedExpression == undefined ? (
-                <div className="w-16 h-16 my-4"></div>
-              ) : (
-                <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
-                  {
-                    Math.round(props.stats.timePerExpression[1][
-                      activeExpression[1].selectedExpression
-                    ])
-                  }
+            activeExpression[1].selectedExpression == undefined ? (
+              <div className="w-16 h-16 my-4"></div>
+            ) : (
+              <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
+                {Math.round(
+                  props.stats.timePerExpression[1][
+                    activeExpression[1].selectedExpression
+                  ]
+                )}
 
-                  <span className="text-3xl">s</span>
-                </h1>
-              )}
+                <span className="text-3xl">s</span>
+              </h1>
+            )}
           </div>
 
           <div className="flex flex-col items-center w-1/3 text-center">
@@ -617,20 +613,20 @@ export default function FinalScreen(props: Props) {
             <h1 className="pt-2 font-bold text-white font-quicksand">Badge</h1>
 
             {activeExpression[1].currentExpression == undefined ||
-              activeExpression[1].selectedExpression == undefined ||
-              props.stats.accuracy[1][activeExpression[1].selectedExpression] <
+            activeExpression[1].selectedExpression == undefined ||
+            props.stats.accuracy[1][activeExpression[1].selectedExpression] <
               0.5 ? (
-                <div className="w-16 h-16 my-4"></div>
-              ) : (
-                <Badge
-                  accuracy={
-                    props.stats.accuracy[1][
+              <div className="w-16 h-16 my-4"></div>
+            ) : (
+              <Badge
+                accuracy={
+                  props.stats.accuracy[1][
                     activeExpression[1].selectedExpression
-                    ]
-                  }
-                  expression={activeExpression[1].selectedExpression}
-                />
-              )}
+                  ]
+                }
+                expression={activeExpression[1].selectedExpression}
+              />
+            )}
           </div>
         </div>
       </div>
