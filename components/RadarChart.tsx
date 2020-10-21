@@ -20,7 +20,7 @@ export default function RadarChart(props) {
         label: "Player 1",
 
         borderColor: "rgba(75, 250, 240, 1)",
-        backgroundColor: "rgba(75, 250, 240, .2)",
+        backgroundColor: "rgba(75, 250, 240, .3)",
 
         outerGlowWidth: 10,
         outerGlowColor: "rgba(75, 250, 240, 1)",
@@ -36,7 +36,7 @@ export default function RadarChart(props) {
         pointInnerGlowColor: "rgba(255, 255, 255, 1)",
         pointInnerGlowWidth: 50,
 
-        borderWidth: 3,
+        borderWidth: 2,
         lineTension: 0,
         data: performance.player1,
       },
@@ -44,7 +44,7 @@ export default function RadarChart(props) {
         label: "Player 2",
 
         borderColor: "rgba(202, 250, 75, 1)",
-        backgroundColor: "rgba(202, 250, 75, .2)",
+        backgroundColor: "rgba(202, 250, 75, .3)",
 
         outerGlowWidth: 10,
         outerGlowColor: "rgba(202, 250, 75, 1)",
@@ -68,7 +68,7 @@ export default function RadarChart(props) {
         label: "Average",
 
         borderColor: "rgba(255, 0, 255, 1)",
-        backgroundColor: "rgba(255, 0, 255, .2)",
+        backgroundColor: "rgba(255, 0, 255, .3)",
 
         outerGlowWidth: 10,
         outerGlowColor: "rgba(255, 0, 255, 1)",
@@ -133,7 +133,13 @@ export default function RadarChart(props) {
       style={{ height: "100%", width }}
       className="relative flex mx-auto"
     >
-      <div className="absolute bottom-0 left-0 flex flex-col text-xl font-semibold text-left font-quicksand ">
+      <div
+        className="absolute flex flex-col text-xl font-semibold text-left font-quicksand "
+        style={{
+          top: "5%",
+          left: "10%",
+        }}
+      >
         <span style={textGlowBlue} className="text-player1">
           Player 1
         </span>

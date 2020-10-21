@@ -21,12 +21,13 @@ a {
 
   border-radius: 1.5rem;
 
-  background-color: rgba(70, 100, 130, 0.5);
+  background-color: rgba(75, 250, 240, 0.4);
 
   border-color: #4bfaf0;
   border-width: 4px;
 
-  box-shadow: 0px 0px 40px #4bfaf0;
+  box-shadow: 0px 0px 30px rgba(75, 250, 240, 1),
+    inset 0px 0px 40px rgba(75, 250, 240, 0.5);
 }
 
 .frosted-green {
@@ -40,7 +41,8 @@ a {
   border-color: #86e409;
   border-width: 4px;
 
-  box-shadow: 0px 0px 40px #86e409;
+  box-shadow: 0px 0px 30px rgba(134, 228, 9, 1),
+    inset 0px 0px 40px rgba(134, 228, 9, 0.5);
 }
 .dark {
   -webkit-backdrop-filter: blur(10px);
@@ -48,9 +50,10 @@ a {
   background-color: rgba(0, 0, 0, 0.5);
 
   border-radius: 1.5rem;
+  box-shadow: ;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-width: 4px;
 
-  border-color: #851af0;
-  border-width: 0px;
-
-  box-shadow: 0px 0px 15px black;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.9),
+    inset 0px 0px 50px rgba(0, 0, 0, 0.5);
 }

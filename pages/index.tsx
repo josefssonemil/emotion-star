@@ -53,7 +53,7 @@ export default function Home() {
   }, [teamName, highscores.data]);
 
   const onRestart = () => {
-    setCurrentScreen("game");
+    setCurrentScreen("warmUp");
     stats.reset();
     setTeamName(getRandomEmoji());
   };
@@ -82,14 +82,35 @@ export default function Home() {
       >
         <img className="h-full" src="/img/logo.png" />
       </div>
-      <nav className="absolute top-0 z-50 p-2 text-white">
-        <button className="mr-4" onClick={() => setCurrentScreen("warmUp")}>
+      <nav className="absolute top-0 z-50 p-2 text-black opacity-75">
+        <button
+          className="mr-4"
+          onClick={() => {
+            setCurrentScreen("warmUp");
+            stats.reset();
+            setTeamName(getRandomEmoji());
+          }}
+        >
           Warm up
         </button>
-        <button className="mr-4" onClick={() => setCurrentScreen("game")}>
+        <button
+          className="mr-4"
+          onClick={() => {
+            setCurrentScreen("game");
+            stats.reset();
+            setTeamName(getRandomEmoji());
+          }}
+        >
           Game
         </button>
-        <button className="mr-4" onClick={() => setCurrentScreen("final")}>
+        <button
+          className="mr-4"
+          onClick={() => {
+            setCurrentScreen("final");
+            stats.reset();
+            setTeamName(getRandomEmoji());
+          }}
+        >
           Final
         </button>
       </nav>

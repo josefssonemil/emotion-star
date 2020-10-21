@@ -31,7 +31,7 @@ interface Props {
 }
 
 export default function FinalScreen(props: Props) {
-  //useIdle(props.onIdle, props.players);
+  //useIdle(props.onRestart, props.players);
 
   const textGlow = {
     textShadow: "0 0 35px rgb(255, 0, 255)",
@@ -144,14 +144,14 @@ export default function FinalScreen(props: Props) {
         }}
         className="flex flex-col justify-between col-span-3 col-start-1 row-span-3 row-start-2 text-center text-white"
       >
-        <span className="text-left">
+        <span className="text-center">
           <span className="text-4xl">Team: </span> {props.teamName}
         </span>
         <span className="text-center">
           {props.stats.score}
           <span className="text-4xl"> P.</span>
         </span>
-        <span className="text-right">
+        <span className="text-center">
           <span className="text-4xl">Rank</span>
           {!!props.playerHighscore
             ? " " + (props.playerHighscore.index + 1)
@@ -163,8 +163,8 @@ export default function FinalScreen(props: Props) {
         <RadarChart performance={data.performance} />
       </div>
 
-      <div className="relative flex items-center justify-center col-span-3 col-end-13 row-span-3 row-start-2">
-        <div className="w-full p-5 dark">
+      <div className="relative flex items-end justify-center col-span-3 col-end-13 row-span-3 row-start-2">
+        <div className="w-full py-5 dark">
           <h1
             style={textGlow}
             className="w-full text-4xl text-center text-white"
@@ -198,12 +198,12 @@ export default function FinalScreen(props: Props) {
               .map((entry, i) => (
                 <div className="flex justify-around w-full" key={entry.id}>
                   <h1
-                    className={`w-1/3 text-xl text-center font-regular font-quicksand ${
+                    className={`w-1/3 text-center font-regular font-quicksand ${
                       !!props.playerHighscore &&
                       entry.emoji === props.playerHighscore.emoji &&
                       entry.score === props.playerHighscore.score
                         ? "text-white font-bold text-3xl bg-gray-500 bg-opacity-25 rounded-l-full"
-                        : "text-gray-500 text-xl"
+                        : "text-gray-500 text-2xl"
                     }`}
                     style={
                       !!props.playerHighscore &&
@@ -221,7 +221,7 @@ export default function FinalScreen(props: Props) {
                       entry.emoji === props.playerHighscore.emoji &&
                       entry.score === props.playerHighscore.score
                         ? "text-3xl bg-gray-500 bg-opacity-25"
-                        : "text-xl"
+                        : "text-2xl"
                     }`}
                     style={
                       !!props.playerHighscore &&
@@ -239,7 +239,7 @@ export default function FinalScreen(props: Props) {
                       entry.emoji === props.playerHighscore.emoji &&
                       entry.score === props.playerHighscore.score
                         ? "text-white font-bold text-3xl bg-gray-500 bg-opacity-25 rounded-r-full"
-                        : "text-gray-500 font-regular text-xl"
+                        : "text-gray-500 font-regular text-2xl"
                     }`}
                     style={
                       !!props.playerHighscore &&
@@ -597,7 +597,7 @@ export default function FinalScreen(props: Props) {
             activeExpression[1].selectedExpression == undefined ? (
               <div className="w-16 h-16 my-4"></div>
             ) : (
-              <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
+              <h1 className="pt-6 text-5xl text-white" style={textGlowGreen}>
                 {Math.round(
                   props.stats.accuracy[1][
                     activeExpression[1].selectedExpression
@@ -657,7 +657,7 @@ export default function FinalScreen(props: Props) {
             activeExpression[1].selectedExpression == undefined ? (
               <div className="w-16 h-16 my-4"></div>
             ) : (
-              <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
+              <h1 className="pt-6 text-5xl text-white" style={textGlowGreen}>
                 {Math.round(
                   props.stats.timePerExpression[1][
                     activeExpression[1].selectedExpression
