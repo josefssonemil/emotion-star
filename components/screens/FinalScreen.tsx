@@ -37,7 +37,7 @@ export default function FinalScreen(props: Props) {
     textShadow: "0 0 35px rgb(255, 0, 255)",
   };
   const textGlowHighscore = {
-    textShadow: "0 0 20px 30px rgb(255, 0, 255)",
+    textShadow: "0px 0px 15px #FCD932",
   };
   const textGlowBlue = {
     textShadow: "0 0 20px #4bfaf0",
@@ -198,12 +198,12 @@ export default function FinalScreen(props: Props) {
               .map((entry, i) => (
                 <div className="flex justify-around w-full" key={entry.id}>
                   <h1
-                    className={`w-1/3 text-center font-regular font-quicksand ${
+                    className={`w-1/3 text-center font-quicksand ${
                       !!props.playerHighscore &&
                       entry.emoji === props.playerHighscore.emoji &&
                       entry.score === props.playerHighscore.score
-                        ? "text-white font-bold text-3xl bg-gray-500 bg-opacity-25 rounded-l-full"
-                        : "text-gray-500 text-2xl"
+                        ? "text-white font-semibold text-3xl  bg-local-purple1 bg-opacity-0 rounded-l-full"
+                        : "text-gray-500 text-2xl font-light"
                     }`}
                     style={
                       !!props.playerHighscore &&
@@ -216,11 +216,11 @@ export default function FinalScreen(props: Props) {
                     {i + 1}
                   </h1>
                   <h1
-                    className={`w-1/3 text-center font-regular font-quicksand ${
+                    className={`w-1/3 text-center font-quicksand ${
                       !!props.playerHighscore &&
                       entry.emoji === props.playerHighscore.emoji &&
                       entry.score === props.playerHighscore.score
-                        ? "text-3xl bg-gray-500 bg-opacity-25"
+                        ? "text-3xl bg-local-purple1 bg-opacity-0"
                         : "text-2xl"
                     }`}
                     style={
@@ -238,8 +238,8 @@ export default function FinalScreen(props: Props) {
                       !!props.playerHighscore &&
                       entry.emoji === props.playerHighscore.emoji &&
                       entry.score === props.playerHighscore.score
-                        ? "text-white font-bold text-3xl bg-gray-500 bg-opacity-25 rounded-r-full"
-                        : "text-gray-500 font-regular text-2xl"
+                        ? "text-white font-semibold text-3xl bg-local-purple1 bg-opacity-0 rounded-r-full"
+                        : "text-gray-500 font-light text-2xl"
                     }`}
                     style={
                       !!props.playerHighscore &&
