@@ -31,7 +31,7 @@ interface Props {
 }
 
 export default function FinalScreen(props: Props) {
-  //useIdle(props.onIdle, props.players);
+  //useIdle(props.onRestart, props.players);
 
   const textGlow = {
     textShadow: "0 0 35px rgb(255, 0, 255)",
@@ -137,36 +137,34 @@ export default function FinalScreen(props: Props) {
         Emotion Stats
       </h1>
 
-      <h1
-        style={{ textShadow: "0px 0px 34px #FCD932" }}
-        className="self-center col-span-2 col-start-5 row-start-1 text-6xl text-left text-white"
-      ></h1>
-
       <div
-        style={{ textShadow: "0px 0px 34px #FCD932" }}
-        className="flex self-center justify-between col-start-5 col-end-10 row-start-1 text-6xl text-center text-white"
+        style={{
+          textShadow: "0px 0px 34px #FCD932",
+          fontSize: "5rem",
+        }}
+        className="flex flex-col justify-between col-span-3 col-start-1 row-span-3 row-start-2 text-center text-white"
       >
-        <span>
-          <span className="text-3xl">Team: </span> {props.teamName}
+        <span className="text-center">
+          <span className="text-4xl">Team: </span> {props.teamName}
         </span>
-        <span>
+        <span className="text-center">
           {props.stats.score}
-          <span className="text-3xl"> P.</span>
+          <span className="text-4xl"> P.</span>
         </span>
-        {!!props.playerHighscore && (
-          <span>
-            <span className="text-3xl">Rank</span>
-            {" " + (props.playerHighscore.index + 1)}
-          </span>
-        )}
+        <span className="text-center">
+          <span className="text-4xl">Rank</span>
+          {!!props.playerHighscore
+            ? " " + (props.playerHighscore.index + 1)
+            : " X"}
+        </span>
       </div>
 
-      <div className="relative flex items-center justify-center col-span-4 col-start-1 row-span-4 row-start-2">
+      <div className="relative flex items-center justify-center col-span-6 col-start-4 row-span-4 row-start-1">
         <RadarChart performance={data.performance} />
       </div>
 
-      <div className="relative flex items-center justify-center col-span-3 col-end-13 row-span-4 row-start-2">
-        <div className="w-full p-5 dark">
+      <div className="relative flex items-end justify-center col-span-3 col-end-13 row-span-3 row-start-2">
+        <div className="w-full py-5 dark">
           <h1
             style={textGlow}
             className="w-full text-4xl text-center text-white"
@@ -200,12 +198,12 @@ export default function FinalScreen(props: Props) {
               .map((entry, i) => (
                 <div className="flex justify-around w-full" key={entry.id}>
                   <h1
-                    className={`w-1/3 text-xl text-center font-regular font-quicksand ${
+                    className={`w-1/3 text-center font-regular font-quicksand ${
                       !!props.playerHighscore &&
                       entry.emoji === props.playerHighscore.emoji &&
                       entry.score === props.playerHighscore.score
                         ? "text-white font-bold text-3xl bg-gray-500 bg-opacity-25 rounded-l-full"
-                        : "text-gray-500 text-xl"
+                        : "text-gray-500 text-2xl"
                     }`}
                     style={
                       !!props.playerHighscore &&
@@ -223,7 +221,7 @@ export default function FinalScreen(props: Props) {
                       entry.emoji === props.playerHighscore.emoji &&
                       entry.score === props.playerHighscore.score
                         ? "text-3xl bg-gray-500 bg-opacity-25"
-                        : "text-xl"
+                        : "text-2xl"
                     }`}
                     style={
                       !!props.playerHighscore &&
@@ -241,7 +239,7 @@ export default function FinalScreen(props: Props) {
                       entry.emoji === props.playerHighscore.emoji &&
                       entry.score === props.playerHighscore.score
                         ? "text-white font-bold text-3xl bg-gray-500 bg-opacity-25 rounded-r-full"
-                        : "text-gray-500 font-regular text-xl"
+                        : "text-gray-500 font-regular text-2xl"
                     }`}
                     style={
                       !!props.playerHighscore &&
@@ -258,7 +256,7 @@ export default function FinalScreen(props: Props) {
         </div>
       </div>
 
-      <div className="flex flex-row col-span-5 col-end-10 row-span-2 row-start-2 overflow-hidden frosted-blue">
+      <div className="flex flex-row col-span-6 col-start-1 row-span-2 row-end-7 overflow-hidden frosted-blue">
         <div>
           <PlayerFace
             canvasRef={props.canvasLeftRef}
@@ -485,7 +483,7 @@ export default function FinalScreen(props: Props) {
         </div>
       </div>
 
-      <div className="flex flex-row col-span-5 col-end-10 row-span-2 row-end-6 overflow-hidden frosted-green">
+      <div className="flex flex-row col-span-6 col-end-13 row-span-2 row-end-7 overflow-hidden frosted-green">
         <div>
           <PlayerFace
             canvasRef={props.canvasRightRef}
@@ -599,7 +597,7 @@ export default function FinalScreen(props: Props) {
             activeExpression[1].selectedExpression == undefined ? (
               <div className="w-16 h-16 my-4"></div>
             ) : (
-              <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
+              <h1 className="pt-6 text-5xl text-white" style={textGlowGreen}>
                 {Math.round(
                   props.stats.accuracy[1][
                     activeExpression[1].selectedExpression
@@ -659,7 +657,7 @@ export default function FinalScreen(props: Props) {
             activeExpression[1].selectedExpression == undefined ? (
               <div className="w-16 h-16 my-4"></div>
             ) : (
-              <h1 className="pt-6 text-5xl text-white" style={textGlowBlue}>
+              <h1 className="pt-6 text-5xl text-white" style={textGlowGreen}>
                 {Math.round(
                   props.stats.timePerExpression[1][
                     activeExpression[1].selectedExpression

@@ -83,16 +83,23 @@ export default function NoteBar(props: Props) {
             }`}
             style={{
               right: "-4rem",
+              boxShadow: "0px 0px 15px #FCD932",
             }}
           >
             <img src="/img/nice.png" />
           </div>
-          <div className="absolute z-30 my-1 ml-1 mr-4 text-4xl text-pink-600"></div>
+          <div className="absolute z-30 my-1 ml-1 mr-4 text-4xl"></div>
           <div className="relative h-4 my-4 bg-black">
             {props.state.isPerfect && props.isPast ? (
               <div
                 className="absolute top-0 bottom-0 left-0 right-0 rounded-full"
-                style={{ backgroundColor: playerColor }}
+                style={{
+                  backgroundColor: playerColor,
+                  boxShadow:
+                    props.state.isPerfect && props.isPast
+                      ? `0px 0px 20px 0px ${playerColor}`
+                      : "none",
+                }}
               />
             ) : (
               props.state.intervals.map((interval, i) => {
@@ -114,7 +121,13 @@ export default function NoteBar(props: Props) {
                   <motion.div
                     key={i}
                     className="absolute top-0 bottom-0 rounded-full"
-                    style={{ left, backgroundColor: playerColor }}
+                    style={{
+                      left,
+                      backgroundColor: playerColor,
+                      boxShadow: props.state.isPerfect
+                        ? `0px 0px 20px 10px ${playerColor}`
+                        : "none",
+                    }}
                     animate={
                       props.isPast && props.state.isPerfect
                         ? {

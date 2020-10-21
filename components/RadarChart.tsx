@@ -9,8 +9,8 @@ export default function RadarChart(props) {
   let width: number;
   let height: number;
 
-  height = bounds.width;
-  width = bounds.width;
+  height = bounds.height;
+  width = bounds.height;
 
   const data = {
     /*["😁", "😡", "😥", "😐", "😮"]*/
@@ -20,7 +20,7 @@ export default function RadarChart(props) {
         label: "Player 1",
 
         borderColor: "rgba(75, 250, 240, 1)",
-        backgroundColor: "rgba(75, 250, 240, .2)",
+        backgroundColor: "rgba(75, 250, 240, .3)",
 
         outerGlowWidth: 10,
         outerGlowColor: "rgba(75, 250, 240, 1)",
@@ -36,7 +36,7 @@ export default function RadarChart(props) {
         pointInnerGlowColor: "rgba(255, 255, 255, 1)",
         pointInnerGlowWidth: 50,
 
-        borderWidth: 3,
+        borderWidth: 2,
         lineTension: 0,
         data: performance.player1,
       },
@@ -44,7 +44,7 @@ export default function RadarChart(props) {
         label: "Player 2",
 
         borderColor: "rgba(202, 250, 75, 1)",
-        backgroundColor: "rgba(202, 250, 75, .2)",
+        backgroundColor: "rgba(202, 250, 75, .3)",
 
         outerGlowWidth: 10,
         outerGlowColor: "rgba(202, 250, 75, 1)",
@@ -68,7 +68,7 @@ export default function RadarChart(props) {
         label: "Average",
 
         borderColor: "rgba(255, 0, 255, 1)",
-        backgroundColor: "rgba(255, 0, 255, .2)",
+        backgroundColor: "rgba(255, 0, 255, .3)",
 
         outerGlowWidth: 10,
         outerGlowColor: "rgba(255, 0, 255, 1)",
@@ -130,10 +130,16 @@ export default function RadarChart(props) {
   return (
     <div
       ref={ref}
-      style={{ width: "90%", height }}
+      style={{ height: "100%", width }}
       className="relative flex mx-auto"
     >
-      <div className="absolute top-0 left-0 flex flex-col text-xl font-semibold font-quicksand ">
+      <div
+        className="absolute flex flex-col text-xl font-semibold text-left font-quicksand "
+        style={{
+          top: "5%",
+          left: "10%",
+        }}
+      >
         <span style={textGlowBlue} className="text-player1">
           Player 1
         </span>
@@ -142,8 +148,8 @@ export default function RadarChart(props) {
         </span>
         <span
           style={{
-            color: "rgba(255, 0, 255, .9)",
-            textShadow: "0 0 20px rgb(255, 0, 255)",
+            color: "rgba(255, 0, 255, 1)",
+            textShadow: "0 0 20px 10px rgb(255, 0, 255)",
           }}
         >
           Average
@@ -154,6 +160,7 @@ export default function RadarChart(props) {
           position: "absolute",
           top: 0,
           left: "50%",
+          textShadow: "0px 0px 34px #FCD932",
         }}
         className="-ml-6 text-5xl"
       >
@@ -164,6 +171,7 @@ export default function RadarChart(props) {
           position: "absolute",
           top: "32%",
           right: 0,
+          textShadow: "0px 0px 34px #FCD932",
         }}
         className="text-5xl"
       >
@@ -174,6 +182,7 @@ export default function RadarChart(props) {
           position: "absolute",
           bottom: "2%",
           right: "17.5%",
+          textShadow: "0px 0px 34px #FF4D00",
         }}
         className="text-5xl"
       >
@@ -184,6 +193,7 @@ export default function RadarChart(props) {
           position: "absolute",
           bottom: "2%",
           left: "17.5%",
+          textShadow: "0px 0px 34px #FCD932",
         }}
         className="text-5xl"
       >
@@ -194,6 +204,7 @@ export default function RadarChart(props) {
           position: "absolute",
           top: "32%",
           left: 0,
+          textShadow: "0px 0px 34px #FCD932",
         }}
         className="text-5xl"
       >
@@ -201,8 +212,8 @@ export default function RadarChart(props) {
       </div>
       <div
         style={{
-          marginLeft: "58px",
-          marginRight: "58px",
+          marginLeft: "60px",
+          marginRight: "60px",
           marginTop: "70px",
           marginBottom: "56px",
         }}
@@ -263,7 +274,7 @@ const Circle = (props) => {
         width: props.size + "%",
         height: props.size + "%",
       }}
-      className="flex opacity-75"
+      className="flex opacity-100"
       viewBox="0 0 576 576"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -273,8 +284,8 @@ const Circle = (props) => {
           cx="288.001"
           cy="287.908"
           r="281.438"
-          stroke="rgba(255,255,255, .3)"
-          strokeWidth="2"
+          stroke="rgba(255,255,255, .6)"
+          strokeWidth="3"
         />
       </g>
       <defs>
