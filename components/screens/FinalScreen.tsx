@@ -138,22 +138,25 @@ export default function FinalScreen(props: Props) {
       </h1>
 
       <div
-        style={{ textShadow: "0px 0px 34px #FCD932" }}
-        className="flex flex-col self-center justify-between col-span-2 col-start-1 row-start-2 row-end-5 text-6xl text-center text-white"
+        style={{
+          textShadow: "0px 0px 34px #FCD932",
+          fontSize: "5rem",
+        }}
+        className="flex flex-col justify-between col-span-3 col-start-1 row-span-3 row-start-2 text-center text-white"
       >
-        <span>
-          <span className="text-3xl">Team: </span> {props.teamName}
+        <span className="text-left">
+          <span className="text-4xl">Team: </span> {props.teamName}
         </span>
-        <span>
+        <span className="text-center">
           {props.stats.score}
-          <span className="text-3xl"> P.</span>
+          <span className="text-4xl"> P.</span>
         </span>
-        {!!props.playerHighscore && (
-          <span>
-            <span className="text-3xl">Rank</span>
-            {" " + (props.playerHighscore.index + 1)}
-          </span>
-        )}
+        <span className="text-right">
+          <span className="text-4xl">Rank</span>
+          {!!props.playerHighscore
+            ? " " + (props.playerHighscore.index + 1)
+            : " X"}
+        </span>
       </div>
 
       <div className="relative flex items-center justify-center col-span-6 col-start-4 row-span-4 row-start-1">

@@ -154,6 +154,7 @@ export default function RadarChart(props) {
           position: "absolute",
           top: 0,
           left: "50%",
+          textShadow: "0px 0px 34px #FCD932",
         }}
         className="-ml-6 text-5xl"
       >
@@ -164,6 +165,7 @@ export default function RadarChart(props) {
           position: "absolute",
           top: "32%",
           right: 0,
+          textShadow: "0px 0px 34px #FCD932",
         }}
         className="text-5xl"
       >
@@ -174,6 +176,7 @@ export default function RadarChart(props) {
           position: "absolute",
           bottom: "2%",
           right: "17.5%",
+          textShadow: "0px 0px 34px #FF4D00",
         }}
         className="text-5xl"
       >
@@ -184,6 +187,7 @@ export default function RadarChart(props) {
           position: "absolute",
           bottom: "2%",
           left: "17.5%",
+          textShadow: "0px 0px 34px #FCD932",
         }}
         className="text-5xl"
       >
@@ -194,6 +198,7 @@ export default function RadarChart(props) {
           position: "absolute",
           top: "32%",
           left: 0,
+          textShadow: "0px 0px 34px #FCD932",
         }}
         className="text-5xl"
       >
@@ -201,8 +206,8 @@ export default function RadarChart(props) {
       </div>
       <div
         style={{
-          marginLeft: "58px",
-          marginRight: "58px",
+          marginLeft: "60px",
+          marginRight: "60px",
           marginTop: "70px",
           marginBottom: "56px",
         }}
@@ -263,7 +268,7 @@ const Circle = (props) => {
         width: props.size + "%",
         height: props.size + "%",
       }}
-      className="flex opacity-75"
+      className="flex opacity-100"
       viewBox="0 0 576 576"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -273,8 +278,8 @@ const Circle = (props) => {
           cx="288.001"
           cy="287.908"
           r="281.438"
-          stroke="rgba(255,255,255, .3)"
-          strokeWidth="2"
+          stroke="rgba(255,255,255, .6)"
+          strokeWidth="3"
         />
       </g>
       <defs>
