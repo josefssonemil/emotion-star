@@ -48,7 +48,7 @@ export default function ScoreScreen(props: Props) {
       <video
         style={{
           objectFit: "cover",
-          width: "auto",
+          width: "100vw",
           height: "100vh",
         }}
         autoPlay
