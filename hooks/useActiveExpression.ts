@@ -7,33 +7,26 @@ export default function useActiveExpression(
   maxCount: number
 ) {
   const timer = useTimer(maxCount);
-  const [currentExpression, setCurrentExpression] = useState(undefined);
-  const [selectedExpression, setSelectedExpression] = useState(undefined);
+  const [currentExpression, setCurrentExpression] = useState<Expression>();
+  const [selectedExpression, setSelectedExpression] = useState<Expression>();
 
+  // When the player's expression is not the current expression
+  //  => start timer and set current expression
   useEffect(() => {
-    if (expression !== currentExpression && timer.seconds == 0) {
+    if (expression !== currentExpression) {
       setCurrentExpression(expression);
       timer.start();
-      //console.log("starting timer");
     }
-  }, [expression, currentExpression, timer.seconds]);
+  }, [expression, currentExpression]);
 
-  useEffect(() => {
-    if (currentExpression !== expression && timer.seconds > 0) {
-      setCurrentExpression(expression);
-      timer.reset();
-      //console.log("face changed during timer, stopping timer");
-    }
-  }, [expression, currentExpression, timer.seconds]);
-
+  // When the timer is done
+  //  => set the selected timer
   useEffect(() => {
     if (timer.seconds >= maxCount) {
-      setSelectedExpression(expression);
-      //console.log(selectedExpression);
-      //console.log("expression change complete! stopping timer");
+      setSelectedExpression(currentExpression);
       timer.reset();
     }
-  }, [timer.seconds, currentExpression, maxCount]);
+  }, [timer.seconds, maxCount, currentExpression]);
 
   return { selectedExpression, timer, currentExpression };
 }
