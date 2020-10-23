@@ -1328,12 +1328,6 @@ export default function Badge(props: Props) {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <rect
-          width="154"
-          height="154"
-          transform="matrix(-1 0 0 1 161 1)"
-          fill="#E5E5E5"
-        />
         <path
           d="M62 111.043L100.043 91L146.188 178.588C132.099 180.596 125.455 179.414 117.488 170.223C119.003 182.879 116.623 189 108.145 198.631L62 111.043Z"
           fill="url(#paint0_linear)"
