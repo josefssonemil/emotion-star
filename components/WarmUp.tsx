@@ -9,7 +9,7 @@ interface Props {
   onComplete: () => void;
 }
 
-const threshold = 2;
+const threshold = 1;
 
 export default function WarmUp(props: Props) {
   const [play] = useSound("/sound/pop.mp3", {
@@ -76,7 +76,7 @@ export default function WarmUp(props: Props) {
         ))}
       </div>
       {
-        //<div className="mt-4 text-white text-2xl hidden">{count} / 5</div>
+        //<div className="hidden mt-4 text-2xl text-white">{count} / 5</div>
       }
     </div>
   );
